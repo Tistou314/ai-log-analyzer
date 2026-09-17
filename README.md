@@ -93,6 +93,24 @@ Toutes les clés sont stables entre versions mineures. Une surcouche n'a besoin 
 3. Itérez. Une surcouche = une question business par écran, les alertes en haut, une phrase d'`explain` par graphique.
 4. Pour comprendre ce que vous voyez : `prompts/tuteur.md`. Pour un diagnostic complet : `prompts/diagnostic.md`.
 
+### Diagnostic et tuteur avec Claude
+
+Deux usages, avec ou sans clé API :
+
+**Sans clé** (gratuit avec un compte claude.ai) : copiez `prompts/diagnostic.md` ou `prompts/tuteur.md` dans claude.ai et joignez `out/report.json`. C'est exactement le même prompt que ci-dessous.
+
+**Avec une clé API** (`export ANTHROPIC_API_KEY=sk-ant-...`, ou un fichier `.env` à la racine — gitignoré, jamais commité ; la clé n'est jamais passée en argument CLI) :
+
+```bash
+# diagnostic complet en 6 parties → out/diagnostic.md + affichage
+python cli.py access.log --diagnose            # option --model pour changer de modèle
+
+# mode tuteur : boucle de questions sur un rapport existant (/quit pour sortir)
+python cli.py chat out/report.json
+```
+
+Les prompts restent dans `prompts/*.md` (source unique). Si le rapport dépasse ~100k caractères, il est allégé automatiquement et les sections retirées sont listées.
+
 Trois parcours suggérés selon votre site :
 - **Bots IA** : qui me lit, pour quoi faire, qui m'usurpe, que bloquer.
 - **Crawl budget** : où part Googlebot, ce qui est gaspillé, ce qui n'est jamais recrawlé.

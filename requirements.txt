@@ -1,5 +1,6 @@
 pandas>=2.0
 numpy>=1.24
 openpyxl>=3.1  # exports GSC xlsx
+anthropic>=1.0  # --diagnose et mode chat (optionnel : sans clé, utilisez les prompts/ à la main)
 # surcouche d'exemple uniquement :
 streamlit>=1.30

@@ -18,6 +18,14 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from analyzer import parser as P, report as REP, robots_sim as RS
 
 def main():
+    # sous-commande : python cli.py chat out/report.json [--model ...]
+    if len(sys.argv) > 1 and sys.argv[1] == "chat":
+        from analyzer import ai_diagnostic
+        cp = argparse.ArgumentParser(prog="cli.py chat", description="mode tuteur : questions sur un report.json existant")
+        cp.add_argument("report", nargs="?", default="out/report.json", help="chemin du report.json (défaut : out/report.json)")
+        cp.add_argument("--model", default=ai_diagnostic.DEFAULT_MODEL, help="modèle Claude à utiliser")
+        c = cp.parse_args(sys.argv[2:])
+        sys.exit(ai_diagnostic.chat(c.report, model=c.model))
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("logs", nargs="+", help="fichiers de logs (.log, .gz, .json, W3C)")
     ap.add_argument("--site", help="URL du site (pour --robots sans fichier)")
@@ -31,6 +39,8 @@ def main():
     ap.add_argument("--limit", type=int, help="ne lire que N lignes par fichier (test rapide)")
     ap.add_argument("--out", default="out", help="dossier de sortie")
     ap.add_argument("--no-csv", action="store_true", help="ne pas écrire hits.csv")
+    ap.add_argument("--diagnose", action="store_true", help="après l'analyse, envoyer le rapport à Claude pour un diagnostic (clé ANTHROPIC_API_KEY requise)")
+    ap.add_argument("--model", default=None, help="modèle Claude pour --diagnose (défaut : voir analyzer/ai_diagnostic.py)")
     a = ap.parse_args()
 
     df = P.parse_files(a.logs, a.limit)
@@ -48,6 +58,10 @@ def main():
     if not a.no_csv: enriched.to_csv(out / "hits.csv", index=False)
     summary(report)
     print(f"\n→ {out/'report.json'}" + ("" if a.no_csv else f"  |  {out/'hits.csv'}"))
+    if a.diagnose:
+        from analyzer import ai_diagnostic
+        ai_diagnostic.diagnose(out / "report.json", out_dir=a.out,
+                               model=a.model or ai_diagnostic.DEFAULT_MODEL)
 
 def summary(r):
     o = r["overview"]
