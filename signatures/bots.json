@@ -1,6 +1,6 @@
 {
- "_doc": "Base de signatures. Chaque entrée : pattern (regex, insensible à la casse, appliquée au User-Agent), family, operator, category, purpose, respects_robots, robots_token (token robots.txt à utiliser, si différent du nom), verify (méthode de vérification d'identité : rdns_suffixes = suffixes DNS inverses légitimes, ip_source = clé dans ip_ranges/). Catégories : search_engine | ai_training | ai_search | ai_user_fetch | ai_agent | seo_tool | social_preview | monitoring | scraper | other_bot. L'ordre compte : première correspondance gagne, donc les plus spécifiques en premier.",
- "_updated": "2026-08-24",
+ "_doc": "Base de signatures. Chaque entrée : pattern (regex, insensible à la casse, appliquée au User-Agent), family, operator, category, purpose, respects_robots, robots_token (token robots.txt à utiliser, si différent du nom), source (URL de la doc officielle de l'UA, pour les ajouts récents), verify (méthode de vérification d'identité : rdns_suffixes = suffixes DNS inverses légitimes, ip_source = clé dans ip_ranges/). Catégories : search_engine | ai_training | ai_search | ai_user_fetch | ai_agent | seo_tool | social_preview | monitoring | scraper | other_bot. L'ordre compte : première correspondance gagne, donc les plus spécifiques en premier.",
+ "_updated": "2026-09-17",
  "bots": [
   {
    "pattern": "Google-Agent",
@@ -242,6 +242,22 @@
    }
   },
   {
+   "pattern": "Google-NotebookLM|NotebookLM",
+   "family": "Google-NotebookLM",
+   "operator": "Google",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch de sources à la demande d'un utilisateur NotebookLM",
+   "respects_robots": false,
+   "source": "https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers",
+   "verify": {
+    "rdns_suffixes": [
+     "google.com",
+     "googleusercontent.com"
+    ],
+    "ip_source": "google_user_triggered"
+   }
+  },
+  {
    "pattern": "Googlebot.*Mobile|Android.*Googlebot",
    "family": "Googlebot Smartphone",
    "operator": "Google",
@@ -294,6 +310,21 @@
    "respects_robots": true,
    "verify": {
     "ip_source": "openai_searchbot"
+   }
+  },
+  {
+   "pattern": "ChatGPT-Agent",
+   "family": "ChatGPT-Agent",
+   "operator": "OpenAI",
+   "category": "ai_agent",
+   "purpose": "Agent navigateur ChatGPT (Atlas / agent mode) qui navigue et agit pour un utilisateur",
+   "respects_robots": true,
+   "source": "https://openai.com/bots",
+   "verify": {
+    "rdns_suffixes": [
+     "openai.com"
+    ],
+    "ip_source": "openai_chatgpt_user"
    }
   },
   {
@@ -513,6 +544,36 @@
    }
   },
   {
+   "pattern": "Amzn-SearchBot",
+   "family": "Amzn-SearchBot",
+   "operator": "Amazon",
+   "category": "ai_search",
+   "purpose": "Indexation pour la recherche IA d'Amazon (Rufus…)",
+   "respects_robots": true,
+   "source": "https://developer.amazon.com/amazonbot",
+   "verify": {
+    "rdns_suffixes": [
+     "amazon.com",
+     "amazonbot.amazon"
+    ]
+   }
+  },
+  {
+   "pattern": "Amzn-User",
+   "family": "Amzn-User",
+   "operator": "Amazon",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch de pages à la demande d'un utilisateur des assistants Amazon",
+   "respects_robots": false,
+   "source": "https://developer.amazon.com/amazonbot",
+   "verify": {
+    "rdns_suffixes": [
+     "amazon.com",
+     "amazonbot.amazon"
+    ]
+   }
+  },
+  {
    "pattern": "facebookexternalhit|facebookcatalog",
    "family": "facebookexternalhit",
    "operator": "Meta",
@@ -639,6 +700,69 @@
    "purpose": "Fetch déclenché par un utilisateur Le Chat",
    "respects_robots": false,
    "verify": {}
+  },
+  {
+   "pattern": "MistralAI-Training",
+   "family": "MistralAI-Training",
+   "operator": "Mistral AI",
+   "category": "ai_training",
+   "purpose": "Crawler d'entraînement des modèles Mistral",
+   "respects_robots": true,
+   "source": "https://docs.mistral.ai/robots"
+  },
+  {
+   "pattern": "MistralAI-Index",
+   "family": "MistralAI-Index",
+   "operator": "Mistral AI",
+   "category": "ai_search",
+   "purpose": "Indexation pour la recherche web du Chat Mistral",
+   "respects_robots": true,
+   "source": "https://docs.mistral.ai/robots"
+  },
+  {
+   "pattern": "Kimi-SearchBot",
+   "family": "Kimi-SearchBot",
+   "operator": "Moonshot AI",
+   "category": "ai_search",
+   "purpose": "Indexation pour la recherche web de Kimi",
+   "respects_robots": true,
+   "source": "https://www.kimi.ai/policies/kimi-bot"
+  },
+  {
+   "pattern": "Kimi-User",
+   "family": "Kimi-User",
+   "operator": "Moonshot AI",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch de pages à la demande d'un utilisateur de Kimi",
+   "respects_robots": false,
+   "source": "https://www.kimi.ai/policies/kimi-bot"
+  },
+  {
+   "pattern": "KimiBot",
+   "family": "KimiBot",
+   "operator": "Moonshot AI",
+   "category": "ai_training",
+   "purpose": "Crawler d'entraînement des modèles Kimi (Moonshot AI)",
+   "respects_robots": true,
+   "source": "https://www.kimi.ai/policies/kimi-bot"
+  },
+  {
+   "pattern": "DeepSeekBot",
+   "family": "DeepSeekBot",
+   "operator": "DeepSeek",
+   "category": "ai_training",
+   "purpose": "Crawler d'entraînement DeepSeek",
+   "respects_robots": false,
+   "source": "https://github.com/ai-robots-txt/ai.robots.txt"
+  },
+  {
+   "pattern": "QwenBot",
+   "family": "QwenBot",
+   "operator": "Alibaba",
+   "category": "ai_training",
+   "purpose": "Crawler d'entraînement Qwen (Tongyi Qianwen, Alibaba)",
+   "respects_robots": false,
+   "source": "https://github.com/ai-robots-txt/ai.robots.txt"
   },
   {
    "pattern": "PanguBot",
@@ -974,6 +1098,34 @@
    "purpose": "Crawl Mojeek",
    "respects_robots": true,
    "verify": {}
+  },
+  {
+   "pattern": "SeznamBot",
+   "family": "SeznamBot",
+   "operator": "Seznam",
+   "category": "search_engine",
+   "purpose": "Moteur de recherche tchèque Seznam.cz",
+   "respects_robots": true,
+   "source": "https://napoveda.seznam.cz/en/seznambot-intro/",
+   "verify": {
+    "rdns_suffixes": [
+     "seznam.cz"
+    ]
+   }
+  },
+  {
+   "pattern": "Yahoo! Slurp|Slurp;",
+   "family": "Yahoo Slurp",
+   "operator": "Yahoo",
+   "category": "search_engine",
+   "purpose": "Crawler du moteur Yahoo (marchés où Yahoo garde son index)",
+   "respects_robots": true,
+   "source": "https://help.yahoo.com/kb/SLN22600.html",
+   "verify": {
+    "rdns_suffixes": [
+     "crawl.yahoo.net"
+    ]
+   }
   },
   {
    "pattern": "ia_archiver|archive\\.org_bot",
