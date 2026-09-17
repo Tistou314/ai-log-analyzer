@@ -19,9 +19,9 @@ Lis README.md (contrat JSON, limites) et ATELIER.md (déroulé) avant toute modi
 Validation rapide : `python cli.py samples/demo_access.log --robots samples/demo_robots.txt --gsc samples/demo_gsc_pages.csv --crawl samples/demo_screamingfrog.csv --sitemap samples/demo_sitemap.xml --compare 2026-08-17`
 Attendu : alerte critical Googlebot usurpé ~9 % (nécessite ip_ranges complets ou les placeholders fournis), rafale GPTBot 150/min, ~76 fetchs à chaud, 6 pages GSC aio_suspect, Google-Agent dans compare.new_families, 1 IP stealth.
 
-Calibré une première fois sur des logs réels o2switch (WordPress recettes) : bugs corrigés = plages IP partielles ne produisent plus de "spoofed", referrers bing.com/duckduckgo.com ne sont plus comptés comme IA, ajout de 9 signatures (WP Rocket, adtech ads.txt, meta-webindexer, Chrome Prefetch Proxy…), détection wp-cron / POST flood dans stealth.
+Calibré une première fois sur des logs réels d'un site éditorial WordPress sur mutualisé cPanel : bugs corrigés = plages IP partielles ne produisent plus de "spoofed", referrers bing.com/duckduckgo.com ne sont plus comptés comme IA, ajout de 9 signatures (WP Rocket, adtech ads.txt, meta-webindexer, Chrome Prefetch Proxy…), détection wp-cron / POST flood dans stealth.
 Second passage sur un mois complet (584k hits) : ajout de analyzer/probes.py (reclassification des scanners déguisés en bots légitimes AVANT les stats IA — sur ce site 128k hits / 245 IP usurpaient Googlebot, cohere-ai, ChatGPT-User…), signature du faux UA Google-Extended, Brave retiré des referrers IA. Validation externe : Googlebot réel = 112 hits/j dans les logs vs 115/j dans le rapport Crawl Stats GSC.
-À faire : détecter l'IP du serveur lui-même (o2switch 109.234.160.0/20, etc.) et l'isoler dans une catégorie self_traffic plutôt que stealth.
+À faire : détecter l'IP du serveur lui-même (plages du mutualisé cPanel, etc.) et l'isoler dans une catégorie self_traffic plutôt que stealth.
 
 ## Règles
 - Les clés de `report.json` sont un contrat : ne pas renommer, ajouter seulement. Documenter tout ajout dans README (section Contrat).
@@ -46,6 +46,6 @@ Second passage sur un mois complet (584k hits) : ajout de analyzer/probes.py (re
 6. Option `--cache-hits` pour estimer la sous-représentation due au cache CDN.
 7. Exports reporting : `out/summary.md` (résumé terminal + alertes + tableaux principaux, lisible seul) et `out/report.html` (même contenu en HTML autonome, graphiques inline, zéro dépendance externe).
 8. Une seconde surcouche d'exemple en HTML pur (un fichier, chargement de report.json par drag & drop, Chart.js via CDN) pour les participants sans Python.
-9. (fait) --gsc-ai valide les heuristiques AIO contre le rapport Generative AI GSC. Résultat sur inspiration-cuisine : précision 79 % pour aio_suspect, 67 % pour les fetchs à chaud, lift 1,7x seulement → Google sert surtout depuis l'index.
+9. (fait) --gsc-ai valide les heuristiques AIO contre le rapport Generative AI GSC. Résultat sur le site éditorial : précision 79 % pour aio_suspect, 67 % pour les fetchs à chaud, lift 1,7x seulement → Google sert surtout depuis l'index.
 10. Ingérer le rapport Crawl Stats GSC (xlsx) pour valider automatiquement le volume Googlebot réel vs logs.
 11. Packaging : `pyproject.toml`, commande `ai-log-analyzer`, GitHub Action qui lance la validation rapide.
