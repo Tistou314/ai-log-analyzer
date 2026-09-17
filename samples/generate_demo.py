@@ -33,8 +33,9 @@ UA = {
  "old_chrome": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36",
 }
 IP = {"google": ["66.249.66.1", "66.249.66.2", "66.249.73.10", "66.249.79.5"], "google_fake": ["185.220.101.7", "45.155.204.3", "91.203.5.44"],
-      "openai": ["20.171.206.10", "20.171.206.11", "52.230.152.8"], "openai_fake": ["103.21.44.9"], "anthropic": ["160.79.104.20", "160.79.104.21"],
-      "pplx": ["3.224.10.5", "3.230.5.6"], "bing": ["157.55.39.10", "40.77.167.20"], "other": [f"{random.randint(11,220)}.{random.randint(1,254)}.{random.randint(1,254)}.{random.randint(1,254)}" for _ in range(400)],
+      "openai": ["20.171.206.10", "20.171.206.11", "52.230.152.8"], "openai_search": ["135.234.64.10", "135.234.64.11"], "chatgpt_user": ["104.210.139.193", "128.85.198.33"],
+      "openai_fake": ["103.21.44.9"], "anthropic": ["216.73.216.10", "216.73.216.11"],
+      "pplx": ["18.97.9.97", "18.97.9.98"], "pplx_user": ["18.97.21.1", "34.193.163.52"], "amazon": ["100.24.134.117", "100.25.103.91"], "bing": ["157.55.39.10", "40.77.167.20"], "other": [f"{random.randint(11,220)}.{random.randint(1,254)}.{random.randint(1,254)}.{random.randint(1,254)}" for _ in range(400)],
       "stealth": ["195.154.22.9"], "burst": ["47.82.10.100"]}
 rows = []
 def log(t, ip, path, ua, status=200, ref="-", size=None, method="GET"):
@@ -86,12 +87,12 @@ for day in range(DAYS):
         for i in range(random.randint(250, 400)): log(base + dt.timedelta(seconds=i * 0.4), random.choice(IP["openai"]), random.choice(PAGES[:-8] + [f"/blog/tag-{i}" for i in range(20)]), UA["gptbot"], random.choice([200]*9 + [404]))
     for _ in range(3): log(rt(day), IP["openai_fake"][0], random.choice(PAGES), UA["gptbot"])
     # OAI-SearchBot, ClaudeBot, Claude-SearchBot, PerplexityBot : index
-    for ua, ips, n in (("oai_search", "openai", 40), ("claudebot", "anthropic", 120), ("claude_search", "anthropic", 30), ("pplx", "pplx", 35)):
+    for ua, ips, n in (("oai_search", "openai_search", 40), ("claudebot", "anthropic", 120), ("claude_search", "anthropic", 30), ("pplx", "pplx", 35)):
         for _ in range(random.randint(n - 10, n + 10)): log(rt(day), random.choice(IP[ips]), random.choice(PAGES[:-6]), UA[ua])
         if day % 4 == 0: log(rt(day), random.choice(IP[ips]), "/robots.txt", UA[ua])
     if day % 5 == 0: log(rt(day), IP["anthropic"][0], "/llms.txt", UA["claudebot"], 200); log(rt(day), IP["openai"][1], "/llms.txt", UA["oai_search"], 404)
     # fetchs utilisateur en journée sur pages populaires, suivis parfois d'un clic humain depuis l'IA
-    for ua, ips, ref in (("chatgpt_user", "openai", "https://chatgpt.com/"), ("claude_user", "anthropic", "https://claude.ai/"), ("pplx_user", "pplx", "https://www.perplexity.ai/"), ("mistral", "other", "https://chat.mistral.ai/")):
+    for ua, ips, ref in (("chatgpt_user", "chatgpt_user", "https://chatgpt.com/"), ("claude_user", "anthropic", "https://claude.ai/"), ("pplx_user", "pplx_user", "https://www.perplexity.ai/"), ("mistral", "other", "https://chat.mistral.ai/")):
         for _ in range(random.randint(8, 25)):
             t = rt(day, random.choice(range(8, 23))); p = random.choice(HOT_PAGES + PAGES[6:10])
             log(t, random.choice(IP[ips]), p, UA[ua])
@@ -99,7 +100,8 @@ for day in range(DAYS):
                 ip = random.choice(IP["other"]); log(t + dt.timedelta(minutes=random.uniform(1, 90)), ip, p, UA["iphone"], ref=ref)
     # entraînement divers
     for ua, n in (("meta", 60), ("bytespider", 150), ("ccbot", 40), ("amazon", 30), ("newbot", 25)):
-        for _ in range(random.randint(int(n*0.7), int(n*1.3))): log(rt(day), random.choice(IP["other"]), random.choice(PAGES + STATIC[:1]), UA[ua], random.choice([200]*19 + [403]))
+        pool = IP["amazon"] if ua == "amazon" else IP["other"]
+        for _ in range(random.randint(int(n*0.7), int(n*1.3))): log(rt(day), random.choice(pool), random.choice(PAGES + STATIC[:1]), UA[ua], random.choice([200]*19 + [403]))
     for _ in range(random.randint(20, 40)): log(rt(day), random.choice(IP["other"]), "/wp-admin/" if random.random() < 0.5 else random.choice(PAGES), UA["bytespider"], 403 if random.random() < 0.3 else 200)
     # outils SEO + social + scripts
     for ua, n in (("ahrefs", 80), ("semrush", 50), ("fb", 10), ("linkedin", 5), ("python", 25)):

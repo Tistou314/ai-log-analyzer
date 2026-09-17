@@ -9,6 +9,11 @@ Exemples :
 Sortie : out/report.json (contrat pour les surcouches), out/hits.csv (hits enrichis), résumé terminal.
 """
 import argparse, sys, pathlib, json
+
+# Consoles Windows en cp1252 : forcer l'UTF-8 pour les flèches et symboles du résumé.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from analyzer import parser as P, report as REP, robots_sim as RS
 

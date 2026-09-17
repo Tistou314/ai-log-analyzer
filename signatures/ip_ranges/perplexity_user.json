@@ -1,0 +1,10 @@
+{
+ "source": "https://www.perplexity.com/perplexity-user.json",
+ "complete": true,
+ "prefixes": [
+  "18.97.21.0/30",
+  "18.97.43.80/29",
+  "34.193.163.52/32",
+  "44.208.221.197/32"
+ ]
+}

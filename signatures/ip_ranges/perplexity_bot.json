@@ -1,8 +1,14 @@
 {
- "source": "PLACEHOLDER partiel \u2014 lancer update.py pour la liste officielle",
- "complete": false,
+ "source": "https://www.perplexity.com/perplexitybot.json",
+ "complete": true,
  "prefixes": [
-  "3.224.0.0/12",
-  "44.192.0.0/11"
+  "107.20.236.150/32",
+  "18.210.92.235/32",
+  "18.97.1.228/30",
+  "18.97.9.96/29",
+  "3.211.124.183/32",
+  "3.222.232.239/32",
+  "3.224.62.45/32",
+  "3.231.139.107/32"
  ]
 }
