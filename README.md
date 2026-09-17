@@ -47,7 +47,7 @@ python cli.py access.log.gz access.log.1.gz \
   --dns
 ```
 
-Sortie dans `out/` : `report.json` (le contrat) et `hits.csv` (chaque hit enrichi : family, category, identity, resource, ai_referrer…).
+Sortie dans `out/` : `report.json` (le contrat), `hits.csv` (chaque hit enrichi : family, category, identity, resource, ai_referrer…), `summary.md` (résumé lisible seul : alertes + tableaux principaux) et `report.html` (même contenu en page HTML autonome, graphiques inline, zéro dépendance externe).
 
 Pas de logs sous la main ? `samples/demo_access.log` contient 14 jours synthétiques avec tous les cas :
 

@@ -56,8 +56,10 @@ def main():
     out = pathlib.Path(a.out); out.mkdir(exist_ok=True)
     REP.save(report, out / "report.json")
     if not a.no_csv: enriched.to_csv(out / "hits.csv", index=False)
+    from analyzer import exports as EXP
+    EXP.save(report, out)
     summary(report)
-    print(f"\n→ {out/'report.json'}" + ("" if a.no_csv else f"  |  {out/'hits.csv'}"))
+    print(f"\n→ {out/'report.json'}  |  {out/'summary.md'}  |  {out/'report.html'}" + ("" if a.no_csv else f"  |  {out/'hits.csv'}"))
     if a.diagnose:
         from analyzer import ai_diagnostic
         ai_diagnostic.diagnose(out / "report.json", out_dir=a.out,
