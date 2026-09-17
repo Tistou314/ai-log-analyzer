@@ -1,0 +1,1318 @@
+{
+ "_doc": "Base de signatures. Chaque entrée : pattern (regex, insensible à la casse, appliquée au User-Agent), family, operator, category, purpose, respects_robots, robots_token (token robots.txt à utiliser, si différent du nom), verify (méthode de vérification d'identité : rdns_suffixes = suffixes DNS inverses légitimes, ip_source = clé dans ip_ranges/). Catégories : search_engine | ai_training | ai_search | ai_user_fetch | ai_agent | seo_tool | social_preview | monitoring | scraper | other_bot. L'ordre compte : première correspondance gagne, donc les plus spécifiques en premier.",
+ "_updated": "2026-08-24",
+ "bots": [
+  {
+   "pattern": "Google-Agent",
+   "family": "Google-Agent",
+   "operator": "Google",
+   "category": "ai_agent",
+   "purpose": "Agent IA Google (AI Mode agents, Gemini) qui navigue / agit pour un utilisateur",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com",
+     "googleusercontent.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Google-CloudVertexBot",
+   "family": "Google-CloudVertexBot",
+   "operator": "Google",
+   "category": "ai_search",
+   "purpose": "Grounding Vertex AI Agents (retrieval à la demande de clients Google Cloud)",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "GoogleAgent-Mariner",
+   "family": "GoogleAgent-Mariner",
+   "operator": "Google",
+   "category": "ai_agent",
+   "purpose": "Agent navigateur Project Mariner",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Google-InspectionTool",
+   "family": "Google-InspectionTool",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Outil d'inspection d'URL / test de résultats enrichis (Search Console)",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "GoogleOther-Image",
+   "family": "GoogleOther-Image",
+   "operator": "Google",
+   "category": "other_bot",
+   "purpose": "Usages internes Google (images), hors recherche publique — R&D, produits, y compris usages IA internes",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google_special"
+   }
+  },
+  {
+   "pattern": "GoogleOther-Video",
+   "family": "GoogleOther-Video",
+   "operator": "Google",
+   "category": "other_bot",
+   "purpose": "Usages internes Google (vidéos), hors recherche publique",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google_special"
+   }
+  },
+  {
+   "pattern": "GoogleOther",
+   "family": "GoogleOther",
+   "operator": "Google",
+   "category": "other_bot",
+   "purpose": "Usages internes Google, hors recherche publique. Bloquable sans effet sur Google Search",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google_special"
+   }
+  },
+  {
+   "pattern": "Googlebot-Image",
+   "family": "Googlebot-Image",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Crawl images Google",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Googlebot-Video",
+   "family": "Googlebot-Video",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Crawl vidéos Google",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Googlebot-News",
+   "family": "Googlebot-News",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Crawl Google Actualités",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Storebot-Google",
+   "family": "Storebot-Google",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Google Shopping",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "AdsBot-Google",
+   "family": "AdsBot-Google",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Contrôle qualité pages de destination Google Ads",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Mediapartners-Google",
+   "family": "Mediapartners-Google",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "AdSense",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Google-Read-Aloud",
+   "family": "Google-Read-Aloud",
+   "operator": "Google",
+   "category": "ai_user_fetch",
+   "purpose": "Lecture à voix haute (Assistant)",
+   "respects_robots": false,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google_user_triggered"
+   }
+  },
+  {
+   "pattern": "Google-Safety",
+   "family": "Google-Safety",
+   "operator": "Google",
+   "category": "monitoring",
+   "purpose": "Safe Browsing / anti-malware",
+   "respects_robots": false,
+   "verify": {
+    "rdns_suffixes": [
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "FeedFetcher-Google",
+   "family": "FeedFetcher-Google",
+   "operator": "Google",
+   "category": "ai_user_fetch",
+   "purpose": "Récupération de flux RSS/Atom déclenchée par un utilisateur",
+   "respects_robots": false,
+   "verify": {
+    "rdns_suffixes": [
+     "google.com"
+    ],
+    "ip_source": "google_user_triggered"
+   }
+  },
+  {
+   "pattern": "Googlebot.*Mobile|Android.*Googlebot",
+   "family": "Googlebot Smartphone",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Crawl principal Google (mobile-first). Sert aussi de fetcher pour AI Overviews / AI Mode : pas d'UA dédié",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "Googlebot",
+   "family": "Googlebot Desktop",
+   "operator": "Google",
+   "category": "search_engine",
+   "purpose": "Crawl Google desktop",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "googlebot.com",
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "APIs-Google",
+   "family": "APIs-Google",
+   "operator": "Google",
+   "category": "other_bot",
+   "purpose": "Notifications push APIs Google",
+   "respects_robots": false,
+   "verify": {
+    "rdns_suffixes": [
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "OAI-SearchBot",
+   "family": "OAI-SearchBot",
+   "operator": "OpenAI",
+   "category": "ai_search",
+   "purpose": "Index de recherche ChatGPT (citations dans ChatGPT Search). Ne sert PAS à l'entraînement",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "openai_searchbot"
+   }
+  },
+  {
+   "pattern": "ChatGPT-User",
+   "family": "ChatGPT-User",
+   "operator": "OpenAI",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch déclenché par un utilisateur ChatGPT (navigation, GPTs, Operator). Un humain attend derrière",
+   "respects_robots": false,
+   "verify": {
+    "ip_source": "openai_chatgpt_user"
+   }
+  },
+  {
+   "pattern": "GPTBot",
+   "family": "GPTBot",
+   "operator": "OpenAI",
+   "category": "ai_training",
+   "purpose": "Collecte pour l'entraînement des modèles OpenAI",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "openai_gptbot"
+   }
+  },
+  {
+   "pattern": "Claude-SearchBot",
+   "family": "Claude-SearchBot",
+   "operator": "Anthropic",
+   "category": "ai_search",
+   "purpose": "Index de recherche pour les réponses de Claude (citations)",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "anthropic"
+   }
+  },
+  {
+   "pattern": "Claude-User",
+   "family": "Claude-User",
+   "operator": "Anthropic",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch déclenché par un utilisateur de Claude",
+   "respects_robots": false,
+   "verify": {
+    "ip_source": "anthropic"
+   }
+  },
+  {
+   "pattern": "ClaudeBot",
+   "family": "ClaudeBot",
+   "operator": "Anthropic",
+   "category": "ai_training",
+   "purpose": "Collecte pour l'entraînement des modèles Claude",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "anthropic"
+   }
+  },
+  {
+   "pattern": "anthropic-ai|Claude-Web",
+   "family": "anthropic-ai (legacy)",
+   "operator": "Anthropic",
+   "category": "ai_training",
+   "purpose": "Anciens tokens Anthropic",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "anthropic"
+   }
+  },
+  {
+   "pattern": "Perplexity-User",
+   "family": "Perplexity-User",
+   "operator": "Perplexity",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch déclenché par un utilisateur Perplexity (ignore robots.txt par design)",
+   "respects_robots": false,
+   "verify": {
+    "ip_source": "perplexity_user"
+   }
+  },
+  {
+   "pattern": "PerplexityBot",
+   "family": "PerplexityBot",
+   "operator": "Perplexity",
+   "category": "ai_search",
+   "purpose": "Index de recherche Perplexity",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "perplexity_bot"
+   }
+  },
+  {
+   "pattern": "Applebot-Extended",
+   "family": "Applebot-Extended",
+   "operator": "Apple",
+   "category": "ai_training",
+   "purpose": "Token de contrôle pour l'entraînement Apple Intelligence (rarement vu en UA)",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "applebot.apple.com"
+    ],
+    "ip_source": "apple"
+   }
+  },
+  {
+   "pattern": "Applebot",
+   "family": "Applebot",
+   "operator": "Apple",
+   "category": "search_engine",
+   "purpose": "Siri, Spotlight, Safari Suggestions, Apple Intelligence (retrieval)",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "applebot.apple.com"
+    ],
+    "ip_source": "apple"
+   }
+  },
+  {
+   "pattern": "MicrosoftPreview",
+   "family": "MicrosoftPreview",
+   "operator": "Microsoft",
+   "category": "social_preview",
+   "purpose": "Aperçus de liens (Teams, Outlook, Copilot)",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "search.msn.com"
+    ],
+    "ip_source": "bing"
+   }
+  },
+  {
+   "pattern": "bingbot",
+   "family": "Bingbot",
+   "operator": "Microsoft",
+   "category": "search_engine",
+   "purpose": "Crawl Bing. Alimente aussi Copilot, ChatGPT Search (via index Bing), DuckDuckGo, Yahoo",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "search.msn.com"
+    ],
+    "ip_source": "bing"
+   }
+  },
+  {
+   "pattern": "BingPreview",
+   "family": "BingPreview",
+   "operator": "Microsoft",
+   "category": "search_engine",
+   "purpose": "Rendu de pages Bing",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "search.msn.com"
+    ],
+    "ip_source": "bing"
+   }
+  },
+  {
+   "pattern": "msnbot",
+   "family": "msnbot",
+   "operator": "Microsoft",
+   "category": "search_engine",
+   "purpose": "Ancien crawler Bing",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "search.msn.com"
+    ],
+    "ip_source": "bing"
+   }
+  },
+  {
+   "pattern": "Meta-ExternalAgent",
+   "family": "Meta-ExternalAgent",
+   "operator": "Meta",
+   "category": "ai_training",
+   "purpose": "Collecte pour l'entraînement des modèles Meta (Llama)",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "meta"
+   }
+  },
+  {
+   "pattern": "Meta-ExternalFetcher",
+   "family": "Meta-ExternalFetcher",
+   "operator": "Meta",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch déclenché par un utilisateur Meta AI",
+   "respects_robots": false,
+   "verify": {
+    "ip_source": "meta"
+   }
+  },
+  {
+   "pattern": "FacebookBot",
+   "family": "FacebookBot",
+   "operator": "Meta",
+   "category": "ai_training",
+   "purpose": "Ancien crawler d'entraînement Meta",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "meta"
+   }
+  },
+  {
+   "pattern": "meta-webindexer",
+   "family": "meta-webindexer",
+   "operator": "Meta",
+   "category": "ai_search",
+   "purpose": "Index web pour Meta AI (réponses avec citations)",
+   "respects_robots": true,
+   "verify": {
+    "ip_source": "meta"
+   }
+  },
+  {
+   "pattern": "facebookexternalhit|facebookcatalog",
+   "family": "facebookexternalhit",
+   "operator": "Meta",
+   "category": "social_preview",
+   "purpose": "Aperçus Open Graph Facebook / Instagram / WhatsApp",
+   "respects_robots": false,
+   "verify": {
+    "ip_source": "meta"
+   }
+  },
+  {
+   "pattern": "Amazonbot",
+   "family": "Amazonbot",
+   "operator": "Amazon",
+   "category": "ai_training",
+   "purpose": "Alexa, et collecte pour les modèles Amazon",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "crawl.amazonbot.amazon"
+    ],
+    "ip_source": "amazon"
+   }
+  },
+  {
+   "pattern": "Bytespider",
+   "family": "Bytespider",
+   "operator": "ByteDance",
+   "category": "ai_training",
+   "purpose": "Collecte ByteDance (Doubao, TikTok). Réputé peu respectueux du robots.txt",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "TikTokSpider",
+   "family": "TikTokSpider",
+   "operator": "ByteDance",
+   "category": "ai_training",
+   "purpose": "Collecte ByteDance",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "CCBot",
+   "family": "CCBot",
+   "operator": "Common Crawl",
+   "category": "ai_training",
+   "purpose": "Common Crawl : corpus public utilisé par la majorité des LLM open source",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "amazonaws.com"
+    ]
+   }
+  },
+  {
+   "pattern": "Diffbot",
+   "family": "Diffbot",
+   "operator": "Diffbot",
+   "category": "ai_training",
+   "purpose": "Knowledge graph / extraction structurée",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "cohere-ai|cohere-training-data-crawler",
+   "family": "Cohere",
+   "operator": "Cohere",
+   "category": "ai_training",
+   "purpose": "Collecte Cohere",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "AI2Bot|Ai2Bot-Dolma",
+   "family": "AI2Bot",
+   "operator": "Allen Institute",
+   "category": "ai_training",
+   "purpose": "Corpus Dolma (OLMo)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Omgilibot|omgili|webzio",
+   "family": "Webz.io",
+   "operator": "Webz.io",
+   "category": "ai_training",
+   "purpose": "Revente de données web à des entraîneurs de LLM",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "YouBot",
+   "family": "YouBot",
+   "operator": "You.com",
+   "category": "ai_search",
+   "purpose": "Index You.com",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "DuckAssistBot",
+   "family": "DuckAssistBot",
+   "operator": "DuckDuckGo",
+   "category": "ai_search",
+   "purpose": "DuckAssist (réponses IA DuckDuckGo)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "DuckDuckBot",
+   "family": "DuckDuckBot",
+   "operator": "DuckDuckGo",
+   "category": "search_engine",
+   "purpose": "Crawl DuckDuckGo",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "MistralAI-User",
+   "family": "MistralAI-User",
+   "operator": "Mistral AI",
+   "category": "ai_user_fetch",
+   "purpose": "Fetch déclenché par un utilisateur Le Chat",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "PanguBot",
+   "family": "PanguBot",
+   "operator": "Huawei",
+   "category": "ai_training",
+   "purpose": "Collecte Huawei PanGu",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "PetalBot",
+   "family": "PetalBot",
+   "operator": "Huawei",
+   "category": "search_engine",
+   "purpose": "Petal Search",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Timpibot",
+   "family": "Timpibot",
+   "operator": "Timpi",
+   "category": "ai_search",
+   "purpose": "Index décentralisé Timpi",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "ImagesiftBot",
+   "family": "ImagesiftBot",
+   "operator": "Hive",
+   "category": "ai_training",
+   "purpose": "Collecte d'images (Hive AI)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "img2dataset",
+   "family": "img2dataset",
+   "operator": "open source",
+   "category": "ai_training",
+   "purpose": "Outil de constitution de datasets image-texte (LAION)",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Kangaroo Bot",
+   "family": "Kangaroo Bot",
+   "operator": "Kangaroo LLM",
+   "category": "ai_training",
+   "purpose": "Collecte Kangaroo",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "iaskspider",
+   "family": "iaskspider",
+   "operator": "iAsk",
+   "category": "ai_search",
+   "purpose": "Moteur de réponses iAsk",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Scrapy",
+   "family": "Scrapy",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Framework de scraping Python",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "python-requests|python-urllib|aiohttp|httpx",
+   "family": "Python HTTP lib",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Script Python générique",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Go-http-client",
+   "family": "Go-http-client",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Client Go générique",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "curl/|Wget/",
+   "family": "curl/wget",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Outil en ligne de commande",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "HeadlessChrome",
+   "family": "HeadlessChrome",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Chrome headless déclaré (Puppeteer/Playwright non masqué)",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Chrome-Lighthouse",
+   "family": "Lighthouse",
+   "operator": "Google",
+   "category": "monitoring",
+   "purpose": "Audit PageSpeed / Lighthouse",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "AhrefsBot",
+   "family": "AhrefsBot",
+   "operator": "Ahrefs",
+   "category": "seo_tool",
+   "purpose": "Index backlinks Ahrefs",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "AhrefsSiteAudit",
+   "family": "AhrefsSiteAudit",
+   "operator": "Ahrefs",
+   "category": "seo_tool",
+   "purpose": "Audit de site Ahrefs (déclenché par un client)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "SemrushBot",
+   "family": "SemrushBot",
+   "operator": "Semrush",
+   "category": "seo_tool",
+   "purpose": "Index Semrush",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "SiteAuditBot",
+   "family": "SiteAuditBot",
+   "operator": "Semrush",
+   "category": "seo_tool",
+   "purpose": "Audit de site Semrush",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "MJ12bot",
+   "family": "MJ12bot",
+   "operator": "Majestic",
+   "category": "seo_tool",
+   "purpose": "Index backlinks Majestic",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "DotBot",
+   "family": "DotBot",
+   "operator": "Moz",
+   "category": "seo_tool",
+   "purpose": "Index Moz",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "rogerbot",
+   "family": "rogerbot",
+   "operator": "Moz",
+   "category": "seo_tool",
+   "purpose": "Audit Moz Pro",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Screaming Frog",
+   "family": "Screaming Frog",
+   "operator": "Screaming Frog",
+   "category": "seo_tool",
+   "purpose": "Crawler desktop (probablement vous ou un concurrent)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "OnCrawl",
+   "family": "OnCrawl",
+   "operator": "OnCrawl",
+   "category": "seo_tool",
+   "purpose": "Crawler OnCrawl",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Botify",
+   "family": "Botify",
+   "operator": "Botify",
+   "category": "seo_tool",
+   "purpose": "Crawler Botify",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "SeekportBot|Seekport",
+   "family": "SeekportBot",
+   "operator": "Seekport",
+   "category": "search_engine",
+   "purpose": "Moteur Seekport",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "DataForSeoBot",
+   "family": "DataForSeoBot",
+   "operator": "DataForSEO",
+   "category": "seo_tool",
+   "purpose": "Données SEO",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "BLEXBot",
+   "family": "BLEXBot",
+   "operator": "WebMeUp",
+   "category": "seo_tool",
+   "purpose": "Index backlinks",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Barkrowler",
+   "family": "Barkrowler",
+   "operator": "Babbar",
+   "category": "seo_tool",
+   "purpose": "Index Babbar",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "serpstatbot",
+   "family": "serpstatbot",
+   "operator": "Serpstat",
+   "category": "seo_tool",
+   "purpose": "Index Serpstat",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "SEOkicks",
+   "family": "SEOkicks",
+   "operator": "SEOkicks",
+   "category": "seo_tool",
+   "purpose": "Index backlinks",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "YandexBot|YandexImages|YandexMobileBot",
+   "family": "YandexBot",
+   "operator": "Yandex",
+   "category": "search_engine",
+   "purpose": "Crawl Yandex",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "yandex.ru",
+     "yandex.net",
+     "yandex.com"
+    ]
+   }
+  },
+  {
+   "pattern": "Baiduspider",
+   "family": "Baiduspider",
+   "operator": "Baidu",
+   "category": "search_engine",
+   "purpose": "Crawl Baidu",
+   "respects_robots": true,
+   "verify": {
+    "rdns_suffixes": [
+     "baidu.com",
+     "baidu.jp"
+    ]
+   }
+  },
+  {
+   "pattern": "Qwantbot|Qwantify",
+   "family": "Qwantbot",
+   "operator": "Qwant",
+   "category": "search_engine",
+   "purpose": "Crawl Qwant",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Sogou",
+   "family": "Sogou",
+   "operator": "Sogou",
+   "category": "search_engine",
+   "purpose": "Crawl Sogou",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "coccocbot",
+   "family": "coccocbot",
+   "operator": "Coc Coc",
+   "category": "search_engine",
+   "purpose": "Crawl Coc Coc",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "NaverBot|Yeti",
+   "family": "Naver",
+   "operator": "Naver",
+   "category": "search_engine",
+   "purpose": "Crawl Naver",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Mojeek",
+   "family": "MojeekBot",
+   "operator": "Mojeek",
+   "category": "search_engine",
+   "purpose": "Crawl Mojeek",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "ia_archiver|archive\\.org_bot",
+   "family": "Internet Archive",
+   "operator": "Internet Archive",
+   "category": "other_bot",
+   "purpose": "Wayback Machine",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Twitterbot",
+   "family": "Twitterbot",
+   "operator": "X",
+   "category": "social_preview",
+   "purpose": "Aperçus X/Twitter",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "LinkedInBot",
+   "family": "LinkedInBot",
+   "operator": "LinkedIn",
+   "category": "social_preview",
+   "purpose": "Aperçus LinkedIn",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Slackbot|Slack-ImgProxy",
+   "family": "Slackbot",
+   "operator": "Slack",
+   "category": "social_preview",
+   "purpose": "Aperçus Slack",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Discordbot",
+   "family": "Discordbot",
+   "operator": "Discord",
+   "category": "social_preview",
+   "purpose": "Aperçus Discord",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "TelegramBot",
+   "family": "TelegramBot",
+   "operator": "Telegram",
+   "category": "social_preview",
+   "purpose": "Aperçus Telegram",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "WhatsApp",
+   "family": "WhatsApp",
+   "operator": "Meta",
+   "category": "social_preview",
+   "purpose": "Aperçus WhatsApp",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Pinterestbot|Pinterest/",
+   "family": "Pinterestbot",
+   "operator": "Pinterest",
+   "category": "social_preview",
+   "purpose": "Pinterest",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "redditbot",
+   "family": "redditbot",
+   "operator": "Reddit",
+   "category": "social_preview",
+   "purpose": "Aperçus Reddit",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "UptimeRobot|Pingdom|StatusCake|Site24x7|Better Uptime|Uptime-Kuma|Datadog",
+   "family": "Monitoring",
+   "operator": "divers",
+   "category": "monitoring",
+   "purpose": "Surveillance de disponibilité",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "GTmetrix|WebPageTest|PageSpeed",
+   "family": "Perf tools",
+   "operator": "divers",
+   "category": "monitoring",
+   "purpose": "Tests de performance",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Cloudflare|cloudflare-healthchecks",
+   "family": "Cloudflare",
+   "operator": "Cloudflare",
+   "category": "monitoring",
+   "purpose": "Health checks",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "masscan|zgrab|nmap|nikto|sqlmap|WPScan|Nuclei",
+   "family": "Scanner sécurité",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Scanner de vulnérabilités (hostile ou audit)",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "WP-Rocket-SaaS|WP Rocket/Preload",
+   "family": "WP Rocket",
+   "operator": "WP Media",
+   "category": "monitoring",
+   "purpose": "Préchargement du cache WP Rocket (déclenché par votre propre site)",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "AdsTxtCrawler|AppNexusAdsTxtCrawler|bidswitchbot|prebotv3|ads-supply-chain|Adsbot/|adstxt",
+   "family": "AdTech ads.txt crawler",
+   "operator": "adtech",
+   "category": "other_bot",
+   "purpose": "Vérification ads.txt / sellers.json par des plateformes publicitaires",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "Chrome Privacy Preserving Prefetch Proxy",
+   "family": "Chrome Prefetch Proxy",
+   "operator": "Google",
+   "category": "other_bot",
+   "purpose": "Préchargement de pages par Chrome (proxy privé Google) : précède souvent un clic humain",
+   "respects_robots": false,
+   "verify": {
+    "rdns_suffixes": [
+     "google.com"
+    ],
+    "ip_source": "google"
+   }
+  },
+  {
+   "pattern": "PoweredByBot",
+   "family": "PoweredByBot",
+   "operator": "Keywords Everywhere",
+   "category": "seo_tool",
+   "purpose": "Détection de technologies (lit aussi llms.txt)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Observer/1\\.0.*obsrvr",
+   "family": "Observer (obsrvr.net)",
+   "operator": "obsrvr.net",
+   "category": "other_bot",
+   "purpose": "Crawler générique",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "SectorBot|PisarBot|ShapBot|MyBot/",
+   "family": "Bot anonyme",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Bot sans documentation publique : à surveiller",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "axios/|node-fetch|undici|okhttp|Java/|libwww-perl|PHP/",
+   "family": "HTTP lib",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "Bibliothèque HTTP générique (script)",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "AgenceSW-Checker|SiteCheckerBotCrawler|SiteAnalyzerBot",
+   "family": "Site checker",
+   "operator": "divers",
+   "category": "seo_tool",
+   "purpose": "Vérificateur de site tiers",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Google-Extended/",
+   "family": "Faux Google-Extended",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "UA INEXISTANT : Google-Extended est un token robots.txt, jamais un User-Agent. Quiconque le porte usurpe.",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "WP-Safe-Scanner|l9scan|leakix|ReadBot/0",
+   "family": "Scanner déclaré",
+   "operator": "divers",
+   "category": "scraper",
+   "purpose": "Scanner de sécurité / fuite (LeakIX, WP-Safe-Scanner…)",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "SERankingBacklinksBot|SE Ranking",
+   "family": "SE Ranking",
+   "operator": "SE Ranking",
+   "category": "seo_tool",
+   "purpose": "Index backlinks SE Ranking",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "Dragonfly/.*publisherdiscovery|AffsignalCrawler|IbouBot|SofyaBot|CriteoBot",
+   "family": "AdTech / affiliation crawler",
+   "operator": "adtech",
+   "category": "other_bot",
+   "purpose": "Découverte d'éditeurs, affiliation, retargeting (Criteo, Publisher Discovery, Affsignal…)",
+   "respects_robots": true,
+   "verify": {}
+  },
+  {
+   "pattern": "^Mozilla/5\\.0 \\(compatible; crawler\\)$",
+   "family": "Bot anonyme",
+   "operator": "inconnu",
+   "category": "scraper",
+   "purpose": "UA générique sans identification",
+   "respects_robots": false,
+   "verify": {}
+  },
+  {
+   "pattern": "bot|crawl|spider|slurp|fetch|scan|archiver|monitor|checker|feed|reader|validator",
+   "family": "Bot non identifié",
+   "operator": "inconnu",
+   "category": "other_bot",
+   "purpose": "UA contenant un mot-clé de bot mais absent de la base",
+   "respects_robots": false,
+   "verify": {}
+  }
+ ],
+ "ai_referrers": {
+  "_doc": "Domaines referrer identifiant un clic humain depuis une interface IA",
+  "chatgpt.com": "ChatGPT",
+  "chat.openai.com": "ChatGPT",
+  "openai.com": "ChatGPT",
+  "perplexity.ai": "Perplexity",
+  "www.perplexity.ai": "Perplexity",
+  "claude.ai": "Claude",
+  "www.claude.ai": "Claude",
+  "gemini.google.com": "Gemini",
+  "bard.google.com": "Gemini",
+  "copilot.microsoft.com": "Copilot",
+  "bing.com/copilot": "Copilot",
+  "chat.mistral.ai": "Le Chat (Mistral)",
+  "you.com": "You.com",
+  "meta.ai": "Meta AI",
+  "www.meta.ai": "Meta AI",
+  "grok.com": "Grok",
+  "x.ai": "Grok",
+  "chat.deepseek.com": "DeepSeek",
+  "kimi.moonshot.cn": "Kimi",
+  "www.kimi.com": "Kimi",
+  "iask.ai": "iAsk",
+  "felo.ai": "Felo",
+  "genspark.ai": "Genspark",
+  "www.genspark.ai": "Genspark",
+  "notebooklm.google.com": "NotebookLM",
+  "aistudio.google.com": "AI Studio",
+  "duckduckgo.com/duckchat": "DuckAssist",
+  "duck.ai": "Duck.ai",
+  "bing.com/chat": "Copilot",
+  "search.brave.com/search?source=llmSuggest": "Brave AI"
+ },
+ "ai_control_files": {
+  "_doc": "Fichiers dont la lecture indique un acteur qui cherche les règles IA/robots",
+  "/robots.txt": "robots.txt",
+  "/llms.txt": "llms.txt",
+  "/llms-full.txt": "llms-full.txt",
+  "/ai.txt": "ai.txt",
+  "/.well-known/ai-plugin.json": "ai-plugin.json",
+  "/.well-known/tdmrep.json": "TDM Reservation Protocol",
+  "/humans.txt": "humans.txt",
+  "/security.txt": "security.txt",
+  "/.well-known/security.txt": "security.txt"
+ },
+ "categories": {
+  "search_engine": {
+   "label": "Moteur de recherche",
+   "explain": "Crawlers des moteurs classiques. Googlebot alimente aussi AI Overviews et AI Mode : il n'existe pas d'UA dédié à ces surfaces."
+  },
+  "ai_training": {
+   "label": "LLM — entraînement",
+   "explain": "Collecte de contenu pour entraîner des modèles. Aucun trafic en retour, aucune citation. C'est ce que Google-Extended / GPTBot / ClaudeBot permettent de bloquer sans perdre la visibilité recherche."
+  },
+  "ai_search": {
+   "label": "LLM — index de recherche",
+   "explain": "Construction d'un index pour citer vos pages dans les réponses (ChatGPT Search, Claude, Perplexity). Bloquer = disparaître des citations."
+  },
+  "ai_user_fetch": {
+   "label": "LLM — fetch utilisateur",
+   "explain": "Un humain a demandé quelque chose à une IA, qui est venue lire votre page en temps réel. Souvent hors robots.txt par design (comme un navigateur). C'est le signal le plus proche d'une visibilité IA réelle."
+  },
+  "ai_agent": {
+   "label": "Agent IA",
+   "explain": "Agent autonome qui navigue, compare ou agit (Google-Agent, Mariner, Operator). Nouveau type de trafic 2026 : attribution et conversion à surveiller."
+  },
+  "seo_tool": {
+   "label": "Outil SEO",
+   "explain": "Ahrefs, Semrush, Majestic… Utile pour vous, coûteux en crawl budget, et révèle si des concurrents vous auditent."
+  },
+  "social_preview": {
+   "label": "Aperçu social/messagerie",
+   "explain": "Un lien a été partagé quelque part. Bon proxy de partage réel."
+  },
+  "monitoring": {
+   "label": "Monitoring / perf",
+   "explain": "Surveillance, tests de vitesse, health checks."
+  },
+  "scraper": {
+   "label": "Scraper / scanner",
+   "explain": "Scripts génériques, headless, scanners de vulnérabilités. À traiter côté sécurité plutôt que SEO."
+  },
+  "other_bot": {
+   "label": "Autre bot",
+   "explain": "Bot identifié comme tel mais absent de la base. À examiner : c'est là que se cachent les nouveaux crawlers IA."
+  },
+  "human": {
+   "label": "Humain (probable)",
+   "explain": "UA navigateur sans marqueur de bot. Voir le module stealth pour les bots déguisés."
+  }
+ }
+}

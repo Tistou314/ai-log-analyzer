@@ -1,0 +1,13 @@
+{
+ "source": "PLACEHOLDER partiel \u2014 lancer update.py pour la liste officielle",
+ "complete": false,
+ "prefixes": [
+  "157.55.0.0/16",
+  "40.77.0.0/16",
+  "207.46.0.0/16",
+  "52.167.144.0/24",
+  "13.66.139.0/24",
+  "20.15.133.160/27",
+  "52.142.24.0/22"
+ ]
+}
