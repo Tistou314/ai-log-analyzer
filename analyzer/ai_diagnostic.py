@@ -1,7 +1,10 @@
-"""Intégration Claude : diagnostic automatique (--diagnose) et mode tuteur (chat).
+"""Intégration LLM : diagnostic automatique (--diagnose) et mode tuteur (chat).
 
-La clé est lue UNIQUEMENT depuis la variable d'environnement ANTHROPIC_API_KEY,
-elle-même éventuellement chargée depuis un fichier .env gitignoré à la racine.
+Multi-fournisseurs : Anthropic (Claude), OpenAI (GPT) ou DeepSeek, au choix de
+l'utilisateur. Le fournisseur est choisi par --provider, ou déduit de la clé
+présente (dans cet ordre : ANTHROPIC_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY).
+Les clés sont lues UNIQUEMENT depuis les variables d'environnement, elles-mêmes
+éventuellement chargées depuis un fichier .env gitignoré à la racine.
 Sans clé : message clair renvoyant au copier-coller des prompts/, jamais d'erreur brute.
 Les prompts vivent dans prompts/*.md (source unique) ; le corps du prompt est
 la partie après le premier séparateur '---'.
@@ -9,17 +12,28 @@ la partie après le premier séparateur '---'.
 import json, os, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DEFAULT_MODEL = "claude-sonnet-4-6"
 MAX_REPORT_CHARS = 100_000
 # retirées en premier si le rapport est trop gros, dans cet ordre
 TRIM_ORDER = ["timeline", "explain", "structure", "crawl_budget", "actors"]
 
-NO_KEY_MSG = """Pas de clé API Anthropic trouvée (variable ANTHROPIC_API_KEY ou fichier .env).
+# fournisseur → (variable d'environnement, modèle par défaut, base_url ou None, SDK)
+PROVIDERS = {
+    "anthropic": dict(env="ANTHROPIC_API_KEY", model="claude-sonnet-4-6", base_url=None, sdk="anthropic"),
+    "openai":    dict(env="OPENAI_API_KEY",    model="gpt-5",             base_url=None, sdk="openai"),
+    "deepseek":  dict(env="DEEPSEEK_API_KEY",  model="deepseek-chat",     base_url="https://api.deepseek.com", sdk="openai"),
+}
+DEFAULT_MODEL = PROVIDERS["anthropic"]["model"]  # rétrocompatibilité
+
+NO_KEY_MSG = """Pas de clé API trouvée. L'outil accepte au choix :
+  ANTHROPIC_API_KEY (Claude), OPENAI_API_KEY (GPT) ou DEEPSEEK_API_KEY (DeepSeek),
+en variable d'environnement ou dans un fichier .env à la racine (jamais commité).
 Deux options :
   1. Sans clé : copiez le contenu de prompts/diagnostic.md (ou prompts/tuteur.md)
-     dans claude.ai avec votre out/report.json joint. C'est le même prompt.
-  2. Avec clé : export ANTHROPIC_API_KEY=sk-ant-...  (ou ANTHROPIC_API_KEY=... dans un
-     fichier .env à la racine, jamais commité), puis relancez cette commande."""
+     dans claude.ai / chatgpt.com / chat.deepseek.com avec votre out/report.json joint.
+     C'est le même prompt.
+  2. Avec clé : export ANTHROPIC_API_KEY=sk-ant-...  (ou OPENAI_API_KEY / DEEPSEEK_API_KEY),
+     puis relancez cette commande. Option --provider anthropic|openai|deepseek si
+     plusieurs clés sont présentes."""
 
 
 def _load_dotenv():
@@ -33,18 +47,90 @@ def _load_dotenv():
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 
-def get_client():
-    """Retourne un client Anthropic, ou None (avec message) si pas de clé / SDK absent."""
+def pick_provider(provider=None):
+    """Retourne le nom du fournisseur à utiliser, ou None (avec message) si aucune clé."""
     _load_dotenv()
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print(NO_KEY_MSG, file=sys.stderr)
+    if provider:
+        provider = provider.lower()
+        if provider not in PROVIDERS:
+            print(f"Fournisseur inconnu : {provider}. Choix : {', '.join(PROVIDERS)}", file=sys.stderr)
+            return None
+        if not os.environ.get(PROVIDERS[provider]["env"]):
+            print(f"--provider {provider} demandé mais {PROVIDERS[provider]['env']} n'est pas définie.", file=sys.stderr)
+            print(NO_KEY_MSG, file=sys.stderr)
+            return None
+        return provider
+    for name, p in PROVIDERS.items():
+        if os.environ.get(p["env"]):
+            return name
+    print(NO_KEY_MSG, file=sys.stderr)
+    return None
+
+
+class LLM:
+    """Abstraction minimale commune : stream(system, messages) → itérateur de texte.
+    Anthropic via son SDK ; OpenAI et DeepSeek via le SDK openai (API compatible)."""
+
+    def __init__(self, provider, model=None):
+        self.provider = provider
+        p = PROVIDERS[provider]
+        self.model = model or p["model"]
+        if p["sdk"] == "anthropic":
+            import anthropic
+            self._client = anthropic.Anthropic()
+        else:
+            import openai
+            self._client = openai.OpenAI(api_key=os.environ[p["env"]], base_url=p["base_url"])
+
+    def stream(self, messages, system=None, max_tokens=8000, cache_system=False):
+        """Génère le texte au fil de l'eau. Retourne l'itérateur ; le texte complet
+        est ensuite dans self.last_text, l'usage (in, out) dans self.last_usage."""
+        self.last_text, self.last_usage = "", (0, 0)
+        if self.provider == "anthropic":
+            return self._stream_anthropic(messages, system, max_tokens, cache_system)
+        return self._stream_openai(messages, system, max_tokens)
+
+    def _stream_anthropic(self, messages, system, max_tokens, cache_system):
+        kwargs = dict(model=self.model, max_tokens=max_tokens, messages=messages)
+        if system:
+            kwargs["system"] = [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}] \
+                if cache_system else system
+        with self._client.messages.stream(**kwargs) as stream:
+            for chunk in stream.text_stream:
+                self.last_text += chunk
+                yield chunk
+            final = stream.get_final_message()
+        self.last_usage = (final.usage.input_tokens, final.usage.output_tokens)
+
+    def _stream_openai(self, messages, system, max_tokens):
+        msgs = ([{"role": "system", "content": system}] if system else []) + messages
+        # OpenAI (gpt-5+) exige max_completion_tokens ; DeepSeek attend max_tokens
+        limit = {"max_completion_tokens": max_tokens} if self.provider == "openai" else {"max_tokens": max_tokens}
+        stream = self._client.chat.completions.create(
+            model=self.model, messages=msgs, stream=True,
+            stream_options={"include_usage": True}, **limit)
+        for chunk in stream:
+            if chunk.usage:
+                self.last_usage = (chunk.usage.prompt_tokens, chunk.usage.completion_tokens)
+            if chunk.choices and chunk.choices[0].delta.content:
+                self.last_text += chunk.choices[0].delta.content
+                yield chunk.choices[0].delta.content
+
+
+def make_llm(provider=None, model=None):
+    """Choisit le fournisseur et construit le client. None (avec message) si impossible."""
+    name = pick_provider(provider)
+    if name is None:
         return None
     try:
-        import anthropic
+        return LLM(name, model)
     except ImportError:
-        print("Le SDK Anthropic n'est pas installé : pip install anthropic", file=sys.stderr)
+        sdk = PROVIDERS[name]["sdk"]
+        print(f"Le SDK '{sdk}' n'est pas installé : pip install {sdk}", file=sys.stderr)
         return None
-    return anthropic.Anthropic()
+    except Exception as e:
+        print(f"Impossible d'initialiser le client {name} : {e}", file=sys.stderr)
+        return None
 
 
 def load_prompt(name):
@@ -78,45 +164,37 @@ def slim_report(report, max_chars=MAX_REPORT_CHARS):
     return s, removed
 
 
-def _extract_text(response):
-    return "".join(b.text for b in response.content if b.type == "text")
-
-
-def diagnose(report_path, out_dir="out", model=DEFAULT_MODEL):
+def diagnose(report_path, out_dir="out", model=None, provider=None):
     """Envoie le rapport allégé avec prompts/diagnostic.md → out/diagnostic.md + affichage."""
-    client = get_client()
-    if client is None:
+    llm = make_llm(provider, model)
+    if llm is None:
         return 1
     report = json.loads(pathlib.Path(report_path).read_text(encoding="utf-8"))
     slim, removed = slim_report(report)
     prompt = load_prompt("diagnostic")
     note = f"\n\n(Sections retirées du rapport pour tenir dans la limite : {', '.join(removed)})" if removed else ""
-    print(f"[diagnose] envoi à {model} ({len(slim):,} caractères de rapport"
+    print(f"[diagnose] envoi à {llm.model} ({llm.provider}, {len(slim):,} caractères de rapport"
           + (f", sections retirées : {', '.join(removed)}" if removed else "") + ")", file=sys.stderr)
     try:
-        with client.messages.stream(
-            model=model, max_tokens=8000,
-            messages=[{"role": "user",
-                       "content": f"{prompt}{note}\n\nVoici report.json :\n```json\n{slim}\n```"}],
-        ) as stream:
-            response = stream.get_final_message()
+        for chunk in llm.stream(
+                [{"role": "user", "content": f"{prompt}{note}\n\nVoici report.json :\n```json\n{slim}\n```"}]):
+            print(chunk, end="", flush=True)
+        print()
     except Exception as e:
-        print(f"Échec de l'appel API : {e}", file=sys.stderr)
+        print(f"Échec de l'appel API {llm.provider} : {e}", file=sys.stderr)
         return 1
-    text = _extract_text(response)
     out = pathlib.Path(out_dir); out.mkdir(exist_ok=True)
-    (out / "diagnostic.md").write_text(text, encoding="utf-8")
-    print(text)
-    u = response.usage
-    print(f"\n→ {out / 'diagnostic.md'}  ({u.input_tokens:,} tokens in, {u.output_tokens:,} out, modèle {model})",
+    (out / "diagnostic.md").write_text(llm.last_text, encoding="utf-8")
+    tin, tout = llm.last_usage
+    print(f"\n→ {out / 'diagnostic.md'}  ({tin:,} tokens in, {tout:,} out, modèle {llm.model} via {llm.provider})",
           file=sys.stderr)
     return 0
 
 
-def chat(report_path, model=DEFAULT_MODEL):
+def chat(report_path, model=None, provider=None):
     """Boucle terminal avec prompts/tuteur.md, rapport en contexte, historique de session, /quit."""
-    client = get_client()
-    if client is None:
+    llm = make_llm(provider, model)
+    if llm is None:
         return 1
     report = json.loads(pathlib.Path(report_path).read_text(encoding="utf-8"))
     slim, removed = slim_report(report)
@@ -124,7 +202,7 @@ def chat(report_path, model=DEFAULT_MODEL):
     if removed:
         system += f"\n(Sections retirées pour tenir dans la limite : {', '.join(removed)})"
     history = []
-    print("Mode tuteur : posez vos questions sur votre rapport. /quit pour sortir.")
+    print(f"Mode tuteur ({llm.model} via {llm.provider}) : posez vos questions sur votre rapport. /quit pour sortir.")
     while True:
         try:
             q = input("\nvous > ").strip()
@@ -137,19 +215,13 @@ def chat(report_path, model=DEFAULT_MODEL):
             break
         history.append({"role": "user", "content": q})
         try:
-            with client.messages.stream(
-                model=model, max_tokens=4000,
-                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
-                messages=history,
-            ) as stream:
-                print("\ntuteur > ", end="", flush=True)
-                for chunk in stream.text_stream:
-                    print(chunk, end="", flush=True)
-                response = stream.get_final_message()
+            print("\ntuteur > ", end="", flush=True)
+            for chunk in llm.stream(history, system=system, max_tokens=4000, cache_system=True):
+                print(chunk, end="", flush=True)
             print()
         except Exception as e:
             history.pop()
-            print(f"\nÉchec de l'appel API : {e}", file=sys.stderr)
+            print(f"\nÉchec de l'appel API {llm.provider} : {e}", file=sys.stderr)
             continue
-        history.append({"role": "assistant", "content": _extract_text(response)})
+        history.append({"role": "assistant", "content": llm.last_text})
     return 0

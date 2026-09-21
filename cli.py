@@ -23,9 +23,10 @@ def main():
         from analyzer import ai_diagnostic
         cp = argparse.ArgumentParser(prog="cli.py chat", description="mode tuteur : questions sur un report.json existant")
         cp.add_argument("report", nargs="?", default="out/report.json", help="chemin du report.json (défaut : out/report.json)")
-        cp.add_argument("--model", default=ai_diagnostic.DEFAULT_MODEL, help="modèle Claude à utiliser")
+        cp.add_argument("--provider", choices=sorted(ai_diagnostic.PROVIDERS), help="fournisseur LLM (défaut : déduit de la clé présente)")
+        cp.add_argument("--model", default=None, help="modèle à utiliser (défaut : celui du fournisseur)")
         c = cp.parse_args(sys.argv[2:])
-        sys.exit(ai_diagnostic.chat(c.report, model=c.model))
+        sys.exit(ai_diagnostic.chat(c.report, model=c.model, provider=c.provider))
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("logs", nargs="+", help="fichiers de logs (.log, .gz, .json, W3C)")
     ap.add_argument("--site", help="URL du site (pour --robots sans fichier)")
@@ -39,8 +40,9 @@ def main():
     ap.add_argument("--limit", type=int, help="ne lire que N lignes par fichier (test rapide)")
     ap.add_argument("--out", default="out", help="dossier de sortie")
     ap.add_argument("--no-csv", action="store_true", help="ne pas écrire hits.csv")
-    ap.add_argument("--diagnose", action="store_true", help="après l'analyse, envoyer le rapport à Claude pour un diagnostic (clé ANTHROPIC_API_KEY requise)")
-    ap.add_argument("--model", default=None, help="modèle Claude pour --diagnose (défaut : voir analyzer/ai_diagnostic.py)")
+    ap.add_argument("--diagnose", action="store_true", help="après l'analyse, envoyer le rapport à un LLM pour un diagnostic (clé ANTHROPIC_API_KEY, OPENAI_API_KEY ou DEEPSEEK_API_KEY)")
+    ap.add_argument("--provider", default=None, help="fournisseur LLM pour --diagnose : anthropic, openai ou deepseek (défaut : déduit de la clé présente)")
+    ap.add_argument("--model", default=None, help="modèle pour --diagnose (défaut : celui du fournisseur)")
     a = ap.parse_args()
 
     df = P.parse_files(a.logs, a.limit)
@@ -63,7 +65,7 @@ def main():
     if a.diagnose:
         from analyzer import ai_diagnostic
         ai_diagnostic.diagnose(out / "report.json", out_dir=a.out,
-                               model=a.model or ai_diagnostic.DEFAULT_MODEL)
+                               model=a.model, provider=a.provider)
 
 def summary(r):
     o = r["overview"]

@@ -93,23 +93,29 @@ Toutes les clés sont stables entre versions mineures. Une surcouche n'a besoin 
 3. Itérez. Une surcouche = une question business par écran, les alertes en haut, une phrase d'`explain` par graphique.
 4. Pour comprendre ce que vous voyez : `prompts/tuteur.md`. Pour un diagnostic complet : `prompts/diagnostic.md`.
 
-### Diagnostic et tuteur avec Claude
+### Diagnostic et tuteur avec le LLM de votre choix
 
-Deux usages, avec ou sans clé API :
+Deux usages, avec ou sans clé API. Trois fournisseurs supportés : **Anthropic (Claude)**, **OpenAI (GPT)** et **DeepSeek**.
 
-**Sans clé** (gratuit avec un compte claude.ai) : copiez `prompts/diagnostic.md` ou `prompts/tuteur.md` dans claude.ai et joignez `out/report.json`. C'est exactement le même prompt que ci-dessous.
+**Sans clé** (gratuit avec un compte) : copiez `prompts/diagnostic.md` ou `prompts/tuteur.md` dans claude.ai, chatgpt.com ou chat.deepseek.com et joignez `out/report.json`. C'est exactement le même prompt que ci-dessous.
 
-**Avec une clé API** (`export ANTHROPIC_API_KEY=sk-ant-...`, ou un fichier `.env` à la racine — gitignoré, jamais commité ; la clé n'est jamais passée en argument CLI) :
+**Avec une clé API** — définissez celle du fournisseur choisi, en variable d'environnement ou dans un fichier `.env` à la racine (gitignoré, jamais commité ; la clé n'est jamais passée en argument CLI) :
+
+| Fournisseur | Variable | Modèle par défaut |
+|---|---|---|
+| Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-4-6` |
+| OpenAI | `OPENAI_API_KEY` | `gpt-5` |
+| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-chat` |
 
 ```bash
 # diagnostic complet en 6 parties → out/diagnostic.md + affichage
-python cli.py access.log --diagnose            # option --model pour changer de modèle
+python cli.py access.log --diagnose            # fournisseur déduit de la clé présente
 
 # mode tuteur : boucle de questions sur un rapport existant (/quit pour sortir)
 python cli.py chat out/report.json
 ```
 
-Les prompts restent dans `prompts/*.md` (source unique). Si le rapport dépasse ~100k caractères, il est allégé automatiquement et les sections retirées sont listées.
+Si une seule clé est définie, le fournisseur est choisi automatiquement. Si plusieurs le sont, ajoutez `--provider anthropic|openai|deepseek` ; `--model` remplace le modèle par défaut du fournisseur. Les prompts restent dans `prompts/*.md` (source unique). Si le rapport dépasse ~100k caractères, il est allégé automatiquement et les sections retirées sont listées.
 
 Trois parcours suggérés selon votre site :
 - **Bots IA** : qui me lit, pour quoi faire, qui m'usurpe, que bloquer.
