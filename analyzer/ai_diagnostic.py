@@ -16,13 +16,41 @@ MAX_REPORT_CHARS = 100_000
 # retirées en premier si le rapport est trop gros, dans cet ordre
 TRIM_ORDER = ["timeline", "explain", "structure", "crawl_budget", "actors"]
 
-# fournisseur → (variable d'environnement, modèle par défaut, base_url ou None, SDK)
+# fournisseur → variable d'environnement, catalogue de modèles (le premier = défaut), base_url, SDK.
+# Catalogue vérifié en septembre 2026 ; --model accepte aussi tout identifiant hors liste
+# (les fournisseurs sortent des modèles plus vite que ce fichier n'est mis à jour).
 PROVIDERS = {
-    "anthropic": dict(env="ANTHROPIC_API_KEY", model="claude-sonnet-4-6", base_url=None, sdk="anthropic"),
-    "openai":    dict(env="OPENAI_API_KEY",    model="gpt-5",             base_url=None, sdk="openai"),
-    "deepseek":  dict(env="DEEPSEEK_API_KEY",  model="deepseek-chat",     base_url="https://api.deepseek.com", sdk="openai"),
+    "anthropic": dict(env="ANTHROPIC_API_KEY", base_url=None, sdk="anthropic", models={
+        "claude-sonnet-5":   "équilibré (défaut)",
+        "claude-opus-5":     "le plus puissant",
+        "claude-haiku-4-5":  "rapide et économique",
+        "claude-sonnet-4-6": "génération précédente",
+    }),
+    "openai": dict(env="OPENAI_API_KEY", base_url=None, sdk="openai", models={
+        "gpt-5.6-terra": "équilibré (défaut)",
+        "gpt-6-astra":   "le plus puissant",
+        "gpt-5.6-sol":   "raisonnement profond",
+        "gpt-5.6-luna":  "rapide et économique",
+    }),
+    "deepseek": dict(env="DEEPSEEK_API_KEY", base_url="https://api.deepseek.com", sdk="openai", models={
+        "deepseek-v4-pro": "le plus puissant (défaut)",
+        "deepseek-flash":  "rapide et économique (V4.1-Flash)",
+    }),
 }
+for _p in PROVIDERS.values():
+    _p["model"] = next(iter(_p["models"]))  # défaut = premier du catalogue
 DEFAULT_MODEL = PROVIDERS["anthropic"]["model"]  # rétrocompatibilité
+
+
+def list_models(file=None):
+    """Affiche le catalogue de modèles par fournisseur."""
+    file = file or sys.stdout
+    for name, p in PROVIDERS.items():
+        key = "définie" if os.environ.get(p["env"]) else "non définie"
+        print(f"\n{name}  (clé {p['env']} : {key})", file=file)
+        for i, (mid, label) in enumerate(p["models"].items()):
+            print(f"  {'*' if i == 0 else ' '} {mid:20s} {label}", file=file)
+    print("\n* = modèle par défaut du fournisseur. --model accepte aussi tout autre identifiant valide chez le fournisseur.", file=file)
 
 NO_KEY_MSG = """Pas de clé API trouvée. L'outil accepte au choix :
   ANTHROPIC_API_KEY (Claude), OPENAI_API_KEY (GPT) ou DEEPSEEK_API_KEY (DeepSeek),

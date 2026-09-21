@@ -19,12 +19,17 @@ from analyzer import parser as P, report as REP, robots_sim as RS
 
 def main():
     # sous-commande : python cli.py chat out/report.json [--model ...]
+    if len(sys.argv) > 1 and sys.argv[1] == "models":
+        from analyzer import ai_diagnostic
+        ai_diagnostic._load_dotenv()
+        ai_diagnostic.list_models()
+        sys.exit(0)
     if len(sys.argv) > 1 and sys.argv[1] == "chat":
         from analyzer import ai_diagnostic
         cp = argparse.ArgumentParser(prog="cli.py chat", description="mode tuteur : questions sur un report.json existant")
         cp.add_argument("report", nargs="?", default="out/report.json", help="chemin du report.json (défaut : out/report.json)")
         cp.add_argument("--provider", choices=sorted(ai_diagnostic.PROVIDERS), help="fournisseur LLM (défaut : déduit de la clé présente)")
-        cp.add_argument("--model", default=None, help="modèle à utiliser (défaut : celui du fournisseur)")
+        cp.add_argument("--model", default=None, help="modèle à utiliser (défaut : celui du fournisseur ; catalogue : python cli.py models)")
         c = cp.parse_args(sys.argv[2:])
         sys.exit(ai_diagnostic.chat(c.report, model=c.model, provider=c.provider))
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -42,7 +47,7 @@ def main():
     ap.add_argument("--no-csv", action="store_true", help="ne pas écrire hits.csv")
     ap.add_argument("--diagnose", action="store_true", help="après l'analyse, envoyer le rapport à un LLM pour un diagnostic (clé ANTHROPIC_API_KEY, OPENAI_API_KEY ou DEEPSEEK_API_KEY)")
     ap.add_argument("--provider", default=None, help="fournisseur LLM pour --diagnose : anthropic, openai ou deepseek (défaut : déduit de la clé présente)")
-    ap.add_argument("--model", default=None, help="modèle pour --diagnose (défaut : celui du fournisseur)")
+    ap.add_argument("--model", default=None, help="modèle pour --diagnose (défaut : celui du fournisseur ; catalogue : python cli.py models)")
     a = ap.parse_args()
 
     df = P.parse_files(a.logs, a.limit)

@@ -101,11 +101,13 @@ Deux usages, avec ou sans clé API. Trois fournisseurs supportés : **Anthropic 
 
 **Avec une clé API** — définissez celle du fournisseur choisi, en variable d'environnement ou dans un fichier `.env` à la racine (gitignoré, jamais commité ; la clé n'est jamais passée en argument CLI) :
 
-| Fournisseur | Variable | Modèle par défaut |
+| Fournisseur | Variable | Modèles proposés (`*` = défaut) |
 |---|---|---|
-| Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-4-6` |
-| OpenAI | `OPENAI_API_KEY` | `gpt-5` |
-| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-chat` |
+| Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-5`\*, `claude-opus-5` (le plus puissant), `claude-haiku-4-5` (éco), `claude-sonnet-4-6` |
+| OpenAI | `OPENAI_API_KEY` | `gpt-5.6-terra`\*, `gpt-6-astra` (le plus puissant), `gpt-5.6-sol` (raisonnement), `gpt-5.6-luna` (éco) |
+| DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-v4-pro`\*, `deepseek-flash` (éco) |
+
+`python cli.py models` affiche ce catalogue et indique quelles clés sont définies. `--model` accepte aussi tout autre identifiant valide chez le fournisseur (catalogue vérifié en septembre 2026 ; les fournisseurs sortent des modèles plus vite que ce README).
 
 ```bash
 # diagnostic complet en 6 parties → out/diagnostic.md + affichage

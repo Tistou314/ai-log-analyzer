@@ -52,9 +52,19 @@ def test_unknown_provider(capsys):
 
 
 def test_default_models():
-    assert D.PROVIDERS["anthropic"]["model"] == "claude-sonnet-4-6"
+    assert D.PROVIDERS["anthropic"]["model"] == "claude-sonnet-5"
+    assert D.PROVIDERS["openai"]["model"] == "gpt-5.6-terra"
+    assert D.PROVIDERS["deepseek"]["model"] == "deepseek-v4-pro"
     for p in D.PROVIDERS.values():
-        assert p["model"] and p["env"] and p["sdk"] in ("anthropic", "openai")
+        assert p["model"] == next(iter(p["models"]))
+        assert p["env"] and p["sdk"] in ("anthropic", "openai")
+
+
+def test_list_models_output(capsys):
+    D.list_models()
+    out = capsys.readouterr().out
+    for mid in ("claude-opus-5", "gpt-6-astra", "deepseek-flash"):
+        assert mid in out
 
 
 def test_slim_report_removes_sections():
