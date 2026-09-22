@@ -1,0 +1,8 @@
+{
+ "source": "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/mojeekbot.ips",
+ "complete": false,
+ "official": false,
+ "prefixes": [
+  "5.102.173.71/32"
+ ]
+}

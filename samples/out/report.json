@@ -1,24 +1,38 @@
 {
  "meta": {
   "version": "1.0.0",
-  "generated": "2026-09-22T17:09:40.351995+00:00",
+  "generated": "2026-09-22T17:31:16.768190+00:00",
   "source": "samples\\demo_access.log",
   "format": "combined",
   "signatures_updated": "2026-09-17",
   "ip_ranges_loaded": [
+   "ahrefs",
    "amazon",
+   "amazon_search",
+   "amazon_user",
    "anthropic",
    "apple",
    "bing",
+   "commoncrawl",
+   "duckassistbot",
+   "duckduckgo",
    "google",
    "google_special",
+   "google_user_agents",
    "google_user_triggered",
    "google_user_triggered_g",
+   "meta",
+   "mistral_user",
+   "mojeek",
    "openai_chatgpt_user",
    "openai_gptbot",
    "openai_searchbot",
    "perplexity_bot",
-   "perplexity_user"
+   "perplexity_user",
+   "semrush",
+   "telegram",
+   "twitter",
+   "yandex"
   ],
   "dns_verification": false,
   "site": null,
@@ -373,8 +387,8 @@
    "unique_urls": 48,
    "unique_ips": 370,
    "ips_verified": 0,
-   "ips_spoofed": 0,
-   "spoofed_share": 0.0,
+   "ips_spoofed": 1157,
+   "spoofed_share": 1.0,
    "bytes_mb": 39.99,
    "s2xx": 1157,
    "s3xx": 0,
@@ -588,8 +602,8 @@
    "unique_urls": 49,
    "unique_ips": 298,
    "ips_verified": 0,
-   "ips_spoofed": 0,
-   "spoofed_share": 0.0,
+   "ips_spoofed": 563,
+   "spoofed_share": 1.0,
    "bytes_mb": 18.89,
    "s2xx": 538,
    "s3xx": 0,
@@ -964,8 +978,8 @@
    "unique_urls": 10,
    "unique_ips": 159,
    "ips_verified": 0,
-   "ips_spoofed": 0,
-   "spoofed_share": 0.0,
+   "ips_spoofed": 210,
+   "spoofed_share": 1.0,
    "bytes_mb": 6.98,
    "s2xx": 210,
    "s3xx": 0,
@@ -1250,9 +1264,9 @@
  "identity": {
   "summary": {
    "verified": 13316,
-   "n/a": 5368,
-   "unverified": 1506,
-   "spoofed": 717
+   "n/a": 3363,
+   "spoofed": 2647,
+   "unverified": 1581
   },
   "spoofed_ips": [
    {
@@ -1279,6 +1293,131 @@
     "ip": "103.21.44.9",
     "family": "GPTBot",
     "hits": 42
+   },
+   {
+    "ip": "215.67.88.72",
+    "family": "AhrefsBot",
+    "hits": 10
+   },
+   {
+    "ip": "13.29.20.242",
+    "family": "AhrefsBot",
+    "hits": 9
+   },
+   {
+    "ip": "80.129.139.127",
+    "family": "AhrefsBot",
+    "hits": 9
+   },
+   {
+    "ip": "20.33.129.248",
+    "family": "AhrefsBot",
+    "hits": 8
+   },
+   {
+    "ip": "120.230.150.103",
+    "family": "AhrefsBot",
+    "hits": 8
+   },
+   {
+    "ip": "112.167.21.219",
+    "family": "AhrefsBot",
+    "hits": 7
+   },
+   {
+    "ip": "181.236.85.160",
+    "family": "AhrefsBot",
+    "hits": 7
+   },
+   {
+    "ip": "83.41.113.214",
+    "family": "AhrefsBot",
+    "hits": 7
+   },
+   {
+    "ip": "174.130.156.51",
+    "family": "AhrefsBot",
+    "hits": 7
+   },
+   {
+    "ip": "84.113.32.120",
+    "family": "AhrefsBot",
+    "hits": 7
+   },
+   {
+    "ip": "73.42.119.98",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "31.41.62.45",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "146.236.1.154",
+    "family": "CCBot",
+    "hits": 6
+   },
+   {
+    "ip": "88.22.64.31",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "179.150.145.134",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "28.248.198.72",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "66.120.180.66",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "65.168.128.102",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "211.117.74.109",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "201.141.85.91",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "149.21.36.39",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "115.85.139.120",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "20.214.95.150",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "36.214.50.76",
+    "family": "AhrefsBot",
+    "hits": 6
+   },
+   {
+    "ip": "207.95.43.156",
+    "family": "AhrefsBot",
+    "hits": 6
    }
   ],
   "labels": {
@@ -3177,28 +3316,34 @@
     "path": "/guides/article-1-isolation-thermique",
     "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 36
+    "clicks": 37
    },
    {
     "path": "/guides/article-6-aides-maprimerenov",
     "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 31
+    "clicks": 35
    },
    {
     "path": "/guides/article-4-renovation-energetique",
     "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 31
+    "clicks": 33
    },
    {
     "path": "/guides/article-4-renovation-energetique",
     "family": "Perplexity-User",
     "ai_referrer": "Perplexity",
-    "clicks": 30
+    "clicks": 32
    },
    {
     "path": "/guides/article-4-renovation-energetique",
+    "family": "Perplexity-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 32
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
     "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
     "clicks": 28
@@ -3207,49 +3352,61 @@
     "path": "/guides/article-6-aides-maprimerenov",
     "family": "Perplexity-User",
     "ai_referrer": "Perplexity",
-    "clicks": 25
-   },
-   {
-    "path": "/guides/article-5-dpe-classe-g",
-    "family": "Claude-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 25
+    "clicks": 28
    },
    {
     "path": "/guides/article-6-aides-maprimerenov",
     "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 25
+    "clicks": 27
+   },
+   {
+    "path": "/guides/article-5-dpe-classe-g",
+    "family": "Claude-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 27
    },
    {
     "path": "/guides/article-5-dpe-classe-g",
     "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 23
-   },
-   {
-    "path": "/guides/article-3-panneaux-solaires",
-    "family": "Perplexity-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 23
+    "clicks": 26
    },
    {
     "path": "/guides/article-2-pompe-a-chaleur",
     "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 22
+    "clicks": 25
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "ChatGPT-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 24
    },
    {
     "path": "/guides/article-6-aides-maprimerenov",
     "family": "OAI-SearchBot",
     "ai_referrer": "ChatGPT",
-    "clicks": 22
+    "clicks": 24
+   },
+   {
+    "path": "/guides/article-1-isolation-thermique",
+    "family": "PerplexityBot",
+    "ai_referrer": "ChatGPT",
+    "clicks": 23
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "Perplexity-User",
+    "ai_referrer": "Perplexity",
+    "clicks": 23
    },
    {
     "path": "/guides/article-5-dpe-classe-g",
     "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 21
+    "clicks": 22
    },
    {
     "path": "/guides/article-3-panneaux-solaires",
@@ -3258,69 +3415,51 @@
     "clicks": 21
    },
    {
-    "path": "/guides/article-3-panneaux-solaires",
-    "family": "ChatGPT-User",
+    "path": "/guides/article-6-aides-maprimerenov",
+    "family": "Claude-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 20
+    "clicks": 21
    },
    {
     "path": "/guides/article-1-isolation-thermique",
     "family": "Perplexity-User",
     "ai_referrer": "Perplexity",
-    "clicks": 20
+    "clicks": 21
    },
    {
     "path": "/guides/article-1-isolation-thermique",
     "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
+    "clicks": 21
+   },
+   {
+    "path": "/guides/article-6-aides-maprimerenov",
+    "family": "ChatGPT-User",
+    "ai_referrer": "Perplexity",
     "clicks": 20
    },
    {
-    "path": "/guides/article-3-panneaux-solaires",
+    "path": "/guides/article-5-dpe-classe-g",
+    "family": "PerplexityBot",
+    "ai_referrer": "ChatGPT",
+    "clicks": 20
+   },
+   {
+    "path": "/guides/article-5-dpe-classe-g",
     "family": "Perplexity-User",
     "ai_referrer": "Perplexity",
     "clicks": 19
    },
    {
     "path": "/guides/article-2-pompe-a-chaleur",
-    "family": "MistralAI-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 18
-   },
-   {
-    "path": "/guides/article-1-isolation-thermique",
-    "family": "MistralAI-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 18
-   },
-   {
-    "path": "/guides/article-6-aides-maprimerenov",
-    "family": "ChatGPT-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 18
-   },
-   {
-    "path": "/guides/article-6-aides-maprimerenov",
-    "family": "Claude-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 18
-   },
-   {
-    "path": "/guides/article-5-dpe-classe-g",
-    "family": "PerplexityBot",
-    "ai_referrer": "ChatGPT",
-    "clicks": 18
-   },
-   {
-    "path": "/guides/article-1-isolation-thermique",
-    "family": "PerplexityBot",
-    "ai_referrer": "ChatGPT",
-    "clicks": 17
-   },
-   {
-    "path": "/guides/article-5-dpe-classe-g",
     "family": "Perplexity-User",
-    "ai_referrer": "Perplexity",
+    "ai_referrer": "ChatGPT",
+    "clicks": 18
+   },
+   {
+    "path": "/guides/article-2-pompe-a-chaleur",
+    "family": "Claude-SearchBot",
+    "ai_referrer": "ChatGPT",
     "clicks": 17
    },
    {
@@ -3336,25 +3475,25 @@
     "clicks": 16
    },
    {
-    "path": "/guides/article-5-dpe-classe-g",
-    "family": "MistralAI-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 16
-   },
-   {
     "path": "/guides/article-3-panneaux-solaires",
     "family": "OAI-SearchBot",
     "ai_referrer": "Perplexity",
     "clicks": 16
    },
    {
-    "path": "/guides/article-6-aides-maprimerenov",
-    "family": "MistralAI-User",
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "ChatGPT-User",
+    "ai_referrer": "Perplexity",
+    "clicks": 16
+   },
+   {
+    "path": "/guides/article-1-isolation-thermique",
+    "family": "Claude-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 15
+    "clicks": 16
    }
   ],
-  "fetch_events": 2333,
+  "fetch_events": 2123,
   "fetched_never_clicked_count": 0,
   "fetched_never_clicked_examples": [],
   "fetched_never_clicked_top": [],
@@ -4517,15 +4656,20 @@
    "delta_pct": 3.6
   },
   "by_category": {
-   "other_bot": {
-    "avant": 25.21,
-    "après": 24.6,
-    "delta_pct": -2.4
+   "scraper": {
+    "avant": 30.37,
+    "après": 28.86,
+    "delta_pct": -5.0
    },
    "seo_tool": {
     "avant": 132.93,
     "après": 123.27,
     "delta_pct": -7.3
+   },
+   "ai_training": {
+    "avant": 645.45,
+    "après": 445.72,
+    "delta_pct": -30.9
    },
    "ai_user_fetch": {
     "avant": 61.31,
@@ -4537,35 +4681,30 @@
     "après": 3.55,
     "delta_pct": null
    },
-   "ai_training": {
-    "avant": 645.45,
-    "après": 445.72,
-    "delta_pct": -30.9
+   "ai_search": {
+    "avant": 112.87,
+    "après": 93.41,
+    "delta_pct": -17.2
    },
-   "scraper": {
-    "avant": 30.37,
-    "après": 28.86,
-    "delta_pct": -5.0
+   "other_bot": {
+    "avant": 25.21,
+    "après": 24.6,
+    "delta_pct": -2.4
+   },
+   "search_engine": {
+    "avant": 570.39,
+    "après": 590.32,
+    "delta_pct": 3.5
    },
    "social_preview": {
     "avant": 14.61,
     "après": 13.93,
     "delta_pct": -4.6
    },
-   "ai_search": {
-    "avant": 112.87,
-    "après": 93.41,
-    "delta_pct": -17.2
-   },
    "human": {
     "avant": 7352.77,
     "après": 7291.8,
     "delta_pct": -0.8
-   },
-   "search_engine": {
-    "avant": 570.39,
-    "après": 590.32,
-    "delta_pct": 3.5
    }
   },
   "by_family": {
@@ -4664,11 +4803,6 @@
     "après": 15.07,
     "delta_pct": 1.2
    },
-   "Meta-ExternalAgent": {
-    "avant": 58.3,
-    "après": 57.87,
-    "delta_pct": -0.7
-   },
    "Bingbot": {
     "avant": 76.63,
     "après": 76.06,
@@ -4682,6 +4816,11 @@
    "Scanner déguisé en UA vide": {
     "avant": 5.01,
     "après": 4.98,
+    "delta_pct": -0.7
+   },
+   "Meta-ExternalAgent": {
+    "avant": 58.3,
+    "après": 57.87,
     "delta_pct": -0.7
    },
    "ClaudeBot": {
@@ -4786,10 +4925,10 @@
     "hits_per_day": 82.5,
     "decision": "allow",
     "why": "Outil SEO à volume raisonnable.",
-    "how": "Rien à faire ; utile si c'est le vôtre.",
+    "how": "Rien à faire ; utile si c'est le vôtre. ATTENTION : 1157 hits (100%) sous cette identité viennent d'IP hors plages officielles — bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.",
     "reads_robots_txt": false,
-    "spoofed_share": 0.0,
-    "ban_spoofed_ips": false
+    "spoofed_share": 1.0,
+    "ban_spoofed_ips": true
    },
    {
     "family": "Bingbot",
@@ -4851,10 +4990,10 @@
     "hits_per_day": 40.2,
     "decision": "block",
     "why": "Collecte pour entraînement, aucun trafic en retour, et il ne lit pas robots.txt.",
-    "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement.",
+    "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement. ATTENTION : 563 hits (100%) sous cette identité viennent d'IP hors plages officielles — bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.",
     "reads_robots_txt": false,
-    "spoofed_share": 0.0,
-    "ban_spoofed_ips": false
+    "spoofed_share": 1.0,
+    "ban_spoofed_ips": true
    },
    {
     "family": "PerplexityBot",
@@ -4968,10 +5107,10 @@
     "hits_per_day": 15.0,
     "decision": "allow",
     "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
-    "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
+    "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation. ATTENTION : 210 hits (100%) sous cette identité viennent d'IP hors plages officielles — bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.",
     "reads_robots_txt": false,
-    "spoofed_share": 0.0,
-    "ban_spoofed_ips": false
+    "spoofed_share": 1.0,
+    "ban_spoofed_ips": true
    },
    {
     "family": "Claude-User",
@@ -5055,8 +5194,8 @@
   "actions": [
    {
     "domain": "security",
-    "title": "Bannir les IP qui usurpent une identité de bot (5 IP)",
-    "why": "70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 605 hits usurpent Googlebot Smartphone depuis des IP hors plages officielles.",
+    "title": "Bannir les IP qui usurpent une identité de bot (30 IP)",
+    "why": "70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 2535 hits usurpent AhrefsBot, Googlebot Smartphone, CCBot, MistralAI-User depuis des IP hors plages officielles.",
     "how": "Règle 403 ou WAF sur les IP de identity.spoofed_ips et probes.top_scanner_ips. Jamais de blocage par User-Agent « Googlebot » ou « ChatGPT-User » : vous bloqueriez les vrais.",
     "effort": "15 min",
     "impact": "immédiat",
@@ -5066,10 +5205,15 @@
       "185.220.101.7",
       "91.203.5.44",
       "47.82.10.100",
-      "103.21.44.9"
+      "103.21.44.9",
+      "215.67.88.72",
+      "13.29.20.242",
+      "80.129.139.127",
+      "20.33.129.248",
+      "120.230.150.103"
      ],
      "scanner_hits": 70,
-     "usurped_hits": 605
+     "usurped_hits": 2535
     },
     "rank": 1
    },
@@ -5180,7 +5324,7 @@
    "level": "critical",
    "kind": "action",
    "section": "identity",
-   "message": "605 hits usurpent une identité de bot connu depuis des IP hors plages officielles : Googlebot Smartphone 605 (9%). Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent."
+   "message": "2535 hits usurpent une identité de bot connu depuis des IP hors plages officielles : AhrefsBot 1157 (100%), Googlebot Smartphone 605 (9%), CCBot 563 (100%), MistralAI-User 210 (100%). Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent."
   },
   {
    "level": "warn",

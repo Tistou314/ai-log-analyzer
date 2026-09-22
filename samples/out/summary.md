@@ -7,7 +7,7 @@ _Généré le 2026-09-22 par ai-log-analyzer._
 ## À traiter
 
 - **[critical]** 70 hits de scanners déguisés en bots légitimes (1 IP). Identités usurpées : UA vide 70. Bannir ces IP.
-- **[critical]** 605 hits usurpent une identité de bot connu depuis des IP hors plages officielles : Googlebot Smartphone 605 (9%). Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.
+- **[critical]** 2535 hits usurpent une identité de bot connu depuis des IP hors plages officielles : AhrefsBot 1157 (100%), Googlebot Smartphone 605 (9%), CCBot 563 (100%), MistralAI-User 210 (100%). Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.
 - **[warn]** Rafales de crawl (risque de charge serveur) : GPTBot 150/min. Crawl-delay pour ceux qui lisent robots.txt, rate limiting pour les autres.
 - **[warn]** Googlebot Smartphone : 20% du crawl gaspillé (paramètres, 404, 5xx, admin).
 
@@ -21,9 +21,9 @@ _Généré le 2026-09-22 par ai-log-analyzer._
 
 ## Plan d'action — dans l'ordre
 
-### 1. Bannir les IP qui usurpent une identité de bot (5 IP)  _(effort : 15 min · impact : immédiat)_
+### 1. Bannir les IP qui usurpent une identité de bot (30 IP)  _(effort : 15 min · impact : immédiat)_
 
-**Pourquoi :** 70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 605 hits usurpent Googlebot Smartphone depuis des IP hors plages officielles.  
+**Pourquoi :** 70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 2535 hits usurpent AhrefsBot, Googlebot Smartphone, CCBot, MistralAI-User depuis des IP hors plages officielles.  
 **Comment :** Règle 403 ou WAF sur les IP de identity.spoofed_ips et probes.top_scanner_ips. Jamais de blocage par User-Agent « Googlebot » ou « ChatGPT-User » : vous bloqueriez les vrais.
 
 ### 2. Récupérer les 20% de crawl Googlebot gaspillés  _(effort : 1 à 2 jours · impact : indexation plus fraîche)_
@@ -70,12 +70,12 @@ _Généré le 2026-09-22 par ai-log-analyzer._
 | Bytespider | 2 598 | 185 | 50% | non | 0% | bloquer |
 | ClaudeBot | 1 701 | 121 | 0% | oui | 0% | surveiller |
 | GPTBot | 1 542 | 110 | 10% | oui | 3% | limiter |
-| AhrefsBot | 1 157 | 82 | 0% | non | 0% | laisser faire |
+| AhrefsBot | 1 157 | 82 | 0% | non | 100% | laisser faire |
 | Bingbot | 1 070 | 76 | 0% | oui | 0% | laisser faire |
 | Meta-ExternalAgent | 814 | 58 | 5% | non | 0% | bloquer |
 | SemrushBot | 638 | 46 | 0% | non | 0% | laisser faire |
 | OAI-SearchBot | 565 | 40 | 0% | oui | 0% | laisser faire |
-| CCBot | 563 | 40 | 4% | non | 0% | bloquer |
+| CCBot | 563 | 40 | 4% | non | 100% | bloquer |
 | PerplexityBot | 493 | 35 | 0% | oui | 0% | laisser faire |
 | Amazonbot | 423 | 30 | 7% | non | 0% | bloquer |
 | Claude-SearchBot | 387 | 28 | 0% | oui | 0% | laisser faire |
@@ -94,9 +94,9 @@ Crawl-delay: 10
 | Statut | Hits |
 |---|---:|
 | verified | 13 316 |
-| n/a | 5 368 |
-| unverified | 1 506 |
-| spoofed | 717 |
+| n/a | 3 363 |
+| spoofed | 2 647 |
+| unverified | 1 581 |
 
 ## Boucle IA → humain
 

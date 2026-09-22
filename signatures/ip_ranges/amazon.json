@@ -1,6 +1,7 @@
 {
  "source": "https://developer.amazon.com/amazonbot/ip-addresses/",
  "complete": true,
+ "official": true,
  "prefixes": [
   "100.24.134.117/32",
   "100.24.149.244/32",

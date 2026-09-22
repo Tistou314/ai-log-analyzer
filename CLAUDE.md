@@ -11,7 +11,8 @@ Lis README.md (contrat JSON, limites) et ATELIER.md (déroulé) avant toute modi
 - `analyzer/io_utils.py` : lecture tolérante des fichiers utilisateur (CSV Excel FR, xlsx, robots.txt, SSL certifi sous Windows).
 - `analyzer/classifier.py` : UA → family / operator / category via `signatures/bots.json` (ordre = priorité).
 - `analyzer/probes.py` : chemins sensibles (.env, .git, xmlrpc…) → reclassification en scanner, quel que soit l'UA. Tourne juste après le verifier.
-- `analyzer/verifier.py` : identité par plages IP (`signatures/ip_ranges/*.json`) puis rDNS optionnel.
+- `analyzer/verifier.py` : identité par plages IP (`signatures/ip_ranges/*.json`, 21 sources officielles + 6 communautaires GoodBots en `complete:false` : elles confirment, n'accusent jamais) puis rDNS optionnel.
+- `signatures/community/crawler-user-agents.json` : référentiel MIT (~1 500 robots), seconde couche du classifieur après bots.json et avant le filet générique ; mise à jour : `python signatures/community/update.py`.
 - `analyzer/{behavior,crawl_budget,structure,aio,referrals,robots_sim,stealth,compare}.py` : un module = une section du rapport.
 - `analyzer/explain.py` : textes pédagogiques + alertes. `analyzer/report.py` : assemblage. `cli.py` : point d'entrée.
 - `prompts/` : diagnostic, tuteur, surcouche. `examples/streamlit_dashboard.py` : surcouche de référence.

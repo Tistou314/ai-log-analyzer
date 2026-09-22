@@ -1,6 +1,7 @@
 {
  "source": "https://openai.com/searchbot.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "104.210.140.128/28",
   "13.66.216.176/28",

@@ -1,0 +1,11 @@
+{
+ "source": "https://mistral.ai/mistralai-user-ips.json",
+ "complete": true,
+ "official": true,
+ "prefixes": [
+  "20.240.160.1/32",
+  "20.240.160.161/32",
+  "20.240.194.83/32",
+  "51.12.243.114/32"
+ ]
+}

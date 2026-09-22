@@ -1,6 +1,7 @@
 {
  "source": "https://www.perplexity.com/perplexitybot.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "107.20.236.150/32",
   "18.210.92.235/32",

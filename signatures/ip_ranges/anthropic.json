@@ -1,6 +1,7 @@
 {
  "source": "https://claude.com/crawling/bots.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "136.107.176.208/32",
   "16.58.26.69/32",

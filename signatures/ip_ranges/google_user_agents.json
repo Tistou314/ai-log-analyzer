@@ -1,0 +1,11 @@
+{
+ "source": "https://developers.google.com/static/search/apis/ipranges/user-triggered-agents.json",
+ "complete": true,
+ "official": true,
+ "prefixes": [
+  "136.121.16.0/24",
+  "136.121.24.0/21",
+  "136.122.0.0/16",
+  "2001:4860:c::/48"
+ ]
+}

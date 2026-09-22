@@ -10,7 +10,7 @@ Ce repo sert de base à l'atelier Teknseo 2026 : le moteur est fourni, **chacun 
 
 | Module | Ce que vous apprenez sur vos logs |
 |---|---|
-| **Acteurs** (taxonomie niveau 1) | 95+ signatures : moteurs, **LLM entraînement** (GPTBot, ClaudeBot, Bytespider, Meta…), **LLM index de recherche** (OAI-SearchBot, Claude-SearchBot, PerplexityBot), **fetch utilisateur** (ChatGPT-User, Claude-User, Perplexity-User, MistralAI-User), **agents** (Google-Agent, Vertex, Mariner), outils SEO, aperçus sociaux, scrapers, scanners. Bots inconnus isolés dans `other_bot`. |
+| **Acteurs** (taxonomie niveau 1) | 128 signatures vérifiées + ~1 500 robots du référentiel communautaire crawler-user-agents : moteurs, **LLM entraînement** (GPTBot, ClaudeBot, Bytespider, Meta…), **LLM index de recherche** (OAI-SearchBot, Claude-SearchBot, PerplexityBot), **fetch utilisateur** (ChatGPT-User, Claude-User, Perplexity-User, MistralAI-User), **agents** (Google-Agent, Vertex, Mariner), outils SEO, aperçus sociaux, scrapers, scanners. Bots inconnus isolés dans `other_bot`. |
 | **Scanners déguisés** | Un acteur qui vise `.env`, `.git`, `credentials`, `xmlrpc`… est un scanner quel que soit son UA. Reclassé avant tout calcul : sans ça, vos stats "bots IA" sont gonflées par des attaquants qui empruntent l'UA de GPTBot ou de Googlebot. |
 | **Identité** (niveau 2) | Chaque bot vérifié contre les plages IP publiées par son opérateur (+ reverse DNS en option). Un "Googlebot" hors plage = usurpation. |
 | **Comportement** (niveau 3) | Rythme, rafales, profondeur, codes HTTP, lecture de robots.txt / llms.txt / ai.txt, poids transféré. |
@@ -38,7 +38,8 @@ Python ne sert qu'à produire un `report.json` à partir de **vos** logs (sectio
 ```bash
 git clone https://github.com/Tistou314/ai-log-analyzer.git && cd ai-log-analyzer
 pip install -r requirements.txt            # moteur seul : pandas, numpy, openpyxl (+ SDK LLM optionnels)
-python signatures/ip_ranges/update.py      # récupère les plages IP officielles (Google, OpenAI, Anthropic, Perplexity, Bing, Apple, Amazon)
+python signatures/ip_ranges/update.py      # plages IP de 27 sources (Google, OpenAI, Anthropic, Perplexity, Bing, Apple, Amazon, DuckDuckGo, Common Crawl, Mistral, Ahrefs…)
+python signatures/community/update.py      # facultatif : rafraîchit le référentiel de ~1 500 robots (déjà fourni dans le repo)
 ```
 
 `requirements-examples.txt` ajoute Streamlit pour la surcouche d'exemple Python ; `requirements-dev.txt` ajoute pytest. Le moteur tourne en local, sans serveur ni réseau (sauf `--dns`, `--robots` sans fichier et `--diagnose`).
@@ -168,7 +169,13 @@ Trois parcours suggérés selon votre site :
 
 ## Maintenir la base de signatures
 
-`signatures/bots.json` : une entrée par bot (regex, famille, opérateur, catégorie, finalité, méthode de vérification). L'ordre compte, les plus spécifiques d'abord. Les bots inconnus remontent dans `other_bot` avec leur UA dans `hits.csv` : c'est là que vous verrez apparaître les nouveaux crawlers IA. PR bienvenues.
+Trois couches, dans l'ordre :
+
+1. **`signatures/bots.json`** — la référence, maintenue à la main : une entrée par bot (regex, famille, opérateur, catégorie précise — entraînement, index, fetch utilisateur, agent —, finalité, méthode de vérification, source officielle). L'ordre compte, les plus spécifiques d'abord. `python signatures/sync_signatures.py` liste les bots IA publiés par ai.robots.txt et Known Agents qui y manquent.
+2. **`signatures/community/crawler-user-agents.json`** — le référentiel communautaire [crawler-user-agents](https://github.com/monperrus/crawler-user-agents) (licence MIT, ~1 500 robots), consulté seulement si la couche 1 ne reconnaît rien. Il évite de compter comme humains les robots de monitoring, outils SEO, scanners, lecteurs RSS… (sur le site de calibration : 87 familles de plus, dont des centaines de hits auparavant « humains »). Ces familles portent `source: community` dans le classifieur.
+3. **Le filet générique** (`bot|crawl|spider…`) → `Bot non identifié`, avec leur UA dans `hits.csv` : c'est là que vous verrez apparaître les nouveaux crawlers IA. PR bienvenues.
+
+**Plages IP** (`signatures/ip_ranges/update.py`) : 21 sources officielles publiées par les opérateurs (elles peuvent conclure à une usurpation) et 6 listes communautaires [GoodBots](https://github.com/AnTheMaker/GoodBots) pour Semrush, Yandex, Meta, Twitter, Telegram et Mojeek, enregistrées `complete: false` : elles confirment une identité mais n'accusent jamais un bot d'usurpation.
 
 ## Limites honnêtes
 

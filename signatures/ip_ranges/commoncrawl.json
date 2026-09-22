@@ -1,0 +1,12 @@
+{
+ "source": "https://index.commoncrawl.org/ccbot.json",
+ "complete": true,
+ "official": true,
+ "prefixes": [
+  "18.97.14.80/29",
+  "18.97.14.88/30",
+  "18.97.9.168/29",
+  "2600:1f28:365:8000::/56",
+  "3.41.188.32/29"
+ ]
+}

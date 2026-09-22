@@ -3,11 +3,47 @@ import re, json, pathlib
 import pandas as pd
 
 SIG_PATH = pathlib.Path(__file__).resolve().parent.parent / "signatures" / "bots.json"
+# Référentiel communautaire (licence MIT, github.com/monperrus/crawler-user-agents) : ~1 500 robots.
+# Seconde couche : consultée seulement si aucune signature de bots.json ne correspond, avant le filet générique.
+COMMUNITY_PATH = pathlib.Path(__file__).resolve().parent.parent / "signatures" / "community" / "crawler-user-agents.json"
+GENERIC_FAMILY = "Bot non identifié"
+TAG_CATEGORY = [  # ordre = priorité quand une entrée porte plusieurs tags
+    ("scanner", "scraper"), ("browser-automation", "scraper"), ("http-library", "scraper"),
+    ("search-engine", "search_engine"), ("seo", "seo_tool"), ("social-preview", "social_preview"),
+    ("monitoring", "monitoring"), ("ai-crawler", None), ("advertising", "other_bot"), ("feed-reader", "other_bot"),
+    ("archiver", "other_bot"), ("academic", "other_bot"),
+]
+
+
+def _community_category(entry):
+    tags = entry.get("tags") or []
+    for tag, cat in TAG_CATEGORY:
+        if tag in tags:
+            if cat: return cat
+            d = (entry.get("description") or "").lower()  # ai-crawler : le référentiel ne distingue pas entraînement / recherche
+            if any(w in d for w in ("search", "answer", "cite", "citation")): return "ai_search"
+            if any(w in d for w in ("train", "dataset", "corpus", "model")): return "ai_training"
+            return "other_bot"
+    return "other_bot"
+
+
+def _load_community(path=COMMUNITY_PATH):
+    try: data = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError): return None, []
+    entries = []
+    for e in data:
+        try: entries.append((re.compile(e["pattern"]), e))
+        except (re.error, KeyError): pass
+    if not entries: return None, []
+    return re.compile("|".join(f"(?:{e['pattern']})" for _, e in entries)), entries
 
 class Classifier:
     def __init__(self, sig_path=SIG_PATH):
         self.sig = json.loads(pathlib.Path(sig_path).read_text(encoding="utf-8"))
-        self.rules = [(re.compile(b["pattern"], re.I), b) for b in self.sig["bots"]]
+        rules = [(re.compile(b["pattern"], re.I), b) for b in self.sig["bots"]]
+        self.rules = [r for r in rules if r[1]["family"] != GENERIC_FAMILY]
+        self.generic = [r for r in rules if r[1]["family"] == GENERIC_FAMILY]
+        self.community_any, self.community = _load_community()
         self.categories = self.sig["categories"]
         self._cache = {}
 
@@ -21,10 +57,29 @@ class Classifier:
                 if rx.search(ua):
                     res = {k: b.get(k) for k in ("family", "operator", "category", "purpose", "respects_robots", "verify")}
                     break
+            if res is None and self.community_any is not None and self.community_any.search(ua):
+                res = self._from_community(ua)
+            if res is None:
+                for rx, b in self.generic:
+                    if rx.search(ua):
+                        res = {k: b.get(k) for k in ("family", "operator", "category", "purpose", "respects_robots", "verify")}
+                        break
         if res is None:
             res = dict(family="Navigateur", operator="humain", category="human", purpose="", respects_robots=None, verify={})
         self._cache[ua] = res
         return res
+
+    def _from_community(self, ua):
+        for rx, e in self.community:
+            m = rx.search(ua)
+            if not m: continue
+            name = (m.group(0) or e["pattern"]).strip(" /;()") or e["pattern"]
+            url = e.get("url") or ""
+            host = re.sub(r"^https?://(www\.)?", "", url).split("/")[0] if url else ""
+            return dict(family=name, operator=host or "inconnu", category=_community_category(e),
+                        purpose=("Référentiel crawler-user-agents : " + (e.get("description") or "robot connu"))[:200],
+                        respects_robots=None, verify={}, source="community")
+        return None
 
     def apply(self, df):
         uas = df["ua"].fillna("").unique()

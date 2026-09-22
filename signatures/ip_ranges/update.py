@@ -21,8 +21,27 @@ SOURCES = {
     "perplexity_user":        "https://www.perplexity.com/perplexity-user.json",
     "bing":                   "https://www.bing.com/toolbox/bingbot.json",
     "apple":                  "https://search.developer.apple.com/applebot.json",
+    "google_user_agents":     "https://developers.google.com/static/search/apis/ipranges/user-triggered-agents.json",
     # Amazon n'expose pas de fichier JSON : le blob est embarqué dans la page HTML
     "amazon":                 "https://developer.amazon.com/amazonbot/ip-addresses/",
+    "amazon_search":          "https://developer.amazon.com/amazonbot/searchbot-ip-addresses/",
+    "amazon_user":            "https://developer.amazon.com/amazonbot/live-ip-addresses/",
+    "duckduckgo":             "https://duckduckgo.com/duckduckbot.json",
+    "duckassistbot":          "https://duckduckgo.com/duckassistbot.json",
+    "commoncrawl":            "https://index.commoncrawl.org/ccbot.json",
+    "mistral_user":           "https://mistral.ai/mistralai-user-ips.json",
+    "ahrefs":                 "https://api.ahrefs.com/v3/public/crawler-ip-ranges",
+}
+
+# Listes COMMUNAUTAIRES (github.com/AnTheMaker/GoodBots, reprises des sources des opérateurs, mises à jour par des bénévoles).
+# Enregistrées avec complete=false : elles peuvent CONFIRMER une identité, jamais conclure à une usurpation.
+COMMUNITY = {
+    "semrush":   "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/semrushbot.ips",
+    "yandex":    "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/yandex.ips",
+    "meta":      "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/facebookbot.ips",
+    "twitter":   "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/twitterbot.ips",
+    "telegram":  "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/telegrambot.ips",
+    "mojeek":    "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/mojeekbot.ips",
 }
 
 def _ssl_context():
@@ -35,7 +54,19 @@ def _ssl_context():
 
 def fetch(url):
     req = urllib.request.Request(url, headers={"User-Agent": "ai-log-analyzer/1.0"})
-    return urllib.request.urlopen(req, timeout=30, context=_ssl_context()).read().decode("utf-8", "replace")
+    return urllib.request.urlopen(req, timeout=90, context=_ssl_context()).read().decode("utf-8", "replace")
+
+def extract_lines(text):
+    """Liste texte : une IP ou un CIDR par ligne (commentaires # ignorés)."""
+    import ipaddress
+    out = []
+    for line in text.splitlines():
+        v = line.split("#", 1)[0].strip()
+        if not v: continue
+        try: out.append(str(ipaddress.ip_network(v, strict=False)))
+        except ValueError: pass
+    return {"prefixes": [{"cidr": v} for v in out]}
+
 
 def extract_json(text):
     """Le corps est du JSON, ou une page HTML contenant un blob {"creationTime": ..., "prefixes": [...]}."""
@@ -50,7 +81,7 @@ def normalize(data):
     prefixes = []
     if isinstance(data, dict):
         for p in data.get("prefixes", []):
-            v = p.get("ipv4Prefix") or p.get("ipv6Prefix") or p.get("cidr")
+            v = p.get("ipv4Prefix") or p.get("ipv6Prefix") or p.get("ip_prefix") or p.get("ipv6_prefix") or p.get("cidr")
             if v: prefixes.append(v)
         for k in ("ipv4", "ipv6", "cidrs", "ranges"):
             for v in data.get(k, []) or []:
@@ -62,18 +93,21 @@ def normalize(data):
     return sorted(set(prefixes))
 
 def main():
-    ok = 0
-    for name, url in SOURCES.items():
+    ok, total = 0, len(SOURCES) + len(COMMUNITY)
+    for name, url, official in [(n, u, True) for n, u in SOURCES.items()] + [(n, u, False) for n, u in COMMUNITY.items()]:
         out = HERE / f"{name}.json"
         try:
-            prefixes = normalize(extract_json(fetch(url)))
+            text = fetch(url)
+            try: data = extract_json(text)
+            except ValueError: data = extract_lines(text)
+            prefixes = normalize(data)
             if not prefixes: raise ValueError("aucun préfixe trouvé")
-            out.write_text(json.dumps({"source": url, "complete": True, "prefixes": prefixes}, indent=1))
-            print(f"OK   {name:26s} {len(prefixes):4d} préfixes")
+            out.write_text(json.dumps({"source": url, "complete": official, "official": official, "prefixes": prefixes}, indent=1))
+            print(f"OK   {name:26s} {len(prefixes):5d} préfixes{'' if official else '  (communautaire : confirme, n accuse pas)'}")
             ok += 1
         except Exception as e:
             print(f"SKIP {name:26s} {e}", file=sys.stderr)
-    print(f"{ok}/{len(SOURCES)} sources mises à jour")
+    print(f"{ok}/{total} sources mises à jour")
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,7 @@
 {
  "source": "https://www.bing.com/toolbox/bingbot.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "13.66.139.0/24",
   "13.66.144.0/24",

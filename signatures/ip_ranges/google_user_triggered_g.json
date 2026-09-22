@@ -1,6 +1,7 @@
 {
  "source": "https://developers.google.com/static/search/apis/ipranges/user-triggered-fetchers-google.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "142.250.32.0/27",
   "142.250.32.128/27",

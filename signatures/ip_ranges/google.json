@@ -1,6 +1,7 @@
 {
  "source": "https://developers.google.com/static/search/apis/ipranges/googlebot.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "192.178.4.0/27",
   "192.178.4.128/27",

@@ -1,6 +1,7 @@
 {
  "source": "https://developers.google.com/static/search/apis/ipranges/special-crawlers.json",
  "complete": true,
+ "official": true,
  "prefixes": [
   "108.177.2.0/27",
   "108.177.2.128/27",

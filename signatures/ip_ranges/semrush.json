@@ -1,0 +1,8 @@
+{
+ "source": "https://raw.githubusercontent.com/AnTheMaker/GoodBots/main/iplists/semrushbot.ips",
+ "complete": false,
+ "official": false,
+ "prefixes": [
+  "85.208.98.128/25"
+ ]
+}
