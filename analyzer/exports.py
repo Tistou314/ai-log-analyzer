@@ -162,6 +162,17 @@ def build_report_html(report):
                        for k, v in sorted(c["ai"]["by_source"].items(), key=lambda kv: -kv[1]))
     ident_rows = "".join(f"<tr><td>{H.escape(k)}</td><td>{_fmt(v)}</td></tr>" for k, v in c["ident"].items())
     lessons_html = "".join(f"<li>{H.escape(l)}</li>" for l in c["lessons"])
+    fnd = report.get("compare", {}).get("findings", [])
+    findings_html = ""
+    if fnd:
+        p = report["compare"]["periods"]
+        labels = {"effect": ("Effets des actions", "#2e7d46"), "warning": ("À traiter", "#b26a00"), "note": ("A bougé, mais pas à cause de vous", INK2), "caveat": ("Limites", INK2)}
+        findings_html = f"<h2>Avant / après — {p['avant']['start'][:10]} → {p['avant']['end'][:10]} vs {p['après']['start'][:10]} → {p['après']['end'][:10]}</h2>"
+        for kind, (title, color) in labels.items():
+            items = [f for f in fnd if f["kind"] == kind]
+            if items:
+                findings_html += f'<h3 style="color:{color};font-size:.95rem;margin:14px 0 4px">{title}</h3><ul>' + "".join(
+                    f"<li><strong>{H.escape(f['title'])}</strong> — {H.escape(f['text'])}</li>" for f in items) + "</ul>"
     gsc_line = ""
     if "gsc_cross" in c["aio"] and "aio_suspects" in c["aio"]["gsc_cross"]:
         gsc_line = f"<li>{c['aio']['gsc_cross']['aio_suspects']} pages GSC au profil « citée dans un AI Overview sans clic »</li>"
@@ -187,6 +198,7 @@ def build_report_html(report):
 </div>
 <h2>À traiter</h2><ul>{alerts_html or '<li class="note">rien de bloquant sur cette période</li>'}</ul>
 <h2>Bon à savoir</h2><ul class="note">{infos_html}</ul>
+{findings_html}
 {'<h2>Plan d’action — dans l’ordre</h2><ul>' + actions_html + '</ul>' if actions_html else ''}
 <h2>Hits par jour</h2>{_svg_timeline(c['day_totals'])}
 <h2>Répartition par catégorie</h2>{_svg_hbar(cat_items)}
