@@ -26,7 +26,7 @@ Ce repo sert de base à l'atelier Teknseo 2026 : le moteur est fourni, **chacun 
 ## Installation
 
 ```bash
-git clone <ce repo> && cd ai-log-analyzer
+git clone https://github.com/Tistou314/ai-log-analyzer.git && cd ai-log-analyzer
 pip install -r requirements.txt            # moteur seul : pandas, numpy, openpyxl (+ SDK LLM optionnels)
 python signatures/ip_ranges/update.py      # récupère les plages IP officielles (Google, OpenAI, Anthropic, Perplexity, Bing, Apple, Amazon)
 ```
