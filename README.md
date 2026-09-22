@@ -86,7 +86,10 @@ robots_sim      (si --robots) impact par famille + leçons
 crawl_stats     (si --crawl-stats) hits Google des logs vs rapport Crawl Stats GSC, jour par jour : ratio + verdict
 stealth         IP "humaines" suspectes avec score et signaux
 self_traffic    le site qui s'appelle lui-même (wp-cron, admin-ajax, requêtes WordPress) : retiré des parts
-compare         (si --compare) deltas par catégorie et famille
+compare         (si --compare DATE, DATE = la date de l'action) deltas par catégorie et famille, familles apparues/disparues,
+                et findings[] : constats rédigés {kind: effect|warning|note|caveat, domain, title, text, evidence} —
+                blocage serveur actif ?, robots.txt respecté bot par bot (sur hits vérifiés), crawl récupéré, nouveaux acteurs,
+                et ce qui a bougé sans rapport avec vos actions
 recommendations by_family[] (decision allow|limit|block|ban_ip|watch + why + how par bot),
                 actions[] (rank, domain, title, why, how, effort, impact, evidence — les gestes à faire, dans l'ordre),
                 robots_txt_suggestion, decisions_legend. LA section à afficher en premier dans une surcouche.

@@ -123,6 +123,16 @@ def build_summary_md(report):
     L.append(f"- {c['aio']['google_agents']['hits']} hits d'agents Google")
     if "gsc_cross" in c["aio"] and "aio_suspects" in c["aio"]["gsc_cross"]:
         L.append(f"- {c['aio']['gsc_cross']['aio_suspects']} pages GSC au profil « citée dans un AI Overview sans clic »")
+    fnd = report.get("compare", {}).get("findings", [])
+    if fnd:
+        p = report["compare"]["periods"]
+        L.append(f"\n## Avant / après ({p['avant']['start'][:10]} → {p['avant']['end'][:10]} vs {p['après']['start'][:10]} → {p['après']['end'][:10]})\n")
+        for kind, title in (("effect", "Effets des actions"), ("warning", "À traiter"), ("note", "A bougé, mais pas à cause de vous"), ("caveat", "Limites")):
+            items = [f for f in fnd if f["kind"] == kind]
+            if items:
+                L.append(f"### {title}\n")
+                for f in items: L.append(f"- **{f['title']}** — {f['text']}")
+                L.append("")
     if c["lessons"]:
         L.append("\n## robots.txt : leçons\n")
         for l in c["lessons"]:

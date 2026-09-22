@@ -99,6 +99,13 @@ def summary(r):
         s1, s2 = v["aio_suspect_vs_truth"], v["hot_fetch_vs_truth"]
         print(f"      Vérité GSC Generative AI : {v['gsc_ai_pages']} pages, {v['gsc_ai_impressions']} impressions IA")
         print(f"      → suspects confirmés {s1['confirmed']}/{s1['predicted']} (précision {s1['precision']}), fetchs à chaud confirmés {s2['confirmed']}/{s2['predicted']} (précision {s2['precision']})")
+    cmp_ = r.get("compare", {})
+    if cmp_.get("findings"):
+        p = cmp_["periods"]
+        print(f"\nAvant / après ({p['avant']['days']:.0f} j → {p['après']['days']:.0f} j) :")
+        for f in cmp_["findings"]:
+            tag = {"effect": "EFFET", "warning": "À TRAITER", "note": "NOTE", "caveat": "LIMITE"}[f["kind"]]
+            print(f"  [{tag}] {f['title']} — {f['text']}")
     cs = r.get("crawl_stats")
     if cs and "ratio_logs_over_gsc" in cs:
         print(f"Crawl Stats GSC : {cs['logs_per_day']:.0f} hits Google/j dans les logs vs {cs['gsc_per_day']:.0f}/j côté Google sur {cs['days_compared']} j (ratio {cs['ratio_logs_over_gsc']}) → {cs['verdict']}")
