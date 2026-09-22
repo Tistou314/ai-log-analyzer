@@ -64,7 +64,8 @@ Où trouver ses logs : **sur mutualisé cPanel (o2switch…), activez "Archiver 
 ## Contrat `report.json`
 
 ```
-meta            version, période, formats, plages IP chargées
+meta            version, période, formats, plages IP chargées, data_sufficiency (ok | short | insufficient
+                + inconclusive_sections : ce qu'on ne peut pas conclure sur une période trop courte)
 overview        hits, part bots / IA, par catégorie, par opérateur, par type de ressource, octets
 categories      libellé + explication de chaque catégorie
 actors[]        une ligne par famille de bot : hits, hits/j, URL uniques, IP, verified/spoofed, codes HTTP,
@@ -85,7 +86,8 @@ recommendations by_family[] (decision allow|limit|block|ban_ip|watch + why + how
                 actions[] (rank, domain, title, why, how, effort, impact, evidence — les gestes à faire, dans l'ordre),
                 robots_txt_suggestion, decisions_legend. LA section à afficher en premier dans une surcouche.
 explain         texte pédagogique par section
-alerts[]        {level: critical|warn|info, message}
+alerts[]        {level: critical|warn|info, kind: action|info, section, message} — triées : les actions d'abord.
+                kind=action : quelque chose à faire ; kind=info : bon à savoir. section = où creuser.
 ```
 
 Toutes les clés sont stables entre versions mineures. Une surcouche n'a besoin que de ce fichier.

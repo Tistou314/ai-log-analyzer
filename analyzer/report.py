@@ -79,6 +79,7 @@ def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, c
     if compare_cutoff:
         a, b = CMP.split_by_date(df, compare_cutoff)
         if len(a) and len(b): report["compare"] = CMP.compare(a, b)
+    report["meta"]["data_sufficiency"] = E.data_sufficiency(report["overview"]["days"])
     report["recommendations"] = REC.build(report)
     report["explain"] = E.EXPLAIN
     report["alerts"] = E.alerts(report)

@@ -96,8 +96,12 @@ def summary(r):
     if "robots_sim" in r:
         print(f"\nrobots.txt : {r['robots_sim']['total_blocked']} hits effectivement bloqués, {r['robots_sim']['total_rules_matched_but_ignored']} matchés mais ignorés par des fetchers utilisateur")
         for l in r["robots_sim"]["lessons"][:6]: print(f"  • {l}")
-    print("\nAlertes :")
-    for al in r["alerts"]: print(f"  [{al['level']}] {al['message']}")
+    acts_al = [al for al in r["alerts"] if al.get("kind") == "action"]
+    infos = [al for al in r["alerts"] if al.get("kind") != "action"]
+    print(f"\nÀ traiter ({len(acts_al)}) :")
+    for al in acts_al: print(f"  [{al['level']}] {al['message']}")
+    print(f"\nBon à savoir ({len(infos)}) :")
+    for al in infos: print(f"  · {al['message']}")
     acts = r.get("recommendations", {}).get("actions", [])
     if acts:
         print("\nPlan d'action (détail dans summary.md et report.json → recommendations) :")

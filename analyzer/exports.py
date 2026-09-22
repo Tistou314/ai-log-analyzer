@@ -86,9 +86,12 @@ def build_summary_md(report):
     L.append(f"_Généré le {dt.date.today()} par ai-log-analyzer._\n")
     L.append(f"**{_fmt(o['hits'])} hits**, {_fmt(o['unique_ips'])} IP, {_fmt(o['unique_urls'])} URL. "
              f"Bots : **{o['bot_share']:.0%}**, dont bots IA : **{o['ai_share']:.1%}**.\n")
-    L.append("## Alertes\n")
+    L.append("## À traiter\n")
     for a in c["alerts"]:
-        L.append(f"- **[{a['level']}]** {a['message']}")
+        if a.get("kind") == "action": L.append(f"- **[{a['level']}]** {a['message']}")
+    L.append("\n## Bon à savoir\n")
+    for a in c["alerts"]:
+        if a.get("kind") != "action": L.append(f"- {a['message']}")
     if c["actions"]:
         L.append("\n## Plan d'action — dans l'ordre\n")
         for a in c["actions"]:
@@ -134,7 +137,8 @@ def build_report_html(report):
     actor_items = [(x["family"], x["hits"]) for x in c["actors"]]
     alerts_html = "".join(
         f'<li><span class="lvl" style="color:{LEVEL_COLORS.get(a["level"], INK2)}">[{a["level"]}]</span> {H.escape(a["message"])}</li>'
-        for a in c["alerts"])
+        for a in c["alerts"] if a.get("kind") == "action")
+    infos_html = "".join(f'<li>{H.escape(a["message"])}</li>' for a in c["alerts"] if a.get("kind") != "action")
     actor_rows = "".join(
         f"<tr><td>{H.escape(x['family'])}</td><td>{_fmt(x['hits'])}</td><td>{x['hits_per_day']:.0f}</td>"
         f"<td>{x['error_rate']:.0%}</td><td>{'oui' if x['fetched_robots_txt'] else 'non'}</td><td>{x['spoofed_share']:.0%}</td>"
@@ -171,7 +175,8 @@ def build_report_html(report):
  <div class="kpi"><b>{o['ai_share']:.1%}</b><span>part bots IA</span></div>
  <div class="kpi"><b>{_fmt(c['ai']['ai_clicks'])}</b><span>clics venant d'IA</span></div>
 </div>
-<h2>Alertes</h2><ul>{alerts_html}</ul>
+<h2>À traiter</h2><ul>{alerts_html or '<li class="note">rien de bloquant sur cette période</li>'}</ul>
+<h2>Bon à savoir</h2><ul class="note">{infos_html}</ul>
 {'<h2>Plan d’action — dans l’ordre</h2><ul>' + actions_html + '</ul>' if actions_html else ''}
 <h2>Hits par jour</h2>{_svg_timeline(c['day_totals'])}
 <h2>Répartition par catégorie</h2>{_svg_hbar(cat_items)}
