@@ -1,7 +1,7 @@
+# Moteur : c'est tout ce qu'il faut pour `python cli.py access.log`
 pandas>=2.0
 numpy>=1.24
-openpyxl>=3.1  # exports GSC xlsx
-anthropic>=1.0  # --diagnose et mode chat avec Claude (optionnel : sans clé, utilisez les prompts/ à la main)
-openai>=1.50    # --diagnose et mode chat avec GPT ou DeepSeek (optionnel)
-# surcouche d'exemple uniquement :
-streamlit>=1.30
+openpyxl>=3.1  # exports Search Console en xlsx (--gsc, --gsc-ai, --crawl-stats)
+# Optionnel, intégration LLM (--diagnose, chat) : sans clé, les prompts/ se copient à la main
+anthropic>=1.0
+openai>=1.50

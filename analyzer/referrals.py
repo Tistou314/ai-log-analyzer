@@ -26,7 +26,11 @@ def analyze(df, ai_referrers, window_hours=48):
     # utm / paramètres typiques
     utm = ai_clicks[ai_clicks["query"].str.contains(r"utm_source=(?:chatgpt|perplexity|claude|copilot|gemini)", case=False, regex=True)]
     # boucle : fetch utilisateur (ai_user_fetch) sur une URL puis clic humain depuis une IA sur la même URL dans la fenêtre
-    fetches = df[df["category"].isin(["ai_user_fetch", "ai_search"]) & (df["resource"] == "html")][["ts", "path", "operator", "family"]]
+    # un « fetch IA » = un vrai fetch : page HTML servie 200, identité non usurpée, pas une sonde (.env, .git…)
+    ok = df["category"].isin(["ai_user_fetch", "ai_search"]) & (df["resource"] == "html") & (df["status"] == 200) & (df["identity"] != "spoofed")
+    if "is_probe" in df: ok &= ~df["is_probe"]
+    ok &= ~df["path"].str.contains(r"/(?:embed|feed)/?$", regex=True)  # oEmbed et flux WordPress : pas des pages
+    fetches = df[ok][["ts", "path", "operator", "family"]]
     loops = []
     if len(fetches) and len(ai_clicks):
         f = fetches.sort_values("ts"); c = ai_clicks.sort_values("ts")[["ts", "path", "ai_referrer"]]

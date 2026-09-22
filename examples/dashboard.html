@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-log-analyzer — surcouche HTML d'exemple</title>
+<!--
+  Surcouche de référence en HTML pur : un seul fichier, aucune dépendance, aucun serveur.
+  Ouvrez-le dans un navigateur et déposez votre out/report.json.
+  C'est un EXEMPLE pour l'atelier : forkez-le, changez l'angle, les écrans, les couleurs.
+  Tout ce qui est affiché vient du contrat report.json (README, section Contrat) :
+  recommendations (décisions + actions), alerts (kind action/info), actors, identity, timeline, ai_referrals, aio.
+-->
+<style>
+:root{--bg:#f4f1ea;--card:#fff;--ink:#141413;--ink2:#5d5b55;--ink3:#8d8b83;--line:#eeebe3;--blue:#2a78d6;--blue2:#275e93;--red:#b3452c;--amber:#c98500;--green:#2e7d46;--clay:#d97757;--dark:#141413}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Instrument Sans",system-ui,-apple-system,Segoe UI,sans-serif}
+h1,h2,.serif{font-family:Fraunces,Georgia,"Times New Roman",serif}
+nav{background:var(--dark);color:#faf9f5;display:flex;align-items:center;gap:24px;padding:0 32px;height:60px}
+nav .brand{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16px;display:flex;gap:10px;align-items:center}
+nav .tabs{display:flex;height:100%}nav .tabs button{background:none;border:0;color:#b0aea6;font:600 14px inherit;padding:0 16px;cursor:pointer;height:100%}
+nav .tabs button.on{color:#faf9f5;box-shadow:inset 0 -3px 0 var(--clay)}nav .meta{margin-left:auto;color:#b0aea6;font-size:13px}
+main{max-width:1280px;margin:0 auto;padding:32px 24px 48px}
+.drop{border:2px dashed #cfcabc;border-radius:16px;padding:64px 24px;text-align:center;background:var(--card);margin-top:32px}
+.drop h1{font-size:32px;margin:0 0 8px}.drop p{color:var(--ink2);margin:6px 0}.drop input{margin-top:12px}
+.hero{display:flex;gap:40px;align-items:flex-end;flex-wrap:wrap;margin-bottom:24px}.hero h1{font-size:34px;line-height:1.15;margin:0;max-width:760px;font-weight:600}
+.hero .sub{color:var(--ink2);margin-top:10px;font-size:15px}.kpis{display:flex;gap:32px;margin-left:auto;flex-wrap:wrap}.kpi b{display:block;font-family:Fraunces,Georgia,serif;font-size:36px;font-weight:700}.kpi span{color:var(--ink2);font-size:13px}
+.card{background:var(--card);border-radius:14px;padding:22px 26px;box-shadow:0 1px 2px rgba(20,20,19,.06);margin-bottom:22px}.card h2{font-size:18px;margin:0 0 12px;font-weight:600}
+.row{display:flex;gap:22px;align-items:stretch}.row>.card{flex:1 1 0;min-width:0}
+.comp{display:flex;height:40px;border-radius:8px;overflow:hidden;gap:2px}.comp div{min-width:2px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;font-size:13px}.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.al{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}.al:last-child{border:0}.al .dot{width:8px;height:8px;border-radius:50%;margin-top:7px;flex-shrink:0}.al .sec{color:var(--blue2);font-weight:600;white-space:nowrap;font-size:13px}
+.muted{color:var(--ink2);font-size:13px}.info li{color:var(--ink2);margin:4px 0}
+.heat{display:flex;gap:3px}.heat div{flex:1;height:36px;border-radius:4px}.axis{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2);margin-top:4px}
+.bars{display:flex;align-items:flex-end;gap:5px;height:110px}.bars div{flex:1;background:var(--blue);border-radius:3px 3px 0 0}
+.hbar{display:flex;align-items:center;gap:12px;margin:8px 0}.hbar .lab{width:150px;text-align:right}.hbar .b{height:22px;border-radius:4px;background:var(--blue2)}.hbar .v{font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;font-size:11px;letter-spacing:.04em;color:var(--ink3);padding:10px 8px;border-bottom:2px solid var(--ink)}td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}td.n,th.n{text-align:right}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}.pill i{width:7px;height:7px;border-radius:50%}
+.ok{color:var(--green);background:#e8f2ea}.ok i{background:var(--green)}.bad{color:var(--red);background:#f9e9e5}.bad i{background:var(--red)}.na{color:var(--ink2);background:#f0ede7}.na i{background:var(--ink3)}
+.dec{font-weight:600}.dec.allow{color:var(--green)}.dec.limit{color:var(--amber)}.dec.block,.dec.ban_ip{color:var(--red)}.dec.watch{color:var(--ink2)}
+.funnel{background:var(--dark);color:#faf9f5;border-radius:14px;padding:26px 30px;display:flex;align-items:center;gap:20px;margin-bottom:22px;flex-wrap:wrap}.funnel .st{flex:1;min-width:220px}.funnel .lab{font-size:11px;letter-spacing:.06em;color:#b0aea6;font-weight:600}.funnel b{display:block;font-family:Fraunces,Georgia,serif;font-size:42px;font-weight:700}.funnel .st p{color:#b0aea6;margin:4px 0 0;font-size:13px}.funnel .arrow{color:var(--clay);font-size:28px}
+.hyp{display:inline-block;font-size:12px;font-weight:600;color:#935300;background:#fdf3e2;border:1px solid #ecd9b0;border-radius:999px;padding:3px 12px;margin-left:10px;vertical-align:middle}
+.act{display:flex;gap:22px;margin-bottom:16px}.act .num{width:40px;height:40px;border-radius:50%;color:#faf9f5;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-size:18px;font-weight:700;flex-shrink:0}
+.act .card{flex:1;margin:0;display:flex;gap:20px}.act .body{flex:1}.act h3{font-family:Fraunces,Georgia,serif;font-size:18px;margin:0 0 6px;font-weight:600}.act .tag{font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin-left:10px;vertical-align:middle}
+.act .side{width:160px;border-left:1px solid var(--line);padding-left:18px;font-size:13px}.act .side span{display:block;color:var(--ink3);font-size:12px}.act .side b{display:block;margin-bottom:8px}
+pre{background:var(--dark);color:#c3c2b7;border-radius:10px;padding:16px 20px;font-size:13px;overflow:auto}
+[hidden]{display:none!important}
+@media(max-width:900px){.row{flex-direction:column}.hbar .lab{width:100px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="1" y="13" width="4" height="8" rx="1" fill="#d97757"/><rect x="9" y="7" width="4" height="14" rx="1" fill="#faf9f5"/><rect x="17" y="1" width="4" height="20" rx="1" fill="#7a99c9"/></svg>ai-log-analyzer</div>
+  <div class="tabs" id="tabs" hidden>
+    <button data-t="overview" class="on">Vue d'ensemble</button><button data-t="actors">Acteurs</button><button data-t="ia">Visibilité IA</button><button data-t="actions">Plan d'action</button>
+  </div>
+  <div class="meta" id="meta"></div>
+</nav>
+<main>
+  <section class="drop" id="drop">
+    <h1>Déposez votre <code>out/report.json</code></h1>
+    <p>Glissez-déposez le fichier ici, ou choisissez-le. Rien ne quitte votre navigateur.</p>
+    <input type="file" id="file" accept=".json,application/json" aria-label="Choisir report.json">
+    <p class="muted">Pas de rapport ? <code>python cli.py samples/demo_access.log --robots samples/demo_robots.txt --gsc samples/demo_gsc_pages.csv --compare 2026-08-17</code></p>
+  </section>
+  <section id="overview" hidden></section>
+  <section id="actors" hidden></section>
+  <section id="ia" hidden></section>
+  <section id="actions" hidden></section>
+</main>
+<script>
+const CAT = { // couleur + libellé par catégorie : constant sur tous les écrans
+  human:['#dcd8ce','Humains'], search_engine:['#2a78d6','Moteurs'], ai_training:['#275e93','LLM entraînement'], ai_search:['#1baf7a','LLM index'],
+  ai_user_fetch:['#e87ba4','Fetchs utilisateur'], ai_agent:['#9085e9','Agents IA'], seo_tool:['#eda100','Outils SEO'], social_preview:['#86b6ef','Aperçus sociaux'],
+  monitoring:['#b7d3f6','Monitoring'], scraper:['#c94f38','Scrapers & scanners'], other_bot:['#8d8b83','Autres bots'], self_traffic:['#cfcabc','Site vers lui-même']};
+const DEC = {allow:'laisser faire', limit:'limiter', block:'bloquer', ban_ip:"bannir l'IP", watch:'surveiller'};
+const DOM = {security:['SÉCURITÉ','#b3452c','#f9e9e5'], seo:['SEO','#935300','#fdf3e2'], geo:['GEO','#275e93','#e9f0f7'], strategy:['STRATÉGIE','#275e93','#e9f0f7'], ops:['SERVEUR','#935300','#fdf3e2'], analytics:['ANALYTICS','#275e93','#e9f0f7'], data:['DONNÉES','#b3452c','#f9e9e5'], routine:['ROUTINE','#52514e','#f0ede7']};
+const fmt = n => Math.round(n).toLocaleString('fr-FR'), pct = (x,d=0) => (100*x).toFixed(d).replace('.',',')+' %';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = id => document.getElementById(id);
+
+function render(r){
+  const o = r.overview, rec = r.recommendations || {by_family:[],actions:[]}, byFam = Object.fromEntries((rec.by_family||[]).map(f=>[f.family,f]));
+  $('drop').hidden = true; $('tabs').hidden = false;
+  $('meta').textContent = `${(r.meta.site||'').replace(/^https?:\/\//,'') || o.hosts && Object.keys(o.hosts)[0] || 'vos logs'} · ${o.period_start.slice(0,10)} → ${o.period_end.slice(0,10)} · ${o.days.toFixed(0)} j`;
+  const acts = r.alerts.filter(a=>a.kind==='action'), infos = r.alerts.filter(a=>a.kind!=='action');
+  const ai = r.ai_referrals || {}, aio = r.aio || {}, suff = r.meta.data_sufficiency || {};
+  const spoofHits = (r.identity.spoofed_ips||[]).reduce((s,x)=>s+x.hits,0);
+
+  // ---- Vue d'ensemble
+  const cats = Object.entries(o.by_category).sort((a,b)=>b[1]-a[1]), total = cats.reduce((s,c)=>s+c[1],0);
+  const botShare = o.bot_share, aiShare = o.ai_share;
+  const hero = suff.level==='insufficient' ? `Moins d'une journée de logs : on ne peut conclure que sur les volumes.` :
+    `Sur ${o.days.toFixed(0)} jours, <span style="color:var(--red)">${pct(botShare)}</span> du trafic n'est pas humain — et les IA en représentent ${pct(aiShare/Math.max(botShare,1e-9))}.`;
+  $('overview').innerHTML = `
+    <div class="hero"><div><h1>${hero}</h1><div class="sub">${fmt(o.hits)} hits analysés · ${fmt(o.unique_ips)} IP · ${fmt(o.unique_urls)} URL. ${esc(suff.message||'')}</div></div>
+      <div class="kpis"><div class="kpi"><b>${pct(botShare)}</b><span>de bots</span></div><div class="kpi"><b style="color:var(--blue2)">${pct(aiShare,1)}</b><span>de bots IA</span></div>
+      <div class="kpi"><b style="color:var(--blue2)">${fmt(ai.ai_clicks||0)}</b><span>clics venus d'IA</span></div><div class="kpi"><b style="color:var(--red)">${fmt(spoofHits)}</b><span>hits usurpés</span></div></div></div>
+    <div class="card"><h2>De quoi est fait votre trafic</h2>
+      <div class="comp">${cats.map(([c,n])=>`<div style="flex:${n};background:${(CAT[c]||CAT.other_bot)[0]}" title="${esc((CAT[c]||[0,c])[1])} : ${fmt(n)}"></div>`).join('')}</div>
+      <div class="legend">${cats.map(([c,n])=>`<span><i style="background:${(CAT[c]||CAT.other_bot)[0]}"></i>${esc((CAT[c]||[0,c])[1])} <b>${fmt(n)}</b> · ${pct(n/total)}</span>`).join('')}</div>
+      <p class="muted">${esc(r.explain.overview||'')}</p></div>
+    <div class="row">
+      <div class="card"><h2>À traiter <span class="pill bad" style="margin-left:8px">${acts.length}</span></h2>
+        ${acts.length ? acts.map(a=>`<div class="al"><div class="dot" style="background:${a.level==='critical'?'var(--red)':'var(--amber)'}"></div><div style="flex:1">${esc(a.message)}</div><span class="sec">${esc(a.section)}</span></div>`).join('') : '<p class="muted">Rien de bloquant sur cette période.</p>'}
+        <h2 style="margin-top:18px">Bon à savoir</h2><ul class="info">${infos.map(a=>`<li>${esc(a.message)}</li>`).join('')}</ul></div>
+      <div class="card"><h2>Quand les bots viennent-ils ?</h2>${heat(r)}<h2 style="margin-top:18px">Hits par jour</h2>${daily(r)}</div>
+    </div>`;
+
+  // ---- Acteurs
+  const idn = r.identity.summary||{}, idTot = Object.values(idn).reduce((s,v)=>s+v,0)||1, lab = r.identity.labels||{};
+  const idPill = a => a.spoofed_share>0.05 && a.ips_spoofed>=5 ? `<span class="pill bad"><i></i>${pct(a.spoofed_share)} usurpé</span>` : a.ips_verified>0 ? `<span class="pill ok"><i></i>vérifié</span>` : `<span class="pill na"><i></i>non vérifiable</span>`;
+  $('actors').innerHTML = `
+    <div class="hero"><div><h1>Qui est vraiment qui ?</h1><div class="sub">${esc(r.explain.identity||'')}</div></div>
+      <div style="margin-left:auto;width:min(420px,100%)"><div class="muted">${fmt(idTot)} hits de bots à l'épreuve des plages IP</div>
+        <div class="comp" style="height:26px;margin-top:6px">${['verified','n/a','unverified','spoofed'].map(k=>`<div style="flex:${idn[k]||0};background:${{verified:'#2e7d46','n/a':'#dcd8ce',unverified:'#8d8b83',spoofed:'#c94f38'}[k]}" title="${k} : ${fmt(idn[k]||0)}"></div>`).join('')}</div>
+        <div class="muted" style="margin-top:6px"><b style="color:var(--green)">${fmt(idn.verified||0)} vérifiés</b> · ${fmt(idn['n/a']||0)} sans méthode · ${fmt(idn.unverified||0)} non vérifiés · <b style="color:var(--red)">${fmt(idn.spoofed||0)} usurpés</b></div></div></div>
+    <div class="card"><table><thead><tr><th>Famille</th><th>Rôle</th><th class="n">Hits</th><th class="n">Hits/j</th><th class="n">Erreurs</th><th>Identité</th><th>robots.txt</th><th>Décision</th><th>Pourquoi / comment</th></tr></thead><tbody>
+      ${r.actors.filter(a=>a.category!=='self_traffic').slice(0,25).map(a=>{const d=byFam[a.family]||{};return `<tr${(a.spoofed_share>0.05&&a.ips_spoofed>=5)||/^(Scanner|Bot déguisé)/.test(a.family)?' style="background:#fdf6f4"':''}>
+        <td><b>${esc(a.family)}</b><br><span class="muted">${esc(a.operator)}</span></td><td class="muted">${esc((CAT[a.category]||[0,a.category])[1])}</td><td class="n"><b>${fmt(a.hits)}</b></td><td class="n muted">${fmt(a.hits_per_day)}</td><td class="n muted">${pct(a.error_rate)}</td>
+        <td>${idPill(a)}</td><td style="color:${a.fetched_robots_txt?'var(--green)':'var(--red)'};font-weight:600">${a.fetched_robots_txt?'lu':'jamais lu'}</td>
+        <td class="dec ${d.decision||''}">${DEC[d.decision]||'—'}</td><td class="muted" style="max-width:340px">${esc(d.why||'')} ${esc(d.how||'')}</td></tr>`}).join('')}</tbody></table>
+      <p class="muted" style="margin-top:12px">${['verified','spoofed','unverified','n/a'].map(k=>esc(lab[k]||'')).join(' ')}</p></div>
+    ${rec.robots_txt_suggestion ? `<div class="card"><h2>Le robots.txt qui découle de ces décisions</h2><pre>${esc(rec.robots_txt_suggestion)}</pre><p class="muted">${esc(rec.note||'')}</p></div>` : ''}`;
+
+  // ---- Visibilité IA
+  const aiHits = ['ai_training','ai_search','ai_user_fetch','ai_agent'].reduce((s,c)=>s+(o.by_category[c]||0),0);
+  const src = Object.entries(ai.by_source||{}).sort((a,b)=>b[1]-a[1]), srcMax = src[0]?.[1]||1;
+  const hot = aio.hot_fetches||{}, ga = aio.google_agents||{}, gx = aio.gsc_cross||{}, never = ai.fetched_never_clicked_examples||[];
+  $('ia').innerHTML = `
+    <div class="hero"><div><h1>Les IA lisent beaucoup. Est-ce qu'elles rendent quelque chose ?</h1><div class="sub">${esc(r.explain.ai_referrals||'')}</div></div></div>
+    <div class="funnel"><div class="st"><div class="lab">LECTURES PAR LES IA</div><b>${fmt(aiHits)}</b><p>hits de bots IA (entraînement, index, fetchs à la demande)</p></div><div class="arrow">→</div>
+      <div class="st"><div class="lab">BOUCLES FETCH → CLIC</div><b>${fmt((ai.fetch_to_click_loops||[]).reduce((s,l)=>s+(l.clicks||0),0))}</b><p>clics arrivés après qu'une IA a lu la même page (fenêtre 48 h)</p></div><div class="arrow">→</div>
+      <div class="st"><div class="lab" style="color:var(--clay)">CLICS HUMAINS VENUS D'IA</div><b style="color:var(--clay)">${fmt(ai.ai_clicks||0)}</b><p>${pct(ai.share_of_human_html||0,2)} du trafic HTML humain — invisible dans GA4</p></div></div>
+    <div class="row">
+      <div class="card"><h2>D'où viennent ces clics</h2>${src.length?src.map(([k,v])=>`<div class="hbar"><span class="lab">${esc(k)}</span><div class="b" style="width:${Math.max(3,Math.round(300*v/srcMax))}px"></div><span class="v">${fmt(v)}</span></div>`).join(''):'<p class="muted">Aucun clic depuis une interface IA sur la période.</p>'}
+        <p class="muted">Détecté par le referer du clic (chatgpt.com, perplexity.ai…).</p></div>
+      <div class="card"><h2>Et les AI Overviews de Google ? <span class="hyp">HYPOTHÈSES — pas des preuves</span></h2><p class="muted">${esc(r.explain.aio||'')}</p>
+        <div style="display:flex;gap:32px;flex-wrap:wrap"><div class="kpi"><b>${fmt(hot.candidates||0)}</b><span>fetchs « à chaud » candidats</span></div><div class="kpi"><b>${fmt(ga.hits||0)}</b><span>hits d'agents Google</span></div>${gx.aio_suspects!=null?`<div class="kpi"><b>${fmt(gx.aio_suspects)}</b><span>pages « citées sans clic » (GSC)</span></div>`:''}</div>
+        ${r.crawl_stats&&r.crawl_stats.ratio_logs_over_gsc?`<p class="muted"><b>Validation GSC :</b> ${fmt(r.crawl_stats.logs_per_day)} hits Googlebot/j dans les logs vs ${fmt(r.crawl_stats.gsc_per_day)}/j côté Google (ratio ${r.crawl_stats.ratio_logs_over_gsc}) — ${esc(r.crawl_stats.verdict)}</p>`:''}</div>
+    </div>
+    <div class="card"><h2>Lues par les IA, jamais cliquées : votre marge de progression</h2>
+      ${never.length?`<ul>${never.slice(0,8).map(p=>`<li><code>${esc(p)}</code></li>`).join('')}</ul><p class="muted">${fmt(ai.fetched_never_clicked_count||0)} pages au total. Titre en question, réponse dans les deux premières phrases, un chiffre daté par section.</p>`:'<p class="muted">Toutes les pages lues par des IA ont généré au moins un clic — ou aucune lecture IA sur la période.</p>'}</div>`;
+
+  // ---- Plan d'action
+  const actions = rec.actions||[];
+  $('actions').innerHTML = `
+    <div class="hero"><div><h1>${actions.length} gestes, dans l'ordre.</h1><div class="sub">${esc(r.explain.recommendations||'')}</div></div></div>
+    ${actions.map(a=>{const d=DOM[a.domain]||DOM.routine;return `<div class="act"><div class="num" style="background:${d[1]}">${a.rank}</div><div class="card"><div class="body"><h3>${esc(a.title)}<span class="tag" style="color:${d[1]};background:${d[2]}">${d[0]}</span></h3>
+      <div class="muted"><b style="color:var(--ink)">Pourquoi :</b> ${esc(a.why)}</div><div class="muted" style="margin-top:4px"><b style="color:var(--ink)">Comment :</b> ${esc(a.how)}</div>
+      ${a.evidence&&Object.keys(a.evidence).length?`<details style="margin-top:6px"><summary class="muted">preuves (report.json)</summary><pre style="margin:6px 0 0">${esc(JSON.stringify(a.evidence,null,1))}</pre></details>`:''}</div>
+      <div class="side"><span>effort</span><b>${esc(a.effort)}</b><span>impact</span><b>${esc(a.impact)}</b></div></div></div>`}).join('')}`;
+  show('overview');
+}
+function heat(r){ // hits de bots par heure UTC, somme des familles de timeline.hourly_by_family
+  const m = r.timeline?.hourly_by_family||{}, h = Array(24).fill(0);
+  Object.values(m).forEach(row => row.forEach((v,i)=>h[i]+=v)); const mx = Math.max(...h,1);
+  const col = v => { const t=v/mx; return t>0.8?'#104281':t>0.6?'#1c5cab':t>0.4?'#5598e7':t>0.2?'#a9c8ec':'#e3edf9'; };
+  const peak = h.indexOf(mx);
+  return `<div class="muted" style="margin-bottom:6px">Hits de bots par heure (UTC), cumul de la période — pic à ${peak} h</div><div class="heat">${h.map((v,i)=>`<div style="background:${col(v)}" title="${i} h : ${fmt(v)}"></div>`).join('')}</div><div class="axis"><span>0 h</span><span>6 h</span><span>12 h</span><span>18 h</span><span>23 h</span></div>`;
+}
+function daily(r){
+  const d = Object.entries(r.timeline?.daily||{}).sort(); const tot = d.map(([k,v])=>[k,Object.values(v).reduce((s,x)=>s+x,0)]); const mx = Math.max(...tot.map(x=>x[1]),1);
+  return `<div class="bars">${tot.map(([k,v])=>`<div style="height:${Math.max(2,100*v/mx)}%" title="${k} : ${fmt(v)}"></div>`).join('')}</div><div class="axis"><span>${tot[0]?.[0]||''}</span><span>${tot[tot.length-1]?.[0]||''}</span></div>`;
+}
+function show(t){ ['overview','actors','ia','actions'].forEach(k=>{$(k).hidden = k!==t}); document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t)); window.scrollTo(0,0); }
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.t)));
+function load(file){ const fr = new FileReader(); fr.onload = e => { try { render(JSON.parse(e.target.result)); } catch(err){ alert('Ce fichier n\'est pas un report.json valide : '+err.message); } }; fr.readAsText(file); }
+$('file').addEventListener('change', e => e.target.files[0] && load(e.target.files[0]));
+['dragover','drop'].forEach(ev => document.addEventListener(ev, e => { e.preventDefault(); if(ev==='drop' && e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); }));
+</script>
+</body>
+</html>

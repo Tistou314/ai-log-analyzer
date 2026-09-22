@@ -27,9 +27,13 @@ Ce repo sert de base à l'atelier Teknseo 2026 : le moteur est fourni, **chacun 
 
 ```bash
 git clone <ce repo> && cd ai-log-analyzer
-pip install -r requirements.txt
+pip install -r requirements.txt            # moteur seul : pandas, numpy, openpyxl (+ SDK LLM optionnels)
 python signatures/ip_ranges/update.py      # récupère les plages IP officielles (Google, OpenAI, Anthropic, Perplexity, Bing, Apple, Amazon)
 ```
+
+`requirements-examples.txt` ajoute Streamlit pour la surcouche d'exemple Python ; `requirements-dev.txt` ajoute pytest. Le moteur tourne en local, sans serveur ni réseau (sauf `--dns`, `--robots` sans fichier et `--diagnose`).
+
+Format de logs pas reconnu ? `python cli.py mes.logs --doctor` montre le format détecté, les colonnes disponibles et les lignes rejetées avec la raison.
 
 ## Utilisation
 
@@ -94,6 +98,8 @@ alerts[]        {level: critical|warn|info, kind: action|info, section, message}
 Toutes les clés sont stables entre versions mineures. Une surcouche n'a besoin que de ce fichier.
 
 ## Construire sa surcouche (l'atelier)
+
+Deux surcouches d'exemple sont fournies, à forker : `examples/dashboard.html` (un seul fichier, zéro dépendance, s'ouvre en double-clic, on y dépose `report.json`) et `examples/streamlit_dashboard.py` (Python). Toutes deux n'affichent que le contrat JSON : `recommendations` (décision par bot, plan d'action), `alerts` (à traiter / bon à savoir), `actors`, `identity`, `timeline`, `ai_referrals`, `aio`.
 
 1. Lancez le moteur sur vos logs (ou le sample).
 2. Ouvrez `prompts/surcouche.md`, choisissez votre angle et votre techno, collez dans Claude avec `report.json`.

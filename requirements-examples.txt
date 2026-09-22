@@ -1,0 +1,3 @@
+# Surcouche d'exemple examples/streamlit_dashboard.py uniquement (examples/dashboard.html n'a besoin de rien)
+-r requirements.txt
+streamlit>=1.30

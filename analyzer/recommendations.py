@@ -38,7 +38,7 @@ def _fam_decision(r, clicks_by_operator):
     if cat == "ai_search":
         c = clicks_by_operator.get(r["operator"], 0)
         why = "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses" + (f" ({c} clics humains venus de cet opérateur sur la période)." if c else ".")
-        return "allow", why, "Ne pas bloquer par réflexe anti-IA. Un llms.txt à la racine l'aide à trouver l'essentiel."
+        return "allow", why, "Ne pas bloquer par réflexe anti-IA : c'est lui qui rapporte des clics."
     if cat == "ai_user_fetch":
         return "allow", "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.", "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation."
     if cat == "ai_agent":
@@ -95,13 +95,19 @@ def build(report):
                             effort="5 min + attente", impact="tout le reste devient fiable", evidence=dict(days=ov["days"])))
 
     spoofed_ips = ident.get("spoofed_ips", [])
-    n_spoof = sum(x["hits"] for x in spoofed_ips)
-    if spoofed_ips:
-        fams = sorted({x["family"] for x in spoofed_ips})
-        actions.append(dict(domain="security", title=f"Bannir {len(spoofed_ips)} IP qui usurpent une identité de bot",
-                            why=f"{n_spoof} hits prétendent être {', '.join(fams[:3])}{'…' if len(fams) > 3 else ''} depuis des IP hors plages officielles" + (f", dont {probes.get('reclassified_hits', 0)} sondes sur des chemins sensibles" if probes.get("reclassified_hits") else "") + ".",
-                            how="Règle 403 ou WAF sur chaque IP de identity.spoofed_ips. Jamais de blocage par User-Agent « Googlebot » : vous bloqueriez le vrai.",
-                            effort="15 min", impact="immédiat", evidence=dict(ips=[x["ip"] for x in spoofed_ips[:10]], hits=n_spoof)))
+    n_probe, ips_probe = probes.get("reclassified_hits", 0), probes.get("reclassified_ips", 0)
+    usurp = [(a["ips_spoofed"], a["family"]) for a in actors if a["spoofed_share"] > 0.05 and a["ips_spoofed"] >= 5
+             and not a["family"].startswith(("Scanner", "Bot déguisé"))]
+    n_usurp = sum(n for n, _ in usurp)
+    if n_probe or n_usurp:
+        parts = []
+        if n_probe: parts.append(f"{n_probe} hits de scanners déguisés en bots légitimes ({ips_probe} IP) sondent .env, .git, xmlrpc…")
+        if n_usurp: parts.append(f"{n_usurp} hits usurpent {', '.join(f for _, f in sorted(usurp, reverse=True)[:4])} depuis des IP hors plages officielles")
+        n_ips = max(ips_probe, 0) + len({x["ip"] for x in spoofed_ips if not x["family"].startswith("Scanner")})
+        actions.append(dict(domain="security", title=f"Bannir les IP qui usurpent une identité de bot ({n_ips} IP)",
+                            why=" ; ".join(parts) + ".",
+                            how="Règle 403 ou WAF sur les IP de identity.spoofed_ips et probes.top_scanner_ips. Jamais de blocage par User-Agent « Googlebot » ou « ChatGPT-User » : vous bloqueriez les vrais.",
+                            effort="15 min", impact="immédiat", evidence=dict(ips=[x["ip"] for x in spoofed_ips[:10]], scanner_hits=n_probe, usurped_hits=n_usurp)))
 
     cb = report.get("crawl_budget", {})
     for fam in ("Googlebot Smartphone", "Googlebot Desktop", "Bingbot"):
@@ -131,7 +137,7 @@ def build(report):
     if ai.get("fetch_events", 0) > 20 and never:
         actions.append(dict(domain="geo", title="Rendre citables les pages lues par les IA mais jamais cliquées",
                             why=f"{ai.get('fetched_never_clicked_count', len(never))} pages sont lues par les index et fetchers IA sans générer un seul clic : elles nourrissent les réponses sans être créditées.",
-                            how="Titre en question, réponse directe dans les deux premières phrases, un chiffre daté et sourcé par section, un llms.txt à la racine. Commencer par les plus lues.",
+                            how="Titre en question, réponse directe dans les deux premières phrases, un chiffre daté et sourcé par section. Commencer par les plus lues.",
                             effort="½ jour par page", impact=f"part des {ai.get('ai_clicks', 0)} clics IA", evidence=dict(examples=never[:5])))
 
     training = [f for f in by_family if f["category"] == "ai_training"]
