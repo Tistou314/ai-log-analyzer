@@ -4,7 +4,7 @@
 
 ---
 
-J'ai un fichier `out/report.json` produit par ai-log-analyzer (structure documentée dans README.md, section "Contrat report.json"). Je veux construire un dashboard dessus.
+J'ai un fichier `report.json` produit par ai-log-analyzer (joint ; en atelier c'est `samples/out/report.json`, 14 jours de logs de démonstration) (structure documentée dans README.md, section "Contrat report.json"). Je veux construire un dashboard dessus.
 
 Ce que je veux voir en priorité : [CHOISIS : la part des bots IA et qui m'usurpe / le crawl budget Googlebot et le gaspillage / les AI Overviews et la boucle IA → clic humain / la comparaison avant-après].
 

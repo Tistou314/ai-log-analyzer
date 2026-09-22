@@ -23,6 +23,16 @@ Ce repo sert de base à l'atelier Teknseo 2026 : le moteur est fourni, **chacun 
 | **Avant / après** | Comparaison de deux périodes, familles apparues / disparues. |
 | **Pédagogie** | Chaque section porte un `explain`, des `alerts` sont calculées, et trois prompts Claude (`prompts/`) transforment le rapport en diagnostic, en tuteur, ou en surcouche. |
 
+## Sans rien installer (le parcours atelier)
+
+Vous n'avez besoin ni de Python ni de vos logs pour construire une surcouche : il vous faut un `report.json` et Claude.
+
+1. Téléchargez le repo (bouton **Code → Download ZIP**, puis décompressez) ou clonez-le.
+2. Ouvrez `examples/dashboard.html` dans votre navigateur (double-clic) et déposez-y `samples/out/report.json` : c'est le rapport déjà calculé sur 14 jours de logs de démonstration, avec tous les cas (Googlebot usurpé, rafale GPTBot, boucle IA → clic, avant/après…).
+3. Ouvrez claude.ai, collez `prompts/surcouche.md`, joignez `samples/out/report.json`, choisissez votre angle : votre surcouche naît là.
+
+Python ne sert qu'à produire un `report.json` à partir de **vos** logs (section suivante). Vous pourrez le faire après l'atelier, quand vous aurez activé l'archivage chez votre hébergeur.
+
 ## Installation
 
 ```bash
