@@ -55,6 +55,8 @@ def _fam_decision(r, clicks_by_operator):
     if cat in ("social_preview", "monitoring"):
         return "allow", "Aperçus de liens partagés ou monitoring : trafic utile et léger.", "Rien à faire."
     if cat == "scraper":
+        if r["error_rate"] > 0.5 and r["hits"] >= 500:
+            return "ban_ip", f"Script générique qui essuie {r['error_rate']:.0%} d'erreurs sur {r['hits']} hits : il tape au hasard (attaque, énumération), ce n'est pas un usage.", "Bannir les IP les plus actives (actors[].top_paths, hits.csv) ; rate limiting sur le reste."
         if burst: return "limit", f"Script générique en rafale ({r['max_hits_per_minute']} hits/min).", "Limiter par IP (rate limiting) ; bannir si ça se répète."
         return "watch", "Script ou bibliothèque HTTP générique : usage inconnu.", "Regarder ses top_paths ; bannir l'IP si elle vise des données ou des formulaires."
     return "watch", "Bot non identifié : c'est ici qu'apparaissent les nouveaux crawlers IA.", "Vérifier l'UA dans hits.csv ; proposer une signature (PR sur bots.json) si c'est un acteur connu."

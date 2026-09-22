@@ -103,7 +103,7 @@ function render(r){
       <div class="card"><h2>À traiter <span class="pill bad" style="margin-left:8px">${acts.length}</span></h2>
         ${acts.length ? acts.map(a=>`<div class="al"><div class="dot" style="background:${a.level==='critical'?'var(--red)':'var(--amber)'}"></div><div style="flex:1">${esc(a.message)}</div><span class="sec">${esc(a.section)}</span></div>`).join('') : '<p class="muted">Rien de bloquant sur cette période.</p>'}
         <h2 style="margin-top:18px">Bon à savoir</h2><ul class="info">${infos.map(a=>`<li>${esc(a.message)}</li>`).join('')}</ul></div>
-      <div class="card"><h2>Quand les bots viennent-ils ?</h2>${heat(r)}<h2 style="margin-top:18px">Hits par jour</h2>${daily(r)}</div>
+      <div class="card"><h2>Quand les bots viennent-ils ?</h2>${heat(r)}<h2 style="margin-top:18px">Hits par jour (hors trafic interne)</h2>${daily(r)}</div>
     </div>`;
 
   // ---- Acteurs
@@ -153,13 +153,14 @@ function render(r){
 }
 function heat(r){ // hits de bots par heure UTC, somme des familles de timeline.hourly_by_family
   const m = r.timeline?.hourly_by_family||{}, h = Array(24).fill(0);
-  Object.values(m).forEach(row => row.forEach((v,i)=>h[i]+=v)); const mx = Math.max(...h,1);
+  const ext = new Set((r.actors||[]).map(a=>a.family)); // actors exclut le trafic interne (WP Rocket, wp-cron) : on ne garde que les bots externes
+  Object.entries(m).forEach(([fam,row]) => { if(ext.has(fam)) row.forEach((v,i)=>h[i]+=v); }); const mx = Math.max(...h,1);
   const col = v => { const t=v/mx; return t>0.8?'#104281':t>0.6?'#1c5cab':t>0.4?'#5598e7':t>0.2?'#a9c8ec':'#e3edf9'; };
   const peak = h.indexOf(mx);
-  return `<div class="muted" style="margin-bottom:6px">Hits de bots par heure (UTC), cumul de la période — pic à ${peak} h</div><div class="heat">${h.map((v,i)=>`<div style="background:${col(v)}" title="${i} h : ${fmt(v)}"></div>`).join('')}</div><div class="axis"><span>0 h</span><span>6 h</span><span>12 h</span><span>18 h</span><span>23 h</span></div>`;
+  return `<div class="muted" style="margin-bottom:6px">Hits de bots externes par heure (UTC), cumul de la période — pic à ${peak} h</div><div class="heat">${h.map((v,i)=>`<div style="background:${col(v)}" title="${i} h : ${fmt(v)}"></div>`).join('')}</div><div class="axis"><span>0 h</span><span>6 h</span><span>12 h</span><span>18 h</span><span>23 h</span></div>`;
 }
 function daily(r){
-  const d = Object.entries(r.timeline?.daily||{}).sort(); const tot = d.map(([k,v])=>[k,Object.values(v).reduce((s,x)=>s+x,0)]); const mx = Math.max(...tot.map(x=>x[1]),1);
+  const d = Object.entries(r.timeline?.daily||{}).sort(); const tot = d.map(([k,v])=>[k,Object.entries(v).filter(([c])=>c!=='self_traffic').reduce((s,[,x])=>s+x,0)]); const mx = Math.max(...tot.map(x=>x[1]),1);
   return `<div class="bars">${tot.map(([k,v])=>`<div style="height:${Math.max(2,100*v/mx)}%" title="${k} : ${fmt(v)}"></div>`).join('')}</div><div class="axis"><span>${tot[0]?.[0]||''}</span><span>${tot[tot.length-1]?.[0]||''}</span></div>`;
 }
 function show(t){ ['overview','actors','ia','actions'].forEach(k=>{$(k).hidden = k!==t}); document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t)); window.scrollTo(0,0); }

@@ -5,7 +5,7 @@ from analyzer import recommendations as R
 
 def actor(family, category, hits=1000, **kw):
     base = dict(family=family, operator="op", category=category, hits=hits, hits_per_day=hits / 14,
-                spoofed_share=0.0, ips_spoofed=0, max_hits_per_minute=5, fetched_robots_txt=True, s5xx=0)
+                spoofed_share=0.0, ips_spoofed=0, max_hits_per_minute=5, fetched_robots_txt=True, s5xx=0, error_rate=0.0)
     base.update(kw)
     return base
 
