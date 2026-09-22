@@ -24,6 +24,15 @@ def main():
         ai_diagnostic._load_dotenv()
         ai_diagnostic.list_models()
         sys.exit(0)
+    # sous-commande : python cli.py diagnose out/report.json [--provider --model]  (sans refaire l'analyse)
+    if len(sys.argv) > 1 and sys.argv[1] == "diagnose":
+        from analyzer import ai_diagnostic
+        dp = argparse.ArgumentParser(prog="cli.py diagnose", description="diagnostic LLM sur un report.json existant")
+        dp.add_argument("report", nargs="?", default="out/report.json")
+        dp.add_argument("--provider", choices=sorted(ai_diagnostic.PROVIDERS))
+        dp.add_argument("--model", default=None)
+        d = dp.parse_args(sys.argv[2:])
+        sys.exit(ai_diagnostic.diagnose(d.report, out_dir=str(pathlib.Path(d.report).parent), model=d.model, provider=d.provider))
     if len(sys.argv) > 1 and sys.argv[1] == "chat":
         from analyzer import ai_diagnostic
         cp = argparse.ArgumentParser(prog="cli.py chat", description="mode tuteur : questions sur un report.json existant")

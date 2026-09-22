@@ -12,6 +12,7 @@ la partie après le premier séparateur '---'.
 import json, os, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+DIAG_MAX_TOKENS = 24_000     # sortie du diagnostic ; les modèles à raisonnement y comptent leur réflexion
 MAX_REPORT_CHARS = 160_000   # ~40k tokens : tient dans tous les modèles du catalogue
 # allégé dans cet ordre si le rapport est trop gros ; actors et crawl_budget sont tronqués, jamais retirés
 TRIM_ORDER = ["timeline", "explain", "structure", "crawl_budget.*.by_template", "actors:30", "crawl_budget:core", "stealth", "probes"]
@@ -119,7 +120,7 @@ class LLM:
     def stream(self, messages, system=None, max_tokens=8000, cache_system=False):
         """Génère le texte au fil de l'eau. Retourne l'itérateur ; le texte complet
         est ensuite dans self.last_text, l'usage (in, out) dans self.last_usage."""
-        self.last_text, self.last_usage = "", (0, 0)
+        self.last_text, self.last_usage, self.truncated = "", (0, 0), False
         if self.provider == "anthropic":
             return self._stream_anthropic(messages, system, max_tokens, cache_system)
         return self._stream_openai(messages, system, max_tokens)
@@ -135,6 +136,7 @@ class LLM:
                 yield chunk
             final = stream.get_final_message()
         self.last_usage = (final.usage.input_tokens, final.usage.output_tokens)
+        self.truncated = final.stop_reason == "max_tokens"
 
     def _stream_openai(self, messages, system, max_tokens):
         msgs = ([{"role": "system", "content": system}] if system else []) + messages
@@ -146,9 +148,13 @@ class LLM:
         for chunk in stream:
             if chunk.usage:
                 self.last_usage = (chunk.usage.prompt_tokens, chunk.usage.completion_tokens)
-            if chunk.choices and chunk.choices[0].delta.content:
-                self.last_text += chunk.choices[0].delta.content
-                yield chunk.choices[0].delta.content
+            if not chunk.choices: continue
+            ch = chunk.choices[0]
+            if ch.finish_reason == "length": self.truncated = True
+            # les modèles à raisonnement (DeepSeek, GPT-5.x) envoient d'abord delta.reasoning_content : ce n'est pas la réponse
+            if ch.delta and ch.delta.content:
+                self.last_text += ch.delta.content
+                yield ch.delta.content
 
 
 def make_llm(provider=None, model=None):
@@ -214,11 +220,17 @@ def diagnose(report_path, out_dir="out", model=None, provider=None):
           + (f", sections retirées : {', '.join(removed)}" if removed else "") + ")", file=sys.stderr)
     try:
         for chunk in llm.stream(
-                [{"role": "user", "content": f"{prompt}{note}\n\nVoici report.json :\n```json\n{slim}\n```"}]):
+                [{"role": "user", "content": f"{prompt}{note}\n\nVoici report.json :\n```json\n{slim}\n```"}],
+                max_tokens=DIAG_MAX_TOKENS):
             print(chunk, end="", flush=True)
         print()
     except Exception as e:
         print(f"Échec de l'appel API {llm.provider} : {e}", file=sys.stderr)
+        return 1
+    if llm.truncated:
+        print(f"ATTENTION : réponse coupée par la limite de sortie ({DIAG_MAX_TOKENS} tokens, raisonnement du modèle compris). Essayez un modèle plus concis avec --model.", file=sys.stderr)
+    if not llm.last_text.strip():
+        print("Le modèle n'a renvoyé aucun texte (tout le budget de sortie est parti en raisonnement ?). Essayez un autre modèle avec --model.", file=sys.stderr)
         return 1
     out = pathlib.Path(out_dir); out.mkdir(exist_ok=True)
     (out / "diagnostic.md").write_text(llm.last_text, encoding="utf-8")

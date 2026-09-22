@@ -130,6 +130,9 @@ Deux usages, avec ou sans clé API. Trois fournisseurs supportés : **Anthropic 
 # diagnostic complet en 6 parties → out/diagnostic.md + affichage
 python cli.py access.log --diagnose            # fournisseur déduit de la clé présente
 
+# le même diagnostic sur un rapport déjà calculé, sans refaire l'analyse
+python cli.py diagnose out/report.json
+
 # mode tuteur : boucle de questions sur un rapport existant (/quit pour sortir)
 python cli.py chat out/report.json
 ```
