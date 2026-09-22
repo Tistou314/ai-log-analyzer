@@ -20,4 +20,6 @@ Si `compare.findings` est présent, ajoute une partie **0. Avant / après** AVAN
 
 De même, `recommendations.actions` et `recommendations.by_family` sont les décisions du moteur : la partie 6 les reprend et les commente, elle ne les remplace pas.
 
+Ne recommande jamais de créer ou d'améliorer un llms.txt, un ai.txt ou tout fichier « pour les IA » : dans les logs réels, aucun bot IA ne les lit — `control_files` mesure qui les lit, c'est tout. Aucun conseil GEO qui ne soit pas étayé par un chiffre du rapport.
+
 Contraintes : pas de généralités sur "l'importance du SEO", pas de recommandation sans chiffre du rapport, signale ce que le rapport ne permet PAS de conclure. Si une section est vide ou absente, dis-le en une ligne et passe.
