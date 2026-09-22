@@ -1,7 +1,7 @@
 {
  "meta": {
   "version": "1.0.0",
-  "generated": "2026-09-22T17:08:05.257577+00:00",
+  "generated": "2026-09-22T17:09:40.351995+00:00",
   "source": "samples\\demo_access.log",
   "format": "combined",
   "signatures_updated": "2026-09-17",
@@ -30,77 +30,77 @@
   }
  },
  "overview": {
-  "hits": 124499,
+  "hits": 123525,
   "unparsed_lines": 0,
   "period_start": "2026-08-10T00:26:55+00:00",
-  "period_end": "2026-08-24T00:48:58+00:00",
+  "period_end": "2026-08-24T00:49:44+00:00",
   "days": 14.02,
   "unique_ips": 427,
-  "unique_urls": 413,
-  "bot_share": 0.1758,
-  "ai_share": 0.0885,
+  "unique_urls": 404,
+  "bot_share": 0.1693,
+  "ai_share": 0.0811,
   "self_traffic_hits": 0,
   "by_category": {
-   "human": 102607,
-   "ai_training": 8516,
-   "search_engine": 8023,
-   "seo_tool": 1898,
-   "ai_search": 1541,
-   "ai_user_fetch": 936,
-   "scraper": 416,
-   "other_bot": 333,
-   "social_preview": 201,
-   "ai_agent": 28
+   "human": 102618,
+   "search_engine": 8134,
+   "ai_training": 7641,
+   "seo_tool": 1795,
+   "ai_search": 1445,
+   "ai_user_fetch": 903,
+   "scraper": 415,
+   "other_bot": 349,
+   "social_preview": 200,
+   "ai_agent": 25
   },
   "by_category_html": {
-   "human": 27007,
-   "ai_training": 8188,
-   "search_engine": 7285,
-   "seo_tool": 1898,
-   "ai_search": 1526,
-   "ai_user_fetch": 936,
-   "scraper": 360,
-   "other_bot": 322,
-   "social_preview": 201,
-   "ai_agent": 28
+   "human": 27018,
+   "search_engine": 7410,
+   "ai_training": 7337,
+   "seo_tool": 1795,
+   "ai_search": 1430,
+   "ai_user_fetch": 903,
+   "scraper": 359,
+   "other_bot": 336,
+   "social_preview": 200,
+   "ai_agent": 25
   },
   "by_operator": {
-   "Google": 7017,
-   "OpenAI": 3395,
-   "ByteDance": 2464,
-   "Anthropic": 2385,
-   "Ahrefs": 1215,
-   "Microsoft": 1034,
-   "Meta": 974,
-   "Perplexity": 741,
-   "Semrush": 683,
-   "inconnu": 679,
-   "Common Crawl": 531,
-   "Amazon": 417,
-   "Mistral AI": 209,
-   "LinkedIn": 78,
+   "Google": 7089,
+   "ByteDance": 2598,
+   "OpenAI": 2350,
+   "Anthropic": 2274,
+   "Ahrefs": 1157,
+   "Microsoft": 1070,
+   "Meta": 943,
+   "Perplexity": 757,
+   "inconnu": 694,
+   "Semrush": 638,
+   "Common Crawl": 563,
+   "Amazon": 423,
+   "Mistral AI": 210,
+   "LinkedIn": 71,
    "inconnu (scanner)": 70
   },
   "bytes_by_category": {
-   "ai_agent": 1.0,
-   "ai_search": 53.9,
-   "ai_training": 292.0,
-   "ai_user_fetch": 32.4,
-   "human": 2463.2,
-   "other_bot": 11.3,
-   "scraper": 14.2,
-   "search_engine": 265.7,
-   "seo_tool": 65.9,
+   "ai_agent": 0.8,
+   "ai_search": 50.4,
+   "ai_training": 262.3,
+   "ai_user_fetch": 31.3,
+   "human": 2463.5,
+   "other_bot": 11.9,
+   "scraper": 14.3,
+   "search_engine": 270.5,
+   "seo_tool": 62.1,
    "social_preview": 7.3
   },
   "resources": {
-   "html": 47751,
-   "image": 30714,
-   "css": 15311,
-   "font": 15252,
-   "js": 15135,
-   "admin": 260,
-   "robots": 42,
+   "html": 46813,
+   "image": 30699,
+   "css": 15306,
+   "font": 15275,
+   "js": 15106,
+   "admin": 246,
+   "robots": 46,
    "sitemap": 14,
    "other": 14,
    "txt": 6
@@ -159,7 +159,7 @@
  },
  "probes": {
   "probe_hits": 56,
-  "probe_share": 0.0004,
+  "probe_share": 0.0005,
   "top_probe_paths": {
    "/xmlrpc.php": 14,
    "/wp-login.php": 14,
@@ -195,18 +195,18 @@
    "family": "Googlebot Smartphone",
    "operator": "Google",
    "category": "search_engine",
-   "hits": 6611,
-   "hits_per_day": 471.7,
-   "html_hits": 6088,
-   "unique_urls": 405,
+   "hits": 6686,
+   "hits_per_day": 477.0,
+   "html_hits": 6177,
+   "unique_urls": 396,
    "unique_ips": 7,
-   "ips_verified": 6004,
-   "ips_spoofed": 607,
-   "spoofed_share": 0.092,
-   "bytes_mb": 219.32,
-   "s2xx": 5730,
-   "s3xx": 274,
-   "s404": 571,
+   "ips_verified": 6081,
+   "ips_spoofed": 605,
+   "spoofed_share": 0.09,
+   "bytes_mb": 222.61,
+   "s2xx": 5796,
+   "s3xx": 276,
+   "s404": 578,
    "s4xx_other": 0,
    "s5xx": 36,
    "error_rate": 0.092,
@@ -216,124 +216,81 @@
    "median_gap_s": 5.0,
    "avg_depth": 2.04,
    "max_depth": 3,
-   "with_query_share": 0.112,
-   "static_share": 0.075,
-   "avg_response_time": 0.492,
+   "with_query_share": 0.111,
+   "static_share": 0.072,
+   "avg_response_time": 0.489,
    "first_seen": "2026-08-10T00:26:55+00:00",
-   "last_seen": "2026-08-23T23:40:54+00:00",
+   "last_seen": "2026-08-23T23:40:00+00:00",
    "top_paths": {
-    "/guides/article-1-isolation-thermique": 157,
-    "/guides/article-6-aides-maprimerenov": 151,
-    "/guides/article-3-panneaux-solaires": 143,
-    "/guides/article-5-dpe-classe-g": 137,
-    "/comparatifs/article-4-renovation-energetique": 134,
-    "/blog/article-4-renovation-energetique": 126,
-    "/guides/article-8-fenetres-double-vitrage": 125,
-    "/blog/article-5-dpe-classe-g": 125,
-    "/blog/article-12-toiture-ardoise": 124,
-    "/blog/article-6-aides-maprimerenov": 123
-   }
-  },
-  {
-   "family": "GPTBot",
-   "operator": "OpenAI",
-   "category": "ai_training",
-   "hits": 2540,
-   "hits_per_day": 181.2,
-   "html_hits": 2533,
-   "unique_urls": 67,
-   "unique_ips": 4,
-   "ips_verified": 2498,
-   "ips_spoofed": 42,
-   "spoofed_share": 0.017,
-   "bytes_mb": 87.3,
-   "s2xx": 2295,
-   "s3xx": 0,
-   "s404": 245,
-   "s4xx_other": 0,
-   "s5xx": 0,
-   "error_rate": 0.096,
-   "fetched_robots_txt": true,
-   "declared_respects_robots": true,
-   "max_hits_per_minute": 150,
-   "median_gap_s": 0.0,
-   "avg_depth": 2.0,
-   "max_depth": 2,
-   "with_query_share": 0.0,
-   "static_share": 0.0,
-   "avg_response_time": 0.492,
-   "first_seen": "2026-08-10T02:52:16+00:00",
-   "last_seen": "2026-08-23T23:01:15+00:00",
-   "top_paths": {
-    "/blog/tag-0": 55,
-    "/comparatifs/article-1-isolation-thermique": 54,
-    "/produits/article-4-renovation-energetique": 53,
-    "/guides/article-11-bardage-bois": 53,
-    "/guides/article-6-aides-maprimerenov": 53,
-    "/guides/article-5-dpe-classe-g": 51,
-    "/produits/article-8-fenetres-double-vitrage": 50,
-    "/guides/article-4-renovation-energetique": 49,
-    "/blog/tag-11": 48,
-    "/guides/article-12-toiture-ardoise": 48
+    "/guides/article-5-dpe-classe-g": 153,
+    "/guides/article-1-isolation-thermique": 145,
+    "/guides/article-3-panneaux-solaires": 141,
+    "/guides/article-6-aides-maprimerenov": 139,
+    "/guides/article-4-renovation-energetique": 136,
+    "/produits/article-10-poele-a-granules": 132,
+    "/comparatifs/article-4-renovation-energetique": 131,
+    "/comparatifs/article-3-panneaux-solaires": 131,
+    "/produits/article-12-toiture-ardoise": 129,
+    "/guides/article-8-fenetres-double-vitrage": 128
    }
   },
   {
    "family": "Bytespider",
    "operator": "ByteDance",
    "category": "ai_training",
-   "hits": 2464,
-   "hits_per_day": 175.8,
-   "html_hits": 2193,
+   "hits": 2598,
+   "hits_per_day": 185.4,
+   "html_hits": 2347,
    "unique_urls": 50,
-   "unique_ips": 399,
+   "unique_ips": 400,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 83.77,
-   "s2xx": 2234,
+   "bytes_mb": 88.52,
+   "s2xx": 1306,
    "s3xx": 0,
    "s404": 0,
-   "s4xx_other": 230,
+   "s4xx_other": 1292,
    "s5xx": 0,
-   "error_rate": 0.093,
+   "error_rate": 0.497,
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 3,
-   "median_gap_s": 329.0,
-   "avg_depth": 1.91,
+   "median_gap_s": 317.0,
+   "avg_depth": 1.92,
    "max_depth": 2,
    "with_query_share": 0.0,
-   "static_share": 0.022,
-   "avg_response_time": 0.485,
+   "static_share": 0.018,
+   "avg_response_time": 0.488,
    "first_seen": "2026-08-10T00:32:36+00:00",
-   "last_seen": "2026-08-23T23:53:52+00:00",
+   "last_seen": "2026-08-24T00:24:48+00:00",
    "top_paths": {
-    "/guides/article-3-panneaux-solaires": 59,
-    "/produits/article-4-renovation-energetique": 57,
-    "/guides/article-8-fenetres-double-vitrage": 55,
-    "/comparatifs/article-3-panneaux-solaires": 54,
-    "/produits/article-3-panneaux-solaires": 54,
-    "/produits/article-2-pompe-a-chaleur": 54,
-    "/comparatifs/article-5-dpe-classe-g": 53,
-    "/comparatifs/article-9-vmc-double-flux": 51,
-    "/produits/article-6-aides-maprimerenov": 51,
-    "/blog/article-4-renovation-energetique": 49
+    "/comparatifs/article-9-vmc-double-flux": 63,
+    "/guides/article-8-fenetres-double-vitrage": 62,
+    "/guides/article-4-renovation-energetique": 61,
+    "/comparatifs/article-1-isolation-thermique": 61,
+    "/comparatifs/article-5-dpe-classe-g": 60,
+    "/comparatifs/article-3-panneaux-solaires": 58,
+    "/comparatifs/article-11-bardage-bois": 57,
+    "/produits/article-4-renovation-energetique": 56,
+    "/comparatifs/article-10-poele-a-granules": 55,
+    "/produits/article-10-poele-a-granules": 55
    }
   },
   {
    "family": "ClaudeBot",
    "operator": "Anthropic",
    "category": "ai_training",
-   "hits": 1713,
-   "hits_per_day": 122.2,
-   "html_hits": 1706,
+   "hits": 1701,
+   "hits_per_day": 121.4,
+   "html_hits": 1694,
    "unique_urls": 44,
    "unique_ips": 2,
-   "ips_verified": 1713,
+   "ips_verified": 1701,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 59.64,
-   "s2xx": 1713,
+   "bytes_mb": 58.66,
+   "s2xx": 1701,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -342,41 +299,84 @@
    "fetched_robots_txt": true,
    "declared_respects_robots": true,
    "max_hits_per_minute": 3,
-   "median_gap_s": 504.0,
+   "median_gap_s": 519.5,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.484,
+   "avg_response_time": 0.491,
    "first_seen": "2026-08-10T00:27:56+00:00",
-   "last_seen": "2026-08-24T00:23:22+00:00",
+   "last_seen": "2026-08-24T00:25:32+00:00",
    "top_paths": {
-    "/produits/article-10-poele-a-granules": 53,
-    "/guides/article-2-pompe-a-chaleur": 53,
-    "/comparatifs/article-6-aides-maprimerenov": 49,
-    "/blog/article-10-poele-a-granules": 49,
-    "/blog/article-9-vmc-double-flux": 49,
-    "/guides/article-11-bardage-bois": 49,
-    "/produits/article-6-aides-maprimerenov": 47,
+    "/blog/article-10-poele-a-granules": 53,
+    "/produits/article-9-vmc-double-flux": 48,
+    "/guides/article-1-isolation-thermique": 48,
+    "/produits/article-6-aides-maprimerenov": 48,
     "/guides/article-5-dpe-classe-g": 46,
-    "/produits/article-1-isolation-thermique": 45,
-    "/blog/article-7-chaudiere-gaz": 45
+    "/blog/article-8-fenetres-double-vitrage": 46,
+    "/produits/article-10-poele-a-granules": 45,
+    "/comparatifs/article-4-renovation-energetique": 45,
+    "/comparatifs/article-6-aides-maprimerenov": 45,
+    "/produits/article-1-isolation-thermique": 44
+   }
+  },
+  {
+   "family": "GPTBot",
+   "operator": "OpenAI",
+   "category": "ai_training",
+   "hits": 1542,
+   "hits_per_day": 110.0,
+   "html_hits": 1531,
+   "unique_urls": 68,
+   "unique_ips": 4,
+   "ips_verified": 1500,
+   "ips_spoofed": 42,
+   "spoofed_share": 0.027,
+   "bytes_mb": 52.88,
+   "s2xx": 1384,
+   "s3xx": 0,
+   "s404": 158,
+   "s4xx_other": 0,
+   "s5xx": 0,
+   "error_rate": 0.102,
+   "fetched_robots_txt": true,
+   "declared_respects_robots": true,
+   "max_hits_per_minute": 150,
+   "median_gap_s": 0.0,
+   "avg_depth": 1.99,
+   "max_depth": 2,
+   "with_query_share": 0.0,
+   "static_share": 0.0,
+   "avg_response_time": 0.487,
+   "first_seen": "2026-08-10T02:52:16+00:00",
+   "last_seen": "2026-08-23T19:05:32+00:00",
+   "top_paths": {
+    "/produits/article-8-fenetres-double-vitrage": 39,
+    "/blog/tag-0": 37,
+    "/guides/article-11-bardage-bois": 36,
+    "/guides/article-6-aides-maprimerenov": 35,
+    "/produits/article-4-renovation-energetique": 33,
+    "/comparatifs/article-1-isolation-thermique": 33,
+    "/guides/article-12-toiture-ardoise": 33,
+    "/blog/tag-1": 31,
+    "/comparatifs/article-2-pompe-a-chaleur": 31,
+    "/produits/article-1-isolation-thermique": 31
    }
   },
   {
    "family": "AhrefsBot",
    "operator": "Ahrefs",
    "category": "seo_tool",
-   "hits": 1215,
-   "hits_per_day": 86.7,
-   "html_hits": 1215,
+   "hits": 1157,
+   "hits_per_day": 82.5,
+   "html_hits": 1157,
    "unique_urls": 48,
-   "unique_ips": 381,
+   "unique_ips": 370,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 42.03,
-   "s2xx": 1215,
+   "bytes_mb": 39.99,
+   "s2xx": 1157,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -385,41 +385,41 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 709.5,
+   "median_gap_s": 692.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.48,
+   "avg_response_time": 0.474,
    "first_seen": "2026-08-10T00:39:44+00:00",
-   "last_seen": "2026-08-24T00:03:34+00:00",
+   "last_seen": "2026-08-24T00:16:43+00:00",
    "top_paths": {
-    "/blog/article-3-panneaux-solaires": 39,
-    "/produits/article-4-renovation-energetique": 35,
-    "/guides/article-12-toiture-ardoise": 34,
-    "/blog/article-11-bardage-bois": 34,
-    "/guides/article-9-vmc-double-flux": 34,
-    "/blog/article-5-dpe-classe-g": 34,
-    "/blog/article-7-chaudiere-gaz": 32,
-    "/guides/article-10-poele-a-granules": 31,
-    "/comparatifs/article-5-dpe-classe-g": 31,
-    "/produits/article-2-pompe-a-chaleur": 30
+    "/guides/article-9-vmc-double-flux": 38,
+    "/blog/article-7-chaudiere-gaz": 33,
+    "/blog/article-3-panneaux-solaires": 32,
+    "/guides/article-4-renovation-energetique": 31,
+    "/produits/article-4-renovation-energetique": 30,
+    "/produits/article-9-vmc-double-flux": 30,
+    "/comparatifs/article-4-renovation-energetique": 29,
+    "/guides/article-10-poele-a-granules": 28,
+    "/comparatifs/article-8-fenetres-double-vitrage": 28,
+    "/comparatifs/article-3-panneaux-solaires": 28
    }
   },
   {
    "family": "Bingbot",
    "operator": "Microsoft",
    "category": "search_engine",
-   "hits": 1034,
-   "hits_per_day": 73.8,
-   "html_hits": 1029,
+   "hits": 1070,
+   "hits_per_day": 76.3,
+   "html_hits": 1065,
    "unique_urls": 49,
    "unique_ips": 2,
-   "ips_verified": 1034,
+   "ips_verified": 1070,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 36.14,
-   "s2xx": 1034,
+   "bytes_mb": 37.71,
+   "s2xx": 1070,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -428,84 +428,84 @@
    "fetched_robots_txt": true,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 759.0,
+   "median_gap_s": 757.0,
    "avg_depth": 2.0,
    "max_depth": 2,
-   "with_query_share": 0.058,
+   "with_query_share": 0.063,
    "static_share": 0.0,
-   "avg_response_time": 0.484,
+   "avg_response_time": 0.487,
    "first_seen": "2026-08-10T01:07:24+00:00",
-   "last_seen": "2026-08-24T00:19:42+00:00",
+   "last_seen": "2026-08-24T00:00:50+00:00",
    "top_paths": {
-    "/guides/article-4-renovation-energetique": 41,
-    "/guides/article-3-panneaux-solaires": 34,
-    "/blog/article-6-aides-maprimerenov": 31,
-    "/produits/article-2-pompe-a-chaleur": 30,
-    "/guides/article-1-isolation-thermique": 29,
-    "/produits/article-8-fenetres-double-vitrage": 28,
-    "/comparatifs/article-7-chaudiere-gaz": 28,
-    "/comparatifs/article-6-aides-maprimerenov": 27,
-    "/blog/article-4-renovation-energetique": 25,
-    "/produits/article-7-chaudiere-gaz": 24
+    "/guides/article-4-renovation-energetique": 44,
+    "/guides/article-3-panneaux-solaires": 36,
+    "/guides/article-1-isolation-thermique": 33,
+    "/produits/article-8-fenetres-double-vitrage": 32,
+    "/blog/article-4-renovation-energetique": 32,
+    "/produits/article-12-toiture-ardoise": 32,
+    "/blog/article-6-aides-maprimerenov": 29,
+    "/produits/article-10-poele-a-granules": 29,
+    "/blog/article-5-dpe-classe-g": 28,
+    "/blog/article-12-toiture-ardoise": 27
    }
   },
   {
    "family": "Meta-ExternalAgent",
    "operator": "Meta",
    "category": "ai_training",
-   "hits": 851,
-   "hits_per_day": 60.7,
-   "html_hits": 828,
+   "hits": 814,
+   "hits_per_day": 58.1,
+   "html_hits": 795,
    "unique_urls": 49,
-   "unique_ips": 350,
+   "unique_ips": 352,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 29.43,
-   "s2xx": 809,
+   "bytes_mb": 28.55,
+   "s2xx": 773,
    "s3xx": 0,
    "s404": 0,
-   "s4xx_other": 42,
+   "s4xx_other": 41,
    "s5xx": 0,
-   "error_rate": 0.049,
+   "error_rate": 0.05,
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 1008.5,
+   "median_gap_s": 1075.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
-   "static_share": 0.027,
-   "avg_response_time": 0.496,
+   "static_share": 0.023,
+   "avg_response_time": 0.497,
    "first_seen": "2026-08-10T00:41:00+00:00",
-   "last_seen": "2026-08-23T23:56:12+00:00",
+   "last_seen": "2026-08-24T00:49:07+00:00",
    "top_paths": {
-    "/produits/article-8-fenetres-double-vitrage": 22,
-    "/produits/article-3-panneaux-solaires": 22,
-    "/comparatifs/article-4-renovation-energetique": 22,
-    "/guides/article-6-aides-maprimerenov": 22,
-    "/produits/article-5-dpe-classe-g": 21,
-    "/produits/article-7-chaudiere-gaz": 21,
-    "/comparatifs/article-5-dpe-classe-g": 21,
+    "/blog/article-11-bardage-bois": 23,
+    "/comparatifs/article-5-dpe-classe-g": 23,
     "/comparatifs/article-11-bardage-bois": 21,
-    "/comparatifs/article-9-vmc-double-flux": 21,
-    "/guides/article-1-isolation-thermique": 21
+    "/comparatifs/article-4-renovation-energetique": 21,
+    "/blog/article-12-toiture-ardoise": 20,
+    "/guides/article-3-panneaux-solaires": 20,
+    "/comparatifs/article-3-panneaux-solaires": 20,
+    "/blog/article-5-dpe-classe-g": 20,
+    "/blog/article-7-chaudiere-gaz": 19,
+    "/produits/article-7-chaudiere-gaz": 19
    }
   },
   {
    "family": "SemrushBot",
    "operator": "Semrush",
    "category": "seo_tool",
-   "hits": 683,
-   "hits_per_day": 48.7,
-   "html_hits": 683,
+   "hits": 638,
+   "hits_per_day": 45.5,
+   "html_hits": 638,
    "unique_urls": 48,
-   "unique_ips": 318,
+   "unique_ips": 324,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 23.84,
-   "s2xx": 683,
+   "bytes_mb": 22.12,
+   "s2xx": 638,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -514,24 +514,24 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 1195.0,
+   "median_gap_s": 1322.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.502,
+   "avg_response_time": 0.492,
    "first_seen": "2026-08-10T00:32:14+00:00",
-   "last_seen": "2026-08-24T00:32:58+00:00",
+   "last_seen": "2026-08-23T23:59:08+00:00",
    "top_paths": {
-    "/blog/article-2-pompe-a-chaleur": 26,
-    "/blog/article-8-fenetres-double-vitrage": 21,
     "/comparatifs/article-9-vmc-double-flux": 21,
-    "/comparatifs/article-7-chaudiere-gaz": 20,
-    "/produits/article-2-pompe-a-chaleur": 19,
-    "/produits/article-12-toiture-ardoise": 19,
-    "/comparatifs/article-3-panneaux-solaires": 19,
-    "/produits/article-6-aides-maprimerenov": 18,
-    "/comparatifs/article-12-toiture-ardoise": 18,
+    "/blog/article-2-pompe-a-chaleur": 20,
+    "/comparatifs/article-3-panneaux-solaires": 20,
+    "/blog/article-11-bardage-bois": 19,
+    "/blog/article-10-poele-a-granules": 19,
+    "/guides/article-10-poele-a-granules": 18,
+    "/blog/article-8-fenetres-double-vitrage": 18,
+    "/guides/article-2-pompe-a-chaleur": 18,
+    "/produits/article-8-fenetres-double-vitrage": 18,
     "/guides/article-3-panneaux-solaires": 17
    }
   },
@@ -539,16 +539,16 @@
    "family": "OAI-SearchBot",
    "operator": "OpenAI",
    "category": "ai_search",
-   "hits": 605,
-   "hits_per_day": 43.2,
-   "html_hits": 598,
+   "hits": 565,
+   "hits_per_day": 40.3,
+   "html_hits": 558,
    "unique_urls": 44,
    "unique_ips": 3,
-   "ips_verified": 605,
+   "ips_verified": 565,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 21.06,
-   "s2xx": 602,
+   "bytes_mb": 20.08,
+   "s2xx": 562,
    "s3xx": 0,
    "s404": 3,
    "s4xx_other": 0,
@@ -557,84 +557,84 @@
    "fetched_robots_txt": true,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 1503.5,
+   "median_gap_s": 1507.0,
    "avg_depth": 1.99,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.505,
+   "avg_response_time": 0.502,
    "first_seen": "2026-08-10T00:41:33+00:00",
-   "last_seen": "2026-08-24T00:48:58+00:00",
+   "last_seen": "2026-08-24T00:17:35+00:00",
    "top_paths": {
-    "/produits/article-1-isolation-thermique": 21,
-    "/guides/article-3-panneaux-solaires": 20,
-    "/produits/article-10-poele-a-granules": 20,
-    "/produits/article-5-dpe-classe-g": 19,
-    "/blog/article-12-toiture-ardoise": 19,
-    "/produits/article-3-panneaux-solaires": 17,
-    "/blog/article-9-vmc-double-flux": 17,
-    "/comparatifs/article-6-aides-maprimerenov": 17,
-    "/guides/article-1-isolation-thermique": 17,
-    "/blog/article-3-panneaux-solaires": 17
+    "/produits/article-10-poele-a-granules": 24,
+    "/produits/article-1-isolation-thermique": 22,
+    "/guides/article-4-renovation-energetique": 20,
+    "/blog/article-9-vmc-double-flux": 19,
+    "/produits/article-9-vmc-double-flux": 19,
+    "/comparatifs/article-6-aides-maprimerenov": 18,
+    "/comparatifs/article-4-renovation-energetique": 18,
+    "/blog/article-5-dpe-classe-g": 18,
+    "/guides/article-12-toiture-ardoise": 18,
+    "/guides/article-6-aides-maprimerenov": 16
    }
   },
   {
    "family": "CCBot",
    "operator": "Common Crawl",
    "category": "ai_training",
-   "hits": 531,
-   "hits_per_day": 37.9,
-   "html_hits": 519,
+   "hits": 563,
+   "hits_per_day": 40.2,
+   "html_hits": 551,
    "unique_urls": 49,
-   "unique_ips": 282,
+   "unique_ips": 298,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 17.51,
-   "s2xx": 509,
+   "bytes_mb": 18.89,
+   "s2xx": 538,
    "s3xx": 0,
    "s404": 0,
-   "s4xx_other": 22,
+   "s4xx_other": 25,
    "s5xx": 0,
-   "error_rate": 0.041,
+   "error_rate": 0.044,
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 1551.0,
+   "median_gap_s": 1392.5,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
-   "static_share": 0.023,
+   "static_share": 0.021,
    "avg_response_time": 0.487,
    "first_seen": "2026-08-10T00:34:53+00:00",
-   "last_seen": "2026-08-24T00:16:18+00:00",
+   "last_seen": "2026-08-23T23:08:04+00:00",
    "top_paths": {
-    "/produits/article-10-poele-a-granules": 16,
-    "/comparatifs/article-9-vmc-double-flux": 16,
-    "/comparatifs/article-1-isolation-thermique": 16,
-    "/produits/article-4-renovation-energetique": 15,
-    "/comparatifs/article-2-pompe-a-chaleur": 14,
-    "/guides/article-4-renovation-energetique": 14,
-    "/guides/article-7-chaudiere-gaz": 14,
-    "/produits/article-9-vmc-double-flux": 14,
-    "/blog/article-9-vmc-double-flux": 13,
-    "/guides/article-2-pompe-a-chaleur": 13
+    "/comparatifs/article-1-isolation-thermique": 18,
+    "/produits/article-8-fenetres-double-vitrage": 17,
+    "/blog/article-9-vmc-double-flux": 16,
+    "/blog/article-1-isolation-thermique": 16,
+    "/guides/article-4-renovation-energetique": 16,
+    "/guides/article-3-panneaux-solaires": 16,
+    "/guides/article-2-pompe-a-chaleur": 15,
+    "/guides/article-12-toiture-ardoise": 15,
+    "/blog/article-12-toiture-ardoise": 15,
+    "/guides/article-6-aides-maprimerenov": 15
    }
   },
   {
    "family": "PerplexityBot",
    "operator": "Perplexity",
    "category": "ai_search",
-   "hits": 506,
-   "hits_per_day": 36.1,
-   "html_hits": 502,
+   "hits": 493,
+   "hits_per_day": 35.2,
+   "html_hits": 489,
    "unique_urls": 43,
    "unique_ips": 2,
-   "ips_verified": 506,
+   "ips_verified": 493,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 17.54,
-   "s2xx": 506,
+   "bytes_mb": 16.95,
+   "s2xx": 493,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -643,213 +643,170 @@
    "fetched_robots_txt": true,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 1590.0,
+   "median_gap_s": 1708.0,
    "avg_depth": 1.99,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.498,
+   "avg_response_time": 0.487,
    "first_seen": "2026-08-10T01:18:26+00:00",
-   "last_seen": "2026-08-23T23:54:02+00:00",
+   "last_seen": "2026-08-24T00:31:21+00:00",
    "top_paths": {
-    "/produits/article-9-vmc-double-flux": 20,
-    "/blog/article-5-dpe-classe-g": 20,
-    "/comparatifs/article-5-dpe-classe-g": 19,
-    "/produits/article-8-fenetres-double-vitrage": 17,
-    "/guides/article-3-panneaux-solaires": 16,
-    "/produits/article-7-chaudiere-gaz": 16,
-    "/guides/article-2-pompe-a-chaleur": 15,
-    "/blog/article-10-poele-a-granules": 15,
-    "/blog/article-8-fenetres-double-vitrage": 15,
-    "/blog/article-9-vmc-double-flux": 14
-   }
-  },
-  {
-   "family": "Claude-SearchBot",
-   "operator": "Anthropic",
-   "category": "ai_search",
-   "hits": 430,
-   "hits_per_day": 30.7,
-   "html_hits": 426,
-   "unique_urls": 43,
-   "unique_ips": 2,
-   "ips_verified": 430,
-   "ips_spoofed": 0,
-   "spoofed_share": 0.0,
-   "bytes_mb": 15.27,
-   "s2xx": 430,
-   "s3xx": 0,
-   "s404": 0,
-   "s4xx_other": 0,
-   "s5xx": 0,
-   "error_rate": 0.0,
-   "fetched_robots_txt": true,
-   "declared_respects_robots": true,
-   "max_hits_per_minute": 2,
-   "median_gap_s": 2058.0,
-   "avg_depth": 1.99,
-   "max_depth": 2,
-   "with_query_share": 0.0,
-   "static_share": 0.0,
-   "avg_response_time": 0.485,
-   "first_seen": "2026-08-10T01:50:36+00:00",
-   "last_seen": "2026-08-23T23:54:52+00:00",
-   "top_paths": {
-    "/guides/article-3-panneaux-solaires": 19,
-    "/guides/article-12-toiture-ardoise": 16,
-    "/guides/article-9-vmc-double-flux": 15,
-    "/produits/article-9-vmc-double-flux": 15,
-    "/blog/article-9-vmc-double-flux": 14,
-    "/produits/article-1-isolation-thermique": 14,
-    "/guides/article-1-isolation-thermique": 13,
-    "/guides/article-2-pompe-a-chaleur": 13,
-    "/comparatifs/article-1-isolation-thermique": 12,
-    "/produits/article-2-pompe-a-chaleur": 12
+    "/blog/article-2-pompe-a-chaleur": 20,
+    "/comparatifs/article-5-dpe-classe-g": 18,
+    "/produits/article-9-vmc-double-flux": 18,
+    "/blog/article-5-dpe-classe-g": 18,
+    "/guides/article-3-panneaux-solaires": 17,
+    "/guides/article-5-dpe-classe-g": 17,
+    "/guides/article-8-fenetres-double-vitrage": 17,
+    "/produits/article-8-fenetres-double-vitrage": 16,
+    "/comparatifs/article-4-renovation-energetique": 15,
+    "/produits/article-2-pompe-a-chaleur": 14
    }
   },
   {
    "family": "Amazonbot",
    "operator": "Amazon",
    "category": "ai_training",
-   "hits": 417,
-   "hits_per_day": 29.8,
-   "html_hits": 409,
+   "hits": 423,
+   "hits_per_day": 30.2,
+   "html_hits": 419,
    "unique_urls": 49,
    "unique_ips": 2,
-   "ips_verified": 417,
+   "ips_verified": 423,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 14.31,
-   "s2xx": 390,
+   "bytes_mb": 14.84,
+   "s2xx": 395,
    "s3xx": 0,
    "s404": 0,
-   "s4xx_other": 27,
+   "s4xx_other": 28,
    "s5xx": 0,
-   "error_rate": 0.065,
+   "error_rate": 0.066,
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 2046.5,
+   "median_gap_s": 2030.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
-   "static_share": 0.019,
-   "avg_response_time": 0.49,
+   "static_share": 0.009,
+   "avg_response_time": 0.488,
    "first_seen": "2026-08-10T04:05:22+00:00",
-   "last_seen": "2026-08-24T00:11:01+00:00",
+   "last_seen": "2026-08-24T00:31:47+00:00",
    "top_paths": {
-    "/blog/article-12-toiture-ardoise": 16,
-    "/guides/article-11-bardage-bois": 15,
-    "/comparatifs/article-4-renovation-energetique": 15,
-    "/comparatifs/article-3-panneaux-solaires": 14,
-    "/comparatifs/article-1-isolation-thermique": 13,
-    "/guides/article-7-chaudiere-gaz": 12,
-    "/blog/article-1-isolation-thermique": 12,
-    "/comparatifs/article-9-vmc-double-flux": 12,
-    "/guides/article-9-vmc-double-flux": 12,
-    "/guides/article-8-fenetres-double-vitrage": 11
+    "/blog/article-11-bardage-bois": 14,
+    "/guides/article-2-pompe-a-chaleur": 13,
+    "/guides/article-7-chaudiere-gaz": 13,
+    "/blog/article-12-toiture-ardoise": 13,
+    "/blog/article-8-fenetres-double-vitrage": 13,
+    "/produits/article-5-dpe-classe-g": 12,
+    "/guides/article-11-bardage-bois": 12,
+    "/comparatifs/article-4-renovation-energetique": 12,
+    "/comparatifs/article-1-isolation-thermique": 12,
+    "/guides/article-12-toiture-ardoise": 12
    }
   },
   {
-   "family": "Python HTTP lib",
-   "operator": "inconnu",
-   "category": "scraper",
-   "hits": 346,
-   "hits_per_day": 24.7,
-   "html_hits": 346,
-   "unique_urls": 48,
-   "unique_ips": 236,
-   "ips_verified": 0,
+   "family": "Claude-SearchBot",
+   "operator": "Anthropic",
+   "category": "ai_search",
+   "hits": 387,
+   "hits_per_day": 27.6,
+   "html_hits": 383,
+   "unique_urls": 43,
+   "unique_ips": 2,
+   "ips_verified": 387,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 11.87,
-   "s2xx": 346,
+   "bytes_mb": 13.39,
+   "s2xx": 387,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
    "s5xx": 0,
    "error_rate": 0.0,
-   "fetched_robots_txt": false,
+   "fetched_robots_txt": true,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 2287.0,
-   "avg_depth": 2.0,
+   "median_gap_s": 2119.0,
+   "avg_depth": 1.99,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.461,
-   "first_seen": "2026-08-10T01:07:16+00:00",
-   "last_seen": "2026-08-24T00:43:46+00:00",
+   "avg_response_time": 0.481,
+   "first_seen": "2026-08-10T01:50:36+00:00",
+   "last_seen": "2026-08-24T00:23:34+00:00",
    "top_paths": {
-    "/comparatifs/article-7-chaudiere-gaz": 12,
-    "/produits/article-5-dpe-classe-g": 12,
-    "/guides/article-2-pompe-a-chaleur": 12,
-    "/guides/article-1-isolation-thermique": 11,
-    "/guides/article-10-poele-a-granules": 11,
-    "/blog/article-9-vmc-double-flux": 10,
-    "/comparatifs/article-8-fenetres-double-vitrage": 10,
-    "/blog/article-7-chaudiere-gaz": 9,
-    "/produits/article-4-renovation-energetique": 9,
-    "/produits/article-2-pompe-a-chaleur": 9
+    "/produits/article-7-chaudiere-gaz": 17,
+    "/guides/article-3-panneaux-solaires": 16,
+    "/guides/article-12-toiture-ardoise": 14,
+    "/comparatifs/article-6-aides-maprimerenov": 13,
+    "/blog/article-9-vmc-double-flux": 13,
+    "/guides/article-9-vmc-double-flux": 13,
+    "/produits/article-9-vmc-double-flux": 13,
+    "/produits/article-10-poele-a-granules": 13,
+    "/blog/article-8-fenetres-double-vitrage": 13,
+    "/produits/article-2-pompe-a-chaleur": 12
    }
   },
   {
    "family": "Bot non identifié",
    "operator": "inconnu",
    "category": "other_bot",
-   "hits": 333,
-   "hits_per_day": 23.8,
-   "html_hits": 322,
+   "hits": 349,
+   "hits_per_day": 24.9,
+   "html_hits": 336,
    "unique_urls": 49,
-   "unique_ips": 223,
+   "unique_ips": 228,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 11.33,
-   "s2xx": 319,
+   "bytes_mb": 11.94,
+   "s2xx": 331,
    "s3xx": 0,
    "s404": 0,
-   "s4xx_other": 14,
+   "s4xx_other": 18,
    "s5xx": 0,
-   "error_rate": 0.042,
+   "error_rate": 0.052,
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 2597.0,
+   "median_gap_s": 2558.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
-   "static_share": 0.033,
-   "avg_response_time": 0.465,
+   "static_share": 0.037,
+   "avg_response_time": 0.485,
    "first_seen": "2026-08-10T01:09:33+00:00",
-   "last_seen": "2026-08-24T00:10:54+00:00",
+   "last_seen": "2026-08-23T23:10:20+00:00",
    "top_paths": {
-    "/blog/article-9-vmc-double-flux": 11,
-    "/blog/article-7-chaudiere-gaz": 10,
-    "/blog/article-8-fenetres-double-vitrage": 10,
-    "/guides/article-2-pompe-a-chaleur": 10,
-    "/guides/article-1-isolation-thermique": 10,
-    "/guides/article-3-panneaux-solaires": 9,
-    "/blog/article-4-renovation-energetique": 9,
-    "/produits/article-9-vmc-double-flux": 9,
-    "/comparatifs/article-5-dpe-classe-g": 9,
-    "/blog/article-5-dpe-classe-g": 9
+    "/blog/article-9-vmc-double-flux": 13,
+    "/guides/article-3-panneaux-solaires": 12,
+    "/produits/article-9-vmc-double-flux": 12,
+    "/guides/article-6-aides-maprimerenov": 11,
+    "/comparatifs/article-12-toiture-ardoise": 10,
+    "/blog/article-4-renovation-energetique": 10,
+    "/blog/article-2-pompe-a-chaleur": 10,
+    "/blog/article-5-dpe-classe-g": 10,
+    "/produits/article-2-pompe-a-chaleur": 10,
+    "/blog/article-8-fenetres-double-vitrage": 9
    }
   },
   {
-   "family": "ChatGPT-User",
-   "operator": "OpenAI",
-   "category": "ai_user_fetch",
-   "hits": 250,
-   "hits_per_day": 17.8,
-   "html_hits": 250,
-   "unique_urls": 10,
-   "unique_ips": 2,
-   "ips_verified": 250,
+   "family": "Python HTTP lib",
+   "operator": "inconnu",
+   "category": "scraper",
+   "hits": 345,
+   "hits_per_day": 24.6,
+   "html_hits": 345,
+   "unique_urls": 48,
+   "unique_ips": 225,
+   "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 9.1,
-   "s2xx": 250,
+   "bytes_mb": 11.86,
+   "s2xx": 345,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -858,84 +815,41 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 2137.0,
+   "median_gap_s": 2340.5,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.434,
-   "first_seen": "2026-08-10T10:44:38+00:00",
-   "last_seen": "2026-08-23T22:53:42+00:00",
+   "avg_response_time": 0.492,
+   "first_seen": "2026-08-10T01:07:16+00:00",
+   "last_seen": "2026-08-23T23:56:41+00:00",
    "top_paths": {
-    "/guides/article-4-renovation-energetique": 31,
-    "/guides/article-9-vmc-double-flux": 29,
-    "/guides/article-10-poele-a-granules": 26,
-    "/guides/article-6-aides-maprimerenov": 25,
-    "/guides/article-5-dpe-classe-g": 25,
-    "/guides/article-1-isolation-thermique": 25,
-    "/guides/article-7-chaudiere-gaz": 25,
-    "/guides/article-8-fenetres-double-vitrage": 25,
-    "/guides/article-3-panneaux-solaires": 24,
-    "/guides/article-2-pompe-a-chaleur": 15
-   }
-  },
-  {
-   "family": "Claude-User",
-   "operator": "Anthropic",
-   "category": "ai_user_fetch",
-   "hits": 242,
-   "hits_per_day": 17.3,
-   "html_hits": 242,
-   "unique_urls": 10,
-   "unique_ips": 2,
-   "ips_verified": 242,
-   "ips_spoofed": 0,
-   "spoofed_share": 0.0,
-   "bytes_mb": 8.36,
-   "s2xx": 242,
-   "s3xx": 0,
-   "s404": 0,
-   "s4xx_other": 0,
-   "s5xx": 0,
-   "error_rate": 0.0,
-   "fetched_robots_txt": false,
-   "declared_respects_robots": true,
-   "max_hits_per_minute": 2,
-   "median_gap_s": 1895.0,
-   "avg_depth": 2.0,
-   "max_depth": 2,
-   "with_query_share": 0.0,
-   "static_share": 0.0,
-   "avg_response_time": 0.48,
-   "first_seen": "2026-08-10T08:30:31+00:00",
-   "last_seen": "2026-08-23T22:57:11+00:00",
-   "top_paths": {
-    "/guides/article-1-isolation-thermique": 27,
-    "/guides/article-10-poele-a-granules": 26,
-    "/guides/article-5-dpe-classe-g": 26,
-    "/guides/article-4-renovation-energetique": 26,
-    "/guides/article-2-pompe-a-chaleur": 25,
-    "/guides/article-9-vmc-double-flux": 24,
-    "/guides/article-3-panneaux-solaires": 24,
-    "/guides/article-6-aides-maprimerenov": 23,
-    "/guides/article-7-chaudiere-gaz": 23,
-    "/guides/article-8-fenetres-double-vitrage": 18
+    "/produits/article-5-dpe-classe-g": 13,
+    "/produits/article-3-panneaux-solaires": 11,
+    "/guides/article-10-poele-a-granules": 11,
+    "/blog/article-12-toiture-ardoise": 11,
+    "/blog/article-5-dpe-classe-g": 10,
+    "/comparatifs/article-7-chaudiere-gaz": 10,
+    "/comparatifs/article-10-poele-a-granules": 10,
+    "/produits/article-10-poele-a-granules": 10,
+    "/guides/article-6-aides-maprimerenov": 10,
+    "/comparatifs/article-8-fenetres-double-vitrage": 9
    }
   },
   {
    "family": "Perplexity-User",
    "operator": "Perplexity",
    "category": "ai_user_fetch",
-   "hits": 235,
-   "hits_per_day": 16.8,
-   "html_hits": 235,
+   "hits": 264,
+   "hits_per_day": 18.8,
+   "html_hits": 264,
    "unique_urls": 10,
    "unique_ips": 2,
-   "ips_verified": 235,
+   "ips_verified": 264,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 7.92,
-   "s2xx": 235,
+   "bytes_mb": 9.29,
+   "s2xx": 264,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -944,25 +858,68 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 2300.5,
+   "median_gap_s": 2112.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.456,
+   "avg_response_time": 0.472,
    "first_seen": "2026-08-10T08:50:09+00:00",
-   "last_seen": "2026-08-23T21:32:49+00:00",
+   "last_seen": "2026-08-23T22:07:50+00:00",
    "top_paths": {
-    "/guides/article-6-aides-maprimerenov": 30,
-    "/guides/article-1-isolation-thermique": 26,
-    "/guides/article-9-vmc-double-flux": 26,
+    "/guides/article-4-renovation-energetique": 36,
+    "/guides/article-3-panneaux-solaires": 30,
+    "/guides/article-5-dpe-classe-g": 30,
+    "/guides/article-9-vmc-double-flux": 28,
+    "/guides/article-6-aides-maprimerenov": 28,
+    "/guides/article-1-isolation-thermique": 25,
     "/guides/article-10-poele-a-granules": 25,
-    "/guides/article-2-pompe-a-chaleur": 24,
-    "/guides/article-3-panneaux-solaires": 24,
-    "/guides/article-4-renovation-energetique": 24,
-    "/guides/article-7-chaudiere-gaz": 23,
-    "/guides/article-5-dpe-classe-g": 22,
-    "/guides/article-8-fenetres-double-vitrage": 11
+    "/guides/article-7-chaudiere-gaz": 21,
+    "/guides/article-8-fenetres-double-vitrage": 21,
+    "/guides/article-2-pompe-a-chaleur": 20
+   }
+  },
+  {
+   "family": "ChatGPT-User",
+   "operator": "OpenAI",
+   "category": "ai_user_fetch",
+   "hits": 243,
+   "hits_per_day": 17.3,
+   "html_hits": 243,
+   "unique_urls": 10,
+   "unique_ips": 2,
+   "ips_verified": 243,
+   "ips_spoofed": 0,
+   "spoofed_share": 0.0,
+   "bytes_mb": 8.36,
+   "s2xx": 243,
+   "s3xx": 0,
+   "s404": 0,
+   "s4xx_other": 0,
+   "s5xx": 0,
+   "error_rate": 0.0,
+   "fetched_robots_txt": false,
+   "declared_respects_robots": true,
+   "max_hits_per_minute": 2,
+   "median_gap_s": 2409.5,
+   "avg_depth": 2.0,
+   "max_depth": 2,
+   "with_query_share": 0.0,
+   "static_share": 0.0,
+   "avg_response_time": 0.478,
+   "first_seen": "2026-08-10T10:44:38+00:00",
+   "last_seen": "2026-08-23T22:23:58+00:00",
+   "top_paths": {
+    "/guides/article-3-panneaux-solaires": 28,
+    "/guides/article-1-isolation-thermique": 28,
+    "/guides/article-4-renovation-energetique": 28,
+    "/guides/article-8-fenetres-double-vitrage": 28,
+    "/guides/article-9-vmc-double-flux": 26,
+    "/guides/article-6-aides-maprimerenov": 24,
+    "/guides/article-10-poele-a-granules": 24,
+    "/guides/article-7-chaudiere-gaz": 21,
+    "/guides/article-5-dpe-classe-g": 19,
+    "/guides/article-2-pompe-a-chaleur": 17
    }
   },
   {
@@ -977,7 +934,7 @@
    "ips_verified": 210,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 4.36,
+   "bytes_mb": 4.3,
    "s2xx": 210,
    "s3xx": 0,
    "s404": 0,
@@ -987,30 +944,30 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 4100.0,
+   "median_gap_s": 4407.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 1.0,
-   "avg_response_time": 0.51,
+   "avg_response_time": 0.52,
    "first_seen": "2026-08-10T00:42:19+00:00",
-   "last_seen": "2026-08-23T19:07:19+00:00",
+   "last_seen": "2026-08-23T23:52:00+00:00",
    "top_paths": {}
   },
   {
    "family": "MistralAI-User",
    "operator": "Mistral AI",
    "category": "ai_user_fetch",
-   "hits": 209,
-   "hits_per_day": 14.9,
-   "html_hits": 209,
+   "hits": 210,
+   "hits_per_day": 15.0,
+   "html_hits": 210,
    "unique_urls": 10,
-   "unique_ips": 156,
+   "unique_ips": 159,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 7.06,
-   "s2xx": 209,
+   "bytes_mb": 6.98,
+   "s2xx": 210,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -1019,25 +976,68 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 1,
-   "median_gap_s": 2190.5,
+   "median_gap_s": 2030.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
    "avg_response_time": 0.477,
    "first_seen": "2026-08-10T08:31:07+00:00",
-   "last_seen": "2026-08-23T19:45:07+00:00",
+   "last_seen": "2026-08-23T21:58:45+00:00",
    "top_paths": {
-    "/guides/article-4-renovation-energetique": 26,
+    "/guides/article-3-panneaux-solaires": 30,
+    "/guides/article-5-dpe-classe-g": 26,
+    "/guides/article-10-poele-a-granules": 23,
+    "/guides/article-2-pompe-a-chaleur": 22,
+    "/guides/article-4-renovation-energetique": 22,
+    "/guides/article-1-isolation-thermique": 19,
+    "/guides/article-7-chaudiere-gaz": 19,
+    "/guides/article-8-fenetres-double-vitrage": 18,
+    "/guides/article-6-aides-maprimerenov": 18,
+    "/guides/article-9-vmc-double-flux": 13
+   }
+  },
+  {
+   "family": "Claude-User",
+   "operator": "Anthropic",
+   "category": "ai_user_fetch",
+   "hits": 186,
+   "hits_per_day": 13.3,
+   "html_hits": 186,
+   "unique_urls": 10,
+   "unique_ips": 2,
+   "ips_verified": 186,
+   "ips_spoofed": 0,
+   "spoofed_share": 0.0,
+   "bytes_mb": 6.7,
+   "s2xx": 186,
+   "s3xx": 0,
+   "s404": 0,
+   "s4xx_other": 0,
+   "s5xx": 0,
+   "error_rate": 0.0,
+   "fetched_robots_txt": false,
+   "declared_respects_robots": true,
+   "max_hits_per_minute": 2,
+   "median_gap_s": 2654.0,
+   "avg_depth": 2.0,
+   "max_depth": 2,
+   "with_query_share": 0.0,
+   "static_share": 0.0,
+   "avg_response_time": 0.508,
+   "first_seen": "2026-08-10T08:30:31+00:00",
+   "last_seen": "2026-08-23T19:14:58+00:00",
+   "top_paths": {
     "/guides/article-3-panneaux-solaires": 25,
-    "/guides/article-5-dpe-classe-g": 24,
-    "/guides/article-10-poele-a-granules": 24,
-    "/guides/article-8-fenetres-double-vitrage": 22,
-    "/guides/article-2-pompe-a-chaleur": 21,
-    "/guides/article-9-vmc-double-flux": 18,
-    "/guides/article-7-chaudiere-gaz": 17,
-    "/guides/article-6-aides-maprimerenov": 17,
-    "/guides/article-1-isolation-thermique": 15
+    "/guides/article-1-isolation-thermique": 23,
+    "/guides/article-4-renovation-energetique": 22,
+    "/guides/article-6-aides-maprimerenov": 20,
+    "/guides/article-8-fenetres-double-vitrage": 20,
+    "/guides/article-5-dpe-classe-g": 17,
+    "/guides/article-7-chaudiere-gaz": 16,
+    "/guides/article-2-pompe-a-chaleur": 15,
+    "/guides/article-9-vmc-double-flux": 14,
+    "/guides/article-10-poele-a-granules": 14
    }
   },
   {
@@ -1047,7 +1047,7 @@
    "hits": 168,
    "hits_per_day": 12.0,
    "html_hits": 168,
-   "unique_urls": 44,
+   "unique_urls": 46,
    "unique_ips": 4,
    "ips_verified": 168,
    "ips_spoofed": 0,
@@ -1062,41 +1062,41 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 4562.0,
+   "median_gap_s": 5438.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.517,
+   "avg_response_time": 0.493,
    "first_seen": "2026-08-10T01:29:01+00:00",
-   "last_seen": "2026-08-24T00:03:34+00:00",
+   "last_seen": "2026-08-23T21:50:56+00:00",
    "top_paths": {
-    "/comparatifs/article-11-bardage-bois": 9,
-    "/guides/article-4-renovation-energetique": 7,
-    "/blog/article-2-pompe-a-chaleur": 7,
-    "/blog/article-6-aides-maprimerenov": 6,
+    "/comparatifs/article-11-bardage-bois": 10,
+    "/blog/article-11-bardage-bois": 8,
+    "/blog/article-1-isolation-thermique": 7,
+    "/comparatifs/article-5-dpe-classe-g": 6,
     "/guides/article-9-vmc-double-flux": 6,
     "/produits/article-6-aides-maprimerenov": 6,
-    "/blog/article-7-chaudiere-gaz": 6,
-    "/blog/article-11-bardage-bois": 6,
-    "/guides/article-12-toiture-ardoise": 6,
-    "/comparatifs/article-12-toiture-ardoise": 5
+    "/blog/article-2-pompe-a-chaleur": 6,
+    "/blog/article-6-aides-maprimerenov": 5,
+    "/guides/article-10-poele-a-granules": 5,
+    "/guides/article-4-renovation-energetique": 5
    }
   },
   {
    "family": "facebookexternalhit",
    "operator": "Meta",
    "category": "social_preview",
-   "hits": 123,
-   "hits_per_day": 8.8,
-   "html_hits": 123,
-   "unique_urls": 43,
-   "unique_ips": 109,
+   "hits": 129,
+   "hits_per_day": 9.2,
+   "html_hits": 129,
+   "unique_urls": 45,
+   "unique_ips": 107,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 4.38,
-   "s2xx": 123,
+   "bytes_mb": 4.72,
+   "s2xx": 129,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -1105,41 +1105,41 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 1,
-   "median_gap_s": 7178.0,
+   "median_gap_s": 7599.5,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.511,
+   "avg_response_time": 0.518,
    "first_seen": "2026-08-10T01:09:59+00:00",
-   "last_seen": "2026-08-23T18:36:50+00:00",
+   "last_seen": "2026-08-24T00:49:44+00:00",
    "top_paths": {
-    "/produits/article-3-panneaux-solaires": 8,
-    "/blog/article-12-toiture-ardoise": 6,
+    "/blog/article-12-toiture-ardoise": 8,
+    "/produits/article-9-vmc-double-flux": 6,
+    "/produits/article-3-panneaux-solaires": 6,
+    "/produits/article-2-pompe-a-chaleur": 5,
+    "/guides/article-11-bardage-bois": 5,
     "/comparatifs/article-8-fenetres-double-vitrage": 5,
-    "/blog/article-4-renovation-energetique": 5,
-    "/blog/article-2-pompe-a-chaleur": 5,
-    "/produits/article-8-fenetres-double-vitrage": 5,
-    "/produits/article-9-vmc-double-flux": 4,
-    "/blog/article-10-poele-a-granules": 4,
-    "/blog/article-5-dpe-classe-g": 4,
-    "/comparatifs/article-10-poele-a-granules": 4
+    "/blog/article-10-poele-a-granules": 5,
+    "/comparatifs/article-10-poele-a-granules": 5,
+    "/comparatifs/article-7-chaudiere-gaz": 4,
+    "/comparatifs/article-1-isolation-thermique": 4
    }
   },
   {
    "family": "LinkedInBot",
    "operator": "LinkedIn",
    "category": "social_preview",
-   "hits": 78,
-   "hits_per_day": 5.6,
-   "html_hits": 78,
-   "unique_urls": 36,
-   "unique_ips": 71,
+   "hits": 71,
+   "hits_per_day": 5.1,
+   "html_hits": 71,
+   "unique_urls": 37,
+   "unique_ips": 62,
    "ips_verified": 0,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 2.97,
-   "s2xx": 78,
+   "bytes_mb": 2.62,
+   "s2xx": 71,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -1148,25 +1148,25 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 13132.0,
+   "median_gap_s": 11875.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.467,
+   "avg_response_time": 0.477,
    "first_seen": "2026-08-10T07:05:58+00:00",
-   "last_seen": "2026-08-23T22:36:59+00:00",
+   "last_seen": "2026-08-23T18:06:16+00:00",
    "top_paths": {
-    "/blog/article-6-aides-maprimerenov": 6,
-    "/produits/article-5-dpe-classe-g": 5,
-    "/guides/article-1-isolation-thermique": 4,
-    "/produits/article-9-vmc-double-flux": 4,
-    "/produits/article-11-bardage-bois": 3,
+    "/produits/article-12-toiture-ardoise": 5,
+    "/produits/article-5-dpe-classe-g": 3,
+    "/guides/article-1-isolation-thermique": 3,
+    "/blog/article-6-aides-maprimerenov": 3,
     "/blog/article-9-vmc-double-flux": 3,
-    "/blog/article-5-dpe-classe-g": 3,
-    "/produits/article-12-toiture-ardoise": 3,
-    "/comparatifs/article-4-renovation-energetique": 3,
-    "/guides/article-4-renovation-energetique": 3
+    "/guides/article-11-bardage-bois": 3,
+    "/guides/article-4-renovation-energetique": 3,
+    "/guides/article-5-dpe-classe-g": 3,
+    "/produits/article-4-renovation-energetique": 3,
+    "/produits/article-2-pompe-a-chaleur": 3
    }
   },
   {
@@ -1181,7 +1181,7 @@
    "ips_verified": 0,
    "ips_spoofed": 70,
    "spoofed_share": 1.0,
-   "bytes_mb": 2.38,
+   "bytes_mb": 2.46,
    "s2xx": 0,
    "s3xx": 0,
    "s404": 70,
@@ -1191,14 +1191,14 @@
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
    "max_hits_per_minute": 2,
-   "median_gap_s": 12601.0,
+   "median_gap_s": 14560.0,
    "avg_depth": 1.0,
    "max_depth": 1,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.488,
+   "avg_response_time": 0.426,
    "first_seen": "2026-08-10T05:28:27+00:00",
-   "last_seen": "2026-08-23T15:45:57+00:00",
+   "last_seen": "2026-08-23T23:51:14+00:00",
    "top_paths": {
     "/phpmyadmin/": 14
    }
@@ -1207,16 +1207,16 @@
    "family": "Google-Agent",
    "operator": "Google",
    "category": "ai_agent",
-   "hits": 28,
-   "hits_per_day": 2.0,
-   "html_hits": 28,
-   "unique_urls": 9,
+   "hits": 25,
+   "hits_per_day": 1.8,
+   "html_hits": 25,
+   "unique_urls": 10,
    "unique_ips": 4,
-   "ips_verified": 28,
+   "ips_verified": 25,
    "ips_spoofed": 0,
    "spoofed_share": 0.0,
-   "bytes_mb": 1.0,
-   "s2xx": 28,
+   "bytes_mb": 0.75,
+   "s2xx": 25,
    "s3xx": 0,
    "s404": 0,
    "s4xx_other": 0,
@@ -1224,50 +1224,51 @@
    "error_rate": 0.0,
    "fetched_robots_txt": false,
    "declared_respects_robots": true,
-   "max_hits_per_minute": 1,
-   "median_gap_s": 8732.0,
+   "max_hits_per_minute": 2,
+   "median_gap_s": 9423.0,
    "avg_depth": 2.0,
    "max_depth": 2,
    "with_query_share": 0.0,
    "static_share": 0.0,
-   "avg_response_time": 0.511,
-   "first_seen": "2026-08-18T12:35:47+00:00",
-   "last_seen": "2026-08-23T20:37:34+00:00",
+   "avg_response_time": 0.5,
+   "first_seen": "2026-08-18T16:56:07+00:00",
+   "last_seen": "2026-08-23T21:25:48+00:00",
    "top_paths": {
-    "/guides/article-3-panneaux-solaires": 5,
-    "/guides/article-6-aides-maprimerenov": 5,
-    "/guides/article-10-poele-a-granules": 4,
-    "/guides/article-8-fenetres-double-vitrage": 3,
+    "/guides/article-1-isolation-thermique": 4,
+    "/guides/article-9-vmc-double-flux": 3,
+    "/guides/article-10-poele-a-granules": 3,
     "/guides/article-7-chaudiere-gaz": 3,
-    "/guides/article-4-renovation-energetique": 3,
-    "/guides/article-9-vmc-double-flux": 2,
-    "/guides/article-5-dpe-classe-g": 2,
-    "/guides/article-1-isolation-thermique": 1
+    "/guides/article-6-aides-maprimerenov": 3,
+    "/guides/article-2-pompe-a-chaleur": 3,
+    "/guides/article-4-renovation-energetique": 2,
+    "/guides/article-3-panneaux-solaires": 2,
+    "/guides/article-5-dpe-classe-g": 1,
+    "/guides/article-8-fenetres-double-vitrage": 1
    }
   }
  ],
  "identity": {
   "summary": {
-   "verified": 14340,
-   "n/a": 5328,
-   "unverified": 1505,
-   "spoofed": 719
+   "verified": 13316,
+   "n/a": 5368,
+   "unverified": 1506,
+   "spoofed": 717
   },
   "spoofed_ips": [
    {
+    "ip": "45.155.204.3",
+    "family": "Googlebot Smartphone",
+    "hits": 219
+   },
+   {
     "ip": "185.220.101.7",
     "family": "Googlebot Smartphone",
-    "hits": 206
+    "hits": 197
    },
    {
     "ip": "91.203.5.44",
     "family": "Googlebot Smartphone",
-    "hits": 201
-   },
-   {
-    "ip": "45.155.204.3",
-    "family": "Googlebot Smartphone",
-    "hits": 200
+    "hits": 189
    },
    {
     "ip": "47.82.10.100",
@@ -1290,13 +1291,13 @@
  },
  "control_files": {
   "robots.txt": {
-   "hits": 42,
+   "hits": 46,
    "status": {
-    "200": 42
+    "200": 46
    },
    "by_family": {
     "Googlebot Smartphone": 14,
-    "GPTBot": 7,
+    "GPTBot": 11,
     "Bingbot": 5,
     "ClaudeBot": 4,
     "OAI-SearchBot": 4,
@@ -1424,537 +1425,537 @@
    },
    "2026-08-17": {
     "ai_agent": 0,
-    "ai_search": 120,
-    "ai_training": 385,
-    "ai_user_fetch": 75,
-    "human": 7327,
-    "other_bot": 16,
-    "scraper": 36,
+    "ai_search": 87,
+    "ai_training": 428,
+    "ai_user_fetch": 58,
+    "human": 7347,
+    "other_bot": 23,
+    "scraper": 21,
     "search_engine": 546,
-    "seo_tool": 175,
-    "social_preview": 21
+    "seo_tool": 114,
+    "social_preview": 16
    },
    "2026-08-18": {
-    "ai_agent": 5,
-    "ai_search": 118,
-    "ai_training": 842,
-    "ai_user_fetch": 83,
-    "human": 7323,
-    "other_bot": 17,
-    "scraper": 24,
-    "search_engine": 557,
-    "seo_tool": 135,
-    "social_preview": 12
+    "ai_agent": 4,
+    "ai_search": 82,
+    "ai_training": 453,
+    "ai_user_fetch": 76,
+    "human": 7331,
+    "other_bot": 27,
+    "scraper": 20,
+    "search_engine": 630,
+    "seo_tool": 123,
+    "social_preview": 11
    },
    "2026-08-19": {
-    "ai_agent": 3,
-    "ai_search": 114,
-    "ai_training": 425,
-    "ai_user_fetch": 71,
-    "human": 7323,
-    "other_bot": 27,
-    "scraper": 26,
-    "search_engine": 576,
-    "seo_tool": 143,
+    "ai_agent": 4,
+    "ai_search": 106,
+    "ai_training": 415,
+    "ai_user_fetch": 75,
+    "human": 7317,
+    "other_bot": 20,
+    "scraper": 35,
+    "search_engine": 652,
+    "seo_tool": 148,
     "social_preview": 18
    },
    "2026-08-20": {
-    "ai_agent": 7,
-    "ai_search": 96,
-    "ai_training": 860,
-    "ai_user_fetch": 58,
-    "human": 7344,
-    "other_bot": 26,
-    "scraper": 28,
-    "search_engine": 591,
-    "seo_tool": 124,
-    "social_preview": 9
-   },
-   "2026-08-21": {
     "ai_agent": 3,
-    "ai_search": 87,
-    "ai_training": 402,
-    "ai_user_fetch": 71,
-    "human": 7330,
-    "other_bot": 21,
-    "scraper": 26,
-    "search_engine": 604,
-    "seo_tool": 110,
+    "ai_search": 94,
+    "ai_training": 447,
+    "ai_user_fetch": 57,
+    "human": 7351,
+    "other_bot": 26,
+    "scraper": 20,
+    "search_engine": 575,
+    "seo_tool": 129,
     "social_preview": 13
    },
+   "2026-08-21": {
+    "ai_agent": 4,
+    "ai_search": 90,
+    "ai_training": 449,
+    "ai_user_fetch": 76,
+    "human": 7343,
+    "other_bot": 25,
+    "scraper": 38,
+    "search_engine": 596,
+    "seo_tool": 165,
+    "social_preview": 15
+   },
    "2026-08-22": {
-    "ai_agent": 3,
-    "ai_search": 106,
-    "ai_training": 648,
-    "ai_user_fetch": 70,
-    "human": 7338,
-    "other_bot": 30,
-    "scraper": 23,
-    "search_engine": 588,
-    "seo_tool": 102,
-    "social_preview": 11
+    "ai_agent": 4,
+    "ai_search": 96,
+    "ai_training": 472,
+    "ai_user_fetch": 76,
+    "human": 7299,
+    "other_bot": 29,
+    "scraper": 33,
+    "search_engine": 573,
+    "seo_tool": 81,
+    "social_preview": 12
    },
    "2026-08-23": {
-    "ai_agent": 7,
-    "ai_search": 110,
-    "ai_training": 444,
-    "ai_user_fetch": 80,
-    "human": 7291,
-    "other_bot": 19,
-    "scraper": 39,
-    "search_engine": 576,
-    "seo_tool": 174,
-    "social_preview": 15
+    "ai_agent": 6,
+    "ai_search": 97,
+    "ai_training": 463,
+    "ai_user_fetch": 57,
+    "human": 7299,
+    "other_bot": 23,
+    "scraper": 36,
+    "search_engine": 579,
+    "seo_tool": 104,
+    "social_preview": 11
    },
    "2026-08-24": {
     "ai_agent": 0,
-    "ai_search": 2,
-    "ai_training": 4,
+    "ai_search": 5,
+    "ai_training": 8,
     "ai_user_fetch": 0,
     "human": 0,
-    "other_bot": 1,
-    "scraper": 2,
-    "search_engine": 3,
-    "seo_tool": 7,
-    "social_preview": 0
+    "other_bot": 0,
+    "scraper": 0,
+    "search_engine": 1,
+    "seo_tool": 3,
+    "social_preview": 2
    }
   },
   "hourly_by_family": {
    "AhrefsBot": [
     54,
+    47,
+    46,
     50,
-    50,
-    44,
     49,
-    56,
-    42,
-    50,
-    55,
     46,
-    52,
-    48,
-    54,
+    39,
+    50,
+    49,
     44,
-    46,
-    58,
-    42,
-    62,
-    48,
-    62,
-    51,
-    63,
-    48,
-    41
-   ],
-   "Amazonbot": [
-    14,
-    12,
-    9,
-    17,
-    24,
-    22,
-    15,
-    21,
-    13,
-    14,
-    15,
-    23,
-    19,
-    30,
-    17,
-    16,
-    21,
-    14,
-    26,
-    13,
-    13,
-    17,
-    16,
-    16
-   ],
-   "Bingbot": [
-    39,
-    53,
-    53,
-    48,
-    40,
-    29,
-    39,
-    31,
-    51,
-    45,
-    38,
-    42,
+    47,
     54,
-    39,
-    36,
-    38,
-    39,
-    39,
+    56,
+    47,
+    53,
     45,
-    57,
-    39,
-    45,
-    50,
+    51,
+    54,
+    43,
+    55,
+    44,
+    48,
+    41,
     45
    ],
-   "Bot non identifié": [
-    15,
-    15,
-    10,
-    12,
-    10,
-    13,
-    8,
-    20,
-    12,
-    12,
-    15,
+   "Amazonbot": [
     19,
-    15,
-    12,
+    9,
     16,
+    19,
+    27,
+    19,
+    13,
+    13,
+    19,
+    19,
+    21,
+    19,
+    17,
+    22,
     15,
-    12,
-    15,
-    15,
-    12,
-    11,
-    12,
+    18,
     24,
+    12,
+    18,
+    15,
+    16,
+    20,
+    14,
+    19
+   ],
+   "Bingbot": [
+    43,
+    47,
+    52,
+    46,
+    43,
+    46,
+    42,
+    34,
+    48,
+    48,
+    41,
+    42,
+    42,
+    30,
+    42,
+    45,
+    35,
+    45,
+    52,
+    50,
+    43,
+    57,
+    51,
+    46
+   ],
+   "Bot non identifié": [
+    17,
+    19,
+    9,
+    9,
+    10,
+    16,
+    14,
+    17,
+    9,
+    12,
+    19,
+    16,
+    18,
+    13,
+    19,
+    12,
+    13,
+    17,
+    17,
+    16,
+    16,
+    9,
+    19,
     13
    ],
    "Bytespider": [
-    111,
-    90,
-    107,
-    108,
-    113,
-    88,
-    97,
-    125,
-    99,
-    92,
-    102,
-    90,
-    111,
-    100,
-    116,
-    113,
-    105,
-    98,
+    117,
     103,
-    100,
-    100,
+    125,
+    98,
+    107,
     95,
-    86,
-    115
+    127,
+    121,
+    85,
+    106,
+    113,
+    93,
+    130,
+    96,
+    121,
+    117,
+    101,
+    96,
+    108,
+    106,
+    109,
+    100,
+    113,
+    111
    ],
    "CCBot": [
-    14,
-    22,
-    33,
+    13,
     23,
+    30,
     25,
+    30,
+    33,
+    24,
+    21,
+    33,
+    19,
+    26,
+    38,
+    23,
     29,
-    17,
-    26,
-    32,
-    21,
-    18,
-    25,
-    26,
-    20,
-    21,
-    22,
+    24,
+    12,
     15,
-    28,
-    20,
-    16,
-    18,
-    21,
+    22,
+    14,
     25,
-    14
+    15,
+    29,
+    22,
+    18
    ],
    "Claude-SearchBot": [
-    19,
+    16,
+    20,
+    14,
+    13,
+    10,
+    12,
+    17,
     20,
     19,
-    17,
-    16,
+    22,
+    20,
     15,
+    21,
+    16,
+    10,
+    16,
     19,
-    26,
+    15,
+    11,
     18,
     19,
-    16,
-    20,
-    21,
-    21,
-    14,
-    15,
-    19,
-    14,
-    14,
-    23,
-    17,
-    22,
+    18,
     16,
     10
    ],
    "ClaudeBot": [
-    74,
-    65,
-    63,
+    81,
+    55,
+    68,
     71,
-    69,
-    70,
-    61,
-    77,
-    69,
+    66,
+    58,
     70,
     76,
-    80,
-    72,
-    87,
-    61,
-    78,
-    75,
-    63,
-    87,
     67,
+    63,
+    65,
+    74,
+    68,
+    78,
+    62,
+    78,
+    77,
+    69,
+    91,
+    64,
     72,
-    60,
-    72,
-    74
+    67,
+    80,
+    81
    ],
    "GPTBot": [
     1,
+    1,
+    1493,
+    9,
+    3,
+    3,
+    1,
+    2,
     0,
-    2498,
+    2,
+    3,
     2,
     1,
-    1,
+    2,
+    4,
+    3,
+    0,
+    2,
     1,
     4,
     2,
-    3,
-    3,
+    2,
     0,
-    1,
-    3,
-    3,
-    2,
-    1,
-    3,
-    3,
-    1,
-    2,
-    2,
-    1,
-    2
+    1
    ],
    "Googlebot Smartphone": [
-    523,
-    37,
+    553,
+    43,
     471,
-    34,
-    548,
+    41,
+    562,
+    50,
+    521,
+    40,
+    502,
     48,
-    545,
-    35,
-    501,
+    481,
+    38,
+    514,
     54,
-    494,
-    39,
-    472,
-    98,
-    453,
-    86,
-    470,
-    36,
-    447,
-    125,
-    492,
-    49,
+    440,
+    67,
+    520,
+    40,
+    463,
+    111,
+    493,
+    51,
     526,
-    28
+    57
    ],
    "Meta-ExternalAgent": [
-    28,
-    45,
-    27,
-    31,
-    38,
-    43,
-    31,
-    42,
-    38,
+    29,
+    37,
+    19,
     33,
+    30,
+    49,
+    22,
+    34,
+    36,
+    35,
+    34,
     39,
+    32,
+    31,
+    38,
+    30,
+    32,
     43,
     34,
-    31,
-    42,
-    25,
-    24,
-    48,
-    41,
-    29,
-    30,
-    36,
+    26,
     37,
-    36
+    31,
+    41,
+    42
    ],
    "OAI-SearchBot": [
-    24,
+    29,
     22,
-    23,
     23,
     19,
-    28,
-    25,
-    29,
-    18,
-    23,
-    26,
-    29,
-    25,
-    28,
-    34,
-    27,
-    24,
-    30,
-    28,
     20,
-    27,
-    27,
+    29,
+    30,
+    26,
+    13,
+    26,
+    19,
+    26,
     22,
-    24
+    21,
+    26,
+    27,
+    17,
+    29,
+    28,
+    22,
+    23,
+    24,
+    26,
+    18
    ],
    "PerplexityBot": [
-    25,
+    30,
     19,
-    25,
-    18,
-    18,
-    20,
-    21,
-    16,
-    22,
-    27,
-    23,
-    26,
-    22,
-    24,
-    22,
-    20,
     17,
-    13,
-    18,
+    24,
     19,
-    25,
-    21,
+    22,
+    19,
+    19,
     20,
-    25
+    25,
+    29,
+    24,
+    29,
+    20,
+    15,
+    18,
+    21,
+    17,
+    22,
+    14,
+    18,
+    13,
+    23,
+    16
    ],
    "Python HTTP lib": [
-    18,
-    18,
-    11,
-    20,
-    15,
-    7,
     17,
+    19,
+    19,
     18,
-    11,
     13,
+    7,
+    14,
     16,
-    12,
-    21,
+    13,
+    14,
+    13,
     15,
-    16,
+    22,
+    17,
+    19,
+    17,
+    10,
+    12,
+    5,
     18,
     11,
-    16,
-    9,
-    14,
-    12,
     11,
-    10,
-    17
+    12,
+    13
    ],
    "SemrushBot": [
-    34,
-    25,
-    25,
+    29,
     23,
-    23,
-    38,
-    31,
-    29,
-    32,
-    26,
-    29,
-    29,
-    29,
-    27,
-    26,
     22,
-    29,
-    27,
-    30,
-    29,
-    25,
+    32,
+    24,
+    36,
     27,
     28,
-    40
+    27,
+    25,
+    25,
+    27,
+    24,
+    30,
+    20,
+    23,
+    22,
+    21,
+    26,
+    29,
+    23,
+    25,
+    26,
+    44
    ]
   }
  },
  "crawl_budget": {
   "Googlebot Smartphone": {
-   "hits": 6611,
-   "hits_per_day": 471.7,
-   "html_hits": 6088,
-   "unique_html_urls": 398,
+   "hits": 6686,
+   "hits_per_day": 477.0,
+   "html_hits": 6177,
+   "unique_html_urls": 389,
    "crawled_once_only": 0,
    "waste": {
-    "with_query_params": 740,
+    "with_query_params": 739,
     "top_params": {
-     "utm_source": 740,
-     "sort": 740
+     "utm_source": 739,
+     "sort": 739
     },
-    "status_404": 571,
-    "status_3xx": 274,
+    "status_404": 578,
+    "status_3xx": 276,
     "status_5xx": 36,
-    "static_assets": 495,
+    "static_assets": 481,
     "admin_or_api": 0,
-    "pagination": 286
+    "pagination": 316
    },
-   "waste_share": 0.204,
+   "waste_share": 0.202,
    "by_segment": [
     {
      "seg": "/blog",
-     "hits": 2229,
-     "urls": 323,
-     "err": 580
+     "hits": 2219,
+     "urls": 314,
+     "err": 587
     },
     {
      "seg": "/produits",
-     "hits": 1605,
+     "hits": 1683,
      "urls": 51,
      "err": 11
     },
     {
      "seg": "/guides",
-     "hits": 1511,
+     "hits": 1549,
      "urls": 12,
      "err": 7
     },
     {
      "seg": "/comparatifs",
-     "hits": 743,
+     "hits": 726,
      "urls": 12,
      "err": 9
     }
@@ -1962,144 +1963,159 @@
    "by_template": [
     {
      "tpl": "/blog/{slug}",
-     "hits": 2229,
-     "urls": 323
+     "hits": 2219,
+     "urls": 314
     },
     {
      "tpl": "/guides/{slug}",
-     "hits": 1511,
+     "hits": 1549,
      "urls": 12
     },
     {
      "tpl": "/produits/{slug}",
-     "hits": 1319,
+     "hits": 1367,
      "urls": 12
     },
     {
      "tpl": "/comparatifs/{slug}",
-     "hits": 743,
+     "hits": 726,
      "urls": 12
     },
     {
      "tpl": "/produits/page/{n}",
-     "hits": 286,
+     "hits": 316,
      "urls": 39
     }
    ],
-   "recrawl_median_days": 0.42,
+   "recrawl_median_days": 0.43,
    "most_crawled": [
     {
+     "path": "/guides/article-5-dpe-classe-g",
+     "crawls": 152,
+     "every_days": 0.09
+    },
+    {
      "path": "/guides/article-1-isolation-thermique",
-     "crawls": 157,
-     "every_days": 0.09
-    },
-    {
-     "path": "/guides/article-6-aides-maprimerenov",
-     "crawls": 151,
-     "every_days": 0.09
-    },
-    {
-     "path": "/guides/article-3-panneaux-solaires",
-     "crawls": 143,
+     "crawls": 145,
      "every_days": 0.1
     },
     {
-     "path": "/guides/article-5-dpe-classe-g",
+     "path": "/guides/article-3-panneaux-solaires",
+     "crawls": 141,
+     "every_days": 0.1
+    },
+    {
+     "path": "/guides/article-6-aides-maprimerenov",
+     "crawls": 139,
+     "every_days": 0.1
+    },
+    {
+     "path": "/guides/article-4-renovation-energetique",
      "crawls": 136,
      "every_days": 0.1
     },
     {
      "path": "/comparatifs/article-4-renovation-energetique",
-     "crawls": 133,
+     "crawls": 130,
+     "every_days": 0.11
+    },
+    {
+     "path": "/comparatifs/article-3-panneaux-solaires",
+     "crawls": 130,
      "every_days": 0.1
     },
     {
-     "path": "/blog/article-4-renovation-energetique",
-     "crawls": 125,
-     "every_days": 0.11
-    },
-    {
-     "path": "/guides/article-8-fenetres-double-vitrage",
-     "crawls": 124,
-     "every_days": 0.11
-    },
-    {
-     "path": "/blog/article-5-dpe-classe-g",
-     "crawls": 123,
-     "every_days": 0.11
-    },
-    {
-     "path": "/blog/article-6-aides-maprimerenov",
-     "crawls": 122,
-     "every_days": 0.12
-    },
-    {
-     "path": "/blog/article-12-toiture-ardoise",
-     "crawls": 122,
-     "every_days": 0.11
-    },
-    {
-     "path": "/blog/article-7-chaudiere-gaz",
-     "crawls": 122,
+     "path": "/produits/article-10-poele-a-granules",
+     "crawls": 129,
      "every_days": 0.11
     },
     {
      "path": "/produits/article-12-toiture-ardoise",
-     "crawls": 120,
-     "every_days": 0.12
+     "crawls": 128,
+     "every_days": 0.11
     },
     {
-     "path": "/blog/article-9-vmc-double-flux",
-     "crawls": 120,
-     "every_days": 0.12
+     "path": "/blog/article-8-fenetres-double-vitrage",
+     "crawls": 128,
+     "every_days": 0.11
+    },
+    {
+     "path": "/guides/article-8-fenetres-double-vitrage",
+     "crawls": 127,
+     "every_days": 0.11
+    },
+    {
+     "path": "/guides/article-2-pompe-a-chaleur",
+     "crawls": 126,
+     "every_days": 0.11
+    },
+    {
+     "path": "/blog/article-4-renovation-energetique",
+     "crawls": 124,
+     "every_days": 0.11
     },
     {
      "path": "/guides/article-10-poele-a-granules",
+     "crawls": 124,
+     "every_days": 0.11
+    },
+    {
+     "path": "/produits/article-4-renovation-energetique",
+     "crawls": 122,
+     "every_days": 0.11
+    },
+    {
+     "path": "/produits/article-11-bardage-bois",
+     "crawls": 121,
+     "every_days": 0.12
+    },
+    {
+     "path": "/produits/article-1-isolation-thermique",
+     "crawls": 121,
+     "every_days": 0.12
+    },
+    {
+     "path": "/blog/article-1-isolation-thermique",
+     "crawls": 120,
+     "every_days": 0.12
+    },
+    {
+     "path": "/blog/article-6-aides-maprimerenov",
      "crawls": 119,
      "every_days": 0.12
     },
     {
-     "path": "/comparatifs/article-3-panneaux-solaires",
+     "path": "/produits/article-8-fenetres-double-vitrage",
      "crawls": 118,
      "every_days": 0.12
     },
     {
-     "path": "/produits/article-10-poele-a-granules",
+     "path": "/guides/article-12-toiture-ardoise",
      "crawls": 118,
      "every_days": 0.12
     },
     {
-     "path": "/blog/article-11-bardage-bois",
-     "crawls": 117,
-     "every_days": 0.12
-    },
-    {
-     "path": "/produits/article-4-renovation-energetique",
-     "crawls": 117,
-     "every_days": 0.12
-    },
-    {
-     "path": "/guides/article-2-pompe-a-chaleur",
-     "crawls": 116,
-     "every_days": 0.12
-    },
-    {
-     "path": "/guides/article-4-renovation-energetique",
-     "crawls": 116,
-     "every_days": 0.12
-    },
-    {
-     "path": "/produits/article-11-bardage-bois",
+     "path": "/blog/article-5-dpe-classe-g",
      "crawls": 115,
      "every_days": 0.12
     },
     {
-     "path": "/produits/article-8-fenetres-double-vitrage",
-     "crawls": 114,
+     "path": "/blog/article-11-bardage-bois",
+     "crawls": 115,
      "every_days": 0.12
     },
     {
-     "path": "/blog/article-8-fenetres-double-vitrage",
+     "path": "/comparatifs/article-2-pompe-a-chaleur",
+     "crawls": 115,
+     "every_days": 0.12
+    },
+    {
+     "path": "/blog/article-12-toiture-ardoise",
+     "crawls": 113,
+     "every_days": 0.12
+    },
+    {
+     "path": "/guides/article-11-bardage-bois",
      "crawls": 113,
      "every_days": 0.12
     },
@@ -2109,231 +2125,216 @@
      "every_days": 0.12
     },
     {
-     "path": "/produits/article-5-dpe-classe-g",
-     "crawls": 113,
-     "every_days": 0.12
-    },
-    {
-     "path": "/comparatifs/article-2-pompe-a-chaleur",
+     "path": "/blog/article-7-chaudiere-gaz",
      "crawls": 112,
      "every_days": 0.12
     },
     {
-     "path": "/guides/article-12-toiture-ardoise",
+     "path": "/blog/article-3-panneaux-solaires",
      "crawls": 111,
-     "every_days": 0.13
-    },
-    {
-     "path": "/guides/article-11-bardage-bois",
-     "crawls": 110,
      "every_days": 0.12
     },
     {
-     "path": "/produits/article-2-pompe-a-chaleur",
-     "crawls": 109,
-     "every_days": 0.13
-    },
-    {
-     "path": "/comparatifs/article-1-isolation-thermique",
-     "crawls": 109,
+     "path": "/blog/article-9-vmc-double-flux",
+     "crawls": 110,
      "every_days": 0.13
     }
    ],
    "stalest": [
     {
-     "path": "/produits/page/29",
-     "last_crawl": "2026-08-13T02:59:25+00:00",
-     "days_since": 10.9
-    },
-    {
-     "path": "/produits/page/2",
-     "last_crawl": "2026-08-14T18:36:12+00:00",
-     "days_since": 9.3
-    },
-    {
-     "path": "/produits/page/3",
-     "last_crawl": "2026-08-18T06:40:50+00:00",
-     "days_since": 5.8
-    },
-    {
-     "path": "/produits/page/9",
-     "last_crawl": "2026-08-18T16:40:39+00:00",
-     "days_since": 5.3
-    },
-    {
-     "path": "/produits/page/26",
-     "last_crawl": "2026-08-19T10:52:46+00:00",
-     "days_since": 4.6
-    },
-    {
-     "path": "/produits/page/10",
-     "last_crawl": "2026-08-19T20:56:46+00:00",
-     "days_since": 4.2
-    },
-    {
-     "path": "/produits/page/15",
-     "last_crawl": "2026-08-19T22:16:50+00:00",
-     "days_since": 4.1
-    },
-    {
-     "path": "/produits/page/24",
-     "last_crawl": "2026-08-20T06:31:23+00:00",
-     "days_since": 3.8
-    },
-    {
-     "path": "/produits/page/32",
-     "last_crawl": "2026-08-20T18:16:06+00:00",
-     "days_since": 3.3
-    },
-    {
-     "path": "/produits/page/6",
-     "last_crawl": "2026-08-21T04:13:26+00:00",
-     "days_since": 2.9
-    },
-    {
-     "path": "/produits/page/21",
-     "last_crawl": "2026-08-21T04:13:32+00:00",
-     "days_since": 2.9
-    },
-    {
-     "path": "/produits/page/35",
-     "last_crawl": "2026-08-21T10:17:11+00:00",
-     "days_since": 2.6
-    },
-    {
-     "path": "/produits/page/40",
-     "last_crawl": "2026-08-21T16:23:51+00:00",
-     "days_since": 2.4
-    },
-    {
-     "path": "/produits/page/36",
-     "last_crawl": "2026-08-21T18:14:50+00:00",
-     "days_since": 2.3
-    },
-    {
-     "path": "/produits/page/30",
-     "last_crawl": "2026-08-22T04:48:38+00:00",
-     "days_since": 1.8
-    },
-    {
-     "path": "/produits/page/34",
-     "last_crawl": "2026-08-22T06:29:37+00:00",
-     "days_since": 1.8
-    },
-    {
-     "path": "/produits/page/17",
-     "last_crawl": "2026-08-22T08:31:54+00:00",
-     "days_since": 1.7
-    },
-    {
-     "path": "/produits/page/33",
-     "last_crawl": "2026-08-22T16:31:13+00:00",
-     "days_since": 1.3
-    },
-    {
-     "path": "/produits/page/22",
-     "last_crawl": "2026-08-22T16:31:31+00:00",
-     "days_since": 1.3
-    },
-    {
-     "path": "/produits/page/16",
-     "last_crawl": "2026-08-22T16:34:35+00:00",
-     "days_since": 1.3
-    },
-    {
-     "path": "/comparatifs/article-9-vmc-double-flux",
-     "last_crawl": "2026-08-22T17:59:52+00:00",
-     "days_since": 1.3
-    },
-    {
-     "path": "/produits/page/23",
-     "last_crawl": "2026-08-22T20:23:49+00:00",
-     "days_since": 1.2
+     "path": "/produits/page/14",
+     "last_crawl": "2026-08-17T22:32:05+00:00",
+     "days_since": 6.1
     },
     {
      "path": "/produits/page/25",
-     "last_crawl": "2026-08-22T22:27:16+00:00",
+     "last_crawl": "2026-08-18T10:36:41+00:00",
+     "days_since": 5.6
+    },
+    {
+     "path": "/produits/page/40",
+     "last_crawl": "2026-08-19T06:32:10+00:00",
+     "days_since": 4.8
+    },
+    {
+     "path": "/produits/page/27",
+     "last_crawl": "2026-08-20T04:08:58+00:00",
+     "days_since": 3.9
+    },
+    {
+     "path": "/produits/page/38",
+     "last_crawl": "2026-08-20T12:18:48+00:00",
+     "days_since": 3.5
+    },
+    {
+     "path": "/produits/page/35",
+     "last_crawl": "2026-08-21T00:24:11+00:00",
+     "days_since": 3.0
+    },
+    {
+     "path": "/produits/page/20",
+     "last_crawl": "2026-08-21T12:35:26+00:00",
+     "days_since": 2.5
+    },
+    {
+     "path": "/produits/page/15",
+     "last_crawl": "2026-08-21T12:36:40+00:00",
+     "days_since": 2.5
+    },
+    {
+     "path": "/produits/page/10",
+     "last_crawl": "2026-08-21T18:45:42+00:00",
+     "days_since": 2.3
+    },
+    {
+     "path": "/produits/page/11",
+     "last_crawl": "2026-08-21T22:46:25+00:00",
+     "days_since": 2.1
+    },
+    {
+     "path": "/produits/page/22",
+     "last_crawl": "2026-08-22T10:42:33+00:00",
+     "days_since": 1.6
+    },
+    {
+     "path": "/produits/page/26",
+     "last_crawl": "2026-08-22T12:58:07+00:00",
+     "days_since": 1.5
+    },
+    {
+     "path": "/produits/page/8",
+     "last_crawl": "2026-08-22T12:58:35+00:00",
+     "days_since": 1.5
+    },
+    {
+     "path": "/comparatifs/article-5-dpe-classe-g",
+     "last_crawl": "2026-08-22T12:59:02+00:00",
+     "days_since": 1.5
+    },
+    {
+     "path": "/produits/page/28",
+     "last_crawl": "2026-08-22T12:59:48+00:00",
+     "days_since": 1.5
+    },
+    {
+     "path": "/produits/page/16",
+     "last_crawl": "2026-08-22T14:32:00+00:00",
+     "days_since": 1.4
+    },
+    {
+     "path": "/produits/page/32",
+     "last_crawl": "2026-08-22T14:32:34+00:00",
+     "days_since": 1.4
+    },
+    {
+     "path": "/comparatifs/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-22T16:55:17+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/21",
+     "last_crawl": "2026-08-22T16:55:54+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/30",
+     "last_crawl": "2026-08-22T16:56:27+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/37",
+     "last_crawl": "2026-08-22T16:56:41+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/29",
+     "last_crawl": "2026-08-22T18:29:33+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/17",
+     "last_crawl": "2026-08-22T18:30:14+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/33",
+     "last_crawl": "2026-08-22T18:31:38+00:00",
+     "days_since": 1.3
+    },
+    {
+     "path": "/produits/page/7",
+     "last_crawl": "2026-08-22T20:01:39+00:00",
+     "days_since": 1.2
+    },
+    {
+     "path": "/produits/page/18",
+     "last_crawl": "2026-08-22T20:01:50+00:00",
+     "days_since": 1.2
+    },
+    {
+     "path": "/comparatifs/article-10-poele-a-granules",
+     "last_crawl": "2026-08-22T21:36:04+00:00",
+     "days_since": 1.1
+    },
+    {
+     "path": "/produits/page/6",
+     "last_crawl": "2026-08-22T22:57:36+00:00",
+     "days_since": 1.1
+    },
+    {
+     "path": "/produits/page/5",
+     "last_crawl": "2026-08-22T22:58:24+00:00",
      "days_since": 1.1
     },
     {
      "path": "/produits/page/39",
-     "last_crawl": "2026-08-22T22:27:50+00:00",
+     "last_crawl": "2026-08-22T22:58:41+00:00",
      "days_since": 1.1
-    },
-    {
-     "path": "/produits/page/7",
-     "last_crawl": "2026-08-23T00:59:19+00:00",
-     "days_since": 1.0
-    },
-    {
-     "path": "/produits/page/11",
-     "last_crawl": "2026-08-23T00:59:38+00:00",
-     "days_since": 1.0
-    },
-    {
-     "path": "/produits/page/27",
-     "last_crawl": "2026-08-23T04:04:31+00:00",
-     "days_since": 0.9
-    },
-    {
-     "path": "/produits/page/13",
-     "last_crawl": "2026-08-23T04:04:39+00:00",
-     "days_since": 0.9
-    },
-    {
-     "path": "/produits/page/8",
-     "last_crawl": "2026-08-23T04:06:46+00:00",
-     "days_since": 0.9
-    },
-    {
-     "path": "/comparatifs/article-6-aides-maprimerenov",
-     "last_crawl": "2026-08-23T06:58:18+00:00",
-     "days_since": 0.7
     }
    ],
    "redirects_hit": {
-    "/blog/tag-8": 11,
-    "/blog/tag-15": 8,
-    "/blog/tag-23": 8,
-    "/blog/tag-38": 8,
-    "/blog/tag-24": 8,
-    "/blog/tag-43": 8,
-    "/blog/tag-21": 8,
+    "/blog/tag-8": 10,
+    "/blog/tag-15": 9,
+    "/blog/tag-6": 9,
+    "/blog/tag-7": 9,
+    "/blog/tag-42": 9,
+    "/blog/tag-40": 8,
+    "/blog/tag-10": 8,
     "/blog/tag-22": 8,
-    "/blog/tag-30": 8,
+    "/blog/tag-44": 8,
+    "/blog/tag-3": 8,
+    "/blog/tag-12": 8,
+    "/blog/tag-31": 8,
+    "/blog/tag-23": 7,
     "/blog/tag-29": 7,
-    "/blog/tag-10": 7,
-    "/blog/tag-27": 7,
-    "/blog/tag-3": 7,
-    "/blog/tag-48": 7,
-    "/blog/tag-18": 7,
-    "/blog/tag-42": 7,
-    "/blog/tag-33": 7,
-    "/blog/tag-40": 6,
-    "/blog/tag-39": 6,
-    "/blog/tag-41": 6
+    "/blog/tag-17": 6,
+    "/blog/tag-21": 6,
+    "/blog/tag-27": 6,
+    "/blog/tag-11": 6,
+    "/blog/tag-48": 6,
+    "/blog/tag-18": 6
    },
    "top_404": {
-    "/blog/ancien-article-43": 7,
-    "/blog/ancien-article-162": 6,
-    "/blog/ancien-article-257": 6,
-    "/blog/ancien-article-276": 6,
-    "/blog/ancien-article-211": 6,
-    "/blog/ancien-article-160": 5,
-    "/blog/ancien-article-69": 5,
-    "/blog/ancien-article-225": 5,
-    "/blog/ancien-article-83": 5,
-    "/blog/ancien-article-154": 5,
+    "/blog/ancien-article-160": 7,
+    "/blog/ancien-article-257": 7,
+    "/blog/ancien-article-285": 6,
+    "/blog/ancien-article-88": 6,
+    "/blog/ancien-article-43": 6,
+    "/blog/ancien-article-137": 6,
+    "/blog/ancien-article-139": 6,
+    "/blog/ancien-article-213": 5,
+    "/blog/ancien-article-222": 5,
+    "/blog/ancien-article-66": 5,
+    "/blog/ancien-article-115": 5,
+    "/blog/ancien-article-209": 5,
+    "/blog/ancien-article-51": 5,
+    "/blog/ancien-article-152": 4,
     "/blog/ancien-article-18": 4,
-    "/blog/ancien-article-213": 4,
-    "/blog/ancien-article-222": 4,
+    "/blog/ancien-article-270": 4,
+    "/blog/ancien-article-86": 4,
     "/blog/ancien-article-92": 4,
-    "/blog/ancien-article-23": 4,
-    "/blog/ancien-article-91": 4,
-    "/blog/ancien-article-219": 4,
-    "/blog/ancien-article-243": 4,
-    "/blog/ancien-article-36": 4,
-    "/blog/ancien-article-33": 4
+    "/blog/ancien-article-225": 4,
+    "/blog/ancien-article-281": 4
    },
    "top_5xx": {
     "/produits/article-10-poele-a-granules": 3,
@@ -2362,7 +2363,7 @@
    "hits": 168,
    "hits_per_day": 12.0,
    "html_hits": 168,
-   "unique_html_urls": 44,
+   "unique_html_urls": 46,
    "crawled_once_only": 4,
    "waste": {
     "with_query_params": 0,
@@ -2378,142 +2379,117 @@
    "by_segment": [
     {
      "seg": "/blog",
-     "hits": 48,
-     "urls": 12,
+     "hits": 50,
+     "urls": 11,
      "err": 0
     },
     {
      "seg": "/comparatifs",
-     "hits": 48,
+     "hits": 49,
      "urls": 12,
      "err": 0
     },
     {
      "seg": "/produits",
-     "hits": 38,
-     "urls": 11,
+     "hits": 36,
+     "urls": 12,
      "err": 0
     },
     {
      "seg": "/guides",
-     "hits": 34,
-     "urls": 9,
+     "hits": 33,
+     "urls": 11,
      "err": 0
     }
    ],
    "by_template": [
     {
      "tpl": "/blog/{slug}",
-     "hits": 48,
-     "urls": 12
+     "hits": 50,
+     "urls": 11
     },
     {
      "tpl": "/comparatifs/{slug}",
-     "hits": 48,
+     "hits": 49,
      "urls": 12
     },
     {
      "tpl": "/produits/{slug}",
-     "hits": 38,
-     "urls": 11
+     "hits": 36,
+     "urls": 12
     },
     {
      "tpl": "/guides/{slug}",
-     "hits": 34,
-     "urls": 9
+     "hits": 33,
+     "urls": 11
     }
    ],
-   "recrawl_median_days": 2.62,
+   "recrawl_median_days": 2.43,
    "most_crawled": [
     {
      "path": "/comparatifs/article-11-bardage-bois",
-     "crawls": 9,
-     "every_days": 1.36
-    },
-    {
-     "path": "/blog/article-2-pompe-a-chaleur",
-     "crawls": 7,
-     "every_days": 1.53
-    },
-    {
-     "path": "/guides/article-4-renovation-energetique",
-     "crawls": 7,
-     "every_days": 1.55
+     "crawls": 10,
+     "every_days": 1.32
     },
     {
      "path": "/blog/article-11-bardage-bois",
-     "crawls": 6,
-     "every_days": 2.05
+     "crawls": 8,
+     "every_days": 1.41
     },
     {
-     "path": "/guides/article-12-toiture-ardoise",
+     "path": "/blog/article-1-isolation-thermique",
+     "crawls": 7,
+     "every_days": 2.12
+    },
+    {
+     "path": "/blog/article-2-pompe-a-chaleur",
      "crawls": 6,
-     "every_days": 2.16
+     "every_days": 1.17
     },
     {
      "path": "/guides/article-9-vmc-double-flux",
      "crawls": 6,
-     "every_days": 2.62
+     "every_days": 2.29
     },
     {
-     "path": "/blog/article-6-aides-maprimerenov",
+     "path": "/comparatifs/article-5-dpe-classe-g",
      "crawls": 6,
-     "every_days": 2.62
+     "every_days": 2.37
     },
     {
      "path": "/produits/article-6-aides-maprimerenov",
      "crawls": 6,
-     "every_days": 2.22
-    },
-    {
-     "path": "/blog/article-7-chaudiere-gaz",
-     "crawls": 6,
-     "every_days": 2.14
-    },
-    {
-     "path": "/blog/article-1-isolation-thermique",
-     "crawls": 5,
-     "every_days": 2.99
-    },
-    {
-     "path": "/comparatifs/article-8-fenetres-double-vitrage",
-     "crawls": 5,
-     "every_days": 1.34
-    },
-    {
-     "path": "/comparatifs/article-12-toiture-ardoise",
-     "crawls": 5,
-     "every_days": 2.71
-    },
-    {
-     "path": "/produits/article-3-panneaux-solaires",
-     "crawls": 5,
-     "every_days": 2.75
-    },
-    {
-     "path": "/comparatifs/article-2-pompe-a-chaleur",
-     "crawls": 5,
-     "every_days": 2.92
-    },
-    {
-     "path": "/produits/article-7-chaudiere-gaz",
-     "crawls": 5,
-     "every_days": 2.21
-    },
-    {
-     "path": "/comparatifs/article-10-poele-a-granules",
-     "crawls": 5,
-     "every_days": 0.81
+     "every_days": 2.47
     },
     {
      "path": "/comparatifs/article-3-panneaux-solaires",
-     "crawls": 4,
-     "every_days": 1.57
+     "crawls": 5,
+     "every_days": 1.66
     },
     {
-     "path": "/produits/article-1-isolation-thermique",
+     "path": "/guides/article-10-poele-a-granules",
+     "crawls": 5,
+     "every_days": 2.63
+    },
+    {
+     "path": "/guides/article-4-renovation-energetique",
+     "crawls": 5,
+     "every_days": 1.74
+    },
+    {
+     "path": "/blog/article-7-chaudiere-gaz",
+     "crawls": 5,
+     "every_days": 1.63
+    },
+    {
+     "path": "/blog/article-6-aides-maprimerenov",
+     "crawls": 5,
+     "every_days": 2.96
+    },
+    {
+     "path": "/comparatifs/article-1-isolation-thermique",
      "crawls": 4,
-     "every_days": 3.13
+     "every_days": 2.52
     },
     {
      "path": "/blog/article-12-toiture-ardoise",
@@ -2521,75 +2497,100 @@
      "every_days": 2.13
     },
     {
-     "path": "/produits/article-9-vmc-double-flux",
+     "path": "/produits/article-1-isolation-thermique",
      "crawls": 4,
-     "every_days": 3.37
+     "every_days": 2.36
     },
     {
-     "path": "/guides/article-10-poele-a-granules",
+     "path": "/produits/article-9-vmc-double-flux",
      "crawls": 4,
-     "every_days": 2.49
+     "every_days": 3.45
+    },
+    {
+     "path": "/produits/article-7-chaudiere-gaz",
+     "crawls": 4,
+     "every_days": 2.21
+    },
+    {
+     "path": "/produits/article-8-fenetres-double-vitrage",
+     "crawls": 4,
+     "every_days": 4.44
+    },
+    {
+     "path": "/blog/article-8-fenetres-double-vitrage",
+     "crawls": 4,
+     "every_days": 2.1
+    },
+    {
+     "path": "/blog/article-10-poele-a-granules",
+     "crawls": 4,
+     "every_days": 2.59
+    },
+    {
+     "path": "/comparatifs/article-8-fenetres-double-vitrage",
+     "crawls": 4,
+     "every_days": 1.9
+    },
+    {
+     "path": "/guides/article-12-toiture-ardoise",
+     "crawls": 4,
+     "every_days": 1.94
+    },
+    {
+     "path": "/comparatifs/article-7-chaudiere-gaz",
+     "crawls": 4,
+     "every_days": 3.01
+    },
+    {
+     "path": "/comparatifs/article-2-pompe-a-chaleur",
+     "crawls": 4,
+     "every_days": 2.39
     },
     {
      "path": "/produits/article-5-dpe-classe-g",
      "crawls": 3,
-     "every_days": 6.72
+     "every_days": 6.11
     },
     {
-     "path": "/produits/article-2-pompe-a-chaleur",
+     "path": "/blog/article-4-renovation-energetique",
      "crawls": 3,
-     "every_days": 5.25
+     "every_days": 0.63
     },
     {
-     "path": "/blog/article-8-fenetres-double-vitrage",
+     "path": "/produits/article-3-panneaux-solaires",
      "crawls": 3,
-     "every_days": 2.62
+     "every_days": 3.68
     },
     {
-     "path": "/blog/article-5-dpe-classe-g",
+     "path": "/comparatifs/article-9-vmc-double-flux",
      "crawls": 3,
-     "every_days": 1.34
+     "every_days": 6.23
     },
     {
-     "path": "/blog/article-10-poele-a-granules",
+     "path": "/comparatifs/article-12-toiture-ardoise",
      "crawls": 3,
-     "every_days": 4.01
+     "every_days": 2.5
     },
     {
-     "path": "/produits/article-8-fenetres-double-vitrage",
+     "path": "/comparatifs/article-6-aides-maprimerenov",
      "crawls": 3,
-     "every_days": 4.17
-    },
-    {
-     "path": "/guides/article-1-isolation-thermique",
-     "crawls": 3,
-     "every_days": 4.57
-    },
-    {
-     "path": "/comparatifs/article-7-chaudiere-gaz",
-     "crawls": 3,
-     "every_days": 2.89
-    },
-    {
-     "path": "/comparatifs/article-5-dpe-classe-g",
-     "crawls": 3,
-     "every_days": 6.17
+     "every_days": 5.4
     }
    ],
    "stalest": [
     {
-     "path": "/guides/article-6-aides-maprimerenov",
-     "last_crawl": "2026-08-14T13:15:56+00:00",
-     "days_since": 9.5
+     "path": "/produits/article-11-bardage-bois",
+     "last_crawl": "2026-08-11T14:03:46+00:00",
+     "days_since": 12.4
     },
     {
-     "path": "/produits/article-4-renovation-energetique",
-     "last_crawl": "2026-08-15T03:11:41+00:00",
-     "days_since": 8.9
+     "path": "/produits/article-2-pompe-a-chaleur",
+     "last_crawl": "2026-08-12T05:38:45+00:00",
+     "days_since": 11.8
     },
     {
-     "path": "/comparatifs/article-6-aides-maprimerenov",
-     "last_crawl": "2026-08-15T08:44:54+00:00",
+     "path": "/comparatifs/article-12-toiture-ardoise",
+     "last_crawl": "2026-08-15T09:11:26+00:00",
      "days_since": 8.7
     },
     {
@@ -2598,134 +2599,134 @@
      "days_since": 7.4
     },
     {
-     "path": "/comparatifs/article-1-isolation-thermique",
-     "last_crawl": "2026-08-16T19:40:46+00:00",
-     "days_since": 7.2
-    },
-    {
-     "path": "/guides/article-10-poele-a-granules",
-     "last_crawl": "2026-08-18T04:30:57+00:00",
-     "days_since": 5.8
-    },
-    {
-     "path": "/produits/article-10-poele-a-granules",
-     "last_crawl": "2026-08-18T14:19:17+00:00",
-     "days_since": 5.4
-    },
-    {
-     "path": "/produits/article-8-fenetres-double-vitrage",
-     "last_crawl": "2026-08-18T22:47:51+00:00",
-     "days_since": 5.1
-    },
-    {
-     "path": "/guides/article-5-dpe-classe-g",
-     "last_crawl": "2026-08-19T04:37:16+00:00",
-     "days_since": 4.8
-    },
-    {
-     "path": "/blog/article-5-dpe-classe-g",
-     "last_crawl": "2026-08-19T04:52:50+00:00",
-     "days_since": 4.8
-    },
-    {
-     "path": "/comparatifs/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-19T11:41:50+00:00",
-     "days_since": 4.5
-    },
-    {
-     "path": "/comparatifs/article-3-panneaux-solaires",
-     "last_crawl": "2026-08-19T21:55:52+00:00",
-     "days_since": 4.1
-    },
-    {
-     "path": "/produits/article-11-bardage-bois",
-     "last_crawl": "2026-08-20T00:13:55+00:00",
-     "days_since": 4.0
-    },
-    {
      "path": "/guides/article-4-renovation-energetique",
-     "last_crawl": "2026-08-20T01:01:44+00:00",
-     "days_since": 4.0
-    },
-    {
-     "path": "/comparatifs/article-9-vmc-double-flux",
-     "last_crawl": "2026-08-20T01:58:02+00:00",
-     "days_since": 4.0
-    },
-    {
-     "path": "/comparatifs/article-4-renovation-energetique",
-     "last_crawl": "2026-08-20T02:36:29+00:00",
-     "days_since": 3.9
-    },
-    {
-     "path": "/blog/article-8-fenetres-double-vitrage",
-     "last_crawl": "2026-08-20T03:30:26+00:00",
-     "days_since": 3.9
-    },
-    {
-     "path": "/guides/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-20T03:50:23+00:00",
-     "days_since": 3.9
-    },
-    {
-     "path": "/blog/article-10-poele-a-granules",
-     "last_crawl": "2026-08-20T05:05:19+00:00",
-     "days_since": 3.8
-    },
-    {
-     "path": "/produits/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-20T20:28:09+00:00",
-     "days_since": 3.2
-    },
-    {
-     "path": "/produits/article-1-isolation-thermique",
-     "last_crawl": "2026-08-21T02:15:49+00:00",
-     "days_since": 2.9
-    },
-    {
-     "path": "/comparatifs/article-12-toiture-ardoise",
-     "last_crawl": "2026-08-21T05:49:28+00:00",
-     "days_since": 2.8
-    },
-    {
-     "path": "/blog/article-3-panneaux-solaires",
-     "last_crawl": "2026-08-21T15:52:31+00:00",
-     "days_since": 2.4
-    },
-    {
-     "path": "/blog/article-11-bardage-bois",
-     "last_crawl": "2026-08-21T15:59:17+00:00",
-     "days_since": 2.4
-    },
-    {
-     "path": "/comparatifs/article-8-fenetres-double-vitrage",
-     "last_crawl": "2026-08-21T16:55:52+00:00",
-     "days_since": 2.3
-    },
-    {
-     "path": "/blog/article-4-renovation-energetique",
-     "last_crawl": "2026-08-21T19:50:33+00:00",
-     "days_since": 2.2
-    },
-    {
-     "path": "/blog/article-9-vmc-double-flux",
-     "last_crawl": "2026-08-21T22:29:44+00:00",
-     "days_since": 2.1
+     "last_crawl": "2026-08-17T17:08:02+00:00",
+     "days_since": 6.3
     },
     {
      "path": "/blog/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-22T02:05:39+00:00",
-     "days_since": 1.9
-    },
-    {
-     "path": "/produits/article-6-aides-maprimerenov",
-     "last_crawl": "2026-08-22T10:21:12+00:00",
-     "days_since": 1.6
+     "last_crawl": "2026-08-17T21:54:55+00:00",
+     "days_since": 6.1
     },
     {
      "path": "/comparatifs/article-2-pompe-a-chaleur",
-     "last_crawl": "2026-08-22T10:38:04+00:00",
-     "days_since": 1.6
+     "last_crawl": "2026-08-17T22:00:24+00:00",
+     "days_since": 6.1
+    },
+    {
+     "path": "/produits/article-7-chaudiere-gaz",
+     "last_crawl": "2026-08-18T15:52:23+00:00",
+     "days_since": 5.4
+    },
+    {
+     "path": "/guides/article-12-toiture-ardoise",
+     "last_crawl": "2026-08-18T18:25:49+00:00",
+     "days_since": 5.3
+    },
+    {
+     "path": "/produits/article-1-isolation-thermique",
+     "last_crawl": "2026-08-18T18:44:14+00:00",
+     "days_since": 5.3
+    },
+    {
+     "path": "/guides/article-8-fenetres-double-vitrage",
+     "last_crawl": "2026-08-18T23:11:08+00:00",
+     "days_since": 5.1
+    },
+    {
+     "path": "/produits/article-4-renovation-energetique",
+     "last_crawl": "2026-08-19T12:58:34+00:00",
+     "days_since": 4.5
+    },
+    {
+     "path": "/blog/article-2-pompe-a-chaleur",
+     "last_crawl": "2026-08-19T16:36:59+00:00",
+     "days_since": 4.3
+    },
+    {
+     "path": "/produits/article-3-panneaux-solaires",
+     "last_crawl": "2026-08-19T17:15:24+00:00",
+     "days_since": 4.3
+    },
+    {
+     "path": "/blog/article-4-renovation-energetique",
+     "last_crawl": "2026-08-19T21:22:20+00:00",
+     "days_since": 4.1
+    },
+    {
+     "path": "/blog/article-10-poele-a-granules",
+     "last_crawl": "2026-08-19T23:16:46+00:00",
+     "days_since": 4.1
+    },
+    {
+     "path": "/guides/article-11-bardage-bois",
+     "last_crawl": "2026-08-20T14:40:19+00:00",
+     "days_since": 3.4
+    },
+    {
+     "path": "/guides/article-5-dpe-classe-g",
+     "last_crawl": "2026-08-20T19:57:50+00:00",
+     "days_since": 3.2
+    },
+    {
+     "path": "/comparatifs/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-20T20:51:33+00:00",
+     "days_since": 3.2
+    },
+    {
+     "path": "/blog/article-8-fenetres-double-vitrage",
+     "last_crawl": "2026-08-21T04:36:53+00:00",
+     "days_since": 2.8
+    },
+    {
+     "path": "/guides/article-10-poele-a-granules",
+     "last_crawl": "2026-08-21T05:21:12+00:00",
+     "days_since": 2.8
+    },
+    {
+     "path": "/blog/article-11-bardage-bois",
+     "last_crawl": "2026-08-21T06:21:52+00:00",
+     "days_since": 2.8
+    },
+    {
+     "path": "/comparatifs/article-3-panneaux-solaires",
+     "last_crawl": "2026-08-21T20:18:55+00:00",
+     "days_since": 2.2
+    },
+    {
+     "path": "/guides/article-3-panneaux-solaires",
+     "last_crawl": "2026-08-21T20:50:44+00:00",
+     "days_since": 2.2
+    },
+    {
+     "path": "/guides/article-2-pompe-a-chaleur",
+     "last_crawl": "2026-08-22T00:17:05+00:00",
+     "days_since": 2.0
+    },
+    {
+     "path": "/comparatifs/article-8-fenetres-double-vitrage",
+     "last_crawl": "2026-08-22T00:46:51+00:00",
+     "days_since": 2.0
+    },
+    {
+     "path": "/guides/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-22T03:54:30+00:00",
+     "days_since": 1.9
+    },
+    {
+     "path": "/blog/article-5-dpe-classe-g",
+     "last_crawl": "2026-08-22T03:58:40+00:00",
+     "days_since": 1.9
+    },
+    {
+     "path": "/comparatifs/article-10-poele-a-granules",
+     "last_crawl": "2026-08-22T05:31:00+00:00",
+     "days_since": 1.8
+    },
+    {
+     "path": "/blog/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-22T07:57:18+00:00",
+     "days_since": 1.7
     }
    ],
    "redirects_hit": {},
@@ -2733,15 +2734,15 @@
    "top_5xx": {}
   },
   "Bingbot": {
-   "hits": 1034,
-   "hits_per_day": 73.8,
-   "html_hits": 1029,
+   "hits": 1070,
+   "hits_per_day": 76.3,
+   "html_hits": 1065,
    "unique_html_urls": 48,
    "crawled_once_only": 0,
    "waste": {
-    "with_query_params": 60,
+    "with_query_params": 67,
     "top_params": {
-     "page": 60
+     "page": 67
     },
     "status_404": 0,
     "status_3xx": 0,
@@ -2750,29 +2751,29 @@
     "admin_or_api": 0,
     "pagination": 0
    },
-   "waste_share": 0.058,
+   "waste_share": 0.063,
    "by_segment": [
     {
      "seg": "/guides",
-     "hits": 293,
+     "hits": 288,
      "urls": 12,
      "err": 0
     },
     {
      "seg": "/produits",
-     "hits": 257,
-     "urls": 12,
-     "err": 0
-    },
-    {
-     "seg": "/comparatifs",
-     "hits": 246,
+     "hits": 278,
      "urls": 12,
      "err": 0
     },
     {
      "seg": "/blog",
-     "hits": 233,
+     "hits": 267,
+     "urls": 12,
+     "err": 0
+    },
+    {
+     "seg": "/comparatifs",
+     "hits": 232,
      "urls": 12,
      "err": 0
     }
@@ -2780,328 +2781,328 @@
    "by_template": [
     {
      "tpl": "/guides/{slug}",
-     "hits": 293,
+     "hits": 288,
      "urls": 12
     },
     {
      "tpl": "/produits/{slug}",
-     "hits": 257,
-     "urls": 12
-    },
-    {
-     "tpl": "/comparatifs/{slug}",
-     "hits": 246,
+     "hits": 278,
      "urls": 12
     },
     {
      "tpl": "/blog/{slug}",
-     "hits": 233,
+     "hits": 267,
+     "urls": 12
+    },
+    {
+     "tpl": "/comparatifs/{slug}",
+     "hits": 232,
      "urls": 12
     }
    ],
-   "recrawl_median_days": 0.66,
+   "recrawl_median_days": 0.65,
    "most_crawled": [
     {
      "path": "/guides/article-4-renovation-energetique",
-     "crawls": 41,
-     "every_days": 0.35
+     "crawls": 44,
+     "every_days": 0.32
     },
     {
      "path": "/guides/article-3-panneaux-solaires",
-     "crawls": 34,
-     "every_days": 0.41
-    },
-    {
-     "path": "/blog/article-6-aides-maprimerenov",
-     "crawls": 31,
-     "every_days": 0.46
-    },
-    {
-     "path": "/produits/article-2-pompe-a-chaleur",
-     "crawls": 30,
-     "every_days": 0.47
+     "crawls": 36,
+     "every_days": 0.39
     },
     {
      "path": "/guides/article-1-isolation-thermique",
-     "crawls": 29,
-     "every_days": 0.46
+     "crawls": 33,
+     "every_days": 0.4
+    },
+    {
+     "path": "/blog/article-4-renovation-energetique",
+     "crawls": 32,
+     "every_days": 0.44
+    },
+    {
+     "path": "/produits/article-12-toiture-ardoise",
+     "crawls": 32,
+     "every_days": 0.42
     },
     {
      "path": "/produits/article-8-fenetres-double-vitrage",
-     "crawls": 28,
-     "every_days": 0.48
+     "crawls": 32,
+     "every_days": 0.45
     },
     {
-     "path": "/comparatifs/article-7-chaudiere-gaz",
+     "path": "/produits/article-10-poele-a-granules",
+     "crawls": 29,
+     "every_days": 0.49
+    },
+    {
+     "path": "/blog/article-6-aides-maprimerenov",
+     "crawls": 29,
+     "every_days": 0.49
+    },
+    {
+     "path": "/blog/article-5-dpe-classe-g",
      "crawls": 28,
-     "every_days": 0.51
+     "every_days": 0.5
     },
     {
      "path": "/comparatifs/article-6-aides-maprimerenov",
      "crawls": 27,
+     "every_days": 0.46
+    },
+    {
+     "path": "/blog/article-12-toiture-ardoise",
+     "crawls": 27,
      "every_days": 0.51
     },
     {
-     "path": "/blog/article-4-renovation-energetique",
+     "path": "/produits/article-5-dpe-classe-g",
+     "crawls": 26,
+     "every_days": 0.53
+    },
+    {
+     "path": "/comparatifs/article-7-chaudiere-gaz",
      "crawls": 25,
      "every_days": 0.56
     },
     {
-     "path": "/comparatifs/article-5-dpe-classe-g",
+     "path": "/blog/article-8-fenetres-double-vitrage",
      "crawls": 24,
-     "every_days": 0.57
-    },
-    {
-     "path": "/produits/article-7-chaudiere-gaz",
-     "crawls": 24,
-     "every_days": 0.58
-    },
-    {
-     "path": "/produits/article-12-toiture-ardoise",
-     "crawls": 23,
-     "every_days": 0.58
-    },
-    {
-     "path": "/produits/article-1-isolation-thermique",
-     "crawls": 23,
-     "every_days": 0.59
-    },
-    {
-     "path": "/guides/article-2-pompe-a-chaleur",
-     "crawls": 23,
-     "every_days": 0.61
-    },
-    {
-     "path": "/guides/article-8-fenetres-double-vitrage",
-     "crawls": 22,
-     "every_days": 0.63
-    },
-    {
-     "path": "/guides/article-6-aides-maprimerenov",
-     "crawls": 22,
      "every_days": 0.56
     },
     {
-     "path": "/guides/article-5-dpe-classe-g",
+     "path": "/blog/article-2-pompe-a-chaleur",
+     "crawls": 24,
+     "every_days": 0.58
+    },
+    {
+     "path": "/guides/article-7-chaudiere-gaz",
      "crawls": 22,
-     "every_days": 0.61
+     "every_days": 0.62
     },
     {
-     "path": "/produits/article-5-dpe-classe-g",
+     "path": "/guides/article-10-poele-a-granules",
+     "crawls": 22,
+     "every_days": 0.65
+    },
+    {
+     "path": "/produits/article-2-pompe-a-chaleur",
+     "crawls": 22,
+     "every_days": 0.65
+    },
+    {
+     "path": "/produits/article-6-aides-maprimerenov",
+     "crawls": 22,
+     "every_days": 0.54
+    },
+    {
+     "path": "/produits/article-7-chaudiere-gaz",
      "crawls": 21,
      "every_days": 0.67
     },
     {
-     "path": "/guides/article-9-vmc-double-flux",
+     "path": "/guides/article-12-toiture-ardoise",
      "crawls": 21,
-     "every_days": 0.6
+     "every_days": 0.63
     },
     {
-     "path": "/produits/article-11-bardage-bois",
-     "crawls": 21,
-     "every_days": 0.67
-    },
-    {
-     "path": "/guides/article-11-bardage-bois",
-     "crawls": 21,
-     "every_days": 0.68
-    },
-    {
-     "path": "/blog/article-5-dpe-classe-g",
-     "crawls": 21,
-     "every_days": 0.66
-    },
-    {
-     "path": "/comparatifs/article-3-panneaux-solaires",
+     "path": "/guides/article-2-pompe-a-chaleur",
      "crawls": 21,
      "every_days": 0.65
     },
     {
+     "path": "/comparatifs/article-5-dpe-classe-g",
+     "crawls": 21,
+     "every_days": 0.66
+    },
+    {
      "path": "/comparatifs/article-8-fenetres-double-vitrage",
-     "crawls": 20,
-     "every_days": 0.71
+     "crawls": 21,
+     "every_days": 0.64
     },
     {
-     "path": "/blog/article-2-pompe-a-chaleur",
-     "crawls": 20,
-     "every_days": 0.71
+     "path": "/blog/article-3-panneaux-solaires",
+     "crawls": 21,
+     "every_days": 0.67
     },
     {
-     "path": "/blog/article-8-fenetres-double-vitrage",
+     "path": "/blog/article-1-isolation-thermique",
+     "crawls": 20,
+     "every_days": 0.6
+    },
+    {
+     "path": "/guides/article-6-aides-maprimerenov",
      "crawls": 20,
      "every_days": 0.66
     },
     {
-     "path": "/comparatifs/article-11-bardage-bois",
+     "path": "/produits/article-9-vmc-double-flux",
      "crawls": 20,
-     "every_days": 0.66
+     "every_days": 0.54
     },
     {
-     "path": "/comparatifs/article-1-isolation-thermique",
+     "path": "/comparatifs/article-3-panneaux-solaires",
      "crawls": 20,
-     "every_days": 0.69
+     "every_days": 0.67
     },
     {
-     "path": "/guides/article-10-poele-a-granules",
+     "path": "/guides/article-11-bardage-bois",
      "crawls": 20,
-     "every_days": 0.69
-    },
-    {
-     "path": "/guides/article-12-toiture-ardoise",
-     "crawls": 20,
-     "every_days": 0.66
+     "every_days": 0.64
     }
    ],
    "stalest": [
     {
-     "path": "/produits/article-10-poele-a-granules",
-     "last_crawl": "2026-08-21T12:24:56+00:00",
-     "days_since": 2.5
-    },
-    {
-     "path": "/blog/article-11-bardage-bois",
-     "last_crawl": "2026-08-21T22:13:19+00:00",
-     "days_since": 2.1
+     "path": "/comparatifs/article-12-toiture-ardoise",
+     "last_crawl": "2026-08-21T06:22:06+00:00",
+     "days_since": 2.8
     },
     {
      "path": "/produits/article-9-vmc-double-flux",
-     "last_crawl": "2026-08-22T02:15:38+00:00",
-     "days_since": 1.9
+     "last_crawl": "2026-08-21T21:46:37+00:00",
+     "days_since": 2.1
     },
     {
-     "path": "/comparatifs/article-4-renovation-energetique",
-     "last_crawl": "2026-08-22T02:50:22+00:00",
-     "days_since": 1.9
-    },
-    {
-     "path": "/guides/article-6-aides-maprimerenov",
-     "last_crawl": "2026-08-22T03:24:02+00:00",
-     "days_since": 1.9
-    },
-    {
-     "path": "/guides/article-9-vmc-double-flux",
-     "last_crawl": "2026-08-22T09:23:56+00:00",
-     "days_since": 1.6
-    },
-    {
-     "path": "/produits/article-6-aides-maprimerenov",
-     "last_crawl": "2026-08-22T12:19:53+00:00",
-     "days_since": 1.5
-    },
-    {
-     "path": "/guides/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-22T15:48:48+00:00",
-     "days_since": 1.4
-    },
-    {
-     "path": "/blog/article-12-toiture-ardoise",
-     "last_crawl": "2026-08-22T16:40:03+00:00",
-     "days_since": 1.3
-    },
-    {
-     "path": "/produits/article-8-fenetres-double-vitrage",
-     "last_crawl": "2026-08-22T21:54:12+00:00",
-     "days_since": 1.1
-    },
-    {
-     "path": "/blog/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-23T02:17:31+00:00",
-     "days_since": 0.9
-    },
-    {
-     "path": "/guides/article-10-poele-a-granules",
-     "last_crawl": "2026-08-23T06:57:57+00:00",
-     "days_since": 0.7
-    },
-    {
-     "path": "/comparatifs/article-3-panneaux-solaires",
-     "last_crawl": "2026-08-23T08:21:23+00:00",
-     "days_since": 0.7
-    },
-    {
-     "path": "/produits/article-1-isolation-thermique",
-     "last_crawl": "2026-08-23T09:02:33+00:00",
-     "days_since": 0.7
-    },
-    {
-     "path": "/blog/article-4-renovation-energetique",
-     "last_crawl": "2026-08-23T10:05:40+00:00",
-     "days_since": 0.6
+     "path": "/produits/article-11-bardage-bois",
+     "last_crawl": "2026-08-21T23:58:29+00:00",
+     "days_since": 2.0
     },
     {
      "path": "/comparatifs/article-11-bardage-bois",
-     "last_crawl": "2026-08-23T10:52:56+00:00",
-     "days_since": 0.6
+     "last_crawl": "2026-08-22T03:31:52+00:00",
+     "days_since": 1.9
+    },
+    {
+     "path": "/produits/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-22T04:47:06+00:00",
+     "days_since": 1.8
+    },
+    {
+     "path": "/comparatifs/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-22T09:24:46+00:00",
+     "days_since": 1.6
+    },
+    {
+     "path": "/guides/article-11-bardage-bois",
+     "last_crawl": "2026-08-22T10:21:06+00:00",
+     "days_since": 1.6
+    },
+    {
+     "path": "/guides/article-8-fenetres-double-vitrage",
+     "last_crawl": "2026-08-22T14:53:12+00:00",
+     "days_since": 1.4
     },
     {
      "path": "/blog/article-1-isolation-thermique",
-     "last_crawl": "2026-08-23T11:13:26+00:00",
-     "days_since": 0.6
+     "last_crawl": "2026-08-22T21:11:53+00:00",
+     "days_since": 1.2
     },
     {
-     "path": "/blog/article-5-dpe-classe-g",
-     "last_crawl": "2026-08-23T11:52:08+00:00",
-     "days_since": 0.5
+     "path": "/guides/article-6-aides-maprimerenov",
+     "last_crawl": "2026-08-22T22:10:50+00:00",
+     "days_since": 1.1
     },
     {
-     "path": "/blog/article-8-fenetres-double-vitrage",
-     "last_crawl": "2026-08-23T11:55:58+00:00",
+     "path": "/comparatifs/article-8-fenetres-double-vitrage",
+     "last_crawl": "2026-08-23T01:12:27+00:00",
+     "days_since": 1.0
+    },
+    {
+     "path": "/comparatifs/article-3-panneaux-solaires",
+     "last_crawl": "2026-08-23T01:28:18+00:00",
+     "days_since": 1.0
+    },
+    {
+     "path": "/blog/article-7-chaudiere-gaz",
+     "last_crawl": "2026-08-23T06:30:11+00:00",
+     "days_since": 0.8
+    },
+    {
+     "path": "/guides/article-2-pompe-a-chaleur",
+     "last_crawl": "2026-08-23T06:35:27+00:00",
+     "days_since": 0.8
+    },
+    {
+     "path": "/blog/article-11-bardage-bois",
+     "last_crawl": "2026-08-23T08:32:17+00:00",
+     "days_since": 0.7
+    },
+    {
+     "path": "/blog/article-2-pompe-a-chaleur",
+     "last_crawl": "2026-08-23T11:47:05+00:00",
      "days_since": 0.5
     },
     {
      "path": "/produits/article-7-chaudiere-gaz",
-     "last_crawl": "2026-08-23T12:54:43+00:00",
+     "last_crawl": "2026-08-23T11:49:34+00:00",
      "days_since": 0.5
     },
     {
      "path": "/blog/article-10-poele-a-granules",
-     "last_crawl": "2026-08-23T12:57:42+00:00",
+     "last_crawl": "2026-08-23T13:55:54+00:00",
      "days_since": 0.5
-    },
-    {
-     "path": "/comparatifs/article-10-poele-a-granules",
-     "last_crawl": "2026-08-23T13:10:59+00:00",
-     "days_since": 0.5
-    },
-    {
-     "path": "/blog/article-9-vmc-double-flux",
-     "last_crawl": "2026-08-23T14:38:53+00:00",
-     "days_since": 0.4
-    },
-    {
-     "path": "/produits/article-4-renovation-energetique",
-     "last_crawl": "2026-08-23T14:45:25+00:00",
-     "days_since": 0.4
-    },
-    {
-     "path": "/guides/article-2-pompe-a-chaleur",
-     "last_crawl": "2026-08-23T16:07:42+00:00",
-     "days_since": 0.4
     },
     {
      "path": "/guides/article-1-isolation-thermique",
-     "last_crawl": "2026-08-23T16:30:08+00:00",
+     "last_crawl": "2026-08-23T14:24:34+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/guides/article-4-renovation-energetique",
+     "last_crawl": "2026-08-23T15:03:15+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/produits/article-3-panneaux-solaires",
+     "last_crawl": "2026-08-23T15:03:40+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/guides/article-5-dpe-classe-g",
+     "last_crawl": "2026-08-23T15:22:15+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/comparatifs/article-1-isolation-thermique",
+     "last_crawl": "2026-08-23T15:35:04+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/guides/article-7-chaudiere-gaz",
+     "last_crawl": "2026-08-23T16:09:08+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/guides/article-10-poele-a-granules",
+     "last_crawl": "2026-08-23T16:17:36+00:00",
+     "days_since": 0.4
+    },
+    {
+     "path": "/blog/article-5-dpe-classe-g",
+     "last_crawl": "2026-08-23T16:31:15+00:00",
      "days_since": 0.3
     },
     {
-     "path": "/comparatifs/article-8-fenetres-double-vitrage",
-     "last_crawl": "2026-08-23T16:34:07+00:00",
+     "path": "/comparatifs/article-4-renovation-energetique",
+     "last_crawl": "2026-08-23T17:16:05+00:00",
      "days_since": 0.3
     },
     {
-     "path": "/comparatifs/article-5-dpe-classe-g",
-     "last_crawl": "2026-08-23T17:14:32+00:00",
+     "path": "/guides/article-9-vmc-double-flux",
+     "last_crawl": "2026-08-23T17:41:38+00:00",
      "days_since": 0.3
     },
     {
-     "path": "/produits/article-2-pompe-a-chaleur",
-     "last_crawl": "2026-08-23T17:57:23+00:00",
-     "days_since": 0.3
+     "path": "/comparatifs/article-7-chaudiere-gaz",
+     "last_crawl": "2026-08-23T18:56:59+00:00",
+     "days_since": 0.2
     },
     {
-     "path": "/blog/article-2-pompe-a-chaleur",
-     "last_crawl": "2026-08-23T18:01:55+00:00",
-     "days_since": 0.3
+     "path": "/blog/article-8-fenetres-double-vitrage",
+     "last_crawl": "2026-08-23T19:30:37+00:00",
+     "days_since": 0.2
     }
    ],
    "redirects_hit": {},
@@ -3109,110 +3110,104 @@
    "top_5xx": {}
   },
   "_mobile_vs_desktop": {
-   "smartphone": 6611,
+   "smartphone": 6686,
    "desktop": 168,
    "smartphone_share": 0.975
   },
   "_status_bots_vs_humans": {
    "bots": {
-    "200": 20358,
-    "404": 889,
-    "403": 335,
-    "301": 274,
+    "200": 18382,
+    "403": 1404,
+    "404": 809,
+    "301": 276,
     "500": 36
    },
    "humans": {
-    "200": 102607
+    "200": 102618
    }
   }
  },
  "ai_referrals": {
-  "ai_clicks": 1642,
-  "ai_clicks_per_day": 117.16,
-  "share_of_human_html": 0.0608,
+  "ai_clicks": 1654,
+  "ai_clicks_per_day": 118.01,
+  "share_of_human_html": 0.0612,
   "by_source": {
-   "ChatGPT": 684,
-   "Perplexity": 429,
-   "Copilot": 203,
-   "Claude": 194,
+   "ChatGPT": 669,
+   "Perplexity": 444,
+   "Copilot": 208,
+   "Claude": 196,
    "Gemini": 87,
-   "Le Chat (Mistral)": 45
+   "Le Chat (Mistral)": 50
   },
   "by_page": {
-   "/guides/article-6-aides-maprimerenov": 239,
-   "/guides/article-3-panneaux-solaires": 227,
-   "/guides/article-1-isolation-thermique": 216,
-   "/guides/article-5-dpe-classe-g": 214,
-   "/guides/article-4-renovation-energetique": 210,
-   "/guides/article-2-pompe-a-chaleur": 199,
+   "/guides/article-3-panneaux-solaires": 237,
+   "/guides/article-6-aides-maprimerenov": 227,
+   "/guides/article-4-renovation-energetique": 221,
+   "/guides/article-1-isolation-thermique": 217,
+   "/guides/article-5-dpe-classe-g": 209,
+   "/guides/article-2-pompe-a-chaleur": 191,
    "/guides/article-12-toiture-ardoise": 23,
    "/blog/article-2-pompe-a-chaleur": 22,
-   "/guides/article-8-fenetres-double-vitrage": 21,
-   "/blog/article-1-isolation-thermique": 19,
-   "/blog/article-4-renovation-energetique": 19,
+   "/guides/article-8-fenetres-double-vitrage": 22,
+   "/blog/article-1-isolation-thermique": 21,
+   "/blog/article-4-renovation-energetique": 20,
    "/guides/article-9-vmc-double-flux": 19,
    "/guides/article-10-poele-a-granules": 18,
    "/guides/article-7-chaudiere-gaz": 17,
-   "/blog/article-3-panneaux-solaires": 14,
-   "/guides/article-11-bardage-bois": 9,
-   "/comparatifs/article-9-vmc-double-flux": 8,
-   "/comparatifs/article-4-renovation-energetique": 8,
+   "/blog/article-3-panneaux-solaires": 15,
+   "/guides/article-11-bardage-bois": 10,
+   "/comparatifs/article-4-renovation-energetique": 9,
+   "/blog/article-10-poele-a-granules": 8,
+   "/blog/article-11-bardage-bois": 8,
+   "/blog/article-12-toiture-ardoise": 8,
    "/blog/article-9-vmc-double-flux": 8,
-   "/blog/article-12-toiture-ardoise": 7,
-   "/blog/article-11-bardage-bois": 7,
-   "/blog/article-10-poele-a-granules": 7,
+   "/comparatifs/article-9-vmc-double-flux": 8,
+   "/comparatifs/article-8-fenetres-double-vitrage": 7,
+   "/blog/article-7-chaudiere-gaz": 7,
    "/produits/article-12-toiture-ardoise": 7,
    "/produits/article-1-isolation-thermique": 7,
-   "/comparatifs/article-8-fenetres-double-vitrage": 6,
+   "/produits/article-10-poele-a-granules": 6,
    "/comparatifs/article-5-dpe-classe-g": 6,
-   "/produits/article-2-pompe-a-chaleur": 6,
    "/comparatifs/article-11-bardage-bois": 6,
-   "/blog/article-7-chaudiere-gaz": 6,
-   "/comparatifs/article-12-toiture-ardoise": 5
+   "/produits/article-2-pompe-a-chaleur": 6
   },
   "utm_tagged": 0,
   "fetch_to_click_loops": [
    {
-    "path": "/guides/article-6-aides-maprimerenov",
+    "path": "/guides/article-1-isolation-thermique",
     "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 42
+    "clicks": 36
    },
    {
     "path": "/guides/article-6-aides-maprimerenov",
-    "family": "Perplexity-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 33
-   },
-   {
-    "path": "/guides/article-5-dpe-classe-g",
     "family": "ChatGPT-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 32
-   },
-   {
-    "path": "/guides/article-2-pompe-a-chaleur",
-    "family": "MistralAI-User",
     "ai_referrer": "ChatGPT",
     "clicks": 31
    },
    {
     "path": "/guides/article-4-renovation-energetique",
-    "family": "Claude-User",
+    "family": "ChatGPT-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 28
+    "clicks": 31
    },
    {
     "path": "/guides/article-4-renovation-energetique",
-    "family": "ChatGPT-User",
+    "family": "Perplexity-User",
+    "ai_referrer": "Perplexity",
+    "clicks": 30
+   },
+   {
+    "path": "/guides/article-4-renovation-energetique",
+    "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
     "clicks": 28
    },
    {
-    "path": "/guides/article-3-panneaux-solaires",
+    "path": "/guides/article-6-aides-maprimerenov",
     "family": "Perplexity-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 26
+    "ai_referrer": "Perplexity",
+    "clicks": 25
    },
    {
     "path": "/guides/article-5-dpe-classe-g",
@@ -3223,44 +3218,50 @@
    {
     "path": "/guides/article-6-aides-maprimerenov",
     "family": "Perplexity-User",
-    "ai_referrer": "Perplexity",
+    "ai_referrer": "ChatGPT",
     "clicks": 25
    },
    {
+    "path": "/guides/article-5-dpe-classe-g",
+    "family": "Perplexity-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 23
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "Perplexity-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 23
+   },
+   {
+    "path": "/guides/article-2-pompe-a-chaleur",
+    "family": "ChatGPT-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 22
+   },
+   {
     "path": "/guides/article-6-aides-maprimerenov",
+    "family": "OAI-SearchBot",
+    "ai_referrer": "ChatGPT",
+    "clicks": 22
+   },
+   {
+    "path": "/guides/article-5-dpe-classe-g",
     "family": "ChatGPT-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 24
-   },
-   {
-    "path": "/guides/article-1-isolation-thermique",
-    "family": "ChatGPT-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 23
-   },
-   {
-    "path": "/guides/article-1-isolation-thermique",
-    "family": "MistralAI-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 23
-   },
-   {
-    "path": "/guides/article-4-renovation-energetique",
-    "family": "Perplexity-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 21
-   },
-   {
-    "path": "/guides/article-1-isolation-thermique",
-    "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
     "clicks": 21
    },
    {
     "path": "/guides/article-3-panneaux-solaires",
-    "family": "OAI-SearchBot",
+    "family": "Claude-User",
     "ai_referrer": "ChatGPT",
     "clicks": 21
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "ChatGPT-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 20
    },
    {
     "path": "/guides/article-1-isolation-thermique",
@@ -3269,167 +3270,167 @@
     "clicks": 20
    },
    {
-    "path": "/guides/article-3-panneaux-solaires",
-    "family": "ChatGPT-User",
+    "path": "/guides/article-1-isolation-thermique",
+    "family": "Perplexity-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 18
+    "clicks": 20
    },
    {
     "path": "/guides/article-3-panneaux-solaires",
     "family": "Perplexity-User",
     "ai_referrer": "Perplexity",
-    "clicks": 18
+    "clicks": 19
    },
    {
-    "path": "/guides/article-3-panneaux-solaires",
-    "family": "Claude-User",
+    "path": "/guides/article-2-pompe-a-chaleur",
+    "family": "MistralAI-User",
     "ai_referrer": "ChatGPT",
     "clicks": 18
-   },
-   {
-    "path": "/guides/article-6-aides-maprimerenov",
-    "family": "OAI-SearchBot",
-    "ai_referrer": "ChatGPT",
-    "clicks": 17
-   },
-   {
-    "path": "/guides/article-5-dpe-classe-g",
-    "family": "Perplexity-User",
-    "ai_referrer": "ChatGPT",
-    "clicks": 17
-   },
-   {
-    "path": "/guides/article-6-aides-maprimerenov",
-    "family": "Claude-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 17
-   },
-   {
-    "path": "/guides/article-5-dpe-classe-g",
-    "family": "Claude-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 16
    },
    {
     "path": "/guides/article-1-isolation-thermique",
-    "family": "Claude-User",
+    "family": "MistralAI-User",
     "ai_referrer": "ChatGPT",
-    "clicks": 16
+    "clicks": 18
    },
    {
-    "path": "/guides/article-5-dpe-classe-g",
-    "family": "Perplexity-User",
+    "path": "/guides/article-6-aides-maprimerenov",
+    "family": "ChatGPT-User",
     "ai_referrer": "Perplexity",
-    "clicks": 15
+    "clicks": 18
+   },
+   {
+    "path": "/guides/article-6-aides-maprimerenov",
+    "family": "Claude-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 18
    },
    {
     "path": "/guides/article-5-dpe-classe-g",
     "family": "PerplexityBot",
     "ai_referrer": "ChatGPT",
-    "clicks": 15
+    "clicks": 18
+   },
+   {
+    "path": "/guides/article-1-isolation-thermique",
+    "family": "PerplexityBot",
+    "ai_referrer": "ChatGPT",
+    "clicks": 17
+   },
+   {
+    "path": "/guides/article-5-dpe-classe-g",
+    "family": "Perplexity-User",
+    "ai_referrer": "Perplexity",
+    "clicks": 17
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "OAI-SearchBot",
+    "ai_referrer": "ChatGPT",
+    "clicks": 17
    },
    {
     "path": "/guides/article-4-renovation-energetique",
+    "family": "Claude-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 16
+   },
+   {
+    "path": "/guides/article-5-dpe-classe-g",
+    "family": "MistralAI-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 16
+   },
+   {
+    "path": "/guides/article-3-panneaux-solaires",
+    "family": "OAI-SearchBot",
+    "ai_referrer": "Perplexity",
+    "clicks": 16
+   },
+   {
+    "path": "/guides/article-6-aides-maprimerenov",
     "family": "MistralAI-User",
     "ai_referrer": "ChatGPT",
     "clicks": 15
-   },
-   {
-    "path": "/guides/article-2-pompe-a-chaleur",
-    "family": "Perplexity-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 15
-   },
-   {
-    "path": "/guides/article-4-renovation-energetique",
-    "family": "Perplexity-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 15
-   },
-   {
-    "path": "/guides/article-4-renovation-energetique",
-    "family": "ChatGPT-User",
-    "ai_referrer": "Perplexity",
-    "clicks": 15
    }
   ],
-  "fetch_events": 2462,
+  "fetch_events": 2333,
   "fetched_never_clicked_count": 0,
   "fetched_never_clicked_examples": [],
   "fetched_never_clicked_top": [],
   "note": "fetch_events = lectures par les index et fetchers IA de vraies pages de contenu (HTML 200, identité non usurpée, hors sondes, hors URL techniques WordPress et paramètres). fetched_never_clicked_top = ces pages classées par nombre de lectures IA, jamais cliquées depuis une interface IA sur la période.",
   "referrer_share_human": {
-   "google.com": 15143,
-   "(direct)": 9156,
-   "bing.com": 1066,
-   "chatgpt.com": 684,
-   "perplexity.ai": 429,
-   "copilot.microsoft.com": 203,
-   "claude.ai": 194,
+   "google.com": 15161,
+   "(direct)": 9136,
+   "bing.com": 1067,
+   "chatgpt.com": 669,
+   "perplexity.ai": 444,
+   "copilot.microsoft.com": 208,
+   "claude.ai": 196,
    "gemini.google.com": 87,
-   "chat.mistral.ai": 45
+   "chat.mistral.ai": 50
   }
  },
  "aio": {
   "hot_fetches": {
-   "candidates": 90,
-   "share_of_googlebot_html": 0.0144,
+   "candidates": 85,
+   "share_of_googlebot_html": 0.0134,
    "by_path": {
-    "/guides/article-1-isolation-thermique": 9,
-    "/guides/article-3-panneaux-solaires": 9,
-    "/guides/article-4-renovation-energetique": 6,
-    "/guides/article-2-pompe-a-chaleur": 5,
-    "/guides/article-5-dpe-classe-g": 5,
-    "/guides/article-6-aides-maprimerenov": 4,
+    "/guides/article-3-panneaux-solaires": 8,
+    "/guides/article-1-isolation-thermique": 7,
+    "/guides/article-4-renovation-energetique": 7,
+    "/guides/article-2-pompe-a-chaleur": 6,
+    "/guides/article-6-aides-maprimerenov": 5,
+    "/produits/article-6-aides-maprimerenov": 4,
     "/blog/article-6-aides-maprimerenov": 3,
-    "/produits/article-8-fenetres-double-vitrage": 3,
-    "/produits/article-6-aides-maprimerenov": 3,
-    "/blog/article-7-chaudiere-gaz": 3,
-    "/produits/article-7-chaudiere-gaz": 3,
     "/comparatifs/article-11-bardage-bois": 3,
-    "/comparatifs/article-12-toiture-ardoise": 3,
-    "/guides/article-9-vmc-double-flux": 2,
-    "/produits/article-9-vmc-double-flux": 2,
+    "/produits/article-9-vmc-double-flux": 3,
+    "/guides/article-5-dpe-classe-g": 3,
+    "/blog/article-7-chaudiere-gaz": 2,
+    "/produits/article-7-chaudiere-gaz": 2,
+    "/comparatifs/article-12-toiture-ardoise": 2,
+    "/produits/article-4-renovation-energetique": 2,
     "/blog/article-1-isolation-thermique": 2,
-    "/comparatifs/article-2-pompe-a-chaleur": 2,
+    "/comparatifs/article-5-dpe-classe-g": 2,
     "/comparatifs/article-3-panneaux-solaires": 2,
     "/produits/article-1-isolation-thermique": 2,
-    "/guides/article-12-toiture-ardoise": 2,
+    "/blog/article-4-renovation-energetique": 2,
     "/comparatifs/article-10-poele-a-granules": 2,
+    "/blog/article-3-panneaux-solaires": 2,
+    "/produits/article-8-fenetres-double-vitrage": 1,
+    "/guides/article-9-vmc-double-flux": 1,
     "/guides/article-10-poele-a-granules": 1,
-    "/produits/article-4-renovation-energetique": 1,
     "/comparatifs/article-6-aides-maprimerenov": 1,
     "/blog/article-8-fenetres-double-vitrage": 1,
-    "/comparatifs/article-5-dpe-classe-g": 1,
+    "/comparatifs/article-2-pompe-a-chaleur": 1,
     "/blog/article-12-toiture-ardoise": 1,
-    "/blog/article-5-dpe-classe-g": 1,
-    "/blog/article-4-renovation-energetique": 1,
-    "/guides/article-11-bardage-bois": 1
+    "/guides/article-12-toiture-ardoise": 1,
+    "/produits/article-3-panneaux-solaires": 1
    },
    "by_hour": [
-    4,
-    1,
     2,
-    7,
-    4,
-    3,
-    2,
-    3,
-    3,
-    6,
-    2,
-    8,
-    2,
-    6,
-    2,
-    8,
-    1,
-    7,
     0,
+    2,
+    6,
+    5,
+    1,
+    2,
+    3,
+    3,
     5,
     1,
     8,
+    3,
     4,
+    2,
+    10,
+    1,
+    10,
+    2,
+    6,
+    1,
+    4,
+    3,
     1
    ],
    "params": {
@@ -3439,22 +3440,23 @@
    "note": "Signal PROBABILISTE. Un hit isolé de Googlebot sur une page connue est compatible avec un fetch de fraîcheur pour AIO/AI Mode, mais aussi avec un recrawl ordinaire. À croiser avec la GSC."
   },
   "google_agents": {
-   "hits": 28,
+   "hits": 25,
    "by_family": {
-    "Google-Agent": 28
+    "Google-Agent": 25
    },
    "by_path": {
-    "/guides/article-3-panneaux-solaires": 5,
-    "/guides/article-6-aides-maprimerenov": 5,
-    "/guides/article-10-poele-a-granules": 4,
-    "/guides/article-8-fenetres-double-vitrage": 3,
+    "/guides/article-1-isolation-thermique": 4,
+    "/guides/article-9-vmc-double-flux": 3,
+    "/guides/article-10-poele-a-granules": 3,
     "/guides/article-7-chaudiere-gaz": 3,
-    "/guides/article-4-renovation-energetique": 3,
-    "/guides/article-9-vmc-double-flux": 2,
-    "/guides/article-5-dpe-classe-g": 2,
-    "/guides/article-1-isolation-thermique": 1
+    "/guides/article-6-aides-maprimerenov": 3,
+    "/guides/article-2-pompe-a-chaleur": 3,
+    "/guides/article-4-renovation-energetique": 2,
+    "/guides/article-3-panneaux-solaires": 2,
+    "/guides/article-5-dpe-classe-g": 1,
+    "/guides/article-8-fenetres-double-vitrage": 1
    },
-   "verified": 28,
+   "verified": 25,
    "spoofed": 0
   },
   "gsc_cross": {
@@ -3463,10 +3465,10 @@
      "path": "/guides/article-5-dpe-classe-g",
      "clicks": 261.0,
      "impressions": 29386.0,
-     "googlebot_hits": 140.0,
-     "ai_fetches": 132.0,
-     "ai_clicks": 214.0,
-     "hot_fetch_candidates": 5.0,
+     "googlebot_hits": 155.0,
+     "ai_fetches": 127.0,
+     "ai_clicks": 209.0,
+     "hot_fetch_candidates": 3.0,
      "ctr": 0.0089,
      "aio_suspect": true
     },
@@ -3474,10 +3476,10 @@
      "path": "/guides/article-6-aides-maprimerenov",
      "clicks": 136.0,
      "impressions": 27138.0,
-     "googlebot_hits": 152.0,
-     "ai_fetches": 121.0,
-     "ai_clicks": 239.0,
-     "hot_fetch_candidates": 4.0,
+     "googlebot_hits": 141.0,
+     "ai_fetches": 119.0,
+     "ai_clicks": 227.0,
+     "hot_fetch_candidates": 5.0,
      "ctr": 0.005,
      "aio_suspect": true
     },
@@ -3486,9 +3488,9 @@
      "clicks": 162.0,
      "impressions": 16728.0,
      "googlebot_hits": 143.0,
-     "ai_fetches": 152.0,
-     "ai_clicks": 227.0,
-     "hot_fetch_candidates": 9.0,
+     "ai_fetches": 159.0,
+     "ai_clicks": 237.0,
+     "hot_fetch_candidates": 8.0,
      "ctr": 0.0097,
      "aio_suspect": true
     },
@@ -3496,10 +3498,10 @@
      "path": "/guides/article-4-renovation-energetique",
      "clicks": 52.0,
      "impressions": 8879.0,
-     "googlebot_hits": 123.0,
+     "googlebot_hits": 141.0,
      "ai_fetches": 148.0,
-     "ai_clicks": 210.0,
-     "hot_fetch_candidates": 6.0,
+     "ai_clicks": 221.0,
+     "hot_fetch_candidates": 7.0,
      "ctr": 0.0059,
      "aio_suspect": true
     },
@@ -3507,10 +3509,10 @@
      "path": "/guides/article-1-isolation-thermique",
      "clicks": 68.0,
      "impressions": 6402.0,
-     "googlebot_hits": 160.0,
-     "ai_fetches": 137.0,
-     "ai_clicks": 216.0,
-     "hot_fetch_candidates": 9.0,
+     "googlebot_hits": 147.0,
+     "ai_fetches": 134.0,
+     "ai_clicks": 217.0,
+     "hot_fetch_candidates": 7.0,
      "ctr": 0.0106,
      "aio_suspect": true
     },
@@ -3518,10 +3520,10 @@
      "path": "/guides/article-2-pompe-a-chaleur",
      "clicks": 30.0,
      "impressions": 4067.0,
-     "googlebot_hits": 117.0,
-     "ai_fetches": 128.0,
-     "ai_clicks": 199.0,
-     "hot_fetch_candidates": 5.0,
+     "googlebot_hits": 129.0,
+     "ai_fetches": 105.0,
+     "ai_clicks": 191.0,
+     "hot_fetch_candidates": 6.0,
      "ctr": 0.0074,
      "aio_suspect": true
     },
@@ -3529,9 +3531,9 @@
      "path": "/blog/article-6-aides-maprimerenov",
      "clicks": 148.0,
      "impressions": 2963.0,
-     "googlebot_hits": 129.0,
-     "ai_fetches": 30.0,
-     "ai_clicks": 3.0,
+     "googlebot_hits": 125.0,
+     "ai_fetches": 32.0,
+     "ai_clicks": 4.0,
      "hot_fetch_candidates": 3.0,
      "ctr": 0.0499,
      "aio_suspect": false
@@ -3540,8 +3542,8 @@
      "path": "/guides/article-10-poele-a-granules",
      "clicks": 94.0,
      "impressions": 2861.0,
-     "googlebot_hits": 123.0,
-     "ai_fetches": 130.0,
+     "googlebot_hits": 129.0,
+     "ai_fetches": 108.0,
      "ai_clicks": 18.0,
      "hot_fetch_candidates": 1.0,
      "ctr": 0.0329,
@@ -3551,9 +3553,9 @@
      "path": "/blog/article-1-isolation-thermique",
      "clicks": 93.0,
      "impressions": 2822.0,
-     "googlebot_hits": 111.0,
-     "ai_fetches": 25.0,
-     "ai_clicks": 19.0,
+     "googlebot_hits": 127.0,
+     "ai_fetches": 30.0,
+     "ai_clicks": 21.0,
      "hot_fetch_candidates": 2.0,
      "ctr": 0.033,
      "aio_suspect": false
@@ -3562,9 +3564,9 @@
      "path": "/produits/article-10-poele-a-granules",
      "clicks": 145.0,
      "impressions": 2750.0,
-     "googlebot_hits": 123.0,
-     "ai_fetches": 35.0,
-     "ai_clicks": 5.0,
+     "googlebot_hits": 134.0,
+     "ai_fetches": 43.0,
+     "ai_clicks": 6.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0527,
      "aio_suspect": false
@@ -3573,7 +3575,7 @@
      "path": "/comparatifs/article-7-chaudiere-gaz",
      "clicks": 81.0,
      "impressions": 2652.0,
-     "googlebot_hits": 38.0,
+     "googlebot_hits": 36.0,
      "ai_fetches": 0.0,
      "ai_clicks": 4.0,
      "hot_fetch_candidates": 0.0,
@@ -3585,9 +3587,9 @@
      "clicks": 208.0,
      "impressions": 2627.0,
      "googlebot_hits": 128.0,
-     "ai_fetches": 34.0,
-     "ai_clicks": 19.0,
-     "hot_fetch_candidates": 1.0,
+     "ai_fetches": 33.0,
+     "ai_clicks": 20.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.0792,
      "aio_suspect": false
     },
@@ -3595,8 +3597,8 @@
      "path": "/produits/article-5-dpe-classe-g",
      "clicks": 142.0,
      "impressions": 2568.0,
-     "googlebot_hits": 116.0,
-     "ai_fetches": 35.0,
+     "googlebot_hits": 102.0,
+     "ai_fetches": 30.0,
      "ai_clicks": 5.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0553,
@@ -3606,9 +3608,9 @@
      "path": "/blog/article-10-poele-a-granules",
      "clicks": 175.0,
      "impressions": 2462.0,
-     "googlebot_hits": 102.0,
-     "ai_fetches": 30.0,
-     "ai_clicks": 7.0,
+     "googlebot_hits": 106.0,
+     "ai_fetches": 24.0,
+     "ai_clicks": 8.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0711,
      "aio_suspect": false
@@ -3617,10 +3619,10 @@
      "path": "/produits/article-9-vmc-double-flux",
      "clicks": 99.0,
      "impressions": 2416.0,
-     "googlebot_hits": 109.0,
+     "googlebot_hits": 112.0,
      "ai_fetches": 50.0,
      "ai_clicks": 2.0,
-     "hot_fetch_candidates": 2.0,
+     "hot_fetch_candidates": 3.0,
      "ctr": 0.041,
      "aio_suspect": false
     },
@@ -3628,8 +3630,8 @@
      "path": "/comparatifs/article-1-isolation-thermique",
      "clicks": 75.0,
      "impressions": 2349.0,
-     "googlebot_hits": 111.0,
-     "ai_fetches": 36.0,
+     "googlebot_hits": 95.0,
+     "ai_fetches": 29.0,
      "ai_clicks": 3.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0319,
@@ -3639,10 +3641,10 @@
      "path": "/blog/article-3-panneaux-solaires",
      "clicks": 175.0,
      "impressions": 2329.0,
-     "googlebot_hits": 109.0,
-     "ai_fetches": 34.0,
-     "ai_clicks": 14.0,
-     "hot_fetch_candidates": 0.0,
+     "googlebot_hits": 113.0,
+     "ai_fetches": 28.0,
+     "ai_clicks": 15.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.0751,
      "aio_suspect": false
     },
@@ -3650,9 +3652,9 @@
      "path": "/blog/article-12-toiture-ardoise",
      "clicks": 167.0,
      "impressions": 2297.0,
-     "googlebot_hits": 128.0,
-     "ai_fetches": 37.0,
-     "ai_clicks": 7.0,
+     "googlebot_hits": 119.0,
+     "ai_fetches": 30.0,
+     "ai_clicks": 8.0,
      "hot_fetch_candidates": 1.0,
      "ctr": 0.0727,
      "aio_suspect": false
@@ -3661,10 +3663,10 @@
      "path": "/produits/article-8-fenetres-double-vitrage",
      "clicks": 77.0,
      "impressions": 2295.0,
-     "googlebot_hits": 118.0,
-     "ai_fetches": 35.0,
+     "googlebot_hits": 123.0,
+     "ai_fetches": 27.0,
      "ai_clicks": 4.0,
-     "hot_fetch_candidates": 3.0,
+     "hot_fetch_candidates": 1.0,
      "ctr": 0.0336,
      "aio_suspect": false
     },
@@ -3673,9 +3675,9 @@
      "clicks": 46.0,
      "impressions": 2267.0,
      "googlebot_hits": 116.0,
-     "ai_fetches": 133.0,
+     "ai_fetches": 117.0,
      "ai_clicks": 19.0,
-     "hot_fetch_candidates": 2.0,
+     "hot_fetch_candidates": 1.0,
      "ctr": 0.0203,
      "aio_suspect": false
     },
@@ -3683,10 +3685,10 @@
      "path": "/comparatifs/article-5-dpe-classe-g",
      "clicks": 129.0,
      "impressions": 2262.0,
-     "googlebot_hits": 38.0,
-     "ai_fetches": 37.0,
+     "googlebot_hits": 37.0,
+     "ai_fetches": 36.0,
      "ai_clicks": 6.0,
-     "hot_fetch_candidates": 1.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.057,
      "aio_suspect": false
     },
@@ -3694,8 +3696,8 @@
      "path": "/produits/article-12-toiture-ardoise",
      "clicks": 147.0,
      "impressions": 2149.0,
-     "googlebot_hits": 121.0,
-     "ai_fetches": 34.0,
+     "googlebot_hits": 131.0,
+     "ai_fetches": 36.0,
      "ai_clicks": 7.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0684,
@@ -3705,10 +3707,10 @@
      "path": "/blog/article-7-chaudiere-gaz",
      "clicks": 148.0,
      "impressions": 2129.0,
-     "googlebot_hits": 128.0,
-     "ai_fetches": 32.0,
-     "ai_clicks": 6.0,
-     "hot_fetch_candidates": 3.0,
+     "googlebot_hits": 117.0,
+     "ai_fetches": 24.0,
+     "ai_clicks": 7.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.0695,
      "aio_suspect": false
     },
@@ -3716,8 +3718,8 @@
      "path": "/blog/article-9-vmc-double-flux",
      "clicks": 148.0,
      "impressions": 2095.0,
-     "googlebot_hits": 124.0,
-     "ai_fetches": 45.0,
+     "googlebot_hits": 112.0,
+     "ai_fetches": 42.0,
      "ai_clicks": 8.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0706,
@@ -3727,10 +3729,10 @@
      "path": "/guides/article-12-toiture-ardoise",
      "clicks": 110.0,
      "impressions": 2080.0,
-     "googlebot_hits": 118.0,
+     "googlebot_hits": 123.0,
      "ai_fetches": 41.0,
      "ai_clicks": 23.0,
-     "hot_fetch_candidates": 2.0,
+     "hot_fetch_candidates": 1.0,
      "ctr": 0.0529,
      "aio_suspect": false
     },
@@ -3738,10 +3740,10 @@
      "path": "/comparatifs/article-2-pompe-a-chaleur",
      "clicks": 145.0,
      "impressions": 2020.0,
-     "googlebot_hits": 118.0,
-     "ai_fetches": 30.0,
-     "ai_clicks": 5.0,
-     "hot_fetch_candidates": 2.0,
+     "googlebot_hits": 120.0,
+     "ai_fetches": 25.0,
+     "ai_clicks": 4.0,
+     "hot_fetch_candidates": 1.0,
      "ctr": 0.0718,
      "aio_suspect": false
     },
@@ -3749,10 +3751,10 @@
      "path": "/produits/article-4-renovation-energetique",
      "clicks": 44.0,
      "impressions": 1972.0,
-     "googlebot_hits": 118.0,
-     "ai_fetches": 32.0,
+     "googlebot_hits": 124.0,
+     "ai_fetches": 28.0,
      "ai_clicks": 2.0,
-     "hot_fetch_candidates": 1.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.0223,
      "aio_suspect": false
     },
@@ -3760,8 +3762,8 @@
      "path": "/comparatifs/article-6-aides-maprimerenov",
      "clicks": 107.0,
      "impressions": 1926.0,
-     "googlebot_hits": 26.0,
-     "ai_fetches": 38.0,
+     "googlebot_hits": 35.0,
+     "ai_fetches": 42.0,
      "ai_clicks": 4.0,
      "hot_fetch_candidates": 1.0,
      "ctr": 0.0556,
@@ -3772,8 +3774,8 @@
      "clicks": 76.0,
      "impressions": 1705.0,
      "googlebot_hits": 124.0,
-     "ai_fetches": 29.0,
-     "ai_clicks": 7.0,
+     "ai_fetches": 32.0,
+     "ai_clicks": 8.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0446,
      "aio_suspect": false
@@ -3782,10 +3784,10 @@
      "path": "/produits/article-3-panneaux-solaires",
      "clicks": 70.0,
      "impressions": 1660.0,
-     "googlebot_hits": 101.0,
-     "ai_fetches": 36.0,
+     "googlebot_hits": 105.0,
+     "ai_fetches": 31.0,
      "ai_clicks": 4.0,
-     "hot_fetch_candidates": 0.0,
+     "hot_fetch_candidates": 1.0,
      "ctr": 0.0422,
      "aio_suspect": false
     },
@@ -3793,8 +3795,8 @@
      "path": "/produits/article-1-isolation-thermique",
      "clicks": 39.0,
      "impressions": 1584.0,
-     "googlebot_hits": 110.0,
-     "ai_fetches": 44.0,
+     "googlebot_hits": 126.0,
+     "ai_fetches": 41.0,
      "ai_clicks": 7.0,
      "hot_fetch_candidates": 2.0,
      "ctr": 0.0246,
@@ -3804,9 +3806,9 @@
      "path": "/comparatifs/article-4-renovation-energetique",
      "clicks": 67.0,
      "impressions": 1511.0,
-     "googlebot_hits": 136.0,
-     "ai_fetches": 33.0,
-     "ai_clicks": 8.0,
+     "googlebot_hits": 132.0,
+     "ai_fetches": 43.0,
+     "ai_clicks": 9.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0443,
      "aio_suspect": false
@@ -3815,9 +3817,9 @@
      "path": "/guides/article-8-fenetres-double-vitrage",
      "clicks": 29.0,
      "impressions": 1350.0,
-     "googlebot_hits": 125.0,
-     "ai_fetches": 115.0,
-     "ai_clicks": 21.0,
+     "googlebot_hits": 129.0,
+     "ai_fetches": 128.0,
+     "ai_clicks": 22.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0215,
      "aio_suspect": false
@@ -3826,8 +3828,8 @@
      "path": "/blog/article-8-fenetres-double-vitrage",
      "clicks": 47.0,
      "impressions": 1292.0,
-     "googlebot_hits": 116.0,
-     "ai_fetches": 39.0,
+     "googlebot_hits": 132.0,
+     "ai_fetches": 35.0,
      "ai_clicks": 5.0,
      "hot_fetch_candidates": 1.0,
      "ctr": 0.0364,
@@ -3837,8 +3839,8 @@
      "path": "/blog/article-2-pompe-a-chaleur",
      "clicks": 93.0,
      "impressions": 1236.0,
-     "googlebot_hits": 105.0,
-     "ai_fetches": 35.0,
+     "googlebot_hits": 93.0,
+     "ai_fetches": 40.0,
      "ai_clicks": 22.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0752,
@@ -3851,7 +3853,7 @@
      "googlebot_hits": 44.0,
      "ai_fetches": 0.0,
      "ai_clicks": 5.0,
-     "hot_fetch_candidates": 3.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.0261,
      "aio_suspect": false
     },
@@ -3859,7 +3861,7 @@
      "path": "/comparatifs/article-9-vmc-double-flux",
      "clicks": 24.0,
      "impressions": 1095.0,
-     "googlebot_hits": 32.0,
+     "googlebot_hits": 36.0,
      "ai_fetches": 0.0,
      "ai_clicks": 8.0,
      "hot_fetch_candidates": 0.0,
@@ -3870,8 +3872,8 @@
      "path": "/guides/article-7-chaudiere-gaz",
      "clicks": 54.0,
      "impressions": 987.0,
-     "googlebot_hits": 114.0,
-     "ai_fetches": 123.0,
+     "googlebot_hits": 113.0,
+     "ai_fetches": 107.0,
      "ai_clicks": 17.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0547,
@@ -3881,9 +3883,9 @@
      "path": "/comparatifs/article-3-panneaux-solaires",
      "clicks": 66.0,
      "impressions": 868.0,
-     "googlebot_hits": 123.0,
-     "ai_fetches": 33.0,
-     "ai_clicks": 2.0,
+     "googlebot_hits": 136.0,
+     "ai_fetches": 25.0,
+     "ai_clicks": 3.0,
      "hot_fetch_candidates": 2.0,
      "ctr": 0.076,
      "aio_suspect": false
@@ -3892,10 +3894,10 @@
      "path": "/produits/article-6-aides-maprimerenov",
      "clicks": 22.0,
      "impressions": 747.0,
-     "googlebot_hits": 102.0,
-     "ai_fetches": 35.0,
+     "googlebot_hits": 110.0,
+     "ai_fetches": 29.0,
      "ai_clicks": 3.0,
-     "hot_fetch_candidates": 3.0,
+     "hot_fetch_candidates": 4.0,
      "ctr": 0.0295,
      "aio_suspect": false
     },
@@ -3903,10 +3905,10 @@
      "path": "/blog/article-5-dpe-classe-g",
      "clicks": 35.0,
      "impressions": 545.0,
-     "googlebot_hits": 128.0,
+     "googlebot_hits": 119.0,
      "ai_fetches": 46.0,
      "ai_clicks": 1.0,
-     "hot_fetch_candidates": 1.0,
+     "hot_fetch_candidates": 0.0,
      "ctr": 0.0642,
      "aio_suspect": false
     },
@@ -3914,8 +3916,8 @@
      "path": "/produits/article-2-pompe-a-chaleur",
      "clicks": 32.0,
      "impressions": 492.0,
-     "googlebot_hits": 112.0,
-     "ai_fetches": 39.0,
+     "googlebot_hits": 108.0,
+     "ai_fetches": 35.0,
      "ai_clicks": 6.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.065,
@@ -3925,9 +3927,9 @@
      "path": "/comparatifs/article-8-fenetres-double-vitrage",
      "clicks": 28.0,
      "impressions": 425.0,
-     "googlebot_hits": 43.0,
+     "googlebot_hits": 35.0,
      "ai_fetches": 0.0,
-     "ai_clicks": 6.0,
+     "ai_clicks": 7.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0659,
      "aio_suspect": false
@@ -3936,7 +3938,7 @@
      "path": "/comparatifs/article-10-poele-a-granules",
      "clicks": 8.0,
      "impressions": 338.0,
-     "googlebot_hits": 34.0,
+     "googlebot_hits": 28.0,
      "ai_fetches": 0.0,
      "ai_clicks": 2.0,
      "hot_fetch_candidates": 2.0,
@@ -3947,10 +3949,10 @@
      "path": "/guides/article-11-bardage-bois",
      "clicks": 8.0,
      "impressions": 168.0,
-     "googlebot_hits": 114.0,
-     "ai_fetches": 31.0,
-     "ai_clicks": 9.0,
-     "hot_fetch_candidates": 1.0,
+     "googlebot_hits": 116.0,
+     "ai_fetches": 27.0,
+     "ai_clicks": 10.0,
+     "hot_fetch_candidates": 0.0,
      "ctr": 0.0476,
      "aio_suspect": false
     },
@@ -3969,7 +3971,7 @@
      "path": "/comparatifs/article-11-bardage-bois",
      "clicks": 7.0,
      "impressions": 109.0,
-     "googlebot_hits": 48.0,
+     "googlebot_hits": 41.0,
      "ai_fetches": 0.0,
      "ai_clicks": 6.0,
      "hot_fetch_candidates": 3.0,
@@ -3980,10 +3982,10 @@
      "path": "/produits/article-7-chaudiere-gaz",
      "clicks": 6.0,
      "impressions": 100.0,
-     "googlebot_hits": 110.0,
-     "ai_fetches": 38.0,
+     "googlebot_hits": 106.0,
+     "ai_fetches": 41.0,
      "ai_clicks": 4.0,
-     "hot_fetch_candidates": 3.0,
+     "hot_fetch_candidates": 2.0,
      "ctr": 0.06,
      "aio_suspect": false
     },
@@ -3991,9 +3993,9 @@
      "path": "/produits/article-11-bardage-bois",
      "clicks": 3.0,
      "impressions": 73.0,
-     "googlebot_hits": 117.0,
-     "ai_fetches": 35.0,
-     "ai_clicks": 4.0,
+     "googlebot_hits": 122.0,
+     "ai_fetches": 26.0,
+     "ai_clicks": 5.0,
      "hot_fetch_candidates": 0.0,
      "ctr": 0.0411,
      "aio_suspect": false
@@ -4022,13 +4024,17 @@
     "/blog/ancien-article-10",
     "/blog/ancien-article-100",
     "/blog/ancien-article-101",
+    "/blog/ancien-article-102",
     "/blog/ancien-article-103",
     "/blog/ancien-article-104",
     "/blog/ancien-article-105",
     "/blog/ancien-article-106",
+    "/blog/ancien-article-107",
     "/blog/ancien-article-108",
     "/blog/ancien-article-11",
     "/blog/ancien-article-111",
+    "/blog/ancien-article-112",
+    "/blog/ancien-article-113",
     "/blog/ancien-article-114",
     "/blog/ancien-article-115",
     "/blog/ancien-article-116",
@@ -4046,11 +4052,11 @@
     "/blog/ancien-article-127",
     "/blog/ancien-article-128",
     "/blog/ancien-article-129",
-    "/blog/ancien-article-13",
     "/blog/ancien-article-130",
     "/blog/ancien-article-131",
     "/blog/ancien-article-132",
     "/blog/ancien-article-133",
+    "/blog/ancien-article-134",
     "/blog/ancien-article-135",
     "/blog/ancien-article-136",
     "/blog/ancien-article-137",
@@ -4062,14 +4068,10 @@
     "/blog/ancien-article-142",
     "/blog/ancien-article-143",
     "/blog/ancien-article-144",
-    "/blog/ancien-article-145",
     "/blog/ancien-article-146",
-    "/blog/ancien-article-147",
-    "/blog/ancien-article-149",
-    "/blog/ancien-article-15",
-    "/blog/ancien-article-150"
+    "/blog/ancien-article-147"
    ],
-   "crawled_not_in_sitemap_count": 350,
+   "crawled_not_in_sitemap_count": 341,
    "read_by_ai": 48,
    "ai_urls_not_in_sitemap": [
     "/blog/tag-0",
@@ -4102,13 +4104,17 @@
     "/blog/ancien-article-10",
     "/blog/ancien-article-100",
     "/blog/ancien-article-101",
+    "/blog/ancien-article-102",
     "/blog/ancien-article-103",
     "/blog/ancien-article-104",
     "/blog/ancien-article-105",
     "/blog/ancien-article-106",
+    "/blog/ancien-article-107",
     "/blog/ancien-article-108",
     "/blog/ancien-article-11",
     "/blog/ancien-article-111",
+    "/blog/ancien-article-112",
+    "/blog/ancien-article-113",
     "/blog/ancien-article-114",
     "/blog/ancien-article-115",
     "/blog/ancien-article-116",
@@ -4126,11 +4132,11 @@
     "/blog/ancien-article-127",
     "/blog/ancien-article-128",
     "/blog/ancien-article-129",
-    "/blog/ancien-article-13",
     "/blog/ancien-article-130",
     "/blog/ancien-article-131",
     "/blog/ancien-article-132",
     "/blog/ancien-article-133",
+    "/blog/ancien-article-134",
     "/blog/ancien-article-135",
     "/blog/ancien-article-136",
     "/blog/ancien-article-137",
@@ -4142,14 +4148,10 @@
     "/blog/ancien-article-142",
     "/blog/ancien-article-143",
     "/blog/ancien-article-144",
-    "/blog/ancien-article-145",
     "/blog/ancien-article-146",
-    "/blog/ancien-article-147",
-    "/blog/ancien-article-149",
-    "/blog/ancien-article-15",
-    "/blog/ancien-article-150"
+    "/blog/ancien-article-147"
    ],
-   "orphans_count": 348,
+   "orphans_count": 339,
    "in_crawl_never_seen_by_googlebot": [
     "/blog/tag-0",
     "/produits/fiche-orpheline-0",
@@ -4175,35 +4177,35 @@
    "hits_by_depth": [
     {
      "depth": 1,
-     "sum": 1545.0,
-     "mean": 128.75,
+     "sum": 1582.0,
+     "mean": 131.83,
      "count": 12
     },
     {
      "depth": 2,
-     "sum": 1442.0,
-     "mean": 96.13,
+     "sum": 1424.0,
+     "mean": 94.93,
      "count": 15
     },
     {
      "depth": 3,
-     "sum": 1357.0,
-     "mean": 113.08,
+     "sum": 1403.0,
+     "mean": 116.92,
      "count": 12
     },
     {
      "depth": 4,
-     "sum": 791.0,
-     "mean": 46.53,
+     "sum": 775.0,
+     "mean": 45.59,
      "count": 17
     }
    ]
   },
   "_human_vs_bot_overlap": {
    "urls_seen_by_humans": 48,
-   "urls_seen_by_googlebot": 398,
+   "urls_seen_by_googlebot": 389,
    "human_only": 0,
-   "googlebot_only": 350
+   "googlebot_only": 341
   }
  },
  "robots_sim": {
@@ -4216,7 +4218,7 @@
   ],
   "by_family": {
    "AhrefsBot": {
-    "hits": 1215,
+    "hits": 1157,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4224,7 +4226,7 @@
     "blocked_examples": []
    },
    "Amazonbot": {
-    "hits": 417,
+    "hits": 423,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4232,7 +4234,7 @@
     "blocked_examples": []
    },
    "Bingbot": {
-    "hits": 1034,
+    "hits": 1070,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4240,7 +4242,7 @@
     "blocked_examples": []
    },
    "Bot non identifié": {
-    "hits": 333,
+    "hits": 349,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4248,8 +4250,8 @@
     "blocked_examples": []
    },
    "Bytespider": {
-    "hits": 2464,
-    "blocked_by_rules": 2464,
+    "hits": 2598,
+    "blocked_by_rules": 2598,
     "effectively_blocked": 0,
     "ignores_robots": true,
     "token": "bytespider",
@@ -4262,7 +4264,7 @@
     ]
    },
    "CCBot": {
-    "hits": 531,
+    "hits": 563,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4270,8 +4272,8 @@
     "blocked_examples": []
    },
    "ChatGPT-User": {
-    "hits": 250,
-    "blocked_by_rules": 250,
+    "hits": 243,
+    "blocked_by_rules": 243,
     "effectively_blocked": 0,
     "ignores_robots": true,
     "token": "chatgpt-user",
@@ -4284,7 +4286,7 @@
     ]
    },
    "Claude-SearchBot": {
-    "hits": 430,
+    "hits": 387,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4292,7 +4294,7 @@
     "blocked_examples": []
    },
    "Claude-User": {
-    "hits": 242,
+    "hits": 186,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": true,
@@ -4300,7 +4302,7 @@
     "blocked_examples": []
    },
    "ClaudeBot": {
-    "hits": 1713,
+    "hits": 1701,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4308,9 +4310,9 @@
     "blocked_examples": []
    },
    "GPTBot": {
-    "hits": 2540,
-    "blocked_by_rules": 2540,
-    "effectively_blocked": 2540,
+    "hits": 1542,
+    "blocked_by_rules": 1542,
+    "effectively_blocked": 1542,
     "ignores_robots": false,
     "token": "gptbot",
     "blocked_examples": [
@@ -4322,7 +4324,7 @@
     ]
    },
    "Google-Agent": {
-    "hits": 28,
+    "hits": 25,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4338,9 +4340,9 @@
     "blocked_examples": []
    },
    "Googlebot Smartphone": {
-    "hits": 6611,
-    "blocked_by_rules": 274,
-    "effectively_blocked": 274,
+    "hits": 6686,
+    "blocked_by_rules": 276,
+    "effectively_blocked": 276,
     "ignores_robots": false,
     "token": "googlebot",
     "blocked_examples": [
@@ -4360,7 +4362,7 @@
     "blocked_examples": []
    },
    "LinkedInBot": {
-    "hits": 78,
+    "hits": 71,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4368,7 +4370,7 @@
     "blocked_examples": []
    },
    "Meta-ExternalAgent": {
-    "hits": 851,
+    "hits": 814,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4376,7 +4378,7 @@
     "blocked_examples": []
    },
    "MistralAI-User": {
-    "hits": 209,
+    "hits": 210,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": true,
@@ -4384,7 +4386,7 @@
     "blocked_examples": []
    },
    "OAI-SearchBot": {
-    "hits": 605,
+    "hits": 565,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4392,7 +4394,7 @@
     "blocked_examples": []
    },
    "Perplexity-User": {
-    "hits": 235,
+    "hits": 264,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": true,
@@ -4400,7 +4402,7 @@
     "blocked_examples": []
    },
    "PerplexityBot": {
-    "hits": 506,
+    "hits": 493,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4408,7 +4410,7 @@
     "blocked_examples": []
    },
    "Python HTTP lib": {
-    "hits": 346,
+    "hits": 345,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4424,7 +4426,7 @@
     "blocked_examples": []
    },
    "SemrushBot": {
-    "hits": 683,
+    "hits": 638,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4432,7 +4434,7 @@
     "blocked_examples": []
    },
    "facebookexternalhit": {
-    "hits": 123,
+    "hits": 129,
     "blocked_by_rules": 0,
     "effectively_blocked": 0,
     "ignores_robots": false,
@@ -4441,8 +4443,8 @@
    }
   },
   "lessons": [
-   "Bytespider : 2464 hits matchent un Disallow mais ce fetcher ignore robots.txt (ce crawler est réputé ne pas honorer robots.txt). Seul un blocage serveur (403/WAF) l'arrête.",
-   "ChatGPT-User : 250 hits matchent un Disallow mais ce fetcher ignore robots.txt (un humain est derrière, il se comporte comme un navigateur). Seul un blocage serveur (403/WAF) l'arrête.",
+   "Bytespider : 2598 hits matchent un Disallow mais ce fetcher ignore robots.txt (ce crawler est réputé ne pas honorer robots.txt). Seul un blocage serveur (403/WAF) l'arrête.",
+   "ChatGPT-User : 243 hits matchent un Disallow mais ce fetcher ignore robots.txt (un humain est derrière, il se comporte comme un navigateur). Seul un blocage serveur (403/WAF) l'arrête.",
    "google-extended est un token de contrôle, pas un User-Agent : aucun hit de vos logs ne change avec cette règle. Elle agit sur l'usage (entraînement / grounding) des pages déjà crawlées par Googlebot/Applebot.",
    "amazonbot crawle le site mais n'a aucune règle dédiée dans le robots.txt (il applique donc le groupe '*').",
    "ccbot crawle le site mais n'a aucune règle dédiée dans le robots.txt (il applique donc le groupe '*').",
@@ -4456,16 +4458,16 @@
    "perplexity-user crawle le site mais n'a aucune règle dédiée dans le robots.txt (il applique donc le groupe '*').",
    "perplexitybot crawle le site mais n'a aucune règle dédiée dans le robots.txt (il applique donc le groupe '*')."
   ],
-  "total_blocked": 2814,
-  "total_rules_matched_but_ignored": 2714
+  "total_blocked": 1818,
+  "total_rules_matched_but_ignored": 2841
  },
  "stealth": {
   "scored_ips": 401,
   "suspects": [
    {
     "ip": "195.154.22.9",
-    "hits": 1603,
-    "html_hits": 1603,
+    "hits": 1606,
+    "html_hits": 1606,
     "score": 6,
     "signals": [
      "no_assets",
@@ -4478,8 +4480,8 @@
     "reclassified": false
    }
   ],
-  "suspect_hits": 1603,
-  "suspect_share_of_human": 0.0156,
+  "suspect_hits": 1606,
+  "suspect_share_of_human": 0.0157,
   "note": "Score heuristique. ≥4 : à vérifier ; ≥7 : très probablement un bot déguisé en navigateur, reclassé en scraper (reclassified=true) avant le calcul des parts. suspect_share_of_human = part du trafic initialement classé humain. Aucun de ces hits n'est vu par GA4 comme bot.",
   "reclassified_ips": [],
   "reclassified_hits": 0
@@ -4494,192 +4496,182 @@
    },
    "après": {
     "days": 7.03,
-    "hits": 62046,
+    "hits": 61072,
     "start": "2026-08-17T00:01:28+00:00",
-    "end": "2026-08-24T00:48:58+00:00"
+    "end": "2026-08-24T00:49:44+00:00"
    }
   },
   "hits_per_day": {
    "avant": 8945.91,
-   "après": 8822.14,
-   "delta_pct": -1.4
+   "après": 8682.99,
+   "delta_pct": -2.9
   },
   "error_rate": {
    "avant": 0.01,
-   "après": 0.01,
-   "delta_pct": -9.4
+   "après": 0.03,
+   "delta_pct": 144.6
   },
   "googlebot_html_urls": {
    "avant": 307,
-   "après": 331,
-   "delta_pct": 7.8
+   "après": 318,
+   "delta_pct": 3.6
   },
   "by_category": {
    "other_bot": {
     "avant": 25.21,
-    "après": 22.32,
-    "delta_pct": -11.5
-   },
-   "ai_training": {
-    "avant": 645.45,
-    "après": 570.17,
-    "delta_pct": -11.7
-   },
-   "ai_agent": {
-    "avant": 0,
-    "après": 3.98,
-    "delta_pct": null
+    "après": 24.6,
+    "delta_pct": -2.4
    },
    "seo_tool": {
     "avant": 132.93,
-    "après": 137.92,
-    "delta_pct": 3.8
+    "après": 123.27,
+    "delta_pct": -7.3
    },
    "ai_user_fetch": {
     "avant": 61.31,
-    "après": 72.23,
-    "delta_pct": 17.8
+    "après": 67.53,
+    "delta_pct": 10.2
    },
-   "social_preview": {
-    "avant": 14.61,
-    "après": 14.08,
-    "delta_pct": -3.7
+   "ai_agent": {
+    "avant": 0,
+    "après": 3.55,
+    "delta_pct": null
    },
-   "human": {
-    "avant": 7352.77,
-    "après": 7290.79,
-    "delta_pct": -0.8
-   },
-   "ai_search": {
-    "avant": 112.87,
-    "après": 107.07,
-    "delta_pct": -5.1
+   "ai_training": {
+    "avant": 645.45,
+    "après": 445.72,
+    "delta_pct": -30.9
    },
    "scraper": {
     "avant": 30.37,
-    "après": 29.01,
-    "delta_pct": -4.5
+    "après": 28.86,
+    "delta_pct": -5.0
+   },
+   "social_preview": {
+    "avant": 14.61,
+    "après": 13.93,
+    "delta_pct": -4.6
+   },
+   "ai_search": {
+    "avant": 112.87,
+    "après": 93.41,
+    "delta_pct": -17.2
+   },
+   "human": {
+    "avant": 7352.77,
+    "après": 7291.8,
+    "delta_pct": -0.8
    },
    "search_engine": {
     "avant": 570.39,
-    "après": 574.58,
-    "delta_pct": 0.7
+    "après": 590.32,
+    "delta_pct": 3.5
    }
   },
   "by_family": {
-   "ChatGPT-User": {
-    "avant": 14.9,
-    "après": 20.76,
-    "delta_pct": 39.4
+   "GPTBot": {
+    "avant": 216.87,
+    "après": 3.98,
+    "delta_pct": -98.2
    },
    "MistralAI-User": {
     "avant": 12.46,
-    "après": 17.35,
-    "delta_pct": 39.2
+    "après": 17.49,
+    "delta_pct": 40.3
    },
-   "GPTBot": {
-    "avant": 216.87,
-    "après": 145.88,
-    "delta_pct": -32.7
-   },
-   "Claude-User": {
-    "avant": 15.33,
-    "après": 19.2,
-    "delta_pct": 25.2
-   },
-   "Perplexity-User": {
-    "avant": 18.62,
-    "après": 14.93,
-    "delta_pct": -19.8
-   },
-   "Amazonbot": {
-    "avant": 27.5,
-    "après": 31.99,
-    "delta_pct": 16.3
-   },
-   "Bot non identifié": {
-    "avant": 25.21,
-    "après": 22.32,
-    "delta_pct": -11.5
-   },
-   "facebookexternalhit": {
-    "avant": 9.31,
-    "après": 8.25,
-    "delta_pct": -11.4
-   },
-   "LinkedInBot": {
-    "avant": 5.3,
-    "après": 5.83,
-    "delta_pct": 10.0
+   "ChatGPT-User": {
+    "avant": 14.9,
+    "après": 19.76,
+    "delta_pct": 32.7
    },
    "Claude-SearchBot": {
     "avant": 32.23,
-    "après": 29.15,
-    "delta_pct": -9.6
+    "après": 23.03,
+    "delta_pct": -28.5
    },
-   "Meta-ExternalAgent": {
-    "avant": 58.3,
-    "après": 63.13,
-    "delta_pct": 8.3
-   },
-   "Bytespider": {
-    "avant": 182.92,
-    "après": 168.78,
-    "delta_pct": -7.7
-   },
-   "Bingbot": {
-    "avant": 76.63,
-    "après": 70.95,
-    "delta_pct": -7.4
-   },
-   "AhrefsBot": {
-    "avant": 83.8,
-    "après": 89.58,
-    "delta_pct": 6.9
+   "Claude-User": {
+    "avant": 15.33,
+    "après": 11.23,
+    "delta_pct": -26.7
    },
    "OAI-SearchBot": {
     "avant": 44.69,
-    "après": 41.66,
-    "delta_pct": -6.8
+    "après": 35.97,
+    "delta_pct": -19.5
    },
-   "Python HTTP lib": {
-    "avant": 25.35,
-    "après": 24.03,
-    "delta_pct": -5.2
-   },
-   "CCBot": {
-    "avant": 38.53,
-    "après": 37.25,
-    "delta_pct": -3.3
-   },
-   "Googlebot Smartphone": {
-    "avant": 466.83,
-    "après": 476.61,
-    "delta_pct": 2.1
+   "Amazonbot": {
+    "avant": 27.5,
+    "après": 32.84,
+    "delta_pct": 19.4
    },
    "SemrushBot": {
     "avant": 49.13,
-    "après": 48.34,
-    "delta_pct": -1.6
+    "après": 41.94,
+    "delta_pct": -14.6
    },
-   "ClaudeBot": {
-    "avant": 121.33,
-    "après": 123.13,
-    "delta_pct": 1.5
+   "LinkedInBot": {
+    "avant": 5.3,
+    "après": 4.83,
+    "delta_pct": -8.8
+   },
+   "CCBot": {
+    "avant": 38.53,
+    "après": 41.8,
+    "delta_pct": 8.5
+   },
+   "Python HTTP lib": {
+    "avant": 25.35,
+    "après": 23.89,
+    "delta_pct": -5.8
+   },
+   "Googlebot Smartphone": {
+    "avant": 466.83,
+    "après": 487.24,
+    "delta_pct": 4.4
+   },
+   "PerplexityBot": {
+    "avant": 35.95,
+    "après": 34.41,
+    "delta_pct": -4.3
+   },
+   "AhrefsBot": {
+    "avant": 83.8,
+    "après": 81.32,
+    "delta_pct": -2.9
+   },
+   "Bytespider": {
+    "avant": 182.92,
+    "après": 187.81,
+    "delta_pct": 2.7
+   },
+   "Bot non identifié": {
+    "avant": 25.21,
+    "après": 24.6,
+    "delta_pct": -2.4
+   },
+   "Perplexity-User": {
+    "avant": 18.62,
+    "après": 19.05,
+    "delta_pct": 2.3
+   },
+   "facebookexternalhit": {
+    "avant": 9.31,
+    "après": 9.1,
+    "delta_pct": -2.3
    },
    "Googlebot-Image": {
     "avant": 14.9,
     "après": 15.07,
     "delta_pct": 1.2
    },
-   "PerplexityBot": {
-    "avant": 35.95,
-    "après": 36.26,
-    "delta_pct": 0.8
+   "Meta-ExternalAgent": {
+    "avant": 58.3,
+    "après": 57.87,
+    "delta_pct": -0.7
    },
-   "Scanner déguisé en UA vide": {
-    "avant": 5.01,
-    "après": 4.98,
+   "Bingbot": {
+    "avant": 76.63,
+    "après": 76.06,
     "delta_pct": -0.7
    },
    "Googlebot Desktop": {
@@ -4687,9 +4679,19 @@
     "après": 11.94,
     "delta_pct": -0.7
    },
+   "Scanner déguisé en UA vide": {
+    "avant": 5.01,
+    "après": 4.98,
+    "delta_pct": -0.7
+   },
+   "ClaudeBot": {
+    "avant": 121.33,
+    "après": 121.42,
+    "delta_pct": 0.1
+   },
    "Google-Agent": {
     "avant": 0,
-    "après": 3.98,
+    "après": 3.55,
     "delta_pct": null
    }
   },
@@ -4697,7 +4699,29 @@
    "Google-Agent"
   ],
   "gone_families": [],
-  "findings": [],
+  "findings": [
+   {
+    "kind": "effect",
+    "domain": "security",
+    "title": "Un blocage serveur est actif",
+    "text": "Réponses 403 servies aux bots : 23 → 177/j (+656%). C'est la signature d'une règle de bannissement (WAF / .htaccess) mise en place entre les deux périodes.",
+    "evidence": {
+     "forbidden_before": 23.35243553008596,
+     "forbidden_after": 176.52916073968706
+    }
+   },
+   {
+    "kind": "effect",
+    "domain": "robots",
+    "title": "GPTBot respecte le blocage",
+    "text": "GPTBot (identité vérifiée) : 213 pages/j avant, 0 après — il ne fait plus que lire robots.txt (1.0 fois/j). Un Disallow qu'il respecte. Les 3 « GPTBot »/j restants sont des usurpateurs, pas lui.",
+    "evidence": {
+     "pages_before": 213.323782234957,
+     "pages_after": 0.0,
+     "robots_after": 0.995732574679943
+    }
+   }
+  ],
   "note": "Familles comparées en hits/jour. new_families / gone_families : présentes dans une seule des deux périodes avec au moins 1 hit/jour. findings : constats rédigés — kind effect (effet d'une action visible), warning (à traiter), note (a bougé mais pas attribuable), caveat (limite). Le pivot --compare doit être la date de l'action."
  },
  "recommendations": {
@@ -4706,34 +4730,21 @@
     "family": "Googlebot Smartphone",
     "operator": "Google",
     "category": "search_engine",
-    "hits": 6611,
-    "hits_per_day": 471.7,
+    "hits": 6686,
+    "hits_per_day": 477.0,
     "decision": "allow",
     "why": "Indispensable à votre visibilité recherche — et il alimente aussi AI Overviews / AI Mode.",
-    "how": "Laisser crawler ; travailler plutôt ce qu'il trouve (404, paramètres, 5xx : voir crawl_budget). ATTENTION : 607 hits (9%) sous cette identité viennent d'IP hors plages officielles — bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.",
+    "how": "Laisser crawler ; travailler plutôt ce qu'il trouve (404, paramètres, 5xx : voir crawl_budget). ATTENTION : 605 hits (9%) sous cette identité viennent d'IP hors plages officielles — bannir ces IP (identity.spoofed_ips), jamais l'User-Agent.",
     "reads_robots_txt": true,
-    "spoofed_share": 0.092,
+    "spoofed_share": 0.09,
     "ban_spoofed_ips": true
-   },
-   {
-    "family": "GPTBot",
-    "operator": "OpenAI",
-    "category": "ai_training",
-    "hits": 2540,
-    "hits_per_day": 181.2,
-    "decision": "limit",
-    "why": "Entraînement sans retour, et agressif : 150 hits/min en pointe, 181 hits/jour.",
-    "how": "Crawl-delay dans robots.txt (il le lit), ou blocage complet si vous refusez l'entraînement.",
-    "reads_robots_txt": true,
-    "spoofed_share": 0.017,
-    "ban_spoofed_ips": false
    },
    {
     "family": "Bytespider",
     "operator": "ByteDance",
     "category": "ai_training",
-    "hits": 2464,
-    "hits_per_day": 175.8,
+    "hits": 2598,
+    "hits_per_day": 185.4,
     "decision": "block",
     "why": "Collecte pour entraînement, aucun trafic en retour, et il ne lit pas robots.txt.",
     "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement.",
@@ -4745,8 +4756,8 @@
     "family": "ClaudeBot",
     "operator": "Anthropic",
     "category": "ai_training",
-    "hits": 1713,
-    "hits_per_day": 122.2,
+    "hits": 1701,
+    "hits_per_day": 121.4,
     "decision": "watch",
     "why": "Collecte pour entraînement : aucun clic en retour, mais respecte robots.txt.",
     "how": "Choix éditorial : autoriser (présence dans les modèles) ou bloquer (User-agent + Disallow: /). Testez l'impact avec --robots avant.",
@@ -4755,11 +4766,24 @@
     "ban_spoofed_ips": false
    },
    {
+    "family": "GPTBot",
+    "operator": "OpenAI",
+    "category": "ai_training",
+    "hits": 1542,
+    "hits_per_day": 110.0,
+    "decision": "limit",
+    "why": "Entraînement sans retour, et agressif : 150 hits/min en pointe, 110 hits/jour.",
+    "how": "Crawl-delay dans robots.txt (il le lit), ou blocage complet si vous refusez l'entraînement.",
+    "reads_robots_txt": true,
+    "spoofed_share": 0.027,
+    "ban_spoofed_ips": false
+   },
+   {
     "family": "AhrefsBot",
     "operator": "Ahrefs",
     "category": "seo_tool",
-    "hits": 1215,
-    "hits_per_day": 86.7,
+    "hits": 1157,
+    "hits_per_day": 82.5,
     "decision": "allow",
     "why": "Outil SEO à volume raisonnable.",
     "how": "Rien à faire ; utile si c'est le vôtre.",
@@ -4771,8 +4795,8 @@
     "family": "Bingbot",
     "operator": "Microsoft",
     "category": "search_engine",
-    "hits": 1034,
-    "hits_per_day": 73.8,
+    "hits": 1070,
+    "hits_per_day": 76.3,
     "decision": "allow",
     "why": "Indispensable à votre visibilité recherche.",
     "how": "Laisser crawler ; travailler plutôt ce qu'il trouve (404, paramètres, 5xx : voir crawl_budget).",
@@ -4784,8 +4808,8 @@
     "family": "Meta-ExternalAgent",
     "operator": "Meta",
     "category": "ai_training",
-    "hits": 851,
-    "hits_per_day": 60.7,
+    "hits": 814,
+    "hits_per_day": 58.1,
     "decision": "block",
     "why": "Collecte pour entraînement, aucun trafic en retour, et il ne lit pas robots.txt.",
     "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement.",
@@ -4797,8 +4821,8 @@
     "family": "SemrushBot",
     "operator": "Semrush",
     "category": "seo_tool",
-    "hits": 683,
-    "hits_per_day": 48.7,
+    "hits": 638,
+    "hits_per_day": 45.5,
     "decision": "allow",
     "why": "Outil SEO à volume raisonnable.",
     "how": "Rien à faire ; utile si c'est le vôtre.",
@@ -4810,10 +4834,10 @@
     "family": "OAI-SearchBot",
     "operator": "OpenAI",
     "category": "ai_search",
-    "hits": 605,
-    "hits_per_day": 43.2,
+    "hits": 565,
+    "hits_per_day": 40.3,
     "decision": "allow",
-    "why": "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses (684 clics humains venus de cet opérateur sur la période).",
+    "why": "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses (669 clics humains venus de cet opérateur sur la période).",
     "how": "Ne pas bloquer par réflexe anti-IA : c'est lui qui rapporte des clics.",
     "reads_robots_txt": true,
     "spoofed_share": 0.0,
@@ -4823,8 +4847,8 @@
     "family": "CCBot",
     "operator": "Common Crawl",
     "category": "ai_training",
-    "hits": 531,
-    "hits_per_day": 37.9,
+    "hits": 563,
+    "hits_per_day": 40.2,
     "decision": "block",
     "why": "Collecte pour entraînement, aucun trafic en retour, et il ne lit pas robots.txt.",
     "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement.",
@@ -4836,23 +4860,10 @@
     "family": "PerplexityBot",
     "operator": "Perplexity",
     "category": "ai_search",
-    "hits": 506,
-    "hits_per_day": 36.1,
+    "hits": 493,
+    "hits_per_day": 35.2,
     "decision": "allow",
-    "why": "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses (429 clics humains venus de cet opérateur sur la période).",
-    "how": "Ne pas bloquer par réflexe anti-IA : c'est lui qui rapporte des clics.",
-    "reads_robots_txt": true,
-    "spoofed_share": 0.0,
-    "ban_spoofed_ips": false
-   },
-   {
-    "family": "Claude-SearchBot",
-    "operator": "Anthropic",
-    "category": "ai_search",
-    "hits": 430,
-    "hits_per_day": 30.7,
-    "decision": "allow",
-    "why": "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses (194 clics humains venus de cet opérateur sur la période).",
+    "why": "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses (444 clics humains venus de cet opérateur sur la période).",
     "how": "Ne pas bloquer par réflexe anti-IA : c'est lui qui rapporte des clics.",
     "reads_robots_txt": true,
     "spoofed_share": 0.0,
@@ -4862,8 +4873,8 @@
     "family": "Amazonbot",
     "operator": "Amazon",
     "category": "ai_training",
-    "hits": 417,
-    "hits_per_day": 29.8,
+    "hits": 423,
+    "hits_per_day": 30.2,
     "decision": "block",
     "why": "Collecte pour entraînement, aucun trafic en retour, et il ne lit pas robots.txt.",
     "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement.",
@@ -4872,15 +4883,15 @@
     "ban_spoofed_ips": false
    },
    {
-    "family": "Python HTTP lib",
-    "operator": "inconnu",
-    "category": "scraper",
-    "hits": 346,
-    "hits_per_day": 24.7,
-    "decision": "watch",
-    "why": "Script ou bibliothèque HTTP générique : usage inconnu.",
-    "how": "Regarder ses top_paths ; bannir l'IP si elle vise des données ou des formulaires.",
-    "reads_robots_txt": false,
+    "family": "Claude-SearchBot",
+    "operator": "Anthropic",
+    "category": "ai_search",
+    "hits": 387,
+    "hits_per_day": 27.6,
+    "decision": "allow",
+    "why": "Index de recherche IA : c'est lui qui permet d'être cité dans les réponses (196 clics humains venus de cet opérateur sur la période).",
+    "how": "Ne pas bloquer par réflexe anti-IA : c'est lui qui rapporte des clics.",
+    "reads_robots_txt": true,
     "spoofed_share": 0.0,
     "ban_spoofed_ips": false
    },
@@ -4888,8 +4899,8 @@
     "family": "Bot non identifié",
     "operator": "inconnu",
     "category": "other_bot",
-    "hits": 333,
-    "hits_per_day": 23.8,
+    "hits": 349,
+    "hits_per_day": 24.9,
     "decision": "watch",
     "why": "Bot non identifié : c'est ici qu'apparaissent les nouveaux crawlers IA.",
     "how": "Vérifier l'UA dans hits.csv ; proposer une signature (PR sur bots.json) si c'est un acteur connu.",
@@ -4898,27 +4909,14 @@
     "ban_spoofed_ips": false
    },
    {
-    "family": "ChatGPT-User",
-    "operator": "OpenAI",
-    "category": "ai_user_fetch",
-    "hits": 250,
-    "hits_per_day": 17.8,
-    "decision": "allow",
-    "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
-    "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
-    "reads_robots_txt": false,
-    "spoofed_share": 0.0,
-    "ban_spoofed_ips": false
-   },
-   {
-    "family": "Claude-User",
-    "operator": "Anthropic",
-    "category": "ai_user_fetch",
-    "hits": 242,
-    "hits_per_day": 17.3,
-    "decision": "allow",
-    "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
-    "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
+    "family": "Python HTTP lib",
+    "operator": "inconnu",
+    "category": "scraper",
+    "hits": 345,
+    "hits_per_day": 24.6,
+    "decision": "watch",
+    "why": "Script ou bibliothèque HTTP générique : usage inconnu.",
+    "how": "Regarder ses top_paths ; bannir l'IP si elle vise des données ou des formulaires.",
     "reads_robots_txt": false,
     "spoofed_share": 0.0,
     "ban_spoofed_ips": false
@@ -4927,8 +4925,21 @@
     "family": "Perplexity-User",
     "operator": "Perplexity",
     "category": "ai_user_fetch",
-    "hits": 235,
-    "hits_per_day": 16.8,
+    "hits": 264,
+    "hits_per_day": 18.8,
+    "decision": "allow",
+    "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
+    "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
+    "reads_robots_txt": false,
+    "spoofed_share": 0.0,
+    "ban_spoofed_ips": false
+   },
+   {
+    "family": "ChatGPT-User",
+    "operator": "OpenAI",
+    "category": "ai_user_fetch",
+    "hits": 243,
+    "hits_per_day": 17.3,
     "decision": "allow",
     "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
     "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
@@ -4953,8 +4964,21 @@
     "family": "MistralAI-User",
     "operator": "Mistral AI",
     "category": "ai_user_fetch",
-    "hits": 209,
-    "hits_per_day": 14.9,
+    "hits": 210,
+    "hits_per_day": 15.0,
+    "decision": "allow",
+    "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
+    "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
+    "reads_robots_txt": false,
+    "spoofed_share": 0.0,
+    "ban_spoofed_ips": false
+   },
+   {
+    "family": "Claude-User",
+    "operator": "Anthropic",
+    "category": "ai_user_fetch",
+    "hits": 186,
+    "hits_per_day": 13.3,
     "decision": "allow",
     "why": "Un humain a demandé votre page à une IA : c'est le signal le plus proche d'une visibilité IA réelle.",
     "how": "Il ignore robots.txt par conception (comme un navigateur). Seul un blocage serveur l'arrêterait — et vous perdriez la citation.",
@@ -4979,8 +5003,8 @@
     "family": "facebookexternalhit",
     "operator": "Meta",
     "category": "social_preview",
-    "hits": 123,
-    "hits_per_day": 8.8,
+    "hits": 129,
+    "hits_per_day": 9.2,
     "decision": "allow",
     "why": "Aperçus de liens partagés ou monitoring : trafic utile et léger.",
     "how": "Rien à faire.",
@@ -4992,8 +5016,8 @@
     "family": "LinkedInBot",
     "operator": "LinkedIn",
     "category": "social_preview",
-    "hits": 78,
-    "hits_per_day": 5.6,
+    "hits": 71,
+    "hits_per_day": 5.1,
     "decision": "allow",
     "why": "Aperçus de liens partagés ou monitoring : trafic utile et léger.",
     "how": "Rien à faire.",
@@ -5018,8 +5042,8 @@
     "family": "Google-Agent",
     "operator": "Google",
     "category": "ai_agent",
-    "hits": 28,
-    "hits_per_day": 2.0,
+    "hits": 25,
+    "hits_per_day": 1.8,
     "decision": "watch",
     "why": "Agent IA qui navigue ou agit pour un utilisateur : trafic récent, attribution encore floue.",
     "how": "Surveiller les pages visitées (actors[].top_paths) ; vérifier l'identité si le volume grimpe.",
@@ -5032,42 +5056,42 @@
    {
     "domain": "security",
     "title": "Bannir les IP qui usurpent une identité de bot (5 IP)",
-    "why": "70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 607 hits usurpent Googlebot Smartphone depuis des IP hors plages officielles.",
+    "why": "70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 605 hits usurpent Googlebot Smartphone depuis des IP hors plages officielles.",
     "how": "Règle 403 ou WAF sur les IP de identity.spoofed_ips et probes.top_scanner_ips. Jamais de blocage par User-Agent « Googlebot » ou « ChatGPT-User » : vous bloqueriez les vrais.",
     "effort": "15 min",
     "impact": "immédiat",
     "evidence": {
      "ips": [
+      "45.155.204.3",
       "185.220.101.7",
       "91.203.5.44",
-      "45.155.204.3",
       "47.82.10.100",
       "103.21.44.9"
      ],
      "scanner_hits": 70,
-     "usurped_hits": 607
+     "usurped_hits": 605
     },
     "rank": 1
    },
    {
     "domain": "seo",
     "title": "Récupérer les 20% de crawl Googlebot gaspillés",
-    "why": "740 hits sur des URL à paramètres, 571 sur des 404, 0 sur admin/API.",
+    "why": "739 hits sur des URL à paramètres, 578 sur des 404, 0 sur admin/API.",
     "how": "Disallow des paramètres inutiles (crawl_budget → waste.top_params), redirection ou suppression des 404 récurrentes (top_404), Disallow de /wp-admin/ et des endpoints API.",
     "effort": "1 à 2 jours",
     "impact": "indexation plus fraîche",
     "evidence": {
      "family": "Googlebot Smartphone",
      "top_params": {
-      "utm_source": 740,
-      "sort": 740
+      "utm_source": 739,
+      "sort": 739
      },
      "top_404": [
-      "/blog/ancien-article-43",
-      "/blog/ancien-article-162",
+      "/blog/ancien-article-160",
       "/blog/ancien-article-257",
-      "/blog/ancien-article-276",
-      "/blog/ancien-article-211"
+      "/blog/ancien-article-285",
+      "/blog/ancien-article-88",
+      "/blog/ancien-article-43"
      ]
     },
     "rank": 2
@@ -5075,15 +5099,15 @@
    {
     "domain": "strategy",
     "title": "Trancher pour chaque bot d'entraînement : autoriser, limiter ou bloquer",
-    "why": "8516 hits de collecte pour entraînement (GPTBot, Bytespider, ClaudeBot, Meta-ExternalAgent) sans aucun trafic en retour, contre 1541 hits d'index qui, eux, génèrent des citations.",
+    "why": "7641 hits de collecte pour entraînement (Bytespider, ClaudeBot, GPTBot, Meta-ExternalAgent) sans aucun trafic en retour, contre 1445 hits d'index qui, eux, génèrent des citations.",
     "how": "Suivre recommendations.by_family (decision par famille). Simuler tout blocage avec --robots robots-modifié.txt avant de l'appliquer : le simulateur montre ce qu'il enlève vraiment.",
     "effort": "1 heure",
     "impact": "maîtrise de l'usage de votre contenu",
     "evidence": {
      "families": {
-      "GPTBot": "limit",
       "Bytespider": "block",
       "ClaudeBot": "watch",
+      "GPTBot": "limit",
       "Meta-ExternalAgent": "block",
       "CCBot": "block",
       "Amazonbot": "block"
@@ -5156,7 +5180,7 @@
    "level": "critical",
    "kind": "action",
    "section": "identity",
-   "message": "607 hits usurpent une identité de bot connu depuis des IP hors plages officielles : Googlebot Smartphone 607 (9%). Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent."
+   "message": "605 hits usurpent une identité de bot connu depuis des IP hors plages officielles : Googlebot Smartphone 605 (9%). Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent."
   },
   {
    "level": "warn",
@@ -5174,19 +5198,19 @@
    "level": "info",
    "kind": "info",
    "section": "control_files",
-   "message": "Bots d'entraînement qui n'ont jamais lu robots.txt sur la période : Bytespider (2464), Meta-ExternalAgent (851), CCBot (531), Amazonbot (417). Un blocage robots.txt ne les arrêtera pas."
+   "message": "Bots d'entraînement qui n'ont jamais lu robots.txt sur la période : Bytespider (2598), Meta-ExternalAgent (814), CCBot (563), Amazonbot (423). Un blocage robots.txt ne les arrêtera pas."
   },
   {
    "level": "info",
    "kind": "info",
    "section": "ai_referrals",
-   "message": "1642 clics humains venant d'IA (6.1% du trafic HTML humain). Sources : ChatGPT 684, Perplexity 429, Copilot 203, Claude 194."
+   "message": "1654 clics humains venant d'IA (6.1% du trafic HTML humain). Sources : ChatGPT 669, Perplexity 444, Copilot 208, Claude 196."
   },
   {
    "level": "info",
    "kind": "info",
    "section": "aio",
-   "message": "28 hits d'agents Google identifiés (Google-Agent / Vertex / Mariner)."
+   "message": "25 hits d'agents Google identifiés (Google-Agent / Vertex / Mariner)."
   },
   {
    "level": "info",

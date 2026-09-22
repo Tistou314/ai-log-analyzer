@@ -18,7 +18,7 @@ Lis README.md (contrat JSON, limites) et ATELIER.md (déroulé) avant toute modi
 - `samples/` : dataset synthétique (régénérable via `generate_demo.py`) + fixtures GSC / Screaming Frog / sitemap / robots.
 
 Validation rapide : `python cli.py samples/demo_access.log --robots samples/demo_robots.txt --gsc samples/demo_gsc_pages.csv --crawl samples/demo_screamingfrog.csv --sitemap samples/demo_sitemap.xml --compare 2026-08-17`
-Attendu : alerte critical Googlebot usurpé ~9 % (nécessite ip_ranges complets ou les placeholders fournis), rafale GPTBot 150/min, ~76 fetchs à chaud, 6 pages GSC aio_suspect, Google-Agent dans compare.new_families, 1 IP stealth.
+Attendu : alerte critical Googlebot usurpé ~9 %, rafale GPTBot 150/min, ~85 fetchs à chaud, 6 pages GSC aio_suspect, Google-Agent dans compare.new_families, 1 IP stealth, 2 constats avant/après (blocage serveur Bytespider, GPTBot respecte le Disallow — scénario ACTION_DAY de generate_demo.py).
 
 Calibré une première fois sur des logs réels d'un site éditorial WordPress sur mutualisé cPanel : bugs corrigés = plages IP partielles ne produisent plus de "spoofed", referrers bing.com/duckduckgo.com ne sont plus comptés comme IA, ajout de 9 signatures (WP Rocket, adtech ads.txt, meta-webindexer, Chrome Prefetch Proxy…), détection wp-cron / POST flood dans stealth.
 Second passage sur un mois complet (584k hits) : ajout de analyzer/probes.py (reclassification des scanners déguisés en bots légitimes AVANT les stats IA — sur ce site 128k hits / 245 IP usurpaient Googlebot, cohere-ai, ChatGPT-User…), signature du faux UA Google-Extended, Brave retiré des referrers IA. Validation externe : Googlebot réel = 112 hits/j dans les logs vs 115/j dans le rapport Crawl Stats GSC.

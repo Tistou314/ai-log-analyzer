@@ -58,3 +58,9 @@ def test_contract_top_level_keys(report):
               "crawl_budget", "structure", "aio", "ai_referrals", "robots_sim", "stealth",
               "compare", "explain", "alerts"]:
         assert k in report, k
+
+
+def test_demo_has_before_after_findings(report):
+    # scénario d'actions au 17 août dans generate_demo.py : blocage serveur de Bytespider, Disallow GPTBot
+    titles = [f["title"] for f in report["compare"]["findings"]]
+    assert any("blocage serveur" in t for t in titles) and any(t.startswith("GPTBot respecte") for t in titles)

@@ -37,6 +37,7 @@ IP = {"google": ["66.249.66.1", "66.249.66.2", "66.249.73.10", "66.249.79.5"], "
       "openai_fake": ["103.21.44.9"], "anthropic": ["216.73.216.10", "216.73.216.11"],
       "pplx": ["18.97.9.97", "18.97.9.98"], "pplx_user": ["18.97.21.1", "34.193.163.52"], "amazon": ["100.24.134.117", "100.25.103.91"], "bing": ["157.55.39.10", "40.77.167.20"], "other": [f"{random.randint(11,220)}.{random.randint(1,254)}.{random.randint(1,254)}.{random.randint(1,254)}" for _ in range(400)],
       "stealth": ["195.154.22.9"], "burst": ["47.82.10.100"]}
+ACTION_DAY = 7   # 2026-08-17 : robots.txt Disallow GPTBot + blocage serveur de Bytespider (démo de --compare)
 rows = []
 def log(t, ip, path, ua, status=200, ref="-", size=None, method="GET"):
     size = size if size is not None else (random.randint(9000, 60000) if not any(path.endswith(e) for e in (".css",".js",".webp",".woff2",".svg",".txt",".xml")) else random.randint(500, 40000))
@@ -81,8 +82,11 @@ for day in range(DAYS):
     # Bing
     for _ in range(random.randint(60, 90)): log(rt(day), random.choice(IP["bing"]), random.choice(PAGES + [p + "?page=2" for p in PAGES[:4]]), UA["bing"])
     if day % 3 == 0: log(rt(day), IP["bing"][0], "/robots.txt", UA["bing"])
-    # GPTBot : rafale nocturne 2h-4h, lit robots.txt, ne touche pas STALE
-    if day % 2 == 0:
+    # GPTBot : rafale nocturne 2h-4h, lit robots.txt, ne touche pas STALE.
+    # Scénario d'actions au 17 août (day 7, pivot --compare) : Disallow GPTBot -> il ne lit plus que robots.txt
+    if day >= ACTION_DAY:
+        log(rt(day, 3), IP["openai"][0], "/robots.txt", UA["gptbot"])
+    elif day % 2 == 0:
         base = rt(day, 2); log(base, IP["openai"][0], "/robots.txt", UA["gptbot"])
         for i in range(random.randint(250, 400)): log(base + dt.timedelta(seconds=i * 0.4), random.choice(IP["openai"]), random.choice(PAGES[:-8] + [f"/blog/tag-{i}" for i in range(20)]), UA["gptbot"], random.choice([200]*9 + [404]))
     for _ in range(3): log(rt(day), IP["openai_fake"][0], random.choice(PAGES), UA["gptbot"])
@@ -101,7 +105,8 @@ for day in range(DAYS):
     # entraînement divers
     for ua, n in (("meta", 60), ("bytespider", 150), ("ccbot", 40), ("amazon", 30), ("newbot", 25)):
         pool = IP["amazon"] if ua == "amazon" else IP["other"]
-        for _ in range(random.randint(int(n*0.7), int(n*1.3))): log(rt(day), random.choice(pool), random.choice(PAGES + STATIC[:1]), UA[ua], random.choice([200]*19 + [403]))
+        # ... et blocage serveur (403 sur l'UA) de Bytespider, qui ignore robots.txt
+        for _ in range(random.randint(int(n*0.7), int(n*1.3))): log(rt(day), random.choice(pool), random.choice(PAGES + STATIC[:1]), UA[ua], 403 if (ua == "bytespider" and day >= ACTION_DAY) else random.choice([200]*19 + [403]))
     for _ in range(random.randint(20, 40)): log(rt(day), random.choice(IP["other"]), "/wp-admin/" if random.random() < 0.5 else random.choice(PAGES), UA["bytespider"], 403 if random.random() < 0.3 else 200)
     # outils SEO + social + scripts
     for ua, n in (("ahrefs", 80), ("semrush", 50), ("fb", 10), ("linkedin", 5), ("python", 25)):
