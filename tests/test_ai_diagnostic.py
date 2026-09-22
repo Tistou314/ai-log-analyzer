@@ -83,17 +83,17 @@ def test_slim_report_untouched_when_small():
 def test_dotenv_utf16_from_powershell(tmp_path, monkeypatch):
     # `echo "X=y" > .env` sous PowerShell écrit de l'UTF-16 avec BOM : le moteur doit le lire
     import os
-    (tmp_path / ".env").write_bytes("DEEPSEEK_API_KEY=sk-test
-".encode("utf-16"))
-    monkeypatch.setattr(D, "ROOT", tmp_path)
+    (tmp_path / '.env').write_bytes('DEEPSEEK_API_KEY=sk-test
+'.encode('utf-16'))
+    monkeypatch.setattr(D, 'ROOT', tmp_path)
     ORIG_LOAD_DOTENV()
-    assert os.environ.get("DEEPSEEK_API_KEY") == "sk-test"
+    assert os.environ.get('DEEPSEEK_API_KEY') == 'sk-test'
 
 
 def test_dotenv_utf8_bom(tmp_path, monkeypatch):
     import os
-    (tmp_path / ".env").write_bytes(b"ï»¿OPENAI_API_KEY='sk-bom'
-")
-    monkeypatch.setattr(D, "ROOT", tmp_path)
+    (tmp_path / '.env').write_bytes(b'ï»¿OPENAI_API_KEY='sk-bom'
+')
+    monkeypatch.setattr(D, 'ROOT', tmp_path)
     ORIG_LOAD_DOTENV()
-    assert os.environ.get("OPENAI_API_KEY") == "sk-bom"
+    assert os.environ.get('OPENAI_API_KEY') == 'sk-bom'
