@@ -17,7 +17,7 @@
 h1,h2,.serif{font-family:Fraunces,Georgia,"Times New Roman",serif}
 nav{background:var(--dark);color:#faf9f5;display:flex;align-items:center;gap:24px;padding:0 32px;height:60px}
 nav .brand{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16px;display:flex;gap:10px;align-items:center}
-nav .tabs{display:flex;height:100%}nav .tabs button{background:none;border:0;color:#b0aea6;font:600 14px inherit;padding:0 16px;cursor:pointer;height:100%}
+nav .tabs{display:flex;height:100%}nav .tabs button{background:none;border:0;color:#b0aea6;font:600 14px inherit;padding:0 14px;cursor:pointer;height:100%;white-space:nowrap}nav .brand{white-space:nowrap}
 nav .tabs button.on{color:#faf9f5;box-shadow:inset 0 -3px 0 var(--clay)}nav .meta{margin-left:auto;color:#b0aea6;font-size:13px}
 main{max-width:1280px;margin:0 auto;padding:32px 24px 48px}
 .drop{border:2px dashed #cfcabc;border-radius:16px;padding:64px 24px;text-align:center;background:var(--card);margin-top:32px}
@@ -39,19 +39,20 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;fo
 .dec{font-weight:600}.dec.allow{color:var(--green)}.dec.limit{color:var(--amber)}.dec.block,.dec.ban_ip{color:var(--red)}.dec.watch{color:var(--ink2)}
 .funnel{background:var(--dark);color:#faf9f5;border-radius:14px;padding:26px 30px;display:flex;align-items:center;gap:20px;margin-bottom:22px;flex-wrap:wrap}.funnel .st{flex:1;min-width:220px}.funnel .lab{font-size:11px;letter-spacing:.06em;color:#b0aea6;font-weight:600}.funnel b{display:block;font-family:Fraunces,Georgia,serif;font-size:42px;font-weight:700}.funnel .st p{color:#b0aea6;margin:4px 0 0;font-size:13px}.funnel .arrow{color:var(--clay);font-size:28px}
 .hyp{display:inline-block;font-size:12px;font-weight:600;color:#935300;background:#fdf3e2;border:1px solid #ecd9b0;border-radius:999px;padding:3px 12px;margin-left:10px;vertical-align:middle}
+.fnd{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}.fnd:last-child{border:0}.fnd .k{font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:3px 10px;height:fit-content;white-space:nowrap}
 .act{display:flex;gap:22px;margin-bottom:16px}.act .num{width:40px;height:40px;border-radius:50%;color:#faf9f5;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-size:18px;font-weight:700;flex-shrink:0}
 .act .card{flex:1;margin:0;display:flex;gap:20px}.act .body{flex:1}.act h3{font-family:Fraunces,Georgia,serif;font-size:18px;margin:0 0 6px;font-weight:600}.act .tag{font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin-left:10px;vertical-align:middle}
 .act .side{width:160px;border-left:1px solid var(--line);padding-left:18px;font-size:13px}.act .side span{display:block;color:var(--ink3);font-size:12px}.act .side b{display:block;margin-bottom:8px}
 pre{background:var(--dark);color:#c3c2b7;border-radius:10px;padding:16px 20px;font-size:13px;overflow:auto}
 [hidden]{display:none!important}
-@media(max-width:900px){.row{flex-direction:column}.hbar .lab{width:100px}}
+@media(max-width:900px){.row{flex-direction:column}.hbar .lab{width:100px}nav{flex-wrap:wrap;height:auto;padding:10px 16px;gap:8px}nav .tabs{order:3;width:100%;overflow-x:auto}nav .tabs button{padding:10px 12px;white-space:nowrap}nav .brand{white-space:nowrap}nav .meta{margin-left:0;font-size:12px}.hero h1{font-size:26px}.kpis{margin-left:0}main{padding:20px 16px}table{display:block;overflow-x:auto}}
 </style>
 </head>
 <body>
 <nav>
   <div class="brand"><svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="1" y="13" width="4" height="8" rx="1" fill="#d97757"/><rect x="9" y="7" width="4" height="14" rx="1" fill="#faf9f5"/><rect x="17" y="1" width="4" height="20" rx="1" fill="#7a99c9"/></svg>ai-log-analyzer</div>
   <div class="tabs" id="tabs" hidden>
-    <button data-t="overview" class="on">Vue d'ensemble</button><button data-t="actors">Acteurs</button><button data-t="ia">Visibilité IA</button><button data-t="actions">Plan d'action</button>
+    <button data-t="overview" class="on">Vue d'ensemble</button><button data-t="actors">Acteurs</button><button data-t="ia">Visibilité IA</button><button data-t="compare">Avant / après</button><button data-t="actions">Plan d'action</button>
   </div>
   <div class="meta" id="meta"></div>
 </nav>
@@ -65,6 +66,7 @@ pre{background:var(--dark);color:#c3c2b7;border-radius:10px;padding:16px 20px;fo
   <section id="overview" hidden></section>
   <section id="actors" hidden></section>
   <section id="ia" hidden></section>
+  <section id="compare" hidden></section>
   <section id="actions" hidden></section>
 </main>
 <script>
@@ -90,7 +92,7 @@ function render(r){
   $('meta').textContent = `${(r.meta.site||'').replace(/^https?:\/\//,'') || o.hosts && Object.keys(o.hosts)[0] || 'vos logs'} · ${o.period_start.slice(0,10)} → ${o.period_end.slice(0,10)} · ${o.days.toFixed(0)} j`;
   const acts = r.alerts.filter(a=>a.kind==='action'), infos = r.alerts.filter(a=>a.kind!=='action');
   const ai = r.ai_referrals || {}, aio = r.aio || {}, suff = r.meta.data_sufficiency || {};
-  const spoofHits = (r.identity.spoofed_ips||[]).reduce((s,x)=>s+x.hits,0);
+  const spoofHits = (r.identity.summary||{}).spoofed ?? (r.identity.spoofed_ips||[]).reduce((s,x)=>s+x.hits,0); // total, pas seulement les 30 premières IP
 
   // ---- Vue d'ensemble
   const cats = Object.entries(o.by_category).sort((a,b)=>b[1]-a[1]), total = cats.reduce((s,c)=>s+c[1],0);
@@ -147,6 +149,22 @@ function render(r){
     <div class="card"><h2>Lues par les IA, jamais cliquées : votre marge de progression</h2>
       ${neverTop.length?`<table><thead><tr><th>Page</th><th class="n">Lectures IA</th><th>Par qui</th></tr></thead><tbody>${neverTop.slice(0,8).map(x=>`<tr><td><code>${esc(x.path)}</code></td><td class="n"><b>${fmt(x.ai_fetches)}</b></td><td class="muted">${esc(Object.entries(x.by_family||{}).map(([k,v])=>k+' '+v).join(', '))}</td></tr>`).join('')}</tbody></table><p class="muted">${fmt(ai.fetched_never_clicked_count||0)} pages de contenu au total, classées par lectures IA. Vérifiez ce que le bot voit (HTML sans JavaScript) sur les premières ; si tout est propre, elles sont citées sans lien.</p>`:'<p class="muted">Toutes les pages lues par des IA ont généré au moins un clic — ou aucune lecture IA sur la période.</p>'}</div>`;
 
+  // ---- Avant / après (compare.findings) : les constats rédigés par le moteur, groupés par nature
+  const cmp = r.compare, KIND = {effect:['EFFET','Ce que vos actions ont produit','var(--green)','#e8f2ea'], warning:['À TRAITER','Ce qui s\'est dégradé ou est apparu','#935300','#fdf3e2'],
+    note:['NOTE','A bougé, mais pas à cause de vous','var(--blue2)','#e9f0f7'], caveat:['LIMITE','Les limites de la comparaison','var(--ink2)','#f0ede7']};
+  if (!cmp) {
+    $('compare').innerHTML = `<div class="hero"><div><h1>Pas de comparaison dans ce rapport.</h1><div class="sub">Relancez le moteur avec <code>--compare AAAA-MM-JJ</code>, la date de votre action (nouveau robots.txt, règle WAF, nettoyage de paramètres) : il dira ce qu'elle a produit.</div></div></div>`;
+  } else {
+    const P = cmp.periods || {}, a = P['avant'] || {}, b = P['après'] || {}, F = cmp.findings || [];
+    const nEff = F.filter(f=>f.kind==='effect').length;
+    $('compare').innerHTML = `
+      <div class="hero"><div><h1>${nEff ? `${nEff} effet${nEff>1?'s':''} de vos actions, visibles dans les logs.` : 'Aucun effet net visible entre les deux périodes.'}</h1>
+        <div class="sub">${esc((a.start||'').slice(0,10))} → ${esc((a.end||'').slice(0,10))} (${fmt(a.days||0)} j) comparé à ${esc((b.start||'').slice(0,10))} → ${esc((b.end||'').slice(0,10))} (${fmt(b.days||0)} j). Chaque constat est calculé par le moteur à partir des logs ; les effets robots.txt ne comptent que les bots à l'identité vérifiée — un usurpateur qui continue ne prouve rien.</div></div></div>
+      ${['effect','warning','note','caveat'].map(k => { const items = F.filter(f=>f.kind===k); if (!items.length) return ''; const [lab, title, c, bg] = KIND[k];
+        return `<div class="card"><h2>${title}</h2>${items.map(f=>`<div class="fnd"><span class="k" style="color:${c};background:${bg}">${lab}</span><div><b>${esc(f.title)}</b><div class="muted">${esc(f.text)}</div></div></div>`).join('')}</div>`; }).join('')}
+      ${(cmp.new_families||[]).length ? `<p class="muted">Familles apparues : ${esc(cmp.new_families.join(', '))}${(cmp.gone_families||[]).length ? ' · disparues : ' + esc(cmp.gone_families.join(', ')) : ''}</p>` : ''}`;
+  }
+
   // ---- Plan d'action
   const actions = rec.actions||[];
   $('actions').innerHTML = `
@@ -169,7 +187,7 @@ function daily(r){
   const d = Object.entries(r.timeline?.daily||{}).sort(); const tot = d.map(([k,v])=>[k,Object.entries(v).filter(([c])=>c!=='self_traffic').reduce((s,[,x])=>s+x,0)]); const mx = Math.max(...tot.map(x=>x[1]),1);
   return `<div class="bars">${tot.map(([k,v])=>`<div style="height:${Math.max(2,100*v/mx)}%" title="${k} : ${fmt(v)}"></div>`).join('')}</div><div class="axis"><span>${tot[0]?.[0]||''}</span><span>${tot[tot.length-1]?.[0]||''}</span></div>`;
 }
-function show(t){ ['overview','actors','ia','actions'].forEach(k=>{$(k).hidden = k!==t}); document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t)); window.scrollTo(0,0); }
+function show(t){ ['overview','actors','ia','compare','actions'].forEach(k=>{$(k).hidden = k!==t}); document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t)); window.scrollTo(0,0); }
 document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.t)));
 function load(file){ const fr = new FileReader(); fr.onload = e => { try { render(JSON.parse(e.target.result)); } catch(err){ alert('Ce fichier n\'est pas un report.json valide : '+err.message); } }; fr.readAsText(file); }
 $('file').addEventListener('change', e => e.target.files[0] && load(e.target.files[0]));
