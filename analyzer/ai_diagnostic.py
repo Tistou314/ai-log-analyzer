@@ -12,9 +12,9 @@ la partie après le premier séparateur '---'.
 import json, os, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-MAX_REPORT_CHARS = 100_000
-# retirées en premier si le rapport est trop gros, dans cet ordre
-TRIM_ORDER = ["timeline", "explain", "structure", "crawl_budget", "actors"]
+MAX_REPORT_CHARS = 160_000   # ~40k tokens : tient dans tous les modèles du catalogue
+# allégé dans cet ordre si le rapport est trop gros ; actors et crawl_budget sont tronqués, jamais retirés
+TRIM_ORDER = ["timeline", "explain", "structure", "crawl_budget.*.by_template", "actors:30", "crawl_budget:core", "stealth", "probes"]
 
 # fournisseur → variable d'environnement, catalogue de modèles (le premier = défaut), base_url, SDK.
 # Catalogue vérifié en septembre 2026 ; --model accepte aussi tout identifiant hors liste
@@ -174,28 +174,31 @@ def load_prompt(name):
 
 
 def slim_report(report, max_chars=MAX_REPORT_CHARS):
-    """Allège le rapport sous max_chars caractères. Retourne (json_str, sections_retirées)."""
-    r = dict(report)
+    """Allège le rapport sous max_chars caractères. Retourne (json_str, sections_retirées_ou_tronquées).
+    Les sections décisionnelles (recommendations, alerts, compare, identity, overview, ai_referrals, aio) ne sont jamais touchées."""
+    import copy
+    r = copy.deepcopy(report)
     removed = []
-    s = json.dumps(r, ensure_ascii=False)
-    for key in TRIM_ORDER:
-        if len(s) <= max_chars:
+    size = lambda: len(json.dumps(r, ensure_ascii=False))
+    for step in TRIM_ORDER:
+        if size() <= max_chars:
             break
-        if key == "crawl_budget" and key in r:
-            # d'abord seulement les gabarits, ensuite la section entière
-            cb = {k: ({kk: vv for kk, vv in v.items() if kk != "by_template"} if isinstance(v, dict) else v)
-                  for k, v in r[key].items()}
-            if json.dumps(cb, ensure_ascii=False) != json.dumps(r[key], ensure_ascii=False):
-                r[key] = cb
-                removed.append("crawl_budget.*.by_template")
-                s = json.dumps(r, ensure_ascii=False)
-                if len(s) <= max_chars:
-                    break
-        if key in r:
-            del r[key]
-            removed.append(key)
-            s = json.dumps(r, ensure_ascii=False)
-    return s, removed
+        if step == "crawl_budget.*.by_template" and "crawl_budget" in r:
+            for v in r["crawl_budget"].values():
+                if isinstance(v, dict): v.pop("by_template", None)
+            removed.append(step)
+        elif step == "actors:30" and "actors" in r:
+            r["actors"] = [{k: v for k, v in a.items() if k != "top_paths"} for a in r["actors"][:30]]
+            removed.append("actors (30 premières familles, sans top_paths)")
+        elif step == "crawl_budget:core" and "crawl_budget" in r:
+            for v in r["crawl_budget"].values():
+                if isinstance(v, dict):
+                    for kk in ("by_segment", "most_crawled", "stalest", "redirects_hit"): v.pop(kk, None)
+            removed.append("crawl_budget (segments, recrawl, redirections)")
+        elif step in r:
+            del r[step]
+            removed.append(step)
+    return json.dumps(r, ensure_ascii=False), removed
 
 
 def diagnose(report_path, out_dir="out", model=None, provider=None):
