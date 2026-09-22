@@ -41,3 +41,21 @@ def test_reclassify_disguised_scanner():
     assert (bad["category"] == "scraper").all()
     assert (bad["identity"] == "spoofed").all()
     assert (good["family"] == "Googlebot Smartphone").all()
+
+
+def test_distributed_scanner_reclassified_at_family_level():
+    # 15 IP à 3 hits chacune sous l'UA GPTBot, toutes sur des chemins sensibles : sous le seuil par IP, mais la famille est un scanner
+    rows = []
+    for i in range(15):
+        for p in PROBES[:3]:
+            rows.append(dict(ip=f"10.0.0.{i}", path=p, family="GPTBot", category="ai_training", operator="OpenAI", purpose="",
+                             is_bot=True, is_ai=True, identity="spoofed", identity_evidence=""))
+    # le vrai GPTBot, vérifié, sur des pages normales : intouchable
+    for i in range(10):
+        rows.append(dict(ip="20.171.206.10", path=f"/recette-{i}", family="GPTBot", category="ai_training", operator="OpenAI", purpose="",
+                         is_bot=True, is_ai=True, identity="verified", identity_evidence="ip_range"))
+    df = probes.apply(pd.DataFrame(rows))
+    fake = df[df["ip"].str.startswith("10.0.0.")]
+    real = df[df["ip"] == "20.171.206.10"]
+    assert (fake["family"] == "Scanner déguisé en GPTBot").all() and (fake["category"] == "scraper").all()
+    assert (real["family"] == "GPTBot").all() and (real["identity"] == "verified").all()

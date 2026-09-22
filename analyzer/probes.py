@@ -33,6 +33,22 @@ def apply(df, min_hits=20, threshold=0.3):
         df.loc[mask, "is_ai"] = False
         df.loc[mask, "identity"] = "spoofed"
         df.loc[mask, "identity_evidence"] = "probe_paths"
+    # scanners distribués : beaucoup d'IP à quelques hits chacune, sous une même fausse identité (GPTBot, Meta-ExternalAgent…).
+    # Passe au niveau de la famille : si ≥ threshold de ses hits NON vérifiés sont des sondes, ces sondes sont des scanners.
+    unver = df[df["is_bot"] & ~df["probe_flag"] & (df["identity"] != "verified") & ~df["family"].str.startswith("Scanner")]
+    fstats = unver.groupby("family").agg(hits=("path", "size"), probes=("is_probe", "sum"))
+    bad_fams = set(fstats[(fstats["hits"] >= min_hits) & (fstats["probes"] / fstats["hits"] >= threshold)].index)
+    if bad_fams:
+        m = df["is_bot"] & df["is_probe"] & (df["identity"] != "verified") & df["family"].isin(bad_fams) & ~df["probe_flag"]
+        df.loc[m, "probe_flag"] = True
+        orig = df.loc[m, "family"]
+        df.loc[m, "family"] = "Scanner déguisé en " + orig
+        df.loc[m, "category"] = "scraper"
+        df.loc[m, "operator"] = "inconnu (scanner)"
+        df.loc[m, "purpose"] = "Scanner de vulnérabilités usurpant un UA de bot légitime (IP distribuées)"
+        df.loc[m, "is_ai"] = False
+        df.loc[m, "identity"] = "spoofed"
+        df.loc[m, "identity_evidence"] = "probe_paths_family"
     # humains qui sondent
     hs = df[~df["is_bot"]].groupby("ip").agg(hits=("path", "size"), probes=("is_probe", "sum"))
     hbad = set(hs[(hs["hits"] >= min_hits) & (hs["probes"] / hs["hits"] >= threshold)].index)
