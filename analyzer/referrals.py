@@ -29,7 +29,9 @@ def analyze(df, ai_referrers, window_hours=48):
     # un « fetch IA » = un vrai fetch : page HTML servie 200, identité non usurpée, pas une sonde (.env, .git…)
     ok = df["category"].isin(["ai_user_fetch", "ai_search"]) & (df["resource"] == "html") & (df["status"] == 200) & (df["identity"] != "spoofed")
     if "is_probe" in df: ok &= ~df["is_probe"]
-    ok &= ~df["path"].str.contains(r"/(?:embed|feed)/?$", regex=True)  # oEmbed et flux WordPress : pas des pages
+    # pas des pages de contenu : oEmbed, flux, technique WordPress, API, login, recherche interne
+    ok &= ~df["path"].str.contains(r"/(?:embed|feed)/?$|^/(?:wp-|xmlrpc|\?|search/|index\.php|cgi-bin)|/(?:wp-json|wp-admin|wp-includes|wp-content|wp-login)", regex=True)
+    ok &= df["query"] == ""
     fetches = df[ok][["ts", "path", "operator", "family"]]
     loops = []
     if len(fetches) and len(ai_clicks):
@@ -38,13 +40,20 @@ def analyze(df, ai_referrers, window_hours=48):
         merged = merged.dropna(subset=["family"])
         loops = merged.groupby(["path", "family", "ai_referrer"]).size().reset_index(name="clicks").sort_values("clicks", ascending=False).head(30).to_dict("records")
     # pages fetchées par des IA mais jamais cliquées
-    fetched_paths = set(fetches["path"]); clicked = set(ai_clicks["path"])
-    never_clicked = sorted(fetched_paths - clicked)
+    # classées par nombre de lectures IA : la première de la liste est la page la plus lue sans jamais être cliquée
+    per_path = fetches.groupby("path").agg(fetches=("family", "size"), by=("family", lambda s: s.value_counts().head(3).to_dict()))
+    clicked = set(ai_clicks["path"])
+    nc = per_path[~per_path.index.isin(clicked)].sort_values("fetches", ascending=False)
+    never_clicked = nc.index.tolist()
+    never_top = [dict(path=p, ai_fetches=int(r["fetches"]), by_family=r["by"]) for p, r in nc.head(20).iterrows()]
     return dict(
         ai_clicks=int(len(ai_clicks)), ai_clicks_per_day=round(len(ai_clicks) / span_days, 2),
         share_of_human_html=round(float(len(ai_clicks) / max(len(humans), 1)), 4),
         by_source=by_source, by_page=by_page, utm_tagged=int(len(utm)),
         fetch_to_click_loops=loops, fetch_events=int(len(fetches)),
         fetched_never_clicked_count=len(never_clicked), fetched_never_clicked_examples=never_clicked[:20],
+        fetched_never_clicked_top=never_top,
+        note="fetch_events = lectures par les index et fetchers IA de vraies pages de contenu (HTML 200, identité non usurpée, hors sondes, hors URL techniques WordPress et paramètres). "
+             "fetched_never_clicked_top = ces pages classées par nombre de lectures IA, jamais cliquées depuis une interface IA sur la période.",
         referrer_share_human=humans["referer"].map(lambda r: urlsplit(r).netloc.removeprefix("www.") if r else "(direct)").value_counts().head(15).to_dict(),
     )

@@ -125,7 +125,7 @@ function render(r){
   // ---- Visibilité IA
   const aiHits = ['ai_training','ai_search','ai_user_fetch','ai_agent'].reduce((s,c)=>s+(o.by_category[c]||0),0);
   const src = Object.entries(ai.by_source||{}).sort((a,b)=>b[1]-a[1]), srcMax = src[0]?.[1]||1;
-  const hot = aio.hot_fetches||{}, ga = aio.google_agents||{}, gx = aio.gsc_cross||{}, never = ai.fetched_never_clicked_examples||[];
+  const hot = aio.hot_fetches||{}, ga = aio.google_agents||{}, gx = aio.gsc_cross||{}, neverTop = ai.fetched_never_clicked_top || (ai.fetched_never_clicked_examples||[]).map(p=>({path:p, ai_fetches:0}));
   $('ia').innerHTML = `
     <div class="hero"><div><h1>Les IA lisent beaucoup. Est-ce qu'elles rendent quelque chose ?</h1><div class="sub">${esc(r.explain.ai_referrals||'')}</div></div></div>
     <div class="funnel"><div class="st"><div class="lab">LECTURES PAR LES IA</div><b>${fmt(aiHits)}</b><p>hits de bots IA (entraînement, index, fetchs à la demande)</p></div><div class="arrow">→</div>
@@ -139,7 +139,7 @@ function render(r){
         ${r.crawl_stats&&r.crawl_stats.ratio_logs_over_gsc?`<p class="muted"><b>Validation GSC :</b> ${fmt(r.crawl_stats.logs_per_day)} hits Googlebot/j dans les logs vs ${fmt(r.crawl_stats.gsc_per_day)}/j côté Google (ratio ${r.crawl_stats.ratio_logs_over_gsc}) — ${esc(r.crawl_stats.verdict)}</p>`:''}</div>
     </div>
     <div class="card"><h2>Lues par les IA, jamais cliquées : votre marge de progression</h2>
-      ${never.length?`<ul>${never.slice(0,8).map(p=>`<li><code>${esc(p)}</code></li>`).join('')}</ul><p class="muted">${fmt(ai.fetched_never_clicked_count||0)} pages au total. Titre en question, réponse dans les deux premières phrases, un chiffre daté par section.</p>`:'<p class="muted">Toutes les pages lues par des IA ont généré au moins un clic — ou aucune lecture IA sur la période.</p>'}</div>`;
+      ${neverTop.length?`<table><thead><tr><th>Page</th><th class="n">Lectures IA</th><th>Par qui</th></tr></thead><tbody>${neverTop.slice(0,8).map(x=>`<tr><td><code>${esc(x.path)}</code></td><td class="n"><b>${fmt(x.ai_fetches)}</b></td><td class="muted">${esc(Object.entries(x.by_family||{}).map(([k,v])=>k+' '+v).join(', '))}</td></tr>`).join('')}</tbody></table><p class="muted">${fmt(ai.fetched_never_clicked_count||0)} pages de contenu au total, classées par lectures IA. Vérifiez ce que le bot voit (HTML sans JavaScript) sur les premières ; si tout est propre, elles sont citées sans lien.</p>`:'<p class="muted">Toutes les pages lues par des IA ont généré au moins un clic — ou aucune lecture IA sur la période.</p>'}</div>`;
 
   // ---- Plan d'action
   const actions = rec.actions||[];

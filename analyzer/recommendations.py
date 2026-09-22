@@ -133,12 +133,16 @@ def build(report):
                             how="Maillage interne vers ces pages, vérification qu'elles répondent 200, sitemap resoumis dans la Search Console.",
                             effort="1 jour", impact="pages enfin indexées", evidence=dict(examples=st.get("never_crawled", [])[:5])))
 
-    never = ai.get("fetched_never_clicked_examples", [])
-    if ai.get("fetch_events", 0) > 20 and never:
-        actions.append(dict(domain="geo", title="Rendre citables les pages lues par les IA mais jamais cliquées",
-                            why=f"{ai.get('fetched_never_clicked_count', len(never))} pages sont lues par les index et fetchers IA sans générer un seul clic : elles nourrissent les réponses sans être créditées.",
-                            how="Titre en question, réponse directe dans les deux premières phrases, un chiffre daté et sourcé par section. Commencer par les plus lues.",
-                            effort="½ jour par page", impact=f"part des {ai.get('ai_clicks', 0)} clics IA", evidence=dict(examples=never[:5])))
+    never_top = ai.get("fetched_never_clicked_top") or [dict(path=p, ai_fetches=None) for p in ai.get("fetched_never_clicked_examples", [])]
+    if ai.get("fetch_events", 0) > 20 and never_top:
+        top = [x for x in never_top if x["path"] != "/"][:5] or never_top[:5]  # la page d'accueil domine mécaniquement, elle n'est pas l'exemple utile
+        lead = top[0]
+        actions.append(dict(domain="geo", title="Vérifier ce que les IA voient sur vos pages les plus lues et jamais cliquées",
+                            why=f"{ai.get('fetched_never_clicked_count', len(never_top))} pages de contenu sont lues par les index et fetchers IA sans jamais générer de clic. La plus lue : {lead['path']}" + (f" ({lead['ai_fetches']} lectures IA)" if lead.get("ai_fetches") else "") + ".",
+                            how="Pour chacune des 5 premières (evidence) : 1) ouvrir la page avec un client sans JavaScript (curl) et vérifier que la réponse à la question du titre est dans le HTML, pas seulement dans un bloc chargé en JS ; "
+                                "2) vérifier la cohérence titre / H1 / première phrase ; 3) sur un WordPress, s'assurer que le thème ou un plugin ne sert pas une version allégée aux bots (cache, lazy-load du contenu). "
+                                "Si tout est propre, la page est probablement citée sans lien : c'est le plafond, pas un défaut de la page.",
+                            effort="20 min par page", impact=f"part des {ai.get('ai_clicks', 0)} clics IA", evidence=dict(pages=top)))
 
     training = [f for f in by_family if f["category"] == "ai_training"]
     if training:

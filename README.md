@@ -82,6 +82,7 @@ crawl_budget    par moteur : gaspillage, segments, gabarits, recrawl, pages stal
 structure       sitemap ↔ crawl, export crawler ↔ crawl, humains ↔ Googlebot
 aio             hot_fetches (probabiliste), google_agents, gsc_cross (si --gsc), gsc_ai_validation (si --gsc-ai : précision/rappel des heuristiques contre la vérité Google)
 ai_referrals    clics venant d'IA, par source, par page, boucles fetch→clic, pages lues jamais cliquées
+                (fetched_never_clicked_top : vraies pages de contenu classées par lectures IA, avec les familles qui les lisent)
 robots_sim      (si --robots) impact par famille + leçons
 crawl_stats     (si --crawl-stats) hits Google des logs vs rapport Crawl Stats GSC, jour par jour : ratio + verdict
 stealth         IP "humaines" suspectes avec score et signaux
