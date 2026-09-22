@@ -142,6 +142,9 @@ class LLM:
         msgs = ([{"role": "system", "content": system}] if system else []) + messages
         # OpenAI (gpt-5+) exige max_completion_tokens ; DeepSeek attend max_tokens
         limit = {"max_completion_tokens": max_tokens} if self.provider == "openai" else {"max_tokens": max_tokens}
+        # DeepSeek V4 : le raisonnement (delta.reasoning_content) consomme max_tokens avant la réponse — sur un résumé
+        # structuré du rapport il n'apporte rien et peut vider tout le budget. On le désactive.
+        if self.provider == "deepseek": limit["extra_body"] = {"thinking": {"type": "disabled"}}
         stream = self._client.chat.completions.create(
             model=self.model, messages=msgs, stream=True,
             stream_options={"include_usage": True}, **limit)
