@@ -69,7 +69,7 @@ overview        hits, part bots / IA, par catégorie, par opérateur, par type d
 categories      libellé + explication de chaque catégorie
 actors[]        une ligne par famille de bot : hits, hits/j, URL uniques, IP, verified/spoofed, codes HTTP,
                 robots.txt lu, rafale max, profondeur, part de paramètres, top pages
-identity        résumé verified / spoofed / unverified + IP usurpatrices
+identity        résumé verified / spoofed / unverified / n/a + IP usurpatrices + labels (chaque statut expliqué)
 control_files   qui lit robots.txt, llms.txt, ai.txt… + familles qui ne lisent jamais robots.txt
 timeline        par jour et par catégorie ; par heure UTC et par famille
 crawl_budget    par moteur : gaspillage, segments, gabarits, recrawl, pages stales, 404/5xx, redirections
@@ -79,7 +79,11 @@ aio             hot_fetches (probabiliste), google_agents, gsc_cross (si --gsc),
 ai_referrals    clics venant d'IA, par source, par page, boucles fetch→clic, pages lues jamais cliquées
 robots_sim      (si --robots) impact par famille + leçons
 stealth         IP "humaines" suspectes avec score et signaux
+self_traffic    le site qui s'appelle lui-même (wp-cron, admin-ajax, requêtes WordPress) : retiré des parts
 compare         (si --compare) deltas par catégorie et famille
+recommendations by_family[] (decision allow|limit|block|ban_ip|watch + why + how par bot),
+                actions[] (rank, domain, title, why, how, effort, impact, evidence — les gestes à faire, dans l'ordre),
+                robots_txt_suggestion, decisions_legend. LA section à afficher en premier dans une surcouche.
 explain         texte pédagogique par section
 alerts[]        {level: critical|warn|info, message}
 ```

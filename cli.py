@@ -98,6 +98,10 @@ def summary(r):
         for l in r["robots_sim"]["lessons"][:6]: print(f"  • {l}")
     print("\nAlertes :")
     for al in r["alerts"]: print(f"  [{al['level']}] {al['message']}")
+    acts = r.get("recommendations", {}).get("actions", [])
+    if acts:
+        print("\nPlan d'action (détail dans summary.md et report.json → recommendations) :")
+        for a in acts: print(f"  {a['rank']}. {a['title']}  [{a['effort']}]")
 
 if __name__ == "__main__":
     main()

@@ -15,6 +15,8 @@ EXPLAIN = {
     "stealth": "Trafic classé humain qui n'en est pas : bots déguisés (pas d'assets, cadence régulière, rotation d'UA, jamais de referer), POST massifs (attaques), et trafic auto-généré (wp-cron, admin-ajax : le site s'appelle lui-même). Ce trafic est compté comme humain par GA4 si le JS s'exécute, et pollue toute stat calculée sur les logs.",
     "compare": "Avant/après : variation par jour de chaque famille et catégorie, familles apparues/disparues. Delta > ±30 % sur Googlebot mérite une explication (mise en prod, robots, perf).",
     "timeline": "Hits par jour et par catégorie, hits par heure UTC par famille. Les bots d'entraînement crawlent souvent en rafales nocturnes ; Googlebot est régulier ; les fetchs utilisateur suivent la journée des humains.",
+    "self_traffic": "Le site qui s'appelle lui-même : wp-cron, admin-ajax, REST interne, requêtes WordPress. Ni humain ni bot externe, retiré des parts. Sans cette étape, l'IP du serveur ressortait en tête des « bots déguisés ».",
+    "recommendations": "La couche décision : by_family donne un verdict par bot (allow / limit / block / ban_ip / watch) avec la raison et la marche à suivre ; actions[] liste ce qu'il faut faire, dans l'ordre (sécurité, crawl, visibilité IA, stratégie, routine), chaque action justifiée par un chiffre du rapport. C'est la section à afficher en premier dans une surcouche.",
 }
 
 def alerts(report):

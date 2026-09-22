@@ -67,9 +67,15 @@ def _collect(report):
     ai = report["ai_referrals"]
     aio = report["aio"]
     ident = report["identity"]["summary"]
+    rec = report.get("recommendations", {})
+    decisions = {f["family"]: f for f in rec.get("by_family", [])}
     return dict(o=o, cats=cats, cat_label=cat_label, day_totals=day_totals, ai=ai, aio=aio, ident=ident,
                 actors=report["actors"][:15], alerts=report["alerts"],
-                lessons=report.get("robots_sim", {}).get("lessons", []))
+                lessons=report.get("robots_sim", {}).get("lessons", []),
+                actions=rec.get("actions", []), decisions=decisions, robots_sugg=rec.get("robots_txt_suggestion", ""))
+
+
+DECISION_FR = {"allow": "laisser faire", "limit": "limiter", "block": "bloquer", "ban_ip": "bannir l'IP", "watch": "surveiller"}
 
 
 def build_summary_md(report):
@@ -83,15 +89,23 @@ def build_summary_md(report):
     L.append("## Alertes\n")
     for a in c["alerts"]:
         L.append(f"- **[{a['level']}]** {a['message']}")
+    if c["actions"]:
+        L.append("\n## Plan d'action — dans l'ordre\n")
+        for a in c["actions"]:
+            L.append(f"### {a['rank']}. {a['title']}  _(effort : {a['effort']} · impact : {a['impact']})_\n")
+            L.append(f"**Pourquoi :** {a['why']}  \n**Comment :** {a['how']}\n")
     L.append("\n## Répartition par catégorie\n")
     L.append("| Catégorie | Hits |\n|---|---:|")
     for k, v in c["cats"]:
         L.append(f"| {c['cat_label'](k)} | {_fmt(v)} |")
     L.append("\n## Top familles de bots\n")
-    L.append("| Famille | Hits | Hits/j | Erreurs | robots.txt lu | Part usurpée |\n|---|---:|---:|---:|:--:|---:|")
+    L.append("| Famille | Hits | Hits/j | Erreurs | robots.txt lu | Part usurpée | Décision |\n|---|---:|---:|---:|:--:|---:|---|")
     for x in c["actors"]:
+        d = c["decisions"].get(x["family"], {})
         L.append(f"| {x['family']} | {_fmt(x['hits'])} | {x['hits_per_day']:.0f} | {x['error_rate']:.0%} | "
-                 f"{'oui' if x['fetched_robots_txt'] else 'non'} | {x['spoofed_share']:.0%} |")
+                 f"{'oui' if x['fetched_robots_txt'] else 'non'} | {x['spoofed_share']:.0%} | {DECISION_FR.get(d.get('decision'), '—')} |")
+    if c["robots_sugg"]:
+        L.append("\n### robots.txt suggéré par les décisions\n\n```\n" + c["robots_sugg"] + "\n```")
     L.append("\n## Identité\n")
     L.append("| Statut | Hits |\n|---|---:|")
     for k, v in c["ident"].items():
@@ -123,8 +137,13 @@ def build_report_html(report):
         for a in c["alerts"])
     actor_rows = "".join(
         f"<tr><td>{H.escape(x['family'])}</td><td>{_fmt(x['hits'])}</td><td>{x['hits_per_day']:.0f}</td>"
-        f"<td>{x['error_rate']:.0%}</td><td>{'oui' if x['fetched_robots_txt'] else 'non'}</td><td>{x['spoofed_share']:.0%}</td></tr>"
+        f"<td>{x['error_rate']:.0%}</td><td>{'oui' if x['fetched_robots_txt'] else 'non'}</td><td>{x['spoofed_share']:.0%}</td>"
+        f"<td style=\"text-align:left\">{H.escape(DECISION_FR.get(c['decisions'].get(x['family'], {}).get('decision'), '—'))}</td></tr>"
         for x in c["actors"])
+    actions_html = "".join(
+        f"<li><strong>{a['rank']}. {H.escape(a['title'])}</strong> <span class=\"note\">(effort : {H.escape(a['effort'])} · impact : {H.escape(a['impact'])})</span>"
+        f"<br><span class=\"note\">Pourquoi :</span> {H.escape(a['why'])}<br><span class=\"note\">Comment :</span> {H.escape(a['how'])}</li>"
+        for a in c["actions"])
     src_rows = "".join(f"<tr><td>{H.escape(k)}</td><td>{_fmt(v)}</td></tr>"
                        for k, v in sorted(c["ai"]["by_source"].items(), key=lambda kv: -kv[1]))
     ident_rows = "".join(f"<tr><td>{H.escape(k)}</td><td>{_fmt(v)}</td></tr>" for k, v in c["ident"].items())
@@ -153,10 +172,11 @@ def build_report_html(report):
  <div class="kpi"><b>{_fmt(c['ai']['ai_clicks'])}</b><span>clics venant d'IA</span></div>
 </div>
 <h2>Alertes</h2><ul>{alerts_html}</ul>
+{'<h2>Plan d’action — dans l’ordre</h2><ul>' + actions_html + '</ul>' if actions_html else ''}
 <h2>Hits par jour</h2>{_svg_timeline(c['day_totals'])}
 <h2>Répartition par catégorie</h2>{_svg_hbar(cat_items)}
 <h2>Top familles de bots</h2>{_svg_hbar(actor_items)}
-<table><tr><th>Famille</th><th>Hits</th><th>Hits/j</th><th>Erreurs</th><th>robots.txt</th><th>Usurpé</th></tr>{actor_rows}</table>
+<table><tr><th>Famille</th><th>Hits</th><th>Hits/j</th><th>Erreurs</th><th>robots.txt</th><th>Usurpé</th><th style="text-align:left">Décision</th></tr>{actor_rows}</table>
 <h2>Identité</h2><table><tr><th>Statut</th><th>Hits</th></tr>{ident_rows}</table>
 <h2>Boucle IA → humain</h2>
 <p>{_fmt(c['ai']['ai_clicks'])} clics humains venant d'interfaces IA ({c['ai']['share_of_human_html']:.2%} du trafic HTML humain).</p>

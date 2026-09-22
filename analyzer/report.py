@@ -1,7 +1,7 @@
 """Assemble le rapport complet = le contrat JSON exploité par les surcouches."""
 import json, datetime as dt
 import pandas as pd
-from . import probes as PR, classifier as C, verifier as V, behavior as B, referrals as R, aio as A, crawl_budget as CB, structure as S, robots_sim as RS, stealth as ST, compare as CMP, explain as E, self_traffic as SELF
+from . import probes as PR, classifier as C, verifier as V, behavior as B, referrals as R, aio as A, crawl_budget as CB, structure as S, robots_sim as RS, stealth as ST, compare as CMP, explain as E, self_traffic as SELF, recommendations as REC
 
 VERSION = "1.0.0"
 
@@ -79,6 +79,7 @@ def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, c
     if compare_cutoff:
         a, b = CMP.split_by_date(df, compare_cutoff)
         if len(a) and len(b): report["compare"] = CMP.compare(a, b)
+    report["recommendations"] = REC.build(report)
     report["explain"] = E.EXPLAIN
     report["alerts"] = E.alerts(report)
     return _jsonable(report), df
