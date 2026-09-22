@@ -75,7 +75,7 @@
      "googlebot.com",
      "google.com"
     ],
-    "ip_source": "google_special"
+    "ip_source": "google"
    }
   },
   {
@@ -90,7 +90,7 @@
      "googlebot.com",
      "google.com"
     ],
-    "ip_source": "google_special"
+    "ip_source": "google"
    }
   },
   {
@@ -105,7 +105,7 @@
      "googlebot.com",
      "google.com"
     ],
-    "ip_source": "google_special"
+    "ip_source": "google"
    }
   },
   {
@@ -1256,9 +1256,9 @@
   {
    "pattern": "WP-Rocket-SaaS|WP Rocket/Preload",
    "family": "WP Rocket",
-   "operator": "WP Media",
-   "category": "monitoring",
-   "purpose": "Préchargement du cache WP Rocket (déclenché par votre propre site)",
+   "operator": "le site lui-même",
+   "category": "self_traffic",
+   "purpose": "Prechargement du cache par le plugin WP Rocket : le site se crawle lui-meme apres chaque purge. Trafic interne, pas un bot externe.",
    "respects_robots": false,
    "verify": {}
   },

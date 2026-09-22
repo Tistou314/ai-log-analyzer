@@ -15,11 +15,13 @@ def _jsonable(o):
     if isinstance(o, float) and o != o: return None
     return o
 
-def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, crawl_export=None, compare_cutoff=None, use_dns=False, site=None):
+def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, crawl_export=None, compare_cutoff=None, use_dns=False, site=None, crawl_stats_path=None):
     clf = C.Classifier(); df = clf.apply(df)
     ver = V.Verifier(use_dns=use_dns); df = ver.apply(df, clf)
     df = PR.apply(df)
     df = SELF.apply(df)
+    stealth = ST.analyze(df)                 # scoré sur le trafic encore classé humain…
+    df, stealth = ST.reclassify(df, stealth)  # …puis les scores élevés deviennent des bots avant toute statistique
     sig = clf.sig
     span = (df["ts"].max() - df["ts"].min()) if len(df) else pd.Timedelta(0)
     ext = df[df["category"] != "self_traffic"]  # parts calculées hors trafic interne du site
@@ -65,6 +67,9 @@ def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, c
     if gsc_ai_path:
         try: report["aio"]["gsc_ai_validation"] = A.validate_against_gsc_ai(report["aio"].get("gsc_cross", {}), hot, A.load_gsc_ai(gsc_ai_path))
         except Exception as e: report["aio"]["gsc_ai_validation"] = dict(error=str(e))
+    if crawl_stats_path:
+        try: report["crawl_stats"] = A.validate_crawl_stats(df, A.load_crawl_stats(crawl_stats_path))
+        except Exception as e: report["crawl_stats"] = dict(error=str(e))
     sm_paths = None
     if sitemap:
         try: sm_paths = S.load_sitemap(sitemap)
@@ -75,7 +80,7 @@ def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, c
         except Exception as e: report.setdefault("errors", []).append(f"crawl_export: {e}")
     report["structure"] = S.analyze(df, sm_paths, crawl_df)
     if robots_text: report["robots_sim"] = RS.simulate(df, robots_text)
-    report["stealth"] = ST.analyze(df)
+    report["stealth"] = stealth
     if compare_cutoff:
         a, b = CMP.split_by_date(df, compare_cutoff)
         if len(a) and len(b): report["compare"] = CMP.compare(a, b)

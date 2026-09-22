@@ -17,14 +17,16 @@ class Verifier:
                 self.complete[f.stem] = bool(d.get("complete", False))  # False = liste partielle → jamais de verdict "spoofed"
             except Exception:
                 pass
-        # les fichiers google_* couvrent tous les bots Google
-        self.aliases = {"google": [k for k in self.nets if k.startswith("google")],
-                        "google_user_triggered": [k for k in self.nets if k.startswith("google")],
+        # une IP Google est une IP Google : chaque source google_* accepte l'union des fichiers Google
+        # (GoogleOther est listé dans googlebot.json, pas dans special-crawlers.json, etc.)
+        google_all = [k for k in self.nets if k.startswith("google")]
+        self.aliases = {k: google_all for k in self.nets if k.startswith("google")}
+        self.aliases.update({"google": google_all, "google_user_triggered": google_all, "google_special": google_all,
                         "openai_gptbot": [k for k in self.nets if k.startswith("openai")],
                         "openai_searchbot": [k for k in self.nets if k.startswith("openai")],
                         "openai_chatgpt_user": [k for k in self.nets if k.startswith("openai")],
                         "perplexity_bot": [k for k in self.nets if k.startswith("perplexity")],
-                        "perplexity_user": [k for k in self.nets if k.startswith("perplexity")]}
+                        "perplexity_user": [k for k in self.nets if k.startswith("perplexity")]})
         self.use_dns, self.dns_workers, self.max_dns = use_dns, dns_workers, max_dns
         self._dns_cache = {}
 

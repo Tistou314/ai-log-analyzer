@@ -40,7 +40,7 @@ python cli.py access.log
 # tout
 python cli.py access.log.gz access.log.1.gz \
   --site https://monsite.fr --robots \
-  --gsc export_gsc_pages.csv --gsc-ai export_gsc_generative_ai.xlsx \
+  --gsc export_gsc_performance.xlsx --gsc-ai export_gsc_generative_ai.xlsx --crawl-stats export_gsc_crawl_stats.xlsx \
   --sitemap https://monsite.fr/sitemap.xml \
   --crawl screamingfrog_internal_html.csv \
   --compare 2026-08-15 \
@@ -79,6 +79,7 @@ structure       sitemap ↔ crawl, export crawler ↔ crawl, humains ↔ Googleb
 aio             hot_fetches (probabiliste), google_agents, gsc_cross (si --gsc), gsc_ai_validation (si --gsc-ai : précision/rappel des heuristiques contre la vérité Google)
 ai_referrals    clics venant d'IA, par source, par page, boucles fetch→clic, pages lues jamais cliquées
 robots_sim      (si --robots) impact par famille + leçons
+crawl_stats     (si --crawl-stats) hits Google des logs vs rapport Crawl Stats GSC, jour par jour : ratio + verdict
 stealth         IP "humaines" suspectes avec score et signaux
 self_traffic    le site qui s'appelle lui-même (wp-cron, admin-ajax, requêtes WordPress) : retiré des parts
 compare         (si --compare) deltas par catégorie et famille

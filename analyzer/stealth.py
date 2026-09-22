@@ -4,9 +4,27 @@ import numpy as np
 
 DC_HINTS = ("amazonaws", "googleusercontent", "hetzner", "ovh", "digitalocean", "linode", "vultr", "azure", "cloud")
 
+RECLASSIFY_SCORE = 7   # ≥ 7 = très probablement un bot : reclassé en scraper avant les statistiques
+FAMILY = "Bot déguisé en navigateur"
+
+
+def reclassify(df, result):
+    """Les IP au score ≥ RECLASSIFY_SCORE quittent la catégorie human : sans ça, un POST flood ou un scraper
+    à UA Chrome gonfle le trafic « humain » (et GA4 fait la même erreur)."""
+    ips = {s["ip"] for s in result["suspects"] if s["score"] >= RECLASSIFY_SCORE}
+    if ips:
+        m = (df["category"] == "human") & df["ip"].isin(ips)
+        df.loc[m, ["family", "category", "operator", "purpose", "is_bot", "is_ai", "identity"]] = \
+            [FAMILY, "scraper", "inconnu (bot déguisé)", "Comportement de bot sous un User-Agent de navigateur", True, False, "n/a"]
+    result["reclassified_ips"] = sorted(ips)
+    result["reclassified_hits"] = int(sum(s["hits"] for s in result["suspects"] if s["ip"] in ips))
+    for s in result["suspects"]: s["reclassified"] = s["ip"] in ips
+    return df, result
+
+
 def analyze(df, min_hits=20):
     h = df[df["category"] == "human"]
-    if not len(h): return dict(suspects=[], scored_ips=0)
+    if not len(h): return dict(suspects=[], scored_ips=0, suspect_hits=0, suspect_share_of_human=0.0)
     per = h.groupby("ip")
     rows = []
     for ip, g in per:
@@ -37,4 +55,4 @@ def analyze(df, min_hits=20):
     total_sus = sum(r["hits"] for r in rows)
     return dict(scored_ips=int(sum(1 for _, g in per if len(g) >= min_hits)), suspects=rows[:50],
                 suspect_hits=int(total_sus), suspect_share_of_human=round(total_sus / max(len(h), 1), 4),
-                note="Score heuristique. ≥4 : à vérifier ; ≥7 : très probablement un bot déguisé en navigateur. Aucun de ces hits n'est vu par GA4 comme bot.")
+                note="Score heuristique. ≥4 : à vérifier ; ≥7 : très probablement un bot déguisé en navigateur, reclassé en scraper (reclassified=true) avant le calcul des parts. suspect_share_of_human = part du trafic initialement classé humain. Aucun de ces hits n'est vu par GA4 comme bot.")

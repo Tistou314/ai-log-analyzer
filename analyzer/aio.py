@@ -37,9 +37,58 @@ def google_agents(df):
                 by_path=g["path"].value_counts().head(30).to_dict(),
                 verified=int((g["identity"] == "verified").sum()), spoofed=int((g["identity"] == "spoofed").sum()))
 
+def _read_gsc_table(path, sheet):
+    """CSV, ou XLSX exporté par la Search Console (un onglet par tableau ; le nom varie selon la langue : on prend celui qui contient `sheet`, sinon le premier qui a une colonne page/URL)."""
+    if str(path).lower().endswith((".xlsx", ".xls")):
+        x = pd.ExcelFile(path)
+        names = [s for s in x.sheet_names if sheet.lower() in s.lower()]
+        for s in names or x.sheet_names:
+            g = x.parse(s)
+            if any("page" in str(c).lower() or "url" in str(c).lower() for c in g.columns): return g
+        raise ValueError(f"aucun onglet avec une colonne page/URL dans {path}")
+    return pd.read_csv(path)
+
+
+def load_crawl_stats(path):
+    """Export xlsx « Statistiques d'exploration » de la GSC : onglet graphique = Date, total des demandes d'exploration."""
+    x = pd.ExcelFile(path)
+    for s in x.sheet_names:
+        g = x.parse(s)
+        cols = {str(c).lower(): c for c in g.columns}
+        date = next((cols[c] for c in cols if c.startswith("date")), None)
+        total = next((cols[c] for c in cols if "demandes" in c or "requests" in c or "crawl" in c), None)
+        if date and total:
+            out = pd.DataFrame({"day": pd.to_datetime(g[date]).dt.date.astype(str), "gsc_requests": pd.to_numeric(g[total], errors="coerce")}).dropna()
+            return out
+    raise ValueError("onglet Date / demandes d'exploration introuvable")
+
+
+def validate_crawl_stats(df, stats):
+    """Compare, jour par jour sur la période commune, les hits Googlebot (tous types) des logs au total Crawl Stats de la GSC."""
+    # périmètre du rapport Crawl Stats : les crawlers Googlebot (smartphone, desktop, image, vidéo, news, GoogleOther, StoreBot, AdsBot),
+    # identité vérifiée uniquement — pas Lighthouse, pas AdSense, pas les usurpateurs
+    fams = df["family"].str.match(r"^(Googlebot|GoogleOther|Storebot-Google|AdsBot-Google)")
+    g = df[fams & (df["identity"] == "verified")]
+    if not len(g): return dict(error="aucun hit Googlebot vérifié dans les logs (plages IP chargées ?)")
+    per_day = g.assign(day=g["ts"].dt.date.astype(str)).groupby("day").size().rename("logs_google_hits").reset_index()
+    m = per_day.merge(stats, on="day", how="inner")
+    if not len(m): return dict(error="aucun jour commun entre les logs et le rapport Crawl Stats", logs_days=[per_day["day"].min(), per_day["day"].max()], gsc_days=[stats["day"].min(), stats["day"].max()])
+    # la GSC compte les jours entiers : on écarte les jours partiels des logs (premier et dernier)
+    full = m.iloc[1:-1] if len(m) > 2 else m
+    lg, gs = float(full["logs_google_hits"].sum()), float(full["gsc_requests"].sum())
+    ratio = round(lg / gs, 3) if gs else None
+    verdict = ("cohérent : les logs voient l'essentiel du crawl Google" if ratio and 0.8 <= ratio <= 1.2 else
+               "les logs voient moins que la GSC : hits servis depuis un cache/CDN, ou plusieurs hôtes (http + https, www) non fournis" if ratio and ratio < 0.8 else
+               "les logs voient plus que la GSC : usurpateurs comptés comme Google ? vérifiez identity" if ratio else "non calculable")
+    return dict(days_compared=int(len(full)), logs_google_hits=int(lg), gsc_crawl_requests=int(gs), ratio_logs_over_gsc=ratio,
+                logs_per_day=round(lg / max(len(full), 1), 1), gsc_per_day=round(gs / max(len(full), 1), 1), verdict=verdict,
+                by_day=full.to_dict("records"),
+                note="Validation externe : la GSC est la vérité sur le volume Googlebot (smartphone, desktop, images, ressources de page…). Comparé aux hits Googlebot VÉRIFIÉS des logs. Un ratio proche de 1 valide à la fois le parser, la classification et l'identité ; la GSC compte aussi les ressources chargées par le rendu, souvent servies par un CDN et absentes des logs.")
+
+
 def load_gsc(path):
-    """Accepte un export CSV GSC (Pages) : colonnes Page/Top pages + Clics/Clicks + Impressions… quel que soit la langue."""
-    gsc = pd.read_csv(path)
+    """Accepte un export GSC rapport Pages, CSV ou XLSX (onglet Pages) : colonnes Page/Top pages + Clics/Clicks + Impressions… quelle que soit la langue."""
+    gsc = _read_gsc_table(path, "Pages")
     cols = {c.lower(): c for c in gsc.columns}
     page = next((cols[c] for c in cols if "page" in c or "url" in c), None)
     clicks = next((cols[c] for c in cols if "clic" in c or "click" in c), None)

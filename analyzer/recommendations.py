@@ -28,6 +28,8 @@ def _fam_decision(r, clicks_by_operator):
     burst = r["max_hits_per_minute"] > 120
     if fam.startswith("Scanner"):
         return "ban_ip", "Sonde des chemins sensibles (.env, .git, xmlrpc…) sous une fausse identité.", "Bannir l'IP au niveau serveur ou WAF. Le robots.txt est ignoré par définition."
+    if fam.startswith("Bot déguisé"):
+        return "ban_ip", "User-Agent de navigateur mais comportement de machine (POST massifs, aucun asset chargé, cadence mécanique) : flood ou scraper, compté comme visiteur par GA4.", "Bannir les IP (stealth.suspects, reclassified=true) par règle serveur ou WAF ; rate limiting sur les POST."
     if cat == "search_engine":
         why = "Indispensable à votre visibilité recherche" + (" — et il alimente aussi AI Overviews / AI Mode." if "Googlebot" in fam else ".")
         how = "Laisser crawler ; travailler plutôt ce qu'il trouve (404, paramètres, 5xx : voir crawl_budget)."
@@ -140,7 +142,8 @@ def build(report):
                             how="Suivre recommendations.by_family (decision par famille). Simuler tout blocage avec --robots robots-modifié.txt avant de l'appliquer : le simulateur montre ce qu'il enlève vraiment.",
                             effort="1 heure", impact="maîtrise de l'usage de votre contenu", evidence=dict(families={f["family"]: f["decision"] for f in training})))
 
-    bursts = [a for a in actors if a["max_hits_per_minute"] > 120 and a["category"] not in ("search_engine",)]
+    bursts = [a for a in actors if a["max_hits_per_minute"] > 120 and a["category"] not in ("search_engine", "scraper")
+              and not a["family"].startswith(("Scanner", "Bot déguisé"))]
     if bursts:
         b = bursts[0]
         actions.append(dict(domain="ops", title=f"Calmer les rafales de {b['family']}",
@@ -149,11 +152,13 @@ def build(report):
                             effort="15 min", impact="stabilité serveur", evidence=dict(family=b["family"], max_hits_per_minute=b["max_hits_per_minute"])))
 
     sl = report.get("stealth", {})
-    if sl.get("suspect_share_of_human", 0) > 0.1:
-        actions.append(dict(domain="analytics", title="Nettoyer vos analytics des bots déguisés en navigateurs",
-                            why=f"{sl['suspect_share_of_human']:.0%} du trafic « humain » vient de {len(sl['suspects'])} IP au comportement de bot (pas d'assets, cadence régulière…). GA4 les compte comme des visites.",
-                            how="Vérifier les IP dans stealth.suspects ; exclure les IP confirmées (filtre serveur ou GA4).",
-                            effort="1 heure", impact="chiffres d'audience fiables", evidence=dict(ips=[s["ip"] for s in sl["suspects"][:5]])))
+    if sl.get("reclassified_hits", 0) or sl.get("suspect_share_of_human", 0) > 0.1:
+        n_ips = len(sl.get("reclassified_ips", [])) or len(sl.get("suspects", []))
+        actions.append(dict(domain="analytics", title="Bannir les bots déguisés en navigateurs et nettoyer vos analytics",
+                            why=f"{sl.get('reclassified_hits', sl.get('suspect_hits', 0))} hits sous un User-Agent de navigateur ont un comportement de bot ({n_ips} IP : POST massifs, aucun asset chargé, cadence mécanique). GA4 les compte comme des visites.",
+                            how="IP et signaux dans stealth.suspects (reclassified=true). Bannir les POST floods (règle serveur / WAF), exclure les autres IP dans GA4.",
+                            effort="1 heure", impact="chiffres d'audience fiables, serveur soulagé",
+                            evidence=dict(ips=[s["ip"] for s in sl.get("suspects", []) if s.get("reclassified")][:8] or [s["ip"] for s in sl.get("suspects", [])[:5]])))
 
     actions.append(dict(domain="routine", title="Installer la routine : un run tous les 15 jours",
                         why="Les nouveaux crawlers IA apparaissent d'abord dans « Bot non identifié » ; les plages IP officielles changent ; un blocage se vérifie au run suivant.",

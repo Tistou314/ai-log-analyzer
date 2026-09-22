@@ -53,21 +53,28 @@ def alerts(report):
     pr = report.get("probes", {})
     if pr.get("usurped_identities"):
         a.append(("critical", "action", "probes", f"{pr['reclassified_hits']} hits de scanners déguisés en bots légitimes ({pr['reclassified_ips']} IP). Identités usurpées : {', '.join(f'{k} {v}' for k, v in list(pr['usurped_identities'].items())[:5])}. Bannir ces IP."))
-    never_robots, heavy_training = [], []
+    never_robots, heavy_training, spoofed, bursts = [], [], [], []
     for r in report["actors"]:
-        if r["family"].startswith("Scanner") or r["category"] == "self_traffic": continue
+        if r["family"].startswith(("Scanner", "Bot déguisé")) or r["category"] == "self_traffic": continue
         if r["spoofed_share"] > 0.05 and r["ips_spoofed"] >= 5:
-            a.append(("critical", "action", "identity", f"{r['family']} : {r['ips_spoofed']} hits depuis des IP hors plages officielles ({r['spoofed_share']:.0%}). Usurpation d'identité probable : bannir ces IP (identity.spoofed_ips), pas l'User-Agent."))
+            spoofed.append((r["ips_spoofed"], f"{r['family']} {r['ips_spoofed']} ({r['spoofed_share']:.0%})"))
         if r["s5xx"] > 0 and r["category"] == "search_engine" and r["s5xx"] / r["hits"] > 0.01:
             a.append(("critical", "action", "crawl_budget", f"{r['family']} reçoit {r['s5xx']} erreurs 5xx ({r['s5xx']/r['hits']:.1%}). Un moteur qui voit des 5xx ralentit son crawl."))
-        if r["category"] == "search_engine" and r["s404"] / r["hits"] > 0.1:
-            a.append(("warn", "action", "crawl_budget", f"{r['family']} : {r['s404']/r['hits']:.0%} de 404. Crawl budget gaspillé sur des URL mortes."))
+        if r["category"] == "search_engine" and r["hits"] >= 20 and r["s404"] / r["hits"] > 0.1:
+            a.append(("warn", "action", "crawl_budget", f"{r['family']} : {r['s404']/r['hits']:.0%} de 404 sur {r['hits']} hits. Crawl budget gaspillé sur des URL mortes."))
         if r["category"] == "ai_training" and r["hits"] > 100 and not r["fetched_robots_txt"]:
             never_robots.append(f"{r['family']} ({r['hits']})")
         if r["category"] == "ai_training" and r["hits_per_day"] > 500:
             heavy_training.append(f"{r['family']} ({r['hits_per_day']:.0f}/j)")
-        if r["max_hits_per_minute"] > 120:
-            a.append(("warn", "action", "actors", f"{r['family']} : rafale à {r['max_hits_per_minute']} hits/minute. Risque de charge serveur."))
+        if r["max_hits_per_minute"] > 120 and r["category"] != "scraper":
+            bursts.append((r["max_hits_per_minute"], f"{r['family']} {r['max_hits_per_minute']}/min"))
+    if spoofed:
+        spoofed.sort(reverse=True)
+        tot = sum(n for n, _ in spoofed)
+        a.append(("critical", "action", "identity", f"{tot} hits usurpent une identité de bot connu depuis des IP hors plages officielles : {', '.join(s for _, s in spoofed[:6])}{'…' if len(spoofed) > 6 else ''}. Bannir ces IP (identity.spoofed_ips), jamais l'User-Agent."))
+    if bursts:
+        bursts.sort(reverse=True)
+        a.append(("warn", "action", "actors", f"Rafales de crawl (risque de charge serveur) : {', '.join(s for _, s in bursts[:5])}. Crawl-delay pour ceux qui lisent robots.txt, rate limiting pour les autres."))
     if never_robots:
         a.append(("info", "info", "control_files", f"Bots d'entraînement qui n'ont jamais lu robots.txt sur la période : {', '.join(never_robots)}. Un blocage robots.txt ne les arrêtera pas."))
     if heavy_training:
@@ -93,7 +100,9 @@ def alerts(report):
     if aio.get("gsc_cross", {}).get("aio_suspects", 0):
         a.append(("info", "info", "aio", f"{aio['gsc_cross']['aio_suspects']} pages GSC au profil 'citée dans un AI Overview sans clic' (impressions élevées, CTR < 2 %, fetchs à chaud). Hypothèse à confirmer dans la GSC."))
     sl = report.get("stealth", {})
-    if sl.get("suspect_share_of_human", 0) > 0.1:
+    if sl.get("reclassified_hits", 0):
+        a.append(("warn", "action", "stealth", f"{sl['reclassified_hits']} hits à User-Agent de navigateur avaient un comportement de bot ({len(sl['reclassified_ips'])} IP, score ≥ 7) : reclassés en bots. GA4 les compte comme des visites — à exclure de vos analytics, et à bannir si ce sont des POST massifs."))
+    elif sl.get("suspect_share_of_human", 0) > 0.1:
         a.append(("warn", "action", "stealth", f"{sl['suspect_share_of_human']:.0%} du trafic 'humain' vient d'IP au comportement de bot ({len(sl['suspects'])} IP suspectes)."))
     selft = report.get("self_traffic", {})
     if selft.get("share_of_all", 0) > 0.05:

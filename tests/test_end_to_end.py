@@ -19,7 +19,7 @@ def report():
 
 def test_googlebot_spoofed_alert(report):
     msgs = [a["message"] for a in report["alerts"] if a["level"] == "critical"]
-    assert any("Googlebot" in m and "usurpation" in m.lower() for m in msgs), msgs
+    assert any("Googlebot" in m and "usurp" in m.lower() for m in msgs), msgs
 
 
 def test_scanner_disguised_alert(report):
@@ -27,7 +27,7 @@ def test_scanner_disguised_alert(report):
 
 
 def test_gptbot_burst_alert(report):
-    assert any("rafale" in a["message"] and "GPTBot" in a["message"] for a in report["alerts"])
+    assert any("rafale" in a["message"].lower() and "GPTBot" in a["message"] for a in report["alerts"])
 
 
 def test_hot_fetches_present(report):

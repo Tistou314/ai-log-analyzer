@@ -38,6 +38,7 @@ def main():
     ap.add_argument("--robots", nargs="?", const="__fetch__", help="chemin d'un robots.txt à simuler, ou sans valeur pour le récupérer depuis --site")
     ap.add_argument("--gsc", help="export CSV Search Console (rapport Pages)")
     ap.add_argument("--gsc-ai", help="export Search Console 'Generative AI Features' (xlsx ou csv, onglet Pages) : vérité terrain AIO")
+    ap.add_argument("--crawl-stats", help="export xlsx Search Console 'Statistiques d'exploration' : valide le volume Googlebot des logs")
     ap.add_argument("--sitemap", help="URL ou fichier sitemap.xml (index accepté)")
     ap.add_argument("--crawl", help="export CSV Screaming Frog / OnCrawl / Botify")
     ap.add_argument("--compare", help="date pivot YYYY-MM-DD : compare avant/après")
@@ -64,7 +65,7 @@ def main():
             if not a.site: sys.exit("--robots sans fichier nécessite --site")
             robots_text = RS.fetch_robots(a.site)
         else: robots_text = open(a.robots, encoding="utf-8").read()
-    report, enriched = REP.build(df, robots_text, a.gsc, a.gsc_ai, a.sitemap, a.crawl, a.compare, a.dns, a.site)
+    report, enriched = REP.build(df, robots_text, a.gsc, a.gsc_ai, a.sitemap, a.crawl, a.compare, a.dns, a.site, crawl_stats_path=a.crawl_stats)
     out = pathlib.Path(a.out); out.mkdir(exist_ok=True)
     REP.save(report, out / "report.json")
     if not a.no_csv: enriched.to_csv(out / "hits.csv", index=False)
@@ -98,6 +99,10 @@ def summary(r):
         s1, s2 = v["aio_suspect_vs_truth"], v["hot_fetch_vs_truth"]
         print(f"      Vérité GSC Generative AI : {v['gsc_ai_pages']} pages, {v['gsc_ai_impressions']} impressions IA")
         print(f"      → suspects confirmés {s1['confirmed']}/{s1['predicted']} (précision {s1['precision']}), fetchs à chaud confirmés {s2['confirmed']}/{s2['predicted']} (précision {s2['precision']})")
+    cs = r.get("crawl_stats")
+    if cs and "ratio_logs_over_gsc" in cs:
+        print(f"Crawl Stats GSC : {cs['logs_per_day']:.0f} hits Google/j dans les logs vs {cs['gsc_per_day']:.0f}/j côté Google sur {cs['days_compared']} j (ratio {cs['ratio_logs_over_gsc']}) → {cs['verdict']}")
+    elif cs: print(f"Crawl Stats GSC : {cs.get('error')}")
     if "robots_sim" in r:
         print(f"\nrobots.txt : {r['robots_sim']['total_blocked']} hits effectivement bloqués, {r['robots_sim']['total_rules_matched_but_ignored']} matchés mais ignorés par des fetchers utilisateur")
         for l in r["robots_sim"]["lessons"][:6]: print(f"  • {l}")

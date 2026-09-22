@@ -4,7 +4,8 @@ et gonfle les stats humaines. Tourne après probes, avant les statistiques.
 """
 import re
 
-SELF_PATHS = re.compile(r"/wp-cron\.php|/admin-ajax\.php|/wp-json/", re.I)  # pas xmlrpc : c'est une sonde (probes.py)
+SELF_PATHS = re.compile(r"/wp-cron\.php|/admin-ajax\.php", re.I)  # pas xmlrpc (sonde) ; pas wp-json (l'API REST est aussi scrapée de l'extérieur)
+SERVER_ONLY_PATHS = re.compile(r"/wp-json/", re.I)  # interne seulement quand l'IP est celle du serveur
 FAMILY = "Trafic du site vers lui-même"
 
 
@@ -20,7 +21,8 @@ def apply(df, min_hits=20, threshold=0.8):
     flagged = df["probe_flag"] if "probe_flag" in df else False
     per_ip = df[~flagged].groupby("ip")["is_self_path"].agg(["size", "mean"])
     loop_ips = set(per_ip[(per_ip["size"] >= min_hits) & (per_ip["mean"] >= threshold)].index)
-    mask = ((df["ip"].isin(server_ips) & df["is_self_path"]) | df["ip"].isin(loop_ips)) & ~flagged
+    server_paths = df["is_self_path"] | df["path"].str.contains(SERVER_ONLY_PATHS)
+    mask = ((df["ip"].isin(server_ips) & server_paths) | df["ip"].isin(loop_ips)) & ~flagged
     if mask.any():
         df.loc[mask, "family"] = FAMILY
         df.loc[mask, "category"] = "self_traffic"
