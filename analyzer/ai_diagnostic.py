@@ -69,7 +69,12 @@ def _load_dotenv():
     env = ROOT / ".env"
     if not env.exists():
         return
-    for line in env.read_text(encoding="utf-8").splitlines():
+    raw = env.read_bytes()
+    # PowerShell (`echo ... > .env`) écrit en UTF-16 avec BOM ; Notepad peut ajouter un BOM UTF-8 : on accepte tout
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")): text = raw.decode("utf-16")
+    elif raw.startswith(b"\xef\xbb\xbf"): text = raw.decode("utf-8-sig")
+    else: text = raw.decode("utf-8", errors="replace")
+    for line in text.splitlines():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, v = line.split("=", 1)
