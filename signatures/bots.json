@@ -1245,6 +1245,15 @@
    "verify": {}
   },
   {
+   "pattern": "^WordPress/\\d",
+   "family": "WordPress (requêtes internes)",
+   "operator": "le site lui-même",
+   "category": "self_traffic",
+   "purpose": "Requêtes HTTP émises par WordPress lui-même (cron, pingbacks, vérifications de mises à jour, oEmbed)",
+   "respects_robots": false,
+   "source": "https://developer.wordpress.org/reference/functions/wp_remote_get/"
+  },
+  {
    "pattern": "WP-Rocket-SaaS|WP Rocket/Preload",
    "family": "WP Rocket",
    "operator": "WP Media",
@@ -1465,6 +1474,10 @@
   "human": {
    "label": "Humain (probable)",
    "explain": "UA navigateur sans marqueur de bot. Voir le module stealth pour les bots déguisés."
+  },
+  "self_traffic": {
+   "label": "Trafic du site vers lui-même",
+   "explain": "Le serveur s'appelle lui-même : wp-cron, admin-ajax, requêtes internes WordPress (UA 'WordPress/x.y'), plugins de cache qui préchargent. Ni humain ni bot externe : à retirer de toute statistique, ni GA4 ni les logs ne devraient le compter comme visite."
   }
  }
 }

@@ -1,7 +1,7 @@
 """Assemble le rapport complet = le contrat JSON exploité par les surcouches."""
 import json, datetime as dt
 import pandas as pd
-from . import probes as PR, classifier as C, verifier as V, behavior as B, referrals as R, aio as A, crawl_budget as CB, structure as S, robots_sim as RS, stealth as ST, compare as CMP, explain as E
+from . import probes as PR, classifier as C, verifier as V, behavior as B, referrals as R, aio as A, crawl_budget as CB, structure as S, robots_sim as RS, stealth as ST, compare as CMP, explain as E, self_traffic as SELF
 
 VERSION = "1.0.0"
 
@@ -19,15 +19,18 @@ def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, c
     clf = C.Classifier(); df = clf.apply(df)
     ver = V.Verifier(use_dns=use_dns); df = ver.apply(df, clf)
     df = PR.apply(df)
+    df = SELF.apply(df)
     sig = clf.sig
     span = (df["ts"].max() - df["ts"].min()) if len(df) else pd.Timedelta(0)
+    ext = df[df["category"] != "self_traffic"]  # parts calculées hors trafic interne du site
     report = dict(
         meta=dict(version=VERSION, generated=dt.datetime.now(dt.timezone.utc).isoformat(), source=df.attrs.get("source"), format=df.attrs.get("format"),
                   signatures_updated=sig.get("_updated"), ip_ranges_loaded=sorted(ver.nets.keys()), dns_verification=use_dns, site=site),
         overview=dict(hits=int(len(df)), unparsed_lines=int(df.attrs.get("unparsed", 0)),
                       period_start=df["ts"].min().isoformat() if len(df) else None, period_end=df["ts"].max().isoformat() if len(df) else None,
                       days=round(span.total_seconds() / 86400, 2), unique_ips=int(df["ip"].nunique()), unique_urls=int(df["path"].nunique()),
-                      bot_share=round(float(df["is_bot"].mean()), 4), ai_share=round(float(df["is_ai"].mean()), 4),
+                      bot_share=round(float(ext["is_bot"].mean()), 4) if len(ext) else 0, ai_share=round(float(ext["is_ai"].mean()), 4) if len(ext) else 0,
+                      self_traffic_hits=int((df["category"] == "self_traffic").sum()),
                       by_category={k: int(v) for k, v in df["category"].value_counts().items()},
                       by_category_html={k: int(v) for k, v in df[df["resource"] == "html"]["category"].value_counts().items()},
                       by_operator={k: int(v) for k, v in df[df["is_bot"]]["operator"].value_counts().head(30).items()},
@@ -41,9 +44,14 @@ def build(df, robots_text=None, gsc_path=None, gsc_ai_path=None, sitemap=None, c
         groups = RS.parse_robots(robots_text)
         robots_rules = {}
     report["probes"] = PR.summary(df)
-    report["actors"] = B.per_family(df)
-    report["identity"] = dict(summary={k: int(v) for k, v in df[df["is_bot"]]["identity"].value_counts().items()},
+    report["self_traffic"] = SELF.summary(df)
+    report["actors"] = B.per_family(df[df["category"] != "self_traffic"])
+    report["identity"] = dict(summary={k: int(v) for k, v in ext[ext["is_bot"]]["identity"].value_counts().items()},
                               spoofed_ips=df[df["identity"] == "spoofed"].groupby(["ip", "family"]).size().sort_values(ascending=False).head(30).reset_index(name="hits").to_dict("records"),
+                              labels={"verified": "Vérifié : IP dans les plages publiées par l'opérateur (ou rDNS confirmé).",
+                                      "spoofed": "Usurpé : prétend être ce bot mais l'IP est hors des plages officielles. À bannir par IP.",
+                                      "unverified": "Non vérifié : l'opérateur publie des plages mais elles sont incomplètes ici, ou seule la vérification DNS (--dns) permettrait de conclure. Pas un signal de fraude.",
+                                      "n/a": "Sans méthode : cet opérateur ne publie ni plages IP ni domaine rDNS. Impossible à vérifier, ce n'est pas suspect pour autant."},
                               note="verified = IP dans les plages publiées (ou rDNS confirmé). spoofed = prétend être un bot connu mais IP hors plages. unverified = aucune méthode disponible (lancez signatures/ip_ranges/update.py ou --dns).")
     report["control_files"] = B.control_files(df, sig["ai_control_files"])
     report["timeline"] = dict(daily=B.daily_series(df), hourly_by_family=B.hourly_matrix(df))
