@@ -33,6 +33,12 @@ def _split_url(url):
     p = urlsplit(url)
     return (p.path or "/"), p.query
 
+def _to_seconds(v):
+    """Temps de réponse : les serveurs loggent en s (Nginx), ms (IIS, Cloudflare) ou µs (Apache %D). Heuristique par ordre de grandeur."""
+    if v > 100_000: return v / 1e6   # µs : 245000 = 0,245 s
+    if v > 50: return v / 1000       # ms
+    return v                         # s
+
 def _row(ip, ts, method, url, protocol, status, nbytes, referer, ua, host="", rt=None, fmt="combined"):
     path, query = _split_url(url)
     return dict(ts=ts, ip=ip, method=method or "GET", path=path, query=query, protocol=protocol or "",
@@ -50,17 +56,17 @@ def _parse_combined(line):
         # cherche un nombre seul (temps de réponse en s ou ms selon config) : on prend le dernier token numérique
         nums = [t for t in g["extra"].replace('"', ' ').split() if re.fullmatch(r"\d+(\.\d+)?", t)]
         if nums:
-            v = float(nums[-1]); rt = v / 1000 if v > 50 else v  # heuristique µs/ms vs s
+            v = float(nums[-1]); rt = _to_seconds(v)
     return _row(g["ip"], _parse_clf_time(g["time"]), g["method"], g["url"], g["protocol"], g["status"], g["bytes"],
                 g["referer"], g["ua"], g.get("host") or "", rt)
 
 JSON_KEYS = {
-    "ip": ["remote_addr", "client_ip", "ClientIP", "ip", "clientIp", "c-ip", "remoteAddr"],
+    "ip": ["remote_addr", "client_ip", "ClientIP", "ip", "clientIp", "c-ip", "remoteAddr", "remote_ip", "RemoteAddr"],
     "ts": ["time_local", "time_iso8601", "timestamp", "time", "EdgeStartTimestamp", "@timestamp", "ts", "date"],
     "method": ["request_method", "method", "ClientRequestMethod", "cs-method"],
-    "url": ["request_uri", "uri", "path", "ClientRequestURI", "cs-uri-stem", "request", "url"],
+    "url": ["request_uri", "uri", "path", "ClientRequestURI", "cs-uri-stem", "request", "url", "RequestPath", "requestPath"],
     "status": ["status", "EdgeResponseStatus", "sc-status", "statusCode", "response_status"],
-    "bytes": ["body_bytes_sent", "bytes_sent", "EdgeResponseBytes", "sc-bytes", "bytes", "size"],
+    "bytes": ["body_bytes_sent", "bytes_sent", "EdgeResponseBytes", "sc-bytes", "bytes", "size", "response_size", "bytesSent"],
     "referer": ["http_referer", "referer", "referrer", "ClientRequestReferer", "cs(Referer)"],
     "ua": ["http_user_agent", "user_agent", "ua", "ClientRequestUserAgent", "cs(User-Agent)", "userAgent"],
     "host": ["host", "server_name", "ClientRequestHost", "cs-host", "vhost"],
@@ -72,10 +78,27 @@ def _get(d, keys):
         if k in d and d[k] not in (None, "", "-"): return d[k]
     return None
 
+def _flatten_nested(d):
+    """Caddy / logs structurés : {"request": {"remote_ip", "uri", "method", "host", "headers": {"User-Agent": [..]}}, "ts": 1.7e9, "status", "size", "duration"}.
+    Remonte les champs imbriqués au premier niveau sans écraser ceux qui existent."""
+    req = d.get("request")
+    if isinstance(req, dict):
+        for k in ("remote_ip", "client_ip", "remote_addr", "uri", "method", "host", "proto"):
+            if k in req and k not in d: d[k] = req[k]
+        hdr = req.get("headers")
+        if isinstance(hdr, dict):
+            for hk, target in (("User-Agent", "user_agent"), ("Referer", "referer")):
+                v = hdr.get(hk) or hdr.get(hk.lower())
+                if v and target not in d: d[target] = v[0] if isinstance(v, list) else v
+    return d
+
+
 def _parse_json(line):
     try: d = json.loads(line)
     except Exception: return None
     if not isinstance(d, dict): return None
+    d = _flatten_nested(d)
+    if _get(d, JSON_KEYS["ip"]) is None and _get(d, JSON_KEYS["ts"]) is None: return None  # objet JSON mais pas un hit
     ts = _get(d, JSON_KEYS["ts"])
     try:
         if isinstance(ts, (int, float)): ts = pd.to_datetime(ts, unit="s" if ts < 1e11 else "ms", utc=True)
@@ -87,8 +110,7 @@ def _parse_json(line):
         parts = url.split(); method = parts[0]; url = parts[1] if len(parts) > 1 else "/"
     else: method = _get(d, JSON_KEYS["method"])
     rt = _get(d, JSON_KEYS["rt"])
-    try:
-        rt = float(rt); rt = rt / 1000 if rt > 50 else rt
+    try: rt = _to_seconds(float(rt))
     except Exception: rt = None
     return _row(_get(d, JSON_KEYS["ip"]) or "", ts, method, url, "", _get(d, JSON_KEYS["status"]) or 0,
                 _get(d, JSON_KEYS["bytes"]) or 0, _get(d, JSON_KEYS["referer"]), _get(d, JSON_KEYS["ua"]),
@@ -111,7 +133,7 @@ class W3CParser:
         q = d.get("cs-uri-query") or ""
         if q and q != "-": url = f"{url}?{q}"
         rt = d.get("time-taken")
-        try: rt = float(rt); rt = rt / 1000 if rt > 50 else rt
+        try: rt = _to_seconds(float(rt))
         except Exception: rt = None
         ua = (d.get("cs(User-Agent)") or "").replace("%20", " ").replace("+", " ")
         return _row(d.get("c-ip", ""), ts, d.get("cs-method"), url, d.get("cs-protocol", ""), d.get("sc-status", 0),
@@ -121,8 +143,25 @@ def open_any(path):
     if str(path).endswith(".gz"): return io.TextIOWrapper(gzip.open(path, "rb"), encoding="utf-8", errors="replace")
     return open(path, encoding="utf-8", errors="replace")
 
-def parse_file(path, limit=None):
-    rows, unparsed, fmt = [], 0, None
+def _why_unparsed(line, fmt, w3c):
+    """Explique en une phrase pourquoi une ligne a été rejetée (pour --doctor)."""
+    if fmt == "json":
+        try: d = json.loads(line)
+        except Exception: return "JSON invalide (ligne tronquée ou non-JSON au milieu d'un fichier JSON)"
+        if not isinstance(d, dict): return "JSON valide mais pas un objet"
+        return f"objet JSON sans champ IP / horodatage reconnu (clés vues : {', '.join(list(d)[:6])})"
+    if fmt == "w3c":
+        if line.startswith("#"): return "ligne de directive W3C"
+        n = len(line.split("\t") if "\t" in line else line.split())
+        return f"{n} champs au lieu des {len(w3c.fields or [])} annoncés par #Fields"
+    if "[" not in line or "]" not in line: return "pas d'horodatage entre crochets : pas un format combined"
+    if line.count('"') < 2: return "requête non entourée de guillemets : format custom (vérifiez LogFormat)"
+    if not re.match(r"^(?:[\w.\-:]+\s+)?[\da-fA-F.:]+\s", line): return "ne commence pas par une IP (ou vhost + IP)"
+    return "ordre des champs différent du combined (IP, ident, user, [date], \"requête\", statut, octets, \"referer\", \"UA\")"
+
+
+def parse_file(path, limit=None, max_samples=5):
+    rows, unparsed, fmt, samples = [], 0, None, []
     w3c = W3CParser()
     with open_any(path) as f:
         for i, line in enumerate(f):
@@ -134,7 +173,10 @@ def parse_file(path, limit=None):
                 elif line.lstrip().startswith("{"): fmt = "json"
                 else: fmt = "combined"
             r = w3c.feed(line) if fmt == "w3c" else _parse_json(line) if fmt == "json" else _parse_combined(line)
-            if r is None: unparsed += 1
+            if r is None:
+                if fmt == "w3c" and line.startswith("#"): continue  # directives : pas des lignes rejetées
+                unparsed += 1
+                if len(samples) < max_samples: samples.append(dict(line=line[:300], reason=_why_unparsed(line, fmt, w3c)))
             else: rows.append(r)
     df = pd.DataFrame(rows)
     if df.empty:
@@ -143,6 +185,7 @@ def parse_file(path, limit=None):
         df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
         df = df.dropna(subset=["ts"]).sort_values("ts").reset_index(drop=True)
     df.attrs["unparsed"] = unparsed
+    df.attrs["unparsed_samples"] = samples
     df.attrs["format"] = fmt
     df.attrs["source"] = str(path)
     return df
@@ -151,6 +194,28 @@ def parse_files(paths, limit=None):
     dfs = [parse_file(p, limit) for p in paths]
     df = pd.concat(dfs, ignore_index=True).sort_values("ts").reset_index(drop=True) if dfs else parse_file.__wrapped__()
     df.attrs["unparsed"] = sum(d.attrs.get("unparsed", 0) for d in dfs)
+    df.attrs["unparsed_samples"] = [s for d in dfs for s in d.attrs.get("unparsed_samples", [])][:10]
     df.attrs["format"] = ",".join(sorted({str(d.attrs.get("format")) for d in dfs}))
     df.attrs["source"] = ", ".join(str(p) for p in paths)
     return df
+
+
+def doctor(df):
+    """Diagnostic lisible du parsing : format, volumes, période, colonnes disponibles, lignes rejetées et pourquoi."""
+    L = [f"Format détecté : {df.attrs.get('format')}", f"Fichier(s) : {df.attrs.get('source')}",
+         f"Hits parsés : {len(df):,}   Lignes rejetées : {df.attrs.get('unparsed', 0):,}"]
+    if len(df):
+        L.append(f"Période : {df['ts'].min()} → {df['ts'].max()} ({(df['ts'].max() - df['ts'].min()).total_seconds() / 86400:.1f} j)")
+        L.append("Colonnes renseignées : " + ", ".join(
+            f"{c} {'oui' if (df[c].notna() & (df[c].astype(str) != '')).any() else 'NON'}"
+            for c in ("ip", "ua", "referer", "host", "response_time", "query")))
+        L.append("UA les plus fréquents (contrôle de vraisemblance) :")
+        for ua, n in df["ua"].value_counts().head(3).items(): L.append(f"   {n:>7,}  {str(ua)[:100]}")
+    if df.attrs.get("unparsed_samples"):
+        L.append("Exemples de lignes rejetées :")
+        for s in df.attrs["unparsed_samples"]:
+            L.append(f"   → {s['reason']}\n     {s['line'][:160]}")
+    if not len(df):
+        L.append("Aucun hit : formats acceptés = Apache/Nginx combined (avec ou sans vhost), JSON lines (Nginx, Caddy, Cloudflare Logpush), W3C/IIS/CloudFront. "
+                 "Un export « Awstats » ou un CSV ne sont pas des logs bruts.")
+    return "\n".join(L)

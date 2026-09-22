@@ -43,6 +43,7 @@ def main():
     ap.add_argument("--compare", help="date pivot YYYY-MM-DD : compare avant/après")
     ap.add_argument("--dns", action="store_true", help="vérification reverse DNS (lent, réseau)")
     ap.add_argument("--limit", type=int, help="ne lire que N lignes par fichier (test rapide)")
+    ap.add_argument("--doctor", action="store_true", help="diagnostic du parsing : format détecté, colonnes disponibles, lignes rejetées et pourquoi")
     ap.add_argument("--out", default="out", help="dossier de sortie")
     ap.add_argument("--no-csv", action="store_true", help="ne pas écrire hits.csv")
     ap.add_argument("--diagnose", action="store_true", help="après l'analyse, envoyer le rapport à un LLM pour un diagnostic (clé ANTHROPIC_API_KEY, OPENAI_API_KEY ou DEEPSEEK_API_KEY)")
@@ -52,7 +53,11 @@ def main():
 
     df = P.parse_files(a.logs, a.limit)
     print(f"[parse] {len(df)} hits, {df.attrs['unparsed']} lignes ignorées, format {df.attrs['format']}", file=sys.stderr)
-    if not len(df): sys.exit("aucun hit parsé : format non reconnu ?")
+    if a.doctor or not len(df):
+        print("\n=== Diagnostic du parsing ===\n" + P.doctor(df) + "\n", file=sys.stderr)
+    if not len(df): sys.exit("Aucun hit parsé. Voir le diagnostic ci-dessus.")
+    if df.attrs["unparsed"] > 0.05 * len(df) and not a.doctor:
+        print(f"[parse] {df.attrs['unparsed'] / (len(df) + df.attrs['unparsed']):.0%} de lignes rejetées : relancez avec --doctor pour voir lesquelles et pourquoi.", file=sys.stderr)
     robots_text = None
     if a.robots:
         if a.robots == "__fetch__":
