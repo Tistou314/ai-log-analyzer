@@ -7,7 +7,8 @@ Principe : le moteur produit `out/report.json` ; les participants forkent et con
 Lis README.md (contrat JSON, limites) et ATELIER.md (déroulé) avant toute modification.
 
 ## Architecture
-- `analyzer/parser.py` : logs → DataFrame normalisé (ts, ip, method, path, query, status, bytes, referer, ua, host, response_time). Détection auto du format.
+- `analyzer/parser.py` : logs → DataFrame normalisé (ts, ip, method, path, query, status, bytes, referer, ua, host, response_time). Détection auto du format ; X-Forwarded-For derrière un CDN ; BOM / UTF-16 / archives ; wrangler tail (Cloudflare Pages).
+- `analyzer/io_utils.py` : lecture tolérante des fichiers utilisateur (CSV Excel FR, xlsx, robots.txt, SSL certifi sous Windows).
 - `analyzer/classifier.py` : UA → family / operator / category via `signatures/bots.json` (ordre = priorité).
 - `analyzer/probes.py` : chemins sensibles (.env, .git, xmlrpc…) → reclassification en scanner, quel que soit l'UA. Tourne juste après le verifier.
 - `analyzer/verifier.py` : identité par plages IP (`signatures/ip_ranges/*.json`) puis rDNS optionnel.

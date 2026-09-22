@@ -25,6 +25,7 @@ IGNORES_ROBOTS = {"ChatGPT-User", "Claude-User", "Perplexity-User", "Meta-Extern
 
 def parse_robots(text):
     groups, cur = [], None
+    text = text.lstrip("\ufeff")
     for raw in text.splitlines():
         line = raw.split("#", 1)[0].strip()
         if not line or ":" not in line: continue
@@ -64,7 +65,8 @@ def is_allowed(groups, token, path):
 
 def fetch_robots(site):
     url = site if site.endswith("robots.txt") else site.rstrip("/") + "/robots.txt"
-    return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "ai-log-analyzer/1.0"}), timeout=15).read().decode("utf-8", "replace")
+    from .io_utils import fetch_text
+    return fetch_text(url)
 
 def simulate(df, robots_text):
     groups = parse_robots(robots_text)

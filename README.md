@@ -71,7 +71,19 @@ python cli.py samples/demo_access.log --robots samples/demo_robots.txt --gsc sam
 streamlit run examples/streamlit_dashboard.py
 ```
 
-Formats acceptés : Apache/Nginx combined (avec ou sans vhost et temps de réponse), JSON lines (Nginx, Caddy, Cloudflare Logpush), W3C/IIS, CloudFront, `.gz`. Détection automatique.
+Formats acceptés, détectés automatiquement :
+
+- Apache / Nginx *combined* (avec ou sans vhost, temps de réponse en s, ms ou µs, date classique ou ISO) ;
+- JSON : Nginx, Caddy, Traefik, Cloudflare Logpush (horodatage en ns ou RFC 3339) ;
+- **Cloudflare Pages** : pas de fichier de logs d'accès ; utilisez `wrangler pages deployment tail --format json > pages.json` (seules les requêtes qui passent par des Pages Functions y figurent) ou le Logpush HTTP de la zone si votre plan l'inclut ;
+- W3C : IIS, CloudFront ;
+- archives `.gz`, `.bz2`, `.zip` ; fichiers en UTF-8, UTF-8 avec BOM ou UTF-16, fins de ligne Windows.
+
+**Site derrière un CDN ou un reverse proxy** (Cloudflare devant Nginx…) : si l'IP du visiteur est journalisée en fin de ligne (X-Forwarded-For / CF-Connecting-IP), le moteur la détecte et l'utilise — sinon chaque Googlebot apparaîtrait usurpé. Si vos logs ne la contiennent pas, `--doctor` vous le dira ; ajoutez `"$http_x_forwarded_for"` à votre `log_format` Nginx.
+
+Un log au format *common* (sans User-Agent) ne permet pas de reconnaître les bots : le moteur prévient.
+
+**Sous Windows** : `python` peut s'appeler `py` (`py cli.py …`). Les jokers marchent (`python cli.py "logs\*.gz"`), un dossier aussi (`python cli.py logs\`). Pour un chemin avec espaces, glissez le fichier dans le terminal : il colle le chemin entre guillemets. `hits.csv` s'ouvre dans Excel avec les accents.
 
 Où trouver ses logs : **sur mutualisé cPanel (o2switch…), activez "Archiver les journaux" dans Accès brut au moins une semaine avant, sinon vous n'aurez que la journée en cours.** OVH (manager → Logs), o2switch / cPanel (Raw Access), Cloudflare (Logpush ou Logs API), Nginx (`/var/log/nginx/access.log`), WordPress sur Kinsta/WP Engine (export depuis le dashboard).
 

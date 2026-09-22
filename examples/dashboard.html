@@ -79,6 +79,12 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 const $ = id => document.getElementById(id);
 
 function render(r){
+  // tolérance aux rapports d'une version antérieure du moteur ou partiels : sections absentes = vides
+  if (!r || !r.overview) { alert("Ce fichier ne ressemble pas à un report.json d'ai-log-analyzer (section overview absente)."); return; }
+  r.meta = r.meta || {}; r.explain = r.explain || {}; r.actors = r.actors || []; r.identity = r.identity || {summary:{}};
+  r.identity.summary = r.identity.summary || {}; r.ai_referrals = r.ai_referrals || {}; r.aio = r.aio || {}; r.categories = r.categories || {};
+  r.alerts = (r.alerts || []).map(a => ({...a, kind: a.kind || (a.level === 'info' ? 'info' : 'action'), section: a.section || ''}));
+  r.overview.by_category = r.overview.by_category || {}; r.overview.days = r.overview.days || 0;
   const o = r.overview, rec = r.recommendations || {by_family:[],actions:[]}, byFam = Object.fromEntries((rec.by_family||[]).map(f=>[f.family,f]));
   $('drop').hidden = true; $('tabs').hidden = false;
   $('meta').textContent = `${(r.meta.site||'').replace(/^https?:\/\//,'') || o.hosts && Object.keys(o.hosts)[0] || 'vos logs'} · ${o.period_start.slice(0,10)} → ${o.period_end.slice(0,10)} · ${o.days.toFixed(0)} j`;
@@ -144,7 +150,7 @@ function render(r){
   // ---- Plan d'action
   const actions = rec.actions||[];
   $('actions').innerHTML = `
-    <div class="hero"><div><h1>${actions.length} gestes, dans l'ordre.</h1><div class="sub">${esc(r.explain.recommendations||'')}</div></div></div>
+    <div class="hero"><div><h1>${actions.length ? actions.length + " gestes, dans l'ordre." : "Plan d'action indisponible"}</h1>${actions.length ? '' : '<p class="muted">Ce rapport ne contient pas de section recommendations : relancez le moteur à jour sur vos logs.</p>'}<div class="sub">${esc(r.explain.recommendations||'')}</div></div></div>
     ${actions.map(a=>{const d=DOM[a.domain]||DOM.routine;return `<div class="act"><div class="num" style="background:${d[1]}">${a.rank}</div><div class="card"><div class="body"><h3>${esc(a.title)}<span class="tag" style="color:${d[1]};background:${d[2]}">${d[0]}</span></h3>
       <div class="muted"><b style="color:var(--ink)">Pourquoi :</b> ${esc(a.why)}</div><div class="muted" style="margin-top:4px"><b style="color:var(--ink)">Comment :</b> ${esc(a.how)}</div>
       ${a.evidence&&Object.keys(a.evidence).length?`<details style="margin-top:6px"><summary class="muted">preuves (report.json)</summary><pre style="margin:6px 0 0">${esc(JSON.stringify(a.evidence,null,1))}</pre></details>`:''}</div>

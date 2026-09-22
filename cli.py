@@ -8,12 +8,15 @@ Exemples :
   python cli.py access.log --compare 2026-08-15 --dns
 Sortie : out/report.json (contrat pour les surcouches), out/hits.csv (hits enrichis), résumé terminal.
 """
-import argparse, sys, pathlib, json
+import argparse, sys, pathlib, json, os, glob
 
 # Consoles Windows en cp1252 : forcer l'UTF-8 pour les flèches et symboles du résumé.
-for _stream in (sys.stdout, sys.stderr):
+for _stream in (sys.stdout, sys.stderr, sys.stdin):
     if hasattr(_stream, "reconfigure"):
-        _stream.reconfigure(encoding="utf-8", errors="replace")
+        try: _stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception: pass
+import warnings
+warnings.filterwarnings("ignore", module="openpyxl")  # « Workbook contains no default style » sur chaque export GSC
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from analyzer import parser as P, report as REP, robots_sim as RS
 
@@ -61,23 +64,44 @@ def main():
     ap.add_argument("--model", default=None, help="modèle pour --diagnose (défaut : celui du fournisseur ; catalogue : python cli.py models)")
     a = ap.parse_args()
 
+    if a.site and not a.site.startswith(("http://", "https://")): a.site = "https://" + a.site.strip("/")
+    a.logs = _expand_logs(a.logs)
+    for opt in ("gsc", "gsc_ai", "crawl", "crawl_stats"):
+        v = getattr(a, opt)
+        if v: setattr(a, opt, _existing(v, "--" + opt.replace("_", "-")))
+    if a.sitemap and not a.sitemap.startswith("http"): a.sitemap = _existing(a.sitemap, "--sitemap")
+    if a.robots and a.robots != "__fetch__": a.robots = _existing(a.robots, "--robots")
+
     df = P.parse_files(a.logs, a.limit)
     print(f"[parse] {len(df)} hits, {df.attrs['unparsed']} lignes ignorées, format {df.attrs['format']}", file=sys.stderr)
     if a.doctor or not len(df):
         print("\n=== Diagnostic du parsing ===\n" + P.doctor(df) + "\n", file=sys.stderr)
     if not len(df): sys.exit("Aucun hit parsé. Voir le diagnostic ci-dessus.")
+    if (df["ua"].fillna("") == "").mean() > 0.9:
+        print("[parse] ATTENTION : ces logs n'ont pas de User-Agent (format « common »). Impossible de reconnaître les bots : "
+              "le rapport classera tout en « UA vide ». Passez le serveur en format « combined ».", file=sys.stderr)
+    if df.attrs.get("client_ip_from", "").startswith("x_forwarded_for"):
+        print("[parse] IP client lue dans X-Forwarded-For (site derrière un CDN / proxy).", file=sys.stderr)
     if df.attrs["unparsed"] > 0.05 * len(df) and not a.doctor:
         print(f"[parse] {df.attrs['unparsed'] / (len(df) + df.attrs['unparsed']):.0%} de lignes rejetées : relancez avec --doctor pour voir lesquelles et pourquoi.", file=sys.stderr)
     robots_text = None
     if a.robots:
         if a.robots == "__fetch__":
             if not a.site: sys.exit("--robots sans fichier nécessite --site")
-            robots_text = RS.fetch_robots(a.site)
-        else: robots_text = open(a.robots, encoding="utf-8").read()
+            try: robots_text = RS.fetch_robots(a.site)
+            except Exception as e:
+                print(f"[robots] impossible de récupérer {a.site}/robots.txt ({e}) : simulation robots.txt ignorée.", file=sys.stderr)
+        else:
+            from analyzer.io_utils import read_text_any
+            robots_text = read_text_any(a.robots)
     report, enriched = REP.build(df, robots_text, a.gsc, a.gsc_ai, a.sitemap, a.crawl, a.compare, a.dns, a.site, crawl_stats_path=a.crawl_stats)
-    out = pathlib.Path(a.out); out.mkdir(exist_ok=True)
+    problems = list(report.get("errors", []))
+    for key, sec in (("--gsc", report.get("aio", {}).get("gsc_cross")), ("--gsc-ai", report.get("aio", {}).get("gsc_ai_validation")), ("--crawl-stats", report.get("crawl_stats"))):
+        if isinstance(sec, dict) and sec.get("error"): problems.append(f"{key}: {sec['error']}")
+    for pb in problems: print(f"[import] {pb} — l'analyse continue sans cette source.", file=sys.stderr)
+    out = pathlib.Path(os.path.expanduser(a.out)); out.mkdir(parents=True, exist_ok=True)
     REP.save(report, out / "report.json")
-    if not a.no_csv: enriched.to_csv(out / "hits.csv", index=False)
+    if not a.no_csv: enriched.to_csv(out / "hits.csv", index=False, encoding="utf-8-sig")  # BOM : Excel affiche les accents
     from analyzer import exports as EXP
     EXP.save(report, out)
     summary(report)
@@ -86,6 +110,33 @@ def main():
         from analyzer import ai_diagnostic
         ai_diagnostic.diagnose(out / "report.json", out_dir=a.out,
                                model=a.model, provider=a.provider)
+
+def _existing(path, label):
+    """Chemin saisi par l'utilisateur : ~ développé, guillemets parasites retirés ; message clair s'il n'existe pas."""
+    p = pathlib.Path(os.path.expanduser(str(path).strip().strip('"').strip("'")))
+    if not p.exists():
+        sys.exit(f"{label} : fichier introuvable : {p}\n(astuce : glissez le fichier dans le terminal pour coller son chemin exact)")
+    return str(p)
+
+
+def _expand_logs(items):
+    """PowerShell et cmd ne développent pas les jokers (*.gz) : on le fait ici. Un dossier = tous les logs qu'il contient."""
+    out = []
+    for it in items:
+        it = os.path.expanduser(str(it).strip().strip('"').strip("'"))
+        if any(ch in it for ch in "*?["):
+            hits = sorted(h for h in glob.glob(it) if os.path.isfile(h))
+            if not hits: sys.exit(f"aucun fichier ne correspond à : {it}")
+            out += hits
+        elif os.path.isdir(it):
+            skip = (".xlsx", ".csv", ".txt", ".md", ".html", ".json.meta", ".xml")
+            hits = sorted(f for f in glob.glob(os.path.join(it, "*")) if os.path.isfile(f) and not f.lower().endswith(skip))
+            if not hits: sys.exit(f"dossier sans fichier de log : {it}")
+            out += hits
+        else:
+            out.append(_existing(it, "log"))
+    return out
+
 
 def summary(r):
     o = r["overview"]

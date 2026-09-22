@@ -6,26 +6,50 @@ import json, streamlit as st, pandas as pd
 st.set_page_config(page_title="ai-log-analyzer", layout="wide")
 st.title("ai-log-analyzer — dashboard de référence")
 up = st.sidebar.file_uploader("report.json", type="json")
-path = st.sidebar.text_input("…ou chemin", "out/report.json")
+import os
+default = "out/report.json" if os.path.exists("out/report.json") else "samples/out/report.json"
+path = st.sidebar.text_input("…ou chemin", default)
 try:
-    r = json.load(up) if up else json.load(open(path))
+    r = json.loads(up.getvalue().decode("utf-8-sig")) if up else json.load(open(path, encoding="utf-8-sig"))
+except FileNotFoundError:
+    st.info("Charge un report.json : python cli.py access.log, ou le rapport de démo samples/out/report.json"); st.stop()
 except Exception as e:
-    st.info("Charge un report.json (python cli.py access.log)"); st.stop()
+    st.error(f"Impossible de lire ce fichier comme report.json : {e}"); st.stop()
 
 o, cats = r["overview"], r["categories"]
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Hits", f"{o['hits']:,}"); c2.metric("Part bots", f"{o['bot_share']:.0%}"); c3.metric("Part bots IA", f"{o['ai_share']:.1%}")
 c4.metric("Clics venant d'IA", r["ai_referrals"]["ai_clicks"])
 for a in r["alerts"]:
-    (st.error if a["level"] == "critical" else st.warning if a["level"] == "warn" else st.info)(a["message"])
+    if a.get("kind", "action") == "action":
+        (st.error if a["level"] == "critical" else st.warning)(a["message"])
+with st.expander("Bon à savoir"):
+    for a in r["alerts"]:
+        if a.get("kind") == "info": st.write("· " + a["message"])
 
-tabs = st.tabs(["Acteurs", "Identité", "Crawl budget", "AIO & agents", "IA → humain", "robots.txt", "Bots déguisés", "Avant/après", "Timeline"])
+tabs = st.tabs(["Plan d'action", "Acteurs", "Identité", "Crawl budget", "AIO & agents", "IA → humain", "robots.txt", "Bots déguisés", "Avant/après", "Timeline"])
 
+with tabs[0]:
+    rec = r.get("recommendations", {})
+    for act in rec.get("actions", []):
+        st.subheader(f"{act['rank']}. {act['title']}")
+        st.markdown(f"**Pourquoi :** {act['why']}")
+        st.markdown(f"**Comment :** {act['how']}")
+        st.caption(f"Effort : {act['effort']} · impact : {act['impact']}")
+    if rec.get("by_family"):
+        st.caption("Décision du moteur par famille de bot")
+        st.dataframe(pd.DataFrame(rec["by_family"])[["family", "category", "hits", "decision", "why", "how"]], width="stretch", hide_index=True)
+    if not rec: st.info("Rapport sans section recommendations : relancez le moteur à jour.")
+
+tabs = tabs[1:]
 with tabs[0]:
     st.caption(r["explain"]["actors"])
     df = pd.DataFrame(r["actors"])
-    df["catégorie"] = df["category"].map(lambda c: cats.get(c, {}).get("label", c))
-    st.dataframe(df[["family", "operator", "catégorie", "hits", "hits_per_day", "unique_urls", "error_rate", "fetched_robots_txt", "max_hits_per_minute", "spoofed_share", "bytes_mb"]], use_container_width=True, hide_index=True)
+    if df.empty:
+        st.info("Aucun bot sur la période.")
+    else:
+        df["catégorie"] = df["category"].map(lambda c: cats.get(c, {}).get("label", c))
+        st.dataframe(df[["family", "operator", "catégorie", "hits", "hits_per_day", "unique_urls", "error_rate", "fetched_robots_txt", "max_hits_per_minute", "spoofed_share", "bytes_mb"]], width="stretch", hide_index=True)
     st.bar_chart(pd.Series(o["by_category"]).rename(index=lambda c: cats.get(c, {}).get("label", c)))
 
 with tabs[1]:
@@ -34,18 +58,22 @@ with tabs[1]:
 
 with tabs[2]:
     st.caption(r["explain"]["crawl_budget"])
-    fam = st.selectbox("Bot", [k for k in r["crawl_budget"] if not k.startswith("_")])
-    cb = r["crawl_budget"][fam]
-    a, b = st.columns(2)
-    a.metric("Gaspillage", f"{cb['waste_share']:.0%}"); b.metric("Recrawl médian (jours)", cb["recrawl_median_days"])
-    st.write("Gaspillage détaillé", cb["waste"])
-    st.subheader("Par segment"); st.dataframe(pd.DataFrame(cb["by_segment"]), hide_index=True)
-    st.subheader("Par gabarit d'URL"); st.dataframe(pd.DataFrame(cb["by_template"]), hide_index=True)
-    st.subheader("Pages les plus anciennes (jamais recrawlées récemment)"); st.dataframe(pd.DataFrame(cb["stalest"]), hide_index=True)
-    if "sitemap" in r["structure"]:
-        s = r["structure"]["sitemap"]; st.subheader("Sitemap vs crawl")
-        st.write(f"{s['crawled_by_googlebot']}/{s['sitemap_urls']} URL du sitemap crawlées ({s['share_crawled']:.0%}). {s['crawled_not_in_sitemap_count']} URL crawlées hors sitemap.")
-        st.write("Jamais crawlées :", s["never_crawled"])
+    engines = [k for k in r["crawl_budget"] if not k.startswith("_")]
+    if not engines:
+        st.info("Aucun hit de moteur (Googlebot, Bingbot) sur la période.")
+    else:
+        fam = st.selectbox("Bot", engines)
+        cb = r["crawl_budget"][fam]
+        a, b = st.columns(2)
+        a.metric("Gaspillage", f"{cb['waste_share']:.0%}"); b.metric("Recrawl médian (jours)", cb["recrawl_median_days"])
+        st.write("Gaspillage détaillé", cb["waste"])
+        st.subheader("Par segment"); st.dataframe(pd.DataFrame(cb["by_segment"]), hide_index=True)
+        st.subheader("Par gabarit d'URL"); st.dataframe(pd.DataFrame(cb["by_template"]), hide_index=True)
+        st.subheader("Pages les plus anciennes (jamais recrawlées récemment)"); st.dataframe(pd.DataFrame(cb["stalest"]), hide_index=True)
+        if "sitemap" in r["structure"]:
+            s = r["structure"]["sitemap"]; st.subheader("Sitemap vs crawl")
+            st.write(f"{s['crawled_by_googlebot']}/{s['sitemap_urls']} URL du sitemap crawlées ({s['share_crawled']:.0%}). {s['crawled_not_in_sitemap_count']} URL crawlées hors sitemap.")
+            st.write("Jamais crawlées :", s["never_crawled"])
 
 with tabs[3]:
     st.caption(r["explain"]["aio"])
@@ -76,11 +104,14 @@ with tabs[6]:
 with tabs[7]:
     if "compare" in r:
         c = r["compare"]; st.caption(r["explain"]["compare"])
+        badge = {"effect": st.success, "warning": st.warning, "note": st.info, "caveat": st.caption}
+        for f in c.get("findings", []):
+            badge.get(f["kind"], st.write)(f"**{f['title']}** — {f['text']}")
         st.write("Nouvelles familles :", c["new_families"], " Disparues :", c["gone_families"])
-        st.dataframe(pd.DataFrame(c["by_family"]).T, use_container_width=True)
+        st.dataframe(pd.DataFrame(c["by_family"]).T, width="stretch")
     else: st.info("Relance avec --compare YYYY-MM-DD")
 
 with tabs[8]:
     st.caption(r["explain"]["timeline"])
     st.area_chart(pd.DataFrame(r["timeline"]["daily"]).T.rename(columns=lambda c: cats.get(c, {}).get("label", c)))
-    st.dataframe(pd.DataFrame(r["timeline"]["hourly_by_family"]).T, use_container_width=True)
+    st.dataframe(pd.DataFrame(r["timeline"]["hourly_by_family"]).T, width="stretch")

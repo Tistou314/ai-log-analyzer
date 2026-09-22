@@ -38,27 +38,29 @@ def google_agents(df):
                 verified=int((g["identity"] == "verified").sum()), spoofed=int((g["identity"] == "spoofed").sum()))
 
 def _read_gsc_table(path, sheet):
-    """CSV, ou XLSX exporté par la Search Console (un onglet par tableau ; le nom varie selon la langue : on prend celui qui contient `sheet`, sinon le premier qui a une colonne page/URL)."""
-    if str(path).lower().endswith((".xlsx", ".xls")):
-        x = pd.ExcelFile(path)
-        names = [s for s in x.sheet_names if sheet.lower() in s.lower()]
-        for s in names or x.sheet_names:
-            g = x.parse(s)
-            if any("page" in str(c).lower() or "url" in str(c).lower() for c in g.columns): return g
-        raise ValueError(f"aucun onglet avec une colonne page/URL dans {path}")
-    return pd.read_csv(path)
+    """CSV (séparateur , ou ; — Excel FR), ou XLSX exporté par la Search Console (onglet dont le nom contient `sheet`,
+    sinon le premier qui a une colonne page/URL)."""
+    from .io_utils import read_table
+    g = read_table(path, sheet=sheet, want=("page", "url"))
+    if not any("page" in str(c).lower() or "url" in str(c).lower() for c in g.columns):
+        raise ValueError(f"aucune colonne page/URL dans {path} : est-ce bien l'export « Pages » de la Search Console ?")
+    return g
 
 
 def load_crawl_stats(path):
     """Export xlsx « Statistiques d'exploration » de la GSC : onglet graphique = Date, total des demandes d'exploration."""
-    x = pd.ExcelFile(path)
-    for s in x.sheet_names:
-        g = x.parse(s)
+    from .io_utils import read_table
+    if str(path).lower().endswith((".xlsx", ".xlsm", ".xls")):
+        x = pd.ExcelFile(path); sheets = [x.parse(s) for s in x.sheet_names]
+    else: sheets = [read_table(path)]
+    for g in sheets:
         cols = {str(c).lower(): c for c in g.columns}
         date = next((cols[c] for c in cols if c.startswith("date")), None)
         total = next((cols[c] for c in cols if "demandes" in c or "requests" in c or "crawl" in c), None)
         if date and total:
-            out = pd.DataFrame({"day": pd.to_datetime(g[date]).dt.date.astype(str), "gsc_requests": pd.to_numeric(g[total], errors="coerce")}).dropna()
+            from .io_utils import to_number
+            out = pd.DataFrame({"day": pd.to_datetime(g[date], errors="coerce").dt.date.astype(str), "gsc_requests": to_number(g[total])}).dropna()
+            out = out[out["day"] != "NaT"]
             return out
     raise ValueError("onglet Date / demandes d'exploration introuvable")
 
@@ -89,14 +91,16 @@ def validate_crawl_stats(df, stats):
 def load_gsc(path):
     """Accepte un export GSC rapport Pages, CSV ou XLSX (onglet Pages) : colonnes Page/Top pages + Clics/Clicks + Impressions… quelle que soit la langue."""
     gsc = _read_gsc_table(path, "Pages")
-    cols = {c.lower(): c for c in gsc.columns}
+    cols = {str(c).lower(): c for c in gsc.columns}
     page = next((cols[c] for c in cols if "page" in c or "url" in c), None)
     clicks = next((cols[c] for c in cols if "clic" in c or "click" in c), None)
     imp = next((cols[c] for c in cols if "impression" in c), None)
     if not page: raise ValueError("Export GSC : colonne page/URL introuvable")
     from urllib.parse import urlsplit
+    from .io_utils import to_number
     out = pd.DataFrame({"path": gsc[page].map(lambda u: urlsplit(str(u)).path or "/"),
-                        "clicks": gsc[clicks] if clicks else 0, "impressions": gsc[imp] if imp else 0})
+                        "clicks": to_number(gsc[clicks]).fillna(0) if clicks else 0,
+                        "impressions": to_number(gsc[imp]).fillna(0) if imp else 0})
     return out.groupby("path", as_index=False).sum()
 
 def cross_gsc(df, gsc_df, hot):
@@ -119,15 +123,13 @@ def cross_gsc(df, gsc_df, hot):
 def load_gsc_ai(path):
     """Export GSC 'Performance on Search - Generative AI Features' (onglet Pages, CSV ou XLSX) : vérité terrain."""
     from urllib.parse import urlsplit
-    if str(path).lower().endswith((".xlsx", ".xls")):
-        g = pd.read_excel(path, sheet_name="Pages")
-    else:
-        g = pd.read_csv(path)
-    cols = {c.lower(): c for c in g.columns}
+    from .io_utils import to_number
+    g = _read_gsc_table(path, "Pages")
+    cols = {str(c).lower(): c for c in g.columns}
     page = next((cols[c] for c in cols if "page" in c or "url" in c), None)
     imp = next((cols[c] for c in cols if "impression" in c), None)
     if not page or not imp: raise ValueError("Export GSC Generative AI : colonnes page/impressions introuvables")
-    out = pd.DataFrame({"path": g[page].map(lambda u: urlsplit(str(u)).path or "/"), "ai_impressions": g[imp]})
+    out = pd.DataFrame({"path": g[page].map(lambda u: urlsplit(str(u)).path or "/"), "ai_impressions": to_number(g[imp]).fillna(0)})
     return out.groupby("path", as_index=False).sum()
 
 def validate_against_gsc_ai(gsc_cross, hot, gsc_ai_df):

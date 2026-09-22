@@ -8,7 +8,8 @@ def load_sitemap(source):
     urls, seen = set(), set()
     def fetch(src):
         if src.startswith("http"):
-            data = urllib.request.urlopen(urllib.request.Request(src, headers={"User-Agent": "ai-log-analyzer/1.0"}), timeout=20).read()
+            from .io_utils import ssl_context
+            data = urllib.request.urlopen(urllib.request.Request(src, headers={"User-Agent": "ai-log-analyzer/1.0"}), timeout=20, context=ssl_context()).read()
         else:
             data = open(src, "rb").read()
         if src.endswith(".gz") or data[:2] == b"\x1f\x8b": data = gzip.decompress(data)
@@ -27,12 +28,14 @@ def load_sitemap(source):
 
 def load_crawl_export(path):
     """CSV Screaming Frog / OnCrawl / Botify : on cherche une colonne URL + colonnes Indexability / Status Code / Depth si présentes."""
-    c = pd.read_csv(path, low_memory=False)
-    cols = {x.lower(): x for x in c.columns}
-    url = next((cols[k] for k in cols if k in ("address", "url", "urls", "page")), None)
+    from .io_utils import read_table
+    c = read_table(path, sheet="internal", want=("address", "adresse", "url"))
+    cols = {str(x).lower().strip(): x for x in c.columns}
+    url = next((cols[k] for k in cols if k in ("address", "adresse", "url", "urls", "page")), None)
     if not url: raise ValueError("colonne URL introuvable dans l'export")
     out = pd.DataFrame({"path": c[url].map(lambda u: urlsplit(str(u)).path or "/")})
-    for name, keys in {"indexability": ("indexability",), "crawl_depth": ("crawl depth", "depth"), "inlinks": ("inlinks", "unique inlinks"), "status": ("status code",)}.items():
+    for name, keys in {"indexability": ("indexability", "indexabilité"), "crawl_depth": ("crawl depth", "depth", "profondeur", "profondeur d'exploration"),
+                       "inlinks": ("inlinks", "unique inlinks", "liens entrants", "liens entrants uniques"), "status": ("status code", "code http", "code de statut")}.items():
         k = next((cols[x] for x in keys if x in cols), None)
         if k: out[name] = c[k]
     return out.drop_duplicates("path")

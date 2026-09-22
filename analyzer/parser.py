@@ -13,6 +13,8 @@ COMBINED = re.compile(
     r'"(?P<method>[A-Z]+)?\s?(?P<url>[^"\s]*)\s?(?P<protocol>HTTP/[\d.]+)?"\s+(?P<status>\d{3})\s+(?P<bytes>-|\d+)'
     r'(?:\s+"(?P<referer>[^"]*)"\s+"(?P<ua>[^"]*)")?(?:\s+(?P<extra>.*))?$')
 CLOUDFRONT_FIELDS = None
+# premier champ entre guillemets après l'UA contenant une IP : X-Forwarded-For / CF-Connecting-IP (« client, proxy1, … »)
+XFF_RX = re.compile(r'"((?:\d{1,3}\.){3}\d{1,3}|[0-9a-fA-F]{1,4}(?::[0-9a-fA-F]{0,4}){2,7})(?:,[^"]*)?"')
 MONTHS = {m: i for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), 1)}
 
 def _parse_clf_time(s):
@@ -25,7 +27,8 @@ def _parse_clf_time(s):
             d = d - off if tz[0] == "+" else d + off
         return d.replace(tzinfo=dt.timezone.utc)
     except Exception:
-        return pd.NaT
+        try: return pd.to_datetime(s, utc=True)  # [2026-08-10T10:00:00+02:00] : Nginx $time_iso8601
+        except Exception: return pd.NaT
 
 def _split_url(url):
     if not url or url == "-":
@@ -57,19 +60,23 @@ def _parse_combined(line):
         nums = [t for t in g["extra"].replace('"', ' ').split() if re.fullmatch(r"\d+(\.\d+)?", t)]
         if nums:
             v = float(nums[-1]); rt = _to_seconds(v)
-    return _row(g["ip"], _parse_clf_time(g["time"]), g["method"], g["url"], g["protocol"], g["status"], g["bytes"],
-                g["referer"], g["ua"], g.get("host") or "", rt)
+    r = _row(g["ip"], _parse_clf_time(g["time"]), g["method"], g["url"], g["protocol"], g["status"], g["bytes"],
+             g["referer"], g["ua"], g.get("host") or "", rt)
+    if g.get("extra"):
+        x = XFF_RX.search(g["extra"])
+        if x: r["xff"] = x.group(1)
+    return r
 
 JSON_KEYS = {
-    "ip": ["remote_addr", "client_ip", "ClientIP", "ip", "clientIp", "c-ip", "remoteAddr", "remote_ip", "RemoteAddr"],
-    "ts": ["time_local", "time_iso8601", "timestamp", "time", "EdgeStartTimestamp", "@timestamp", "ts", "date"],
-    "method": ["request_method", "method", "ClientRequestMethod", "cs-method"],
+    "ip": ["remote_addr", "client_ip", "ClientIP", "ip", "clientIp", "c-ip", "remoteAddr", "remote_ip", "RemoteAddr", "ClientHost"],
+    "ts": ["time_local", "time_iso8601", "timestamp", "time", "EdgeStartTimestamp", "@timestamp", "ts", "date", "StartUTC", "StartLocal"],
+    "method": ["request_method", "method", "ClientRequestMethod", "cs-method", "RequestMethod"],
     "url": ["request_uri", "uri", "path", "ClientRequestURI", "cs-uri-stem", "request", "url", "RequestPath", "requestPath"],
-    "status": ["status", "EdgeResponseStatus", "sc-status", "statusCode", "response_status"],
-    "bytes": ["body_bytes_sent", "bytes_sent", "EdgeResponseBytes", "sc-bytes", "bytes", "size", "response_size", "bytesSent"],
-    "referer": ["http_referer", "referer", "referrer", "ClientRequestReferer", "cs(Referer)"],
-    "ua": ["http_user_agent", "user_agent", "ua", "ClientRequestUserAgent", "cs(User-Agent)", "userAgent"],
-    "host": ["host", "server_name", "ClientRequestHost", "cs-host", "vhost"],
+    "status": ["status", "EdgeResponseStatus", "sc-status", "statusCode", "response_status", "DownstreamStatus", "OriginStatus"],
+    "bytes": ["body_bytes_sent", "bytes_sent", "EdgeResponseBytes", "sc-bytes", "bytes", "size", "response_size", "bytesSent", "DownstreamContentSize"],
+    "referer": ["http_referer", "referer", "referrer", "ClientRequestReferer", "cs(Referer)", "request_Referer"],
+    "ua": ["http_user_agent", "user_agent", "ua", "ClientRequestUserAgent", "cs(User-Agent)", "userAgent", "request_User-Agent"],
+    "host": ["host", "server_name", "ClientRequestHost", "cs-host", "vhost", "RequestHost"],
     "rt": ["request_time", "upstream_response_time", "duration", "EdgeTimeToFirstByteMs", "time-taken", "responseTime"],
 }
 
@@ -81,6 +88,20 @@ def _get(d, keys):
 def _flatten_nested(d):
     """Caddy / logs structurés : {"request": {"remote_ip", "uri", "method", "host", "headers": {"User-Agent": [..]}}, "ts": 1.7e9, "status", "size", "duration"}.
     Remonte les champs imbriqués au premier niveau sans écraser ceux qui existent."""
+    ev = d.get("event")
+    if isinstance(ev, dict) and isinstance(ev.get("request"), dict):
+        # `wrangler pages deployment tail --format json` : URL complète, en-têtes en minuscules, statut dans event.response
+        er = ev["request"]; hdr = {str(k).lower(): v for k, v in (er.get("headers") or {}).items()}
+        u = urlsplit(er.get("url") or "")
+        d.setdefault("uri", (u.path or "/") + ("?" + u.query if u.query else ""))
+        d.setdefault("host", u.netloc)
+        d.setdefault("method", er.get("method"))
+        if hdr.get("user-agent"): d.setdefault("user_agent", hdr["user-agent"])
+        if hdr.get("referer"): d.setdefault("referer", hdr["referer"])
+        ip = hdr.get("cf-connecting-ip") or hdr.get("x-real-ip") or (hdr.get("x-forwarded-for") or "").split(",")[0].strip()
+        if ip: d.setdefault("client_ip", ip)
+        if isinstance(ev.get("response"), dict): d.setdefault("status", ev["response"].get("status"))
+        if "eventTimestamp" in d: d.setdefault("timestamp", d["eventTimestamp"])
     req = d.get("request")
     if isinstance(req, dict):
         for k in ("remote_ip", "client_ip", "remote_addr", "uri", "method", "host", "proto"):
@@ -101,7 +122,7 @@ def _parse_json(line):
     if _get(d, JSON_KEYS["ip"]) is None and _get(d, JSON_KEYS["ts"]) is None: return None  # objet JSON mais pas un hit
     ts = _get(d, JSON_KEYS["ts"])
     try:
-        if isinstance(ts, (int, float)): ts = pd.to_datetime(ts, unit="s" if ts < 1e11 else "ms", utc=True)
+        if isinstance(ts, (int, float)): ts = pd.to_datetime(ts, unit="s" if ts < 1e11 else "ms" if ts < 1e14 else "us" if ts < 1e17 else "ns", utc=True)
         elif isinstance(ts, str) and "/" in ts and ":" in ts and ts[:2].isdigit(): ts = _parse_clf_time(ts)
         else: ts = pd.to_datetime(ts, utc=True)
     except Exception: ts = pd.NaT
@@ -112,9 +133,12 @@ def _parse_json(line):
     rt = _get(d, JSON_KEYS["rt"])
     try: rt = _to_seconds(float(rt))
     except Exception: rt = None
-    return _row(_get(d, JSON_KEYS["ip"]) or "", ts, method, url, "", _get(d, JSON_KEYS["status"]) or 0,
-                _get(d, JSON_KEYS["bytes"]) or 0, _get(d, JSON_KEYS["referer"]), _get(d, JSON_KEYS["ua"]),
-                _get(d, JSON_KEYS["host"]) or "", rt, "json")
+    r = _row(_get(d, JSON_KEYS["ip"]) or "", ts, method, url, "", _get(d, JSON_KEYS["status"]) or 0,
+             _get(d, JSON_KEYS["bytes"]) or 0, _get(d, JSON_KEYS["referer"]), _get(d, JSON_KEYS["ua"]),
+             _get(d, JSON_KEYS["host"]) or "", rt, "json")
+    x = _get(d, ["http_x_forwarded_for", "x_forwarded_for", "http_cf_connecting_ip", "cf_connecting_ip", "x-forwarded-for"])
+    if isinstance(x, str) and x.strip() and x.strip() != "-": r["xff"] = x.split(",")[0].strip()
+    return r
 
 class W3CParser:
     """IIS / CloudFront : en-tête #Fields: définit les colonnes."""
@@ -140,8 +164,25 @@ class W3CParser:
                     d.get("sc-bytes", 0), d.get("cs(Referer)"), ua, d.get("x-host-header") or d.get("cs-host") or "", rt, "w3c")
 
 def open_any(path):
-    if str(path).endswith(".gz"): return io.TextIOWrapper(gzip.open(path, "rb"), encoding="utf-8", errors="replace")
-    return open(path, encoding="utf-8", errors="replace")
+    """Ouvre .gz / .bz2 / .zip (premier fichier de l'archive) ou texte brut ; détecte le BOM UTF-8 et l'UTF-16
+    (logs IIS ou fichiers réenregistrés sous Windows)."""
+    p = str(path).lower()
+    if p.endswith(".gz"): raw = gzip.open(path, "rb")
+    elif p.endswith(".bz2"):
+        import bz2; raw = bz2.open(path, "rb")
+    elif p.endswith(".zip"):
+        import zipfile
+        z = zipfile.ZipFile(path)
+        members = [n for n in z.namelist() if not n.endswith("/")]
+        if not members: raise ValueError(f"archive vide : {path}")
+        raw = z.open(members[0])
+    else: raw = open(path, "rb")
+    if not hasattr(raw, "peek"): raw = io.BufferedReader(raw)
+    head = raw.peek(4)[:4]
+    if head[:2] in (b"\xff\xfe", b"\xfe\xff"): enc = "utf-16"
+    elif head[:3] == b"\xef\xbb\xbf": enc = "utf-8-sig"
+    else: enc = "utf-8"
+    return io.TextIOWrapper(raw, encoding=enc, errors="replace", newline="")
 
 def _why_unparsed(line, fmt, w3c):
     """Explique en une phrase pourquoi une ligne a été rejetée (pour --doctor)."""
@@ -160,13 +201,42 @@ def _why_unparsed(line, fmt, w3c):
     return "ordre des champs différent du combined (IP, ident, user, [date], \"requête\", statut, octets, \"referer\", \"UA\")"
 
 
+def _json_stream(f):
+    """Objets JSON concaténés, éventuellement sur plusieurs lignes chacun ({...}\n{...}) : une ligne JSON par objet."""
+    dec, buf = json.JSONDecoder(), f.read().lstrip("\ufeff")
+    i, n = 0, len(buf)
+    while i < n:
+        while i < n and buf[i] in " \t\r\n,[]": i += 1
+        if i >= n: break
+        try: obj, j = dec.raw_decode(buf, i)
+        except ValueError:
+            nl = buf.find("\n", i); i = n if nl < 0 else nl + 1; yield None; continue
+        yield json.dumps(obj); i = j
+
+
 def parse_file(path, limit=None, max_samples=5):
     rows, unparsed, fmt, samples = [], 0, None, []
     w3c = W3CParser()
     with open_any(path) as f:
+        first = f.readline()
+        head = first.strip().lstrip("\ufeff")
+        multi = head in ("{", "[") or (head.startswith(("{", "[")) and not head.endswith(("}", "},")))
+        if multi:  # JSON multi-lignes (wrangler tail, export d'API) : on le remet à plat, un objet par ligne
+            for i, line in enumerate(_json_stream(io.StringIO(first + f.read()))):
+                if limit and i >= limit: break
+                r = _parse_json(line) if line else None
+                if r is None:
+                    unparsed += 1
+                    if len(samples) < max_samples: samples.append(dict(line=(line or "")[:300], reason="objet JSON illisible ou sans champ IP / horodatage reconnu"))
+                else: rows.append(r)
+            fmt = "json"
+            f = iter(())
+        else:
+            import itertools
+            f = itertools.chain([first], f)
         for i, line in enumerate(f):
             if limit and i >= limit: break
-            line = line.rstrip("\n")
+            line = line.rstrip("\r\n").lstrip("\ufeff")
             if not line: continue
             if fmt is None:
                 if line.startswith("#"): fmt = "w3c"
@@ -183,7 +253,23 @@ def parse_file(path, limit=None, max_samples=5):
         df = pd.DataFrame(columns=["ts","ip","method","path","query","protocol","status","bytes","referer","ua","host","response_time","raw_format"])
     else:
         df["ts"] = pd.to_datetime(df["ts"], utc=True, errors="coerce")
+        bad_ts = int(df["ts"].isna().sum())
+        if bad_ts:
+            unparsed += bad_ts
+            if len(samples) < max_samples:
+                samples.append(dict(line=f"({bad_ts} lignes, ex. chemin {df.loc[df['ts'].isna(), 'path'].iloc[0]})",
+                                    reason="date illisible : format d'horodatage non reconnu"))
         df = df.dropna(subset=["ts"]).sort_values("ts").reset_index(drop=True)
+        df.attrs["client_ip_from"] = "remote_addr"
+        if "xff" in df:
+            has = df["xff"].notna() & (df["xff"] != df["ip"])
+            if has.mean() > 0.5:
+                # site derrière un CDN / reverse proxy : remote_addr est l'IP du proxy, l'IP client est dans X-Forwarded-For.
+                # Sans ça, chaque Googlebot passerait pour usurpé (IP Cloudflare hors des plages Google).
+                df["proxy_ip"] = df["ip"]
+                df.loc[has, "ip"] = df.loc[has, "xff"]
+                df.attrs["client_ip_from"] = "x_forwarded_for"
+            df = df.drop(columns=["xff"])
     df.attrs["unparsed"] = unparsed
     df.attrs["unparsed_samples"] = samples
     df.attrs["format"] = fmt
@@ -192,11 +278,16 @@ def parse_file(path, limit=None, max_samples=5):
 
 def parse_files(paths, limit=None):
     dfs = [parse_file(p, limit) for p in paths]
-    df = pd.concat(dfs, ignore_index=True).sort_values("ts").reset_index(drop=True) if dfs else parse_file.__wrapped__()
+    full = [d for d in dfs if len(d)]  # un fichier vide concaténé casserait le type datetime de ts
+    df = pd.concat(full, ignore_index=True) if full else dfs[0].copy()
+    if len(df):
+        df["ts"] = pd.to_datetime(df["ts"], utc=True)
+        df = df.sort_values("ts").reset_index(drop=True)
     df.attrs["unparsed"] = sum(d.attrs.get("unparsed", 0) for d in dfs)
     df.attrs["unparsed_samples"] = [s for d in dfs for s in d.attrs.get("unparsed_samples", [])][:10]
     df.attrs["format"] = ",".join(sorted({str(d.attrs.get("format")) for d in dfs}))
     df.attrs["source"] = ", ".join(str(p) for p in paths)
+    df.attrs["client_ip_from"] = ",".join(sorted({str(d.attrs.get("client_ip_from", "remote_addr")) for d in dfs}))
     return df
 
 
@@ -205,10 +296,15 @@ def doctor(df):
     L = [f"Format détecté : {df.attrs.get('format')}", f"Fichier(s) : {df.attrs.get('source')}",
          f"Hits parsés : {len(df):,}   Lignes rejetées : {df.attrs.get('unparsed', 0):,}"]
     if len(df):
+        if df.attrs.get("client_ip_from") == "x_forwarded_for":
+            L.append("IP client : lue dans X-Forwarded-For (site derrière un CDN / proxy) ; remote_addr conservé dans proxy_ip")
         L.append(f"Période : {df['ts'].min()} → {df['ts'].max()} ({(df['ts'].max() - df['ts'].min()).total_seconds() / 86400:.1f} j)")
         L.append("Colonnes renseignées : " + ", ".join(
             f"{c} {'oui' if (df[c].notna() & (df[c].astype(str) != '')).any() else 'NON'}"
             for c in ("ip", "ua", "referer", "host", "response_time", "query")))
+        if (df["ua"].fillna("") == "").mean() > 0.9:
+            L.append("ATTENTION : aucune colonne User-Agent dans ces logs (format « common » ?). Sans UA, impossible de distinguer "
+                     "Googlebot, GPTBot ou un humain : passez le serveur en format « combined » (Apache : LogFormat combined ; Nginx : log_format par défaut).")
         L.append("UA les plus fréquents (contrôle de vraisemblance) :")
         for ua, n in df["ua"].value_counts().head(3).items(): L.append(f"   {n:>7,}  {str(ua)[:100]}")
     if df.attrs.get("unparsed_samples"):
