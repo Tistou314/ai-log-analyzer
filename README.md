@@ -103,7 +103,7 @@ Deux usages, avec ou sans clé API. Trois fournisseurs supportés : **Anthropic 
 
 | Fournisseur | Variable | Modèles proposés (`*` = défaut) |
 |---|---|---|
-| Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-5`\*, `claude-opus-5` (le plus puissant), `claude-haiku-4-5` (éco), `claude-sonnet-4-6` |
+| Anthropic | `ANTHROPIC_API_KEY` | `claude-sonnet-5`\*, `claude-fable-5` (le plus puissant, classe Mythos), `claude-opus-5`, `claude-haiku-4-5` (éco), `claude-sonnet-4-6` |
 | OpenAI | `OPENAI_API_KEY` | `gpt-5.6-terra`\*, `gpt-6-astra` (le plus puissant), `gpt-5.6-sol` (raisonnement), `gpt-5.6-luna` (éco) |
 | DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-v4-pro`\*, `deepseek-flash` (éco) |
 

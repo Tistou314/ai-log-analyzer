@@ -22,7 +22,8 @@ TRIM_ORDER = ["timeline", "explain", "structure", "crawl_budget", "actors"]
 PROVIDERS = {
     "anthropic": dict(env="ANTHROPIC_API_KEY", base_url=None, sdk="anthropic", models={
         "claude-sonnet-5":   "équilibré (défaut)",
-        "claude-opus-5":     "le plus puissant",
+        "claude-fable-5":    "le plus puissant (classe Mythos)",
+        "claude-opus-5":     "très puissant",
         "claude-haiku-4-5":  "rapide et économique",
         "claude-sonnet-4-6": "génération précédente",
     }),
