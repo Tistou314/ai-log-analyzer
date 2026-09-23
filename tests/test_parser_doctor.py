@@ -34,6 +34,16 @@ def test_ovh_shared_vhost_format(tmp_path):
     assert df.iloc[0]["host"] == "site.fr" and df.iloc[0]["ip"] == "198.51.100.7"
 
 
+def test_ovh_shared_ip_then_vhost_format(tmp_path):
+    # format réel des logs OVH mutualisé (logs.ovh.net) : le domaine suit l'IP, à la place du champ ident
+    p = _write(tmp_path, "ovh2.log", [
+        f'198.51.100.7 www.site.fr - [12/Aug/2026:10:00:00 +0200] "GET /page HTTP/1.1" 200 3456 "-" "{UA}"',
+        f'198.51.100.8 - - [12/Aug/2026:10:00:01 +0200] "GET /page HTTP/1.1" 200 3456 "-" "{UA}"'])
+    df = parse_file(p)
+    assert df.iloc[0]["host"] == "www.site.fr" and df.iloc[0]["ip"] == "198.51.100.7"
+    assert df.iloc[1]["host"] == ""
+
+
 def test_apache_with_microseconds_and_ipv6(tmp_path):
     p = _write(tmp_path, "ap.log", [
         f'2a01:cb00:1234::1 - - [12/Aug/2026:10:00:00 +0000] "GET /p HTTP/1.1" 200 100 "-" "{UA}" 245000'])

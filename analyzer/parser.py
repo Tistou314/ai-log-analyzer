@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 import pandas as pd
 
 COMBINED = re.compile(
-    r'^(?:(?P<host>[\w.\-:]+)\s+)?(?P<ip>[\da-fA-F.:]+)\s+\S+\s+\S+\s+\[(?P<time>[^\]]+)\]\s+'
+    r'^(?:(?P<host>[\w.\-:]+)\s+)?(?P<ip>[\da-fA-F.:]+)\s+(?P<ident>\S+)\s+\S+\s+\[(?P<time>[^\]]+)\]\s+'
     r'"(?P<method>[A-Z]+)?\s?(?P<url>[^"\s]*)\s?(?P<protocol>HTTP/[\d.]+)?"\s+(?P<status>\d{3})\s+(?P<bytes>-|\d+)'
     r'(?:\s+"(?P<referer>[^"]*)"\s+"(?P<ua>[^"]*)")?(?:\s+(?P<extra>.*))?$')
 CLOUDFRONT_FIELDS = None
@@ -50,6 +50,12 @@ def _row(ip, ts, method, url, protocol, status, nbytes, referer, ua, host="", rt
                 referer="" if referer in (None, "-") else referer, ua="" if ua in (None, "-") else ua,
                 host=host or "", response_time=rt, raw_format=fmt)
 
+def _vhost_ident(v):
+    """OVH mutualisé : « IP domaine - [date] … » — le domaine occupe le champ ident (d'ordinaire « - »)."""
+    if v and "." in v and re.fullmatch(r"(?=.*[a-zA-Z])[\w.\-]+", v):
+        return v.lower()
+    return ""
+
 def _parse_combined(line):
     m = COMBINED.match(line)
     if not m: return None
@@ -61,7 +67,7 @@ def _parse_combined(line):
         if nums:
             v = float(nums[-1]); rt = _to_seconds(v)
     r = _row(g["ip"], _parse_clf_time(g["time"]), g["method"], g["url"], g["protocol"], g["status"], g["bytes"],
-             g["referer"], g["ua"], g.get("host") or "", rt)
+             g["referer"], g["ua"], g.get("host") or _vhost_ident(g.get("ident")), rt)
     if g.get("extra"):
         x = XFF_RX.search(g["extra"])
         if x: r["xff"] = x.group(1)
