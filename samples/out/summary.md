@@ -1,6 +1,6 @@
 # Analyse de logs — 2026-08-10 → 2026-08-24 (14.02 j)
 
-_Généré le 2026-09-22 par ai-log-analyzer._
+_Généré le 2026-09-23 par ai-log-analyzer._
 
 **123 525 hits**, 427 IP, 404 URL. Bots : **17%**, dont bots IA : **8.1%**.
 

@@ -36,6 +36,13 @@ def main():
         dp.add_argument("--model", default=None)
         d = dp.parse_args(sys.argv[2:])
         sys.exit(ai_diagnostic.diagnose(d.report, out_dir=str(pathlib.Path(d.report).parent), model=d.model, provider=d.provider))
+    # sous-commande : python cli.py schema out/report.json  → report_schema.json (à coller dans Claude)
+    if len(sys.argv) > 1 and sys.argv[1] == "schema":
+        from analyzer import schema as SCH
+        src = pathlib.Path(sys.argv[2] if len(sys.argv) > 2 else "out/report.json")
+        dst = SCH.save(json.loads(src.read_text(encoding="utf-8")), src.with_name(src.stem + "_schema.json"))
+        print(f"→ {dst} ({dst.stat().st_size // 1024} Ko, à coller dans Claude à la place de report.json)")
+        sys.exit(0)
     if len(sys.argv) > 1 and sys.argv[1] == "chat":
         from analyzer import ai_diagnostic
         cp = argparse.ArgumentParser(prog="cli.py chat", description="mode tuteur : questions sur un report.json existant")
@@ -104,8 +111,10 @@ def main():
     if not a.no_csv: enriched.to_csv(out / "hits.csv", index=False, encoding="utf-8-sig")  # BOM : Excel affiche les accents
     from analyzer import exports as EXP
     EXP.save(report, out)
+    from analyzer import schema as SCH
+    SCH.save(json.loads((out / "report.json").read_text(encoding="utf-8")), out / "report_schema.json")
     summary(report)
-    print(f"\n→ {out/'report.json'}  |  {out/'summary.md'}  |  {out/'report.html'}" + ("" if a.no_csv else f"  |  {out/'hits.csv'}"))
+    print(f"\n→ {out/'report.json'}  |  {out/'summary.md'}  |  {out/'report.html'}  |  {out/'report_schema.json'} (pour Claude)" + ("" if a.no_csv else f"  |  {out/'hits.csv'}"))
     if a.diagnose:
         from analyzer import ai_diagnostic
         ai_diagnostic.diagnose(out / "report.json", out_dir=a.out,

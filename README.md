@@ -29,7 +29,7 @@ Vous n'avez besoin ni de Python ni de vos logs pour construire une surcouche : i
 
 1. Téléchargez le repo (bouton **Code → Download ZIP**, puis décompressez) ou clonez-le.
 2. Ouvrez `examples/dashboard.html` dans votre navigateur (double-clic) et déposez-y `samples/out/report.json` : c'est le rapport déjà calculé sur 14 jours de logs de démonstration, avec tous les cas (Googlebot usurpé, rafale GPTBot, boucle IA → clic, avant/après…).
-3. Ouvrez claude.ai, collez `prompts/surcouche.md`, joignez `samples/out/report.json`, choisissez votre angle : votre surcouche naît là.
+3. Ouvrez claude.ai, collez `prompts/surcouche.md`, joignez `samples/out/report_schema.json` (structure allégée ; votre dashboard chargera ensuite `report.json`), choisissez votre angle : votre surcouche naît là.
 
 Python ne sert qu'à produire un `report.json` à partir de **vos** logs (section suivante). Vous pourrez le faire après l'atelier, quand vous aurez activé l'archivage chez votre hébergeur.
 
@@ -90,6 +90,8 @@ Où trouver ses logs : **sur mutualisé cPanel (o2switch…), activez "Archiver 
 
 ## Contrat `report.json`
 
+Chaque run écrit aussi `out/report_schema.json` : mêmes clés, listes réduites à 2 exemples, dictionnaires de données à 3 entrées, textes tronqués. C'est ce fichier qu'on donne à un LLM pour coder une surcouche.
+
 ```
 meta            version, période, formats, plages IP chargées, data_sufficiency (ok | short | insufficient
                 + inconclusive_sections : ce qu'on ne peut pas conclure sur une période trop courte)
@@ -129,7 +131,7 @@ Toutes les clés sont stables entre versions mineures. Une surcouche n'a besoin 
 Deux surcouches d'exemple sont fournies, à forker : `examples/dashboard.html` (un seul fichier, zéro dépendance, s'ouvre en double-clic, on y dépose `report.json`) et `examples/streamlit_dashboard.py` (Python). Toutes deux n'affichent que le contrat JSON : `recommendations` (décision par bot, plan d'action), `alerts` (à traiter / bon à savoir), `actors`, `identity`, `timeline`, `ai_referrals`, `aio`.
 
 1. Lancez le moteur sur vos logs (ou le sample).
-2. Ouvrez `prompts/surcouche.md`, choisissez votre angle et votre techno, collez dans Claude avec `report.json`.
+2. Ouvrez `prompts/surcouche.md`, choisissez votre angle et votre techno, collez dans Claude avec `report_schema.json` (structure allégée, ~30 Ko, générée à chaque run ou via `python cli.py schema out/report.json`) : le vrai `report.json` fait souvent plusieurs centaines de Ko, trop pour un compte Claude gratuit. Le dashboard produit charge ensuite le vrai fichier.
 3. Itérez. Une surcouche = une question business par écran, les alertes en haut, une phrase d'`explain` par graphique.
 4. Pour comprendre ce que vous voyez : `prompts/tuteur.md`. Pour un diagnostic complet : `prompts/diagnostic.md`.
 

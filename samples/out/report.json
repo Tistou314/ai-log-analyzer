@@ -1,7 +1,7 @@
 {
  "meta": {
   "version": "1.0.0",
-  "generated": "2026-09-22T17:31:16.768190+00:00",
+  "generated": "2026-09-23T13:01:40.069959+00:00",
   "source": "samples\\demo_access.log",
   "format": "combined",
   "signatures_updated": "2026-09-17",
@@ -4656,20 +4656,20 @@
    "delta_pct": 3.6
   },
   "by_category": {
-   "scraper": {
-    "avant": 30.37,
-    "après": 28.86,
-    "delta_pct": -5.0
-   },
-   "seo_tool": {
-    "avant": 132.93,
-    "après": 123.27,
-    "delta_pct": -7.3
+   "search_engine": {
+    "avant": 570.39,
+    "après": 590.32,
+    "delta_pct": 3.5
    },
    "ai_training": {
     "avant": 645.45,
     "après": 445.72,
     "delta_pct": -30.9
+   },
+   "ai_search": {
+    "avant": 112.87,
+    "après": 93.41,
+    "delta_pct": -17.2
    },
    "ai_user_fetch": {
     "avant": 61.31,
@@ -4681,30 +4681,30 @@
     "après": 3.55,
     "delta_pct": null
    },
-   "ai_search": {
-    "avant": 112.87,
-    "après": 93.41,
-    "delta_pct": -17.2
+   "human": {
+    "avant": 7352.77,
+    "après": 7291.8,
+    "delta_pct": -0.8
    },
-   "other_bot": {
-    "avant": 25.21,
-    "après": 24.6,
-    "delta_pct": -2.4
-   },
-   "search_engine": {
-    "avant": 570.39,
-    "après": 590.32,
-    "delta_pct": 3.5
+   "scraper": {
+    "avant": 30.37,
+    "après": 28.86,
+    "delta_pct": -5.0
    },
    "social_preview": {
     "avant": 14.61,
     "après": 13.93,
     "delta_pct": -4.6
    },
-   "human": {
-    "avant": 7352.77,
-    "après": 7291.8,
-    "delta_pct": -0.8
+   "other_bot": {
+    "avant": 25.21,
+    "après": 24.6,
+    "delta_pct": -2.4
+   },
+   "seo_tool": {
+    "avant": 132.93,
+    "après": 123.27,
+    "delta_pct": -7.3
    }
   },
   "by_family": {
@@ -4803,14 +4803,14 @@
     "après": 15.07,
     "delta_pct": 1.2
    },
-   "Bingbot": {
-    "avant": 76.63,
-    "après": 76.06,
-    "delta_pct": -0.7
-   },
    "Googlebot Desktop": {
     "avant": 12.03,
     "après": 11.94,
+    "delta_pct": -0.7
+   },
+   "Bingbot": {
+    "avant": 76.63,
+    "après": 76.06,
     "delta_pct": -0.7
    },
    "Scanner déguisé en UA vide": {

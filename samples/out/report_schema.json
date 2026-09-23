@@ -1,0 +1,1010 @@
+{
+ "meta": {
+  "version": "1.0.0",
+  "generated": "2026-09-23T13:01:40.069959+00:00",
+  "source": "samples\\demo_access.log",
+  "format": "combined",
+  "signatures_updated": "2026-09-17",
+  "ip_ranges_loaded": [
+   "ahrefs",
+   "amazon",
+   "… 27 éléments au total, même structure"
+  ],
+  "dns_verification": false,
+  "site": null,
+  "data_sufficiency": {
+   "days": 14.02,
+   "level": "ok",
+   "inconclusive_sections": [],
+   "message": "14.0 jours de logs : période suffisante."
+  }
+ },
+ "overview": {
+  "hits": 123525,
+  "unparsed_lines": 0,
+  "period_start": "2026-08-10T00:26:55+00:00",
+  "period_end": "2026-08-24T00:49:44+00:00",
+  "days": 14.02,
+  "unique_ips": 427,
+  "unique_urls": 404,
+  "bot_share": 0.1693,
+  "ai_share": 0.0811,
+  "self_traffic_hits": 0,
+  "by_category": {
+   "human": 102618,
+   "search_engine": 8134,
+   "ai_training": 7641,
+   "…": "10 entrées au total, même structure"
+  },
+  "by_category_html": {
+   "human": 27018,
+   "search_engine": 7410,
+   "ai_training": 7337,
+   "…": "10 entrées au total, même structure"
+  },
+  "by_operator": {
+   "Google": 7089,
+   "ByteDance": 2598,
+   "OpenAI": 2350,
+   "…": "15 entrées au total, même structure"
+  },
+  "bytes_by_category": {
+   "ai_agent": 0.8,
+   "ai_search": 50.4,
+   "ai_training": 262.3,
+   "…": "10 entrées au total, même structure"
+  },
+  "resources": {
+   "html": 46813,
+   "image": 30699,
+   "css": 15306,
+   "…": "10 entrées au total, même structure"
+  },
+  "hosts": {}
+ },
+ "categories": {
+  "search_engine": {
+   "label": "Moteur de recherche",
+   "explain": "Crawlers des moteurs classiques. Googlebot alimente aussi AI Overviews et AI Mode : il n'existe pas d'UA dédié à ces surfaces."
+  },
+  "ai_training": {
+   "label": "LLM — entraînement",
+   "explain": "Collecte de contenu pour entraîner des modèles. Aucun trafic en retour, aucune citation. C'est ce que Google-Extended / GPTBot / ClaudeBot permettent de bloquer sans perdre la visibilité recherche."
+  },
+  "ai_search": {
+   "label": "LLM — index de recherche",
+   "explain": "Construction d'un index pour citer vos pages dans les réponses (ChatGPT Search, Claude, Perplexity). Bloquer = disparaître des citations."
+  },
+  "…": "12 entrées au total, même structure"
+ },
+ "probes": {
+  "probe_hits": 56,
+  "probe_share": 0.0005,
+  "top_probe_paths": {
+   "/xmlrpc.php": 14,
+   "/wp-login.php": 14,
+   "/.env": 14,
+   "/phpmyadmin/": 14
+  },
+  "reclassified_hits": 70,
+  "reclassified_families": {
+   "Scanner déguisé en UA vide": 70
+  },
+  "reclassified_ips": 1,
+  "top_scanner_ips": [
+   {
+    "ip": "47.82.10.100",
+    "family": "Scanner déguisé en UA vide",
+    "hits": 70
+   }
+  ],
+  "usurped_identities": {
+   "UA vide": 70
+  },
+  "note": "Un acteur qui vise .env, .git, credentials, xmlrpc… est un scanner, quel que soit son User-Agent. Ces hits sont retirés des stats bots IA / moteurs et comptés en scraper."
+ },
+ "self_traffic": {
+  "hits": 0,
+  "share_of_all": 0.0,
+  "ips": [],
+  "top_paths": {},
+  "note": "Trafic interne (wp-cron, admin-ajax, REST, requêtes WordPress). Retiré des parts humaines et bots externes ; ce n'est pas un bot déguisé."
+ },
+ "actors": [
+  {
+   "family": "Googlebot Smartphone",
+   "operator": "Google",
+   "category": "search_engine",
+   "hits": 6686,
+   "hits_per_day": 477.0,
+   "html_hits": 6177,
+   "unique_urls": 396,
+   "unique_ips": 7,
+   "ips_verified": 6081,
+   "ips_spoofed": 605,
+   "spoofed_share": 0.09,
+   "bytes_mb": 222.61,
+   "s2xx": 5796,
+   "s3xx": 276,
+   "s404": 578,
+   "s4xx_other": 0,
+   "s5xx": 36,
+   "error_rate": 0.092,
+   "fetched_robots_txt": true,
+   "declared_respects_robots": true,
+   "max_hits_per_minute": 19,
+   "median_gap_s": 5.0,
+   "avg_depth": 2.04,
+   "max_depth": 3,
+   "with_query_share": 0.111,
+   "static_share": 0.072,
+   "avg_response_time": 0.489,
+   "first_seen": "2026-08-10T00:26:55+00:00",
+   "last_seen": "2026-08-23T23:40:00+00:00",
+   "top_paths": {
+    "/guides/article-5-dpe-classe-g": 153,
+    "/guides/article-1-isolation-thermique": 145,
+    "/guides/article-3-panneaux-solaires": 141,
+    "…": "10 entrées au total, même structure"
+   }
+  },
+  {
+   "family": "Bytespider",
+   "operator": "ByteDance",
+   "category": "ai_training",
+   "hits": 2598,
+   "hits_per_day": 185.4,
+   "html_hits": 2347,
+   "unique_urls": 50,
+   "unique_ips": 400,
+   "ips_verified": 0,
+   "ips_spoofed": 0,
+   "spoofed_share": 0.0,
+   "bytes_mb": 88.52,
+   "s2xx": 1306,
+   "s3xx": 0,
+   "s404": 0,
+   "s4xx_other": 1292,
+   "s5xx": 0,
+   "error_rate": 0.497,
+   "fetched_robots_txt": false,
+   "declared_respects_robots": true,
+   "max_hits_per_minute": 3,
+   "median_gap_s": 317.0,
+   "avg_depth": 1.92,
+   "max_depth": 2,
+   "with_query_share": 0.0,
+   "static_share": 0.018,
+   "avg_response_time": 0.488,
+   "first_seen": "2026-08-10T00:32:36+00:00",
+   "last_seen": "2026-08-24T00:24:48+00:00",
+   "top_paths": {
+    "/comparatifs/article-9-vmc-double-flux": 63,
+    "/guides/article-8-fenetres-double-vitrage": 62,
+    "/guides/article-4-renovation-energetique": 61,
+    "…": "10 entrées au total, même structure"
+   }
+  },
+  "… 25 éléments au total, même structure"
+ ],
+ "identity": {
+  "summary": {
+   "verified": 13316,
+   "n/a": 3363,
+   "spoofed": 2647,
+   "unverified": 1581
+  },
+  "spoofed_ips": [
+   {
+    "ip": "45.155.204.3",
+    "family": "Googlebot Smartphone",
+    "hits": 219
+   },
+   {
+    "ip": "185.220.101.7",
+    "family": "Googlebot Smartphone",
+    "hits": 197
+   },
+   "… 30 éléments au total, même structure"
+  ],
+  "labels": {
+   "verified": "Vérifié : IP dans les plages publiées par l'opérateur (ou rDNS confirmé).",
+   "spoofed": "Usurpé : prétend être ce bot mais l'IP est hors des plages officielles. À bannir par IP.",
+   "unverified": "Non vérifié : l'opérateur publie des plages mais elles sont incomplètes ici, ou seule la vérification DNS (--dns) permettrait de conclure. Pas un signal de fraude.",
+   "n/a": "Sans méthode : cet opérateur ne publie ni plages IP ni domaine rDNS. Impossible à vérifier, ce n'est pas suspect pour autant."
+  },
+  "note": "verified = IP dans les plages publiées (ou rDNS confirmé). spoofed = prétend être un bot connu mais IP hors plages. unverified = aucune méthode disponible (lancez signatures/ip_ranges/update.py ou --d…"
+ },
+ "control_files": {
+  "robots.txt": {
+   "hits": 46,
+   "status": {
+    "200": 46
+   },
+   "by_family": {
+    "Googlebot Smartphone": 14,
+    "GPTBot": 11,
+    "Bingbot": 5,
+    "ClaudeBot": 4,
+    "OAI-SearchBot": 4,
+    "PerplexityBot": 4,
+    "Claude-SearchBot": 4
+   }
+  },
+  "llms.txt": {
+   "hits": 6,
+   "status": {
+    "404": 3,
+    "200": 3
+   },
+   "by_family": {
+    "OAI-SearchBot": 3,
+    "ClaudeBot": 3
+   }
+  },
+  "_families_never_fetched_robots": [
+   "AhrefsBot",
+   "Amazonbot",
+   "… 18 éléments au total, même structure"
+  ]
+ },
+ "timeline": {
+  "daily": {
+   "2026-08-10": {
+    "ai_agent": 0,
+    "ai_search": 112,
+    "ai_training": 796,
+    "…": "10 entrées au total, même structure"
+   },
+   "2026-08-11": {
+    "ai_agent": 0,
+    "ai_search": 109,
+    "ai_training": 396,
+    "…": "10 entrées au total, même structure"
+   },
+   "2026-08-12": {
+    "ai_agent": 0,
+    "ai_search": 122,
+    "ai_training": 853,
+    "…": "10 entrées au total, même structure"
+   },
+   "…": "15 entrées au total, même structure"
+  },
+  "hourly_by_family": {
+   "AhrefsBot": [
+    54,
+    47,
+    "… 24 éléments au total, même structure"
+   ],
+   "Amazonbot": [
+    19,
+    9,
+    "… 24 éléments au total, même structure"
+   ],
+   "Bingbot": [
+    43,
+    47,
+    "… 24 éléments au total, même structure"
+   ],
+   "…": "15 entrées au total, même structure"
+  }
+ },
+ "crawl_budget": {
+  "Googlebot Smartphone": {
+   "hits": 6686,
+   "hits_per_day": 477.0,
+   "html_hits": 6177,
+   "unique_html_urls": 389,
+   "crawled_once_only": 0,
+   "waste": {
+    "with_query_params": 739,
+    "top_params": {
+     "utm_source": 739,
+     "sort": 739
+    },
+    "status_404": 578,
+    "status_3xx": 276,
+    "status_5xx": 36,
+    "static_assets": 481,
+    "admin_or_api": 0,
+    "pagination": 316
+   },
+   "waste_share": 0.202,
+   "by_segment": [
+    {
+     "seg": "/blog",
+     "hits": 2219,
+     "urls": 314,
+     "err": 587
+    },
+    {
+     "seg": "/produits",
+     "hits": 1683,
+     "urls": 51,
+     "err": 11
+    },
+    "… 4 éléments au total, même structure"
+   ],
+   "by_template": [
+    {
+     "tpl": "/blog/{slug}",
+     "hits": 2219,
+     "urls": 314
+    },
+    {
+     "tpl": "/guides/{slug}",
+     "hits": 1549,
+     "urls": 12
+    },
+    "… 5 éléments au total, même structure"
+   ],
+   "recrawl_median_days": 0.43,
+   "most_crawled": [
+    {
+     "path": "/guides/article-5-dpe-classe-g",
+     "crawls": 152,
+     "every_days": 0.09
+    },
+    {
+     "path": "/guides/article-1-isolation-thermique",
+     "crawls": 145,
+     "every_days": 0.1
+    },
+    "… 30 éléments au total, même structure"
+   ],
+   "stalest": [
+    {
+     "path": "/produits/page/14",
+     "last_crawl": "2026-08-17T22:32:05+00:00",
+     "days_since": 6.1
+    },
+    {
+     "path": "/produits/page/25",
+     "last_crawl": "2026-08-18T10:36:41+00:00",
+     "days_since": 5.6
+    },
+    "… 30 éléments au total, même structure"
+   ],
+   "redirects_hit": {
+    "/blog/tag-8": 10,
+    "/blog/tag-15": 9,
+    "/blog/tag-6": 9,
+    "…": "20 entrées au total, même structure"
+   },
+   "top_404": {
+    "/blog/ancien-article-160": 7,
+    "/blog/ancien-article-257": 7,
+    "/blog/ancien-article-285": 6,
+    "…": "20 entrées au total, même structure"
+   },
+   "top_5xx": {
+    "/produits/article-10-poele-a-granules": 3,
+    "/produits/article-7-chaudiere-gaz": 3,
+    "/blog/article-12-toiture-ardoise": 2,
+    "…": "20 entrées au total, même structure"
+   }
+  },
+  "Googlebot Desktop": {
+   "hits": 168,
+   "hits_per_day": 12.0,
+   "html_hits": 168,
+   "unique_html_urls": 46,
+   "crawled_once_only": 4,
+   "waste": {
+    "with_query_params": 0,
+    "top_params": {},
+    "status_404": 0,
+    "status_3xx": 0,
+    "status_5xx": 0,
+    "static_assets": 0,
+    "admin_or_api": 0,
+    "pagination": 0
+   },
+   "waste_share": 0.0,
+   "by_segment": [
+    {
+     "seg": "/blog",
+     "hits": 50,
+     "urls": 11,
+     "err": 0
+    },
+    {
+     "seg": "/comparatifs",
+     "hits": 49,
+     "urls": 12,
+     "err": 0
+    },
+    "… 4 éléments au total, même structure"
+   ],
+   "by_template": [
+    {
+     "tpl": "/blog/{slug}",
+     "hits": 50,
+     "urls": 11
+    },
+    {
+     "tpl": "/comparatifs/{slug}",
+     "hits": 49,
+     "urls": 12
+    },
+    "… 4 éléments au total, même structure"
+   ],
+   "recrawl_median_days": 2.43,
+   "most_crawled": [
+    {
+     "path": "/comparatifs/article-11-bardage-bois",
+     "crawls": 10,
+     "every_days": 1.32
+    },
+    {
+     "path": "/blog/article-11-bardage-bois",
+     "crawls": 8,
+     "every_days": 1.41
+    },
+    "… 30 éléments au total, même structure"
+   ],
+   "stalest": [
+    {
+     "path": "/produits/article-11-bardage-bois",
+     "last_crawl": "2026-08-11T14:03:46+00:00",
+     "days_since": 12.4
+    },
+    {
+     "path": "/produits/article-2-pompe-a-chaleur",
+     "last_crawl": "2026-08-12T05:38:45+00:00",
+     "days_since": 11.8
+    },
+    "… 30 éléments au total, même structure"
+   ],
+   "redirects_hit": {},
+   "top_404": {},
+   "top_5xx": {}
+  },
+  "Bingbot": {
+   "hits": 1070,
+   "hits_per_day": 76.3,
+   "html_hits": 1065,
+   "unique_html_urls": 48,
+   "crawled_once_only": 0,
+   "waste": {
+    "with_query_params": 67,
+    "top_params": {
+     "page": 67
+    },
+    "status_404": 0,
+    "status_3xx": 0,
+    "status_5xx": 0,
+    "static_assets": 0,
+    "admin_or_api": 0,
+    "pagination": 0
+   },
+   "waste_share": 0.063,
+   "by_segment": [
+    {
+     "seg": "/guides",
+     "hits": 288,
+     "urls": 12,
+     "err": 0
+    },
+    {
+     "seg": "/produits",
+     "hits": 278,
+     "urls": 12,
+     "err": 0
+    },
+    "… 4 éléments au total, même structure"
+   ],
+   "by_template": [
+    {
+     "tpl": "/guides/{slug}",
+     "hits": 288,
+     "urls": 12
+    },
+    {
+     "tpl": "/produits/{slug}",
+     "hits": 278,
+     "urls": 12
+    },
+    "… 4 éléments au total, même structure"
+   ],
+   "recrawl_median_days": 0.65,
+   "most_crawled": [
+    {
+     "path": "/guides/article-4-renovation-energetique",
+     "crawls": 44,
+     "every_days": 0.32
+    },
+    {
+     "path": "/guides/article-3-panneaux-solaires",
+     "crawls": 36,
+     "every_days": 0.39
+    },
+    "… 30 éléments au total, même structure"
+   ],
+   "stalest": [
+    {
+     "path": "/comparatifs/article-12-toiture-ardoise",
+     "last_crawl": "2026-08-21T06:22:06+00:00",
+     "days_since": 2.8
+    },
+    {
+     "path": "/produits/article-9-vmc-double-flux",
+     "last_crawl": "2026-08-21T21:46:37+00:00",
+     "days_since": 2.1
+    },
+    "… 30 éléments au total, même structure"
+   ],
+   "redirects_hit": {},
+   "top_404": {},
+   "top_5xx": {}
+  },
+  "_mobile_vs_desktop": {
+   "smartphone": 6686,
+   "desktop": 168,
+   "smartphone_share": 0.975
+  },
+  "_status_bots_vs_humans": {
+   "bots": {
+    "200": 18382,
+    "403": 1404,
+    "404": 809,
+    "301": 276,
+    "500": 36
+   },
+   "humans": {
+    "200": 102618
+   }
+  }
+ },
+ "ai_referrals": {
+  "ai_clicks": 1654,
+  "ai_clicks_per_day": 118.01,
+  "share_of_human_html": 0.0612,
+  "by_source": {
+   "ChatGPT": 669,
+   "Perplexity": 444,
+   "Copilot": 208,
+   "Claude": 196,
+   "Gemini": 87,
+   "Le Chat (Mistral)": 50
+  },
+  "by_page": {
+   "/guides/article-3-panneaux-solaires": 237,
+   "/guides/article-6-aides-maprimerenov": 227,
+   "/guides/article-4-renovation-energetique": 221,
+   "…": "30 entrées au total, même structure"
+  },
+  "utm_tagged": 0,
+  "fetch_to_click_loops": [
+   {
+    "path": "/guides/article-1-isolation-thermique",
+    "family": "ChatGPT-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 37
+   },
+   {
+    "path": "/guides/article-6-aides-maprimerenov",
+    "family": "ChatGPT-User",
+    "ai_referrer": "ChatGPT",
+    "clicks": 35
+   },
+   "… 30 éléments au total, même structure"
+  ],
+  "fetch_events": 2123,
+  "fetched_never_clicked_count": 0,
+  "fetched_never_clicked_examples": [],
+  "fetched_never_clicked_top": [],
+  "note": "fetch_events = lectures par les index et fetchers IA de vraies pages de contenu (HTML 200, identité non usurpée, hors sondes, hors URL techniques WordPress et paramètres). fetched_never_clicked_top = …",
+  "referrer_share_human": {
+   "google.com": 15161,
+   "(direct)": 9136,
+   "bing.com": 1067,
+   "…": "9 entrées au total, même structure"
+  }
+ },
+ "aio": {
+  "hot_fetches": {
+   "candidates": 85,
+   "share_of_googlebot_html": 0.0134,
+   "by_path": {
+    "/guides/article-3-panneaux-solaires": 8,
+    "/guides/article-1-isolation-thermique": 7,
+    "/guides/article-4-renovation-energetique": 7,
+    "…": "30 entrées au total, même structure"
+   },
+   "by_hour": [
+    2,
+    0,
+    "… 24 éléments au total, même structure"
+   ],
+   "params": {
+    "isolation_minutes": 10,
+    "min_prior_crawls": 2
+   },
+   "note": "Signal PROBABILISTE. Un hit isolé de Googlebot sur une page connue est compatible avec un fetch de fraîcheur pour AIO/AI Mode, mais aussi avec un recrawl ordinaire. À croiser avec la GSC."
+  },
+  "google_agents": {
+   "hits": 25,
+   "by_family": {
+    "Google-Agent": 25
+   },
+   "by_path": {
+    "/guides/article-1-isolation-thermique": 4,
+    "/guides/article-9-vmc-double-flux": 3,
+    "/guides/article-10-poele-a-granules": 3,
+    "…": "10 entrées au total, même structure"
+   },
+   "verified": 25,
+   "spoofed": 0
+  },
+  "gsc_cross": {
+   "pages": [
+    {
+     "path": "/guides/article-5-dpe-classe-g",
+     "clicks": 261.0,
+     "impressions": 29386.0,
+     "googlebot_hits": 155.0,
+     "ai_fetches": 127.0,
+     "ai_clicks": 209.0,
+     "hot_fetch_candidates": 3.0,
+     "ctr": 0.0089,
+     "aio_suspect": true
+    },
+    {
+     "path": "/guides/article-6-aides-maprimerenov",
+     "clicks": 136.0,
+     "impressions": 27138.0,
+     "googlebot_hits": 141.0,
+     "ai_fetches": 119.0,
+     "ai_clicks": 227.0,
+     "hot_fetch_candidates": 5.0,
+     "ctr": 0.005,
+     "aio_suspect": true
+    },
+    "… 49 éléments au total, même structure"
+   ],
+   "aio_suspects": 6,
+   "gsc_pages_never_crawled": 1,
+   "gsc_pages_never_crawled_examples": [
+    "/guides/page-fantome-jamais-crawlee"
+   ],
+   "note": "aio_suspect = impressions élevées + CTR < 2 % + fetchs à chaud : profil typique d'une page citée dans un AI Overview sans clic. Hypothèse à confirmer dans le rapport Generative AI de la GSC."
+  }
+ },
+ "structure": {
+  "sitemap": {
+   "sitemap_urls": 50,
+   "crawled_by_googlebot": 48,
+   "share_crawled": 0.96,
+   "never_crawled": [
+    "/comparatifs/nouveau-comparatif",
+    "/guides/page-fantome-jamais-crawlee"
+   ],
+   "never_crawled_count": 2,
+   "crawled_not_in_sitemap": [
+    "/blog/ancien-article-1",
+    "/blog/ancien-article-10",
+    "… 50 éléments au total, même structure"
+   ],
+   "crawled_not_in_sitemap_count": 341,
+   "read_by_ai": 48,
+   "ai_urls_not_in_sitemap": [
+    "/blog/tag-0",
+    "/blog/tag-1",
+    "… 20 éléments au total, même structure"
+   ]
+  },
+  "crawl_export": {
+   "crawl_urls": 56,
+   "crawled_by_googlebot": 50,
+   "orphans_googlebot_only": [
+    "/blog/ancien-article-1",
+    "/blog/ancien-article-10",
+    "… 50 éléments au total, même structure"
+   ],
+   "orphans_count": 339,
+   "in_crawl_never_seen_by_googlebot": [
+    "/blog/tag-0",
+    "/produits/fiche-orpheline-0",
+    "… 6 éléments au total, même structure"
+   ],
+   "never_seen_count": 6,
+   "indexable_never_crawled": [
+    "/produits/fiche-orpheline-0",
+    "/produits/fiche-orpheline-1",
+    "… 5 éléments au total, même structure"
+   ],
+   "indexable_never_crawled_count": 5,
+   "non_indexable_crawled": [
+    "/blog/tag-1",
+    "/blog/tag-2"
+   ],
+   "non_indexable_crawled_count": 2,
+   "hits_by_depth": [
+    {
+     "depth": 1,
+     "sum": 1582.0,
+     "mean": 131.83,
+     "count": 12
+    },
+    {
+     "depth": 2,
+     "sum": 1424.0,
+     "mean": 94.93,
+     "count": 15
+    },
+    "… 4 éléments au total, même structure"
+   ]
+  },
+  "_human_vs_bot_overlap": {
+   "urls_seen_by_humans": 48,
+   "urls_seen_by_googlebot": 389,
+   "human_only": 0,
+   "googlebot_only": 341
+  }
+ },
+ "robots_sim": {
+  "tokens_in_file": [
+   "*",
+   "bytespider",
+   "… 5 éléments au total, même structure"
+  ],
+  "by_family": {
+   "AhrefsBot": {
+    "hits": 1157,
+    "blocked_by_rules": 0,
+    "effectively_blocked": 0,
+    "ignores_robots": false,
+    "token": "ahrefsbot",
+    "blocked_examples": []
+   },
+   "Amazonbot": {
+    "hits": 423,
+    "blocked_by_rules": 0,
+    "effectively_blocked": 0,
+    "ignores_robots": false,
+    "token": "amazonbot",
+    "blocked_examples": []
+   },
+   "Bingbot": {
+    "hits": 1070,
+    "blocked_by_rules": 0,
+    "effectively_blocked": 0,
+    "ignores_robots": false,
+    "token": "bingbot",
+    "blocked_examples": []
+   },
+   "…": "25 entrées au total, même structure"
+  },
+  "lessons": [
+   "Bytespider : 2598 hits matchent un Disallow mais ce fetcher ignore robots.txt (ce crawler est réputé ne pas honorer robots.txt). Seul un blocage serveur (403/WAF) l'arrête.",
+   "ChatGPT-User : 243 hits matchent un Disallow mais ce fetcher ignore robots.txt (un humain est derrière, il se comporte comme un navigateur). Seul un blocage serveur (403/WAF) l'arrête.",
+   "… 14 éléments au total, même structure"
+  ],
+  "total_blocked": 1818,
+  "total_rules_matched_but_ignored": 2841
+ },
+ "stealth": {
+  "scored_ips": 401,
+  "suspects": [
+   {
+    "ip": "195.154.22.9",
+    "hits": 1606,
+    "html_hits": 1606,
+    "score": 6,
+    "signals": [
+     "no_assets",
+     "no_referer",
+     "… 4 éléments au total, même structure"
+    ],
+    "sample_ua": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36",
+    "median_gap_s": 3.0,
+    "reclassified": false
+   }
+  ],
+  "suspect_hits": 1606,
+  "suspect_share_of_human": 0.0157,
+  "note": "Score heuristique. ≥4 : à vérifier ; ≥7 : très probablement un bot déguisé en navigateur, reclassé en scraper (reclassified=true) avant le calcul des parts. suspect_share_of_human = part du trafic ini…",
+  "reclassified_ips": [],
+  "reclassified_hits": 0
+ },
+ "compare": {
+  "periods": {
+   "avant": {
+    "days": 6.98,
+    "hits": 62453,
+    "start": "2026-08-10T00:26:55+00:00",
+    "end": "2026-08-16T23:59:49+00:00"
+   },
+   "après": {
+    "days": 7.03,
+    "hits": 61072,
+    "start": "2026-08-17T00:01:28+00:00",
+    "end": "2026-08-24T00:49:44+00:00"
+   }
+  },
+  "hits_per_day": {
+   "avant": 8945.91,
+   "après": 8682.99,
+   "delta_pct": -2.9
+  },
+  "error_rate": {
+   "avant": 0.01,
+   "après": 0.03,
+   "delta_pct": 144.6
+  },
+  "googlebot_html_urls": {
+   "avant": 307,
+   "après": 318,
+   "delta_pct": 3.6
+  },
+  "by_category": {
+   "search_engine": {
+    "avant": 570.39,
+    "après": 590.32,
+    "delta_pct": 3.5
+   },
+   "ai_training": {
+    "avant": 645.45,
+    "après": 445.72,
+    "delta_pct": -30.9
+   },
+   "ai_search": {
+    "avant": 112.87,
+    "après": 93.41,
+    "delta_pct": -17.2
+   },
+   "…": "10 entrées au total, même structure"
+  },
+  "by_family": {
+   "GPTBot": {
+    "avant": 216.87,
+    "après": 3.98,
+    "delta_pct": -98.2
+   },
+   "MistralAI-User": {
+    "avant": 12.46,
+    "après": 17.49,
+    "delta_pct": 40.3
+   },
+   "ChatGPT-User": {
+    "avant": 14.9,
+    "après": 19.76,
+    "delta_pct": 32.7
+   },
+   "…": "25 entrées au total, même structure"
+  },
+  "new_families": [
+   "Google-Agent"
+  ],
+  "gone_families": [],
+  "findings": [
+   {
+    "kind": "effect",
+    "domain": "security",
+    "title": "Un blocage serveur est actif",
+    "text": "Réponses 403 servies aux bots : 23 → 177/j (+656%). C'est la signature d'une règle de bannissement (WAF / .htaccess) mise en place entre les deux périodes.",
+    "evidence": {
+     "forbidden_before": 23.35243553008596,
+     "forbidden_after": 176.52916073968706
+    }
+   },
+   {
+    "kind": "effect",
+    "domain": "robots",
+    "title": "GPTBot respecte le blocage",
+    "text": "GPTBot (identité vérifiée) : 213 pages/j avant, 0 après — il ne fait plus que lire robots.txt (1.0 fois/j). Un Disallow qu'il respecte. Les 3 « GPTBot »/j restants sont des usurpateurs, pas lui.",
+    "evidence": {
+     "pages_before": 213.323782234957,
+     "pages_after": 0.0,
+     "robots_after": 0.995732574679943
+    }
+   }
+  ],
+  "note": "Familles comparées en hits/jour. new_families / gone_families : présentes dans une seule des deux périodes avec au moins 1 hit/jour. findings : constats rédigés — kind effect (effet d'une action visib…"
+ },
+ "recommendations": {
+  "by_family": [
+   {
+    "family": "Googlebot Smartphone",
+    "operator": "Google",
+    "category": "search_engine",
+    "hits": 6686,
+    "hits_per_day": 477.0,
+    "decision": "allow",
+    "why": "Indispensable à votre visibilité recherche — et il alimente aussi AI Overviews / AI Mode.",
+    "how": "Laisser crawler ; travailler plutôt ce qu'il trouve (404, paramètres, 5xx : voir crawl_budget). ATTENTION : 605 hits (9%) sous cette identité viennent d'IP hors plages officielles — bannir ces IP (ide…",
+    "reads_robots_txt": true,
+    "spoofed_share": 0.09,
+    "ban_spoofed_ips": true
+   },
+   {
+    "family": "Bytespider",
+    "operator": "ByteDance",
+    "category": "ai_training",
+    "hits": 2598,
+    "hits_per_day": 185.4,
+    "decision": "block",
+    "why": "Collecte pour entraînement, aucun trafic en retour, et il ne lit pas robots.txt.",
+    "how": "Le bloquer dans robots.txt est symbolique : blocage serveur (403 sur l'UA) si vous refusez l'entraînement.",
+    "reads_robots_txt": false,
+    "spoofed_share": 0.0,
+    "ban_spoofed_ips": false
+   },
+   "… 25 éléments au total, même structure"
+  ],
+  "actions": [
+   {
+    "domain": "security",
+    "title": "Bannir les IP qui usurpent une identité de bot (30 IP)",
+    "why": "70 hits de scanners déguisés en bots légitimes (1 IP) sondent .env, .git, xmlrpc… ; 2535 hits usurpent AhrefsBot, Googlebot Smartphone, CCBot, MistralAI-User depuis des IP hors plages officielles.",
+    "how": "Règle 403 ou WAF sur les IP de identity.spoofed_ips et probes.top_scanner_ips. Jamais de blocage par User-Agent « Googlebot » ou « ChatGPT-User » : vous bloqueriez les vrais.",
+    "effort": "15 min",
+    "impact": "immédiat",
+    "evidence": {
+     "ips": [
+      "45.155.204.3",
+      "185.220.101.7",
+      "… 10 éléments au total, même structure"
+     ],
+     "scanner_hits": 70,
+     "usurped_hits": 2535
+    },
+    "rank": 1
+   },
+   {
+    "domain": "seo",
+    "title": "Récupérer les 20% de crawl Googlebot gaspillés",
+    "why": "739 hits sur des URL à paramètres, 578 sur des 404, 0 sur admin/API.",
+    "how": "Disallow des paramètres inutiles (crawl_budget → waste.top_params), redirection ou suppression des 404 récurrentes (top_404), Disallow de /wp-admin/ et des endpoints API.",
+    "effort": "1 à 2 jours",
+    "impact": "indexation plus fraîche",
+    "evidence": {
+     "family": "Googlebot Smartphone",
+     "top_params": {
+      "utm_source": 739,
+      "sort": 739
+     },
+     "top_404": [
+      "/blog/ancien-article-160",
+      "/blog/ancien-article-257",
+      "… 5 éléments au total, même structure"
+     ]
+    },
+    "rank": 2
+   },
+   "… 5 éléments au total, même structure"
+  ],
+  "robots_txt_suggestion": "User-agent: GPTBot\nCrawl-delay: 10",
+  "decisions_legend": {
+   "allow": "Laisser faire : utile ou nécessaire (moteur, index qui cite, aperçu social).",
+   "limit": "Autoriser mais ralentir (Crawl-delay ou limitation serveur) : légitime mais trop agressif.",
+   "block": "Bloquer dans robots.txt : ce bot le respecte et ne vous rapporte rien.",
+   "ban_ip": "Bannir par IP (403 / WAF) : usurpation ou attaque, le robots.txt ne sert à rien.",
+   "watch": "Surveiller : décision à prendre selon votre stratégie, ou acteur trop récent pour trancher."
+  },
+  "note": "Décisions calculées par le moteur à partir des chiffres du rapport (catégorie, identité, rythme, lecture de robots.txt, clics en retour). Ce sont des recommandations par défaut : la décision finale su…"
+ },
+ "explain": {
+  "overview": "Vue d'ensemble : volume, période, part de bots. Sur la plupart des sites, les bots font 30 à 70 % des hits ; les bots IA 5 à 30 % du crawl total en 2026.",
+  "actors": "Niveau 1 de la taxonomie : QUI. Chaque famille de bot avec son opérateur et sa catégorie (moteur / entraînement / index IA / fetch utilisateur / agent / outil SEO…). Regardez d'abord la colonne catego…",
+  "probes": "Scanners de vulnérabilités : hits sur .env, .git, credentials, xmlrpc, wp-login… Ils empruntent très souvent l'UA de Googlebot, ClaudeBot, cohere-ai ou ChatGPT-User pour passer les filtres. Le moteur …",
+  "…": "18 entrées au total, même structure"
+ },
+ "alerts": [
+  {
+   "level": "critical",
+   "kind": "action",
+   "section": "probes",
+   "message": "70 hits de scanners déguisés en bots légitimes (1 IP). Identités usurpées : UA vide 70. Bannir ces IP."
+  },
+  {
+   "level": "critical",
+   "kind": "action",
+   "section": "identity",
+   "message": "2535 hits usurpent une identité de bot connu depuis des IP hors plages officielles : AhrefsBot 1157 (100%), Googlebot Smartphone 605 (9%), CCBot 563 (100%), MistralAI-User 210 (100%). Bannir ces IP (i…"
+  },
+  "… 9 éléments au total, même structure"
+ ],
+ "_schema_note": "Structure de report.json allégée pour un LLM : clés complètes, listes et dictionnaires de données réduits à quelques exemples. Le dashboard doit charger le vrai report.json."
+}

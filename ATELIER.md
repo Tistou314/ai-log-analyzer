@@ -10,7 +10,7 @@ Ce que chaque participant fait, dans l'ordre (à projeter en début de séquence
 
 1. **Récupérer le repo** : github.com/Tistou314/ai-log-analyzer → *Code → Download ZIP* → décompresser. Pas de git, pas de terminal.
 2. **Voir à quoi ressemble un rapport** : double-clic sur `examples/dashboard.html`, déposer `samples/out/report.json`. Deux minutes pour comprendre ce qu'il y a dedans (4 écrans, décisions par bot, plan d'action, avant/après).
-3. **Construire sa surcouche** : claude.ai → coller `prompts/surcouche.md` → joindre `samples/out/report.json` → choisir son angle (bots IA / crawl budget / boucle IA → humain / avant-après) et sa techno (HTML un fichier de préférence : ça s'ouvre en double-clic). Claude propose la structure, puis code ; on itère.
+3. **Construire sa surcouche** : claude.ai → coller `prompts/surcouche.md` → joindre `samples/out/report_schema.json` (la structure, 28 Ko : le vrai report.json est trop lourd pour un compte gratuit) → choisir son angle (bots IA / crawl budget / boucle IA → humain / avant-après) et sa techno (HTML un fichier de préférence : ça s'ouvre en double-clic). Claude propose la structure, puis code ; on itère.
 4. **Les plus avancés** : forker `examples/dashboard.html` au lieu de partir de zéro, ou ajouter un écran à partir d'une section du contrat (`recommendations`, `compare.findings`, `stealth`…).
 
 Sur l'écran de l'animateur : la démo tourne sur de vrais logs (deux mois d'un site éditorial, `--compare` à la date des actions) — c'est là que les participants voient ce que ça donne sur un vrai site ; eux travaillent sur le sample.
@@ -25,7 +25,7 @@ Plan B pour ceux qui n'iront pas au bout : `examples/dashboard.html` + `samples/
 | 5–15 | Démo moteur | `python cli.py samples/demo_access.log --robots … --gsc … --compare …` en live. On lit le résumé terminal ensemble : « À traiter » vs « Bon à savoir », usurpation Googlebot, rafale GPTBot, Google-Extended qui ne change rien, boucle ChatGPT-User → clic, puis le plan d'action (`recommendations`). Sur un site réel : entre août et septembre 2026, les index IA ont fait +647 % pendant que les crawlers d'entraînement reculaient de 80 %. |
 | 15–20 | Les 4 catégories de bots IA | Entraînement / index / fetch utilisateur / agent. Une slide, une décision robots.txt par catégorie. |
 | 20–25 | AIO : ce qu'on peut voir | Pas d'UA. Fetchs à chaud, Google-Agent, croisement GSC. Honnêteté sur le probabiliste. |
-| 25–50 | **Vibe coding** | Chacun télécharge le ZIP, ouvre `examples/dashboard.html` avec `samples/out/report.json`, choisit un parcours, colle `prompts/surcouche.md` + le `report.json` dans Claude et construit son dashboard. Circuler, débloquer. Les plus avancés : forker `dashboard.html`, ajouter un écran `compare.findings` ou `recommendations`. |
+| 25–50 | **Vibe coding** | Chacun télécharge le ZIP, ouvre `examples/dashboard.html` avec `samples/out/report.json`, choisit un parcours, colle `prompts/surcouche.md` + `report_schema.json` dans Claude, puis charge le vrai `report.json` dans le dashboard produit et construit son dashboard. Circuler, débloquer. Les plus avancés : forker `dashboard.html`, ajouter un écran `compare.findings` ou `recommendations`. |
 | 50–57 | Partage | 3 volontaires montrent leur écran. Ce qu'ils ont découvert sur leur site. |
 | 57–60 | Suite | `prompts/tuteur.md` pour continuer seul, PR sur `bots.json`, lien du repo. |
 
